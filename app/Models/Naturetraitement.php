@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Ppci\Models\PpciModel;
@@ -11,20 +12,20 @@ use Ppci\Models\PpciModel;
  */
 class Naturetraitement extends PpciModel
 {
-  function __construct($bdd, $param = array())
-  {
+    function __construct()
+    {
         $this->table = "naturetraitement";
         $this->fields = array(
-      "naturetraitement_id" => array(
-        "type" => 1,
-        "key" => 1,
-        "requis" => 1
-      ),
-      "naturetraitement_libelle" => array(
-        "longueur" => 255,
-        "requis" => 1
-      )
-    );
+            "naturetraitement_id" => array(
+                "type" => 1,
+                "key" => 1,
+                "requis" => 1
+            ),
+            "naturetraitement_libelle" => array(
+                "type" => 0,
+                "requis" => 1
+            )
+        );
         parent::__construct();
-  }
+    }
 }

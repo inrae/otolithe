@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Ppci\Models\PpciModel;
@@ -8,12 +9,6 @@ use Ppci\Models\PpciModel;
  */
 class Piecemetadata extends PpciModel
 {
-    /**
-     * Constructeur
-     *
-     * @param pdo $bdd
-     * @param array $param
-     */
     public function __construct()
     {
         $this->table = "piecemetadata";
@@ -39,7 +34,7 @@ class Piecemetadata extends PpciModel
         metadatatype_name
         from piecemetadata
         join metadatatype using (metadatatype_id)
-        where piece_id = :piece_id
+        where piece_id = :piece_id:
         ";
         return $this->getListeParamAsPrepared($sql, array("piece_id" => $id));
     }

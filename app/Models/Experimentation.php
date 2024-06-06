@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Models;
 
 use Ppci\Models\PpciModel;
+
 /**
  * ORM de gestion de la table experimentation
  *
@@ -13,8 +15,8 @@ class Experimentation extends PpciModel
 
     function __construct()
     {
-                $this->table = "experimentation";
-                $this->fields = array(
+        $this->table = "experimentation";
+        $this->fields = array(
             "exp_id" => array(
                 "type" => 1,
                 "key" => 1,
@@ -22,10 +24,10 @@ class Experimentation extends PpciModel
                 "defaultValue" => 0
             ),
             "exp_nom" => array(
-                "longueur" => 100
+                "type" => 0
             ),
             "exp_description" => array(
-                "longueur" => 255
+                "type" => 0
             ),
             "exp_debut" => array(
                 "type" => 2,
@@ -37,7 +39,7 @@ class Experimentation extends PpciModel
             )
         );
 
-                parent::__construct();
+        parent::__construct();
     }
 
     /**
@@ -46,7 +48,7 @@ class Experimentation extends PpciModel
      * {@inheritdoc}
      * @see ObjetBDD::ecrire()
      */
-    function ecrire($data):int
+    function ecrire($data): int
     {
         $id = parent::ecrire($data);
         if ($id > 0) {
@@ -92,7 +94,7 @@ class Experimentation extends PpciModel
 					left outer join lecteur_experimentation l
 					on (e.exp_id = l.exp_id and l.lecteur_id = :id:)
 					order by exp_nom";
-            return $this->getListeParam($sql, ["id"=>$lecteur_id]);
+            return $this->getListeParam($sql, ["id" => $lecteur_id]);
         } else {
             return [];
         }
@@ -112,19 +114,17 @@ class Experimentation extends PpciModel
 					left outer join individu_experimentation ie
 					on (e.exp_id = ie.exp_id and ie.individu_id = :individu_id:)
                     order by exp_nom";
-                    $data = $this->getListeParamAsPrepared(
-                        $sql,
-                        array("individu_id"=>$individu_id)
-                    );
+            $data = $this->getListeParamAsPrepared(
+                $sql,
+                array("individu_id" => $individu_id)
+            );
         } else {
             $sql = "select e.exp_id, exp_nom
             from experimentation e
             order by exp_nom";
             $data = $this->getListeParam($sql);
-
         }
-            return $data;
-
+        return $data;
     }
 
     /**
@@ -160,7 +160,7 @@ class Experimentation extends PpciModel
 					join lecteur_experimentation using (exp_id)
 					where lecteur_id = :id:
 					order by e.exp_nom";
-            return $this->getListeParam($sql, ["id"=>$lecteur_id]);
+            return $this->getListeParam($sql, ["id" => $lecteur_id]);
         } else {
             return [];
         }

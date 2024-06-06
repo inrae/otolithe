@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Models;
 
 use Ppci\Models\PpciModel;
+
 /**
  * Table de reference des types de lumiere
  *
@@ -13,8 +15,7 @@ class LumiereType extends PpciModel
 
     public function __construct()
     {
-                $this->table = "lumieretype";
-        $this->id_auto = "0";
+        $this->table = "lumieretype";
         $this->fields = array(
             "lumieretype_id" => array(
                 "type" => 1,
@@ -24,10 +25,9 @@ class LumiereType extends PpciModel
             ),
             "lumieretype_libelle" => array(
                 "type" => 0,
-                "requis" => 1,
-                "longueur" => 255,
+                "requis" => 1
             ),
         );
-                parent::__construct();
+        parent::__construct();
     }
 }

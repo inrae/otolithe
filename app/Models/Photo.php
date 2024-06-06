@@ -1,13 +1,9 @@
 <?php
 namespace App\Models;
 
+use Ppci\Libraries\PpciException;
 use Ppci\Models\PpciModel;
-include_once "modules/classes/photolecture.class.php";
-/**
- * Traitement des exceptions
- */
-class PhotoException extends Exception
-{ }
+
 /**
  * Classe de gestion des photos
  * @author quinton
@@ -17,8 +13,6 @@ class Photo extends PpciModel
 {
 
     public $format_thumbnail;
-
-    private $chemin = "img";
 
     public function __construct()
     {
@@ -36,20 +30,20 @@ class Photo extends PpciModel
                 "parentAttrib" => 1,
             ),
             "photo_nom" => array(
-                "longueur" => "255",
+                "type" => 0,
             ),
             "description" => array(
-                "longueur" => 255,
+                "type" => 0,
             ),
             "photo_filename" => array(
-                "longueur" => 512,
+                "type" => 0,
             ),
             "photo_date" => array(
                 "type" => 2,
                 "defaultValue" => "getDateJour",
             ),
             "color" => array(
-                "longueur" => 2,
+                "type" => 2,
             ),
             "lumieretype_id" => array(
                 "type" => 1,
@@ -68,7 +62,7 @@ class Photo extends PpciModel
                 "type" => 0,
             ),
             "uri" => array(
-                "longueur" => 512,
+                "type" => 0,
             ),
             "long_reference" => array(
                 "type" => 0,
@@ -88,7 +82,7 @@ class Photo extends PpciModel
                 parent::__construct();
     }
 
-    public function ecrire($data)
+    public function ecrire($data):int
     {
         /*
          * On recherche si une photo a ete telechargee
@@ -128,37 +122,39 @@ class Photo extends PpciModel
             // IMagick::setResourceLimit(imagick::RESOURCETYPE_MEMORY, 33554432);
             // maximum amount of memory map to allocate for the pixel cache
             // IMagick::setResourceLimit(imagick::RESOURCETYPE_MAP, 33554432);
-            $image = new Imagick();
+            $image = new \Imagick();
             try {
                 $image->readImageBlob($data["photoload"]);
-            } catch (ImagickException $ie) {
+            } catch (\ImagickException $ie) {
                 $message = _("Imagick - impossible de charger la photo ");
                 $message .= $ie->getMessage();
-                throw new PhotoException($message);
+                throw new PpciException($message);
             }
             $geo = $image->getimagegeometry();
             $data["photo_width"] = $geo["width"];
             $data["photo_height"] = $geo["height"];
-            $dataPhoto["photo_data"] = pg_escape_bytea($data["photoload"]);
+            //$dataPhoto["photo_data"] = pg_escape_bytea($data["photoload"]);
+            $dataPhoto["photo_data"] = $data["photoload"];
             unset($data["photoload"]);
             /*
              * Generation du thumbnail
              */
             try {
-                $image->resizeImage($this->format_thumbnail, $this->format_thumbnail, imagick::FILTER_LANCZOS, 1, true);
-            } catch (ImagickException $ie) {
+                $image->resizeImage($this->format_thumbnail, $this->format_thumbnail, \Imagick::FILTER_LANCZOS, 1, true);
+            } catch (\ImagickException $ie) {
                 $message = _("Imagick - impossible de redimensionner la photo");
                 $message .= $ie->getMessage();
-                throw new PhotoException($message);
+                throw new PpciException($message);
             }
             try {
                 $image->setformat("jpeg");
-            } catch (ImagickException $ie) {
+            } catch (\ImagickException $ie) {
                 $message = _("Imagick - impossible de définir le format de la photo");
                 $message .= $ie->getMessage();
-                throw new PhotoException($message);
+                throw new PpciException($message);
             }
-            $dataPhoto["photo_thumbnail"] = pg_escape_bytea($image->getimageblob());
+            //$dataPhoto["photo_thumbnail"] = pg_escape_bytea($image->getimageblob());
+            $dataPhoto["photo_thumbnail"] = $image->getimageblob();
             /*
              * Suppression le cas echeant de la photo dans le dossier img
              */
@@ -185,10 +181,10 @@ class Photo extends PpciModel
                             unlink($APPLI_photoStockage . "/" . $entry);
                         }
                     }
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     $message = _("Problème rencontré lors du parcours des photos existantes ou de leur suppression");
                     $message .= $e->getMessage();
-                    throw new PhotoException($message);
+                    throw new PpciException($message);
                 }
             }
         }
@@ -219,7 +215,7 @@ class Photo extends PpciModel
             $photoLecture->supprimerChamp($id, "photo_id");
             parent::supprimer($id);
         } else {
-            throw new ObjetBDDException(_("La suppression d'une clé nulle ou non numérique n'est pas possible"));
+            throw new PpciException(_("La suppression d'une clé nulle ou non numérique n'est pas possible"));
         }
     }
 
@@ -233,78 +229,10 @@ class Photo extends PpciModel
     {
         if ($piece_id > 0) {
             $sql = "select photo_id, piece_id, photo_nom, description, photo_date, color, photo_height, photo_width
-				from " . $this->table . " where piece_id = " . $piece_id;
-            return $this->getListParam($sql);
+				from photo where piece_id = :id:" ;
+            return $this->getListParam($sql, ["id"=>$piece_id]);
         } else {
-            return null;
-        }
-    }
-
-    /**
-     * Retourne une photo au format "blob" pour affichage
-     *
-     * @param int $id
-     *            : $photo_id
-     * @param number $thumbnail
-     *            : 0 - photo originale, 1 - photo au format vignette
-     * @param number $sizeX
-     *            : si > 0, redimension a la taille indiquee
-     * @param number $sizeY
-     *            : si > 0, redimension a la taille indiquee
-     * @return string
-     */
-    public function getPhotoOld($id, $thumbnail = 0, $sizeX = 0, $sizeY = 0)
-    {
-        if ($id > 0) {
-            $this->UTF8 = false;
-            $this->codageHtml = false;
-            if ($thumbnail == 1) {
-                $sql = "select photo_thumbnail as image ";
-            } else {
-                $sql = "select photo_data as image ";
-            }
-            $sql .= " from " . $this->table;
-            $where = " where photo_id = " . $id;
-            $data = $this->executeSQL($sql . $where);
-            $photo = $data->fields["image"];
-            if ($sizeX > 0 && $sizeY > 0 && strlen($photo) > 0) {
-                /*
-                 * Mise a l'image de la photo
-                 */
-                $image = new Imagick();
-                $image->readImageBlob($photo);
-                $geo = $image->getimagegeometry();
-                if ($geo["width"] > $sizeX || $geo["height"] > $sizeY) {
-                    $image->resizeImage($sizeX, $sizeY, imagick::FILTER_LANCZOS, 1, true);
-                    $image->setformat("JPEG");
-                    $photo = $image->getimageblob();
-                }
-            }
-            return $photo;
-        }
-    }
-
-    /**
-     *
-     * @deprecated
-     * @param unknown $id
-     * @param number $thumbnail
-     * @param number $sizeX
-     * @param number $sizeY
-     * @return string
-     */
-    public function getPhoto($id, $thumbnail = 0, $sizeX = 0, $sizeY = 0)
-    {
-        /*
-         * Regeneration du chemin d'acces au fichier de la photo
-         */
-        if ($id > 0 && is_numeric($thumbnail) && is_numeric($sizeX) && is_numeric($sizeY)) {
-            $thumbnail == 1 ? $nomPhoto = "thumbnail" : $nomPhoto = "photo";
-            $nomPhoto .= $id . '-' . $sizeX . 'x' . $sizeY . ".jpg";
-            $filename = $this->chemin . '/' . $nomPhoto;
-            if (file_exists($filename)) {
-                return file_get_contents($filename);
-            }
+            return [];
         }
     }
 
@@ -328,7 +256,7 @@ class Photo extends PpciModel
                 /*
                  * Recuperation de l'extension a partir du nom du fichier
                  */
-                $sql = "select photo_filename from photo where photo_id = :photo_id";
+                $sql = "select photo_filename from photo where photo_id = :photo_id:";
 
                 $dphoto = $this->lireParamAsPrepared($sql, array(
                     "photo_id" => $id,
@@ -354,7 +282,6 @@ class Photo extends PpciModel
     public function writeFilePhoto($id, $thumbnail = 0, $sizeX = 0, $sizeY = 0, $isOrigin = false)
     {
         if ($id > 0) {
-            $this->UTF8 = false;
             if ($thumbnail == 1) {
                 $colonne = "photo_thumbnail";
             } else {
@@ -365,14 +292,18 @@ class Photo extends PpciModel
             /*
              * On recherche si la photo existe ou non
              */
-            $path = $this->chemin . '/' . $nomPhoto;
+            /**
+             * @var App
+             */
+            $appParam = service("AppConfig");
+            $path = $appParam->APP_temp. '/' . $nomPhoto;
             if (!file_exists($path)) {
                 /*
                  * On cree la photo
                  */
                 $photoRef = $this->getBlobReference($id, $colonne);
                 if (!is_null($photoRef)) {
-                    $image = new Imagick();
+                    $image = new \Imagick();
                     try {
                         $image->readimagefile($photoRef);
                         if ($sizeX > 0 && $sizeY > 0) {
@@ -381,7 +312,7 @@ class Photo extends PpciModel
                              */
                             $geo = $image->getimagegeometry();
                             if ($geo["width"] > $sizeX || $geo["height"] > $sizeY) {
-                                $image->resizeImage($sizeX, $sizeY, imagick::FILTER_LANCZOS, 1, true);
+                                $image->resizeImage($sizeX, $sizeY, \Imagick::FILTER_LANCZOS, 1, true);
                                 // $image->setformat ( "JPEG" );
                             }
                             /*
@@ -394,11 +325,11 @@ class Photo extends PpciModel
                         /*
                          * Ecriture de la photo
                          */
-                        $image->writeimage($path);
-                    } catch (Exception $e) {
+                        $image->writeImage($path);
+                    } catch (\Exception $e) {
                         $message = _("Problème d'écriture de la photo dans le dossier temporaire");
                         $message .= $e->getMessage();
-                        throw (new PhotoException($message));
+                        throw (new PpciException($message));
                     }
                 }
             }
@@ -417,12 +348,12 @@ class Photo extends PpciModel
         if ($id > 0) {
             $sql = "select photo_id, piece_id, photo_nom, description, photo_filename, photo_date, color,
 				lumieretype_libelle, grossissement, repere, uri, long_reference, photo_width, photo_height, long_ref_pixel
-				from " . $this->table . "
+				from photo
 				left outer join lumieretype using(lumieretype_id)
-				where photo_id = " . $id;
-            return ($this->lireParam($sql));
+				where photo_id = :id:";
+            return ($this->lireParam($sql, ["id"=>$id]));
         } else {
-            return null;
+            return [];
         }
     }
 }

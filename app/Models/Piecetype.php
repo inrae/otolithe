@@ -11,7 +11,7 @@ use Ppci\Models\PpciModel;
  */
 class Piecetype extends PpciModel
 {
-  function __construct($bdd, $param = array())
+  function __construct()
   {
         $this->table = "piecetype";
         $this->fields = array(
@@ -22,7 +22,7 @@ class Piecetype extends PpciModel
         "defaultValue" => 0
       ),
       "piecetype_libelle" => array(
-        "longueur" => 255
+        "type"=>0
       )
     );
         parent::__construct();

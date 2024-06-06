@@ -28,11 +28,11 @@ class Individu extends PpciModel
                 "type" => 1
             ),
             "codeindividu" => array(
-                "longueur" => 100,
+                "type" => 0,
                 "requis" => 1
             ),
             "tag" => array(
-                "longueur" => 255
+                "type" => 0
             ),
             "longueur" => array(
                 "type" => 1
@@ -44,7 +44,7 @@ class Individu extends PpciModel
                 "type" => 0
             ),
             "parasite" => array(
-                "longueur" => 255
+                "type" => 0
             ),
             "age" => array(
                 "type" => 1
@@ -227,7 +227,7 @@ class Individu extends PpciModel
             $sql = "select count(*) as nb from individu
                     join piece using (individu_id)
                     join photo using (piece_id)
-                    where individu_id = :individu_id
+                    where individu_id = :individu_id:
                     ";
             $aid = array(
                 "individu_id" => $id

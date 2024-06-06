@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Models;
 
+use Ppci\Libraries\PpciException;
 use Ppci\Models\PpciModel;
-class PieceException extends Exception
-{ }
+
 /**
  * ORM de gestion de la table piece
  * @author quinton
@@ -13,8 +14,8 @@ class Piece extends PpciModel
 {
 	function __construct()
 	{
-				$this->table = "piece";
-				$this->fields = array(
+		$this->table = "piece";
+		$this->fields = array(
 			"piece_id" => array(
 				"type" => 1,
 				"key" => 1,
@@ -31,14 +32,14 @@ class Piece extends PpciModel
 				"requis" => 1
 			),
 			"piececode" => array(
-				"longueur" => 255
+				"type" => 0
 			),
 			"traitementpiece_id" => array(
 				"type" => 1
 			),
 			"uuid" => array("type" => 0, "defaultValue" => "getUUID"),
 		);
-				parent::__construct();
+		parent::__construct();
 	}
 	/**
 	 * Affiche le detail d'une piece
@@ -51,12 +52,12 @@ class Piece extends PpciModel
 		if ($id > 0) {
 			$sql = "select piece_id, individu_id, piecetype_id, piecetype_libelle, piececode,
 				traitementpiece_id, traitementpiece_libelle, uuid
-				from " . $this->table . " left outer join piecetype using (piecetype_id)
+				from piece left outer join piecetype using (piecetype_id)
 				  left outer join traitementpiece using (traitementpiece_id)
-				 where piece_id = " . $id;
-			return $this->lireParam($sql);
+				 where piece_id = :id:";
+			return $this->lireParam($sql, ["id" => $id]);
 		} else {
-			return null;
+			return [];
 		}
 	}
 	/**
@@ -71,16 +72,16 @@ class Piece extends PpciModel
 			$sql = "select piece_id, individu_id, piececode,
 				piecetype_libelle, traitementpiece_libelle,
 				count(photo_id) as nbphoto
-				from " . $this->table . "
+				from piece
 						left outer join piecetype using (piecetype_id)
 						left outer join traitementpiece using (traitementpiece_id)
 						left outer join photo using (piece_id)
-				where individu_id = " . $individu_id . "
+				where individu_id = :id:
 				group by piece_id, individu_id, piecetype_libelle, traitementpiece_libelle
 						";
-			return $this->getListeParam($sql);
+			return $this->getListeParam($sql, ["id" => $individu_id]);
 		} else {
-			return null;
+			return [];
 		}
 	}
 	/**
@@ -95,19 +96,17 @@ class Piece extends PpciModel
 		if (is_numeric($id) && $id > 0) {
 			/** Suppression des tables liees */
 			/** Suppression des photos */
-			include_once 'modules/classes/photo.class.php';
 			$photo = new Photo($this->connection, $this->paramori);
 			$lp = $photo->getListePhotoFromPiece($id);
 			foreach ($lp as $row) {
 				$photo->supprimer($row["photo_id"]);
 			}
 			/** Suppression des metadonnees */
-			include_once 'modules/classes/piecemetadata.class.php';
 			$pm = new Piecemetadata($this->connection, $this->paramori);
 			$pm->supprimerChamp($id, "piece_id");
 			parent::supprimer($id);
 		} else {
-			throw new ObjetBDDException(_("La suppression d'une clé nulle ou non numérique n'est pas possible"));
+			throw new PpciException(_("La suppression d'une clé nulle ou non numérique n'est pas possible"));
 		}
 	}
 	/**
@@ -120,10 +119,9 @@ class Piece extends PpciModel
 	function supprimerFromIndividu($id)
 	{
 		if ($id > 0) {
-			$sql = "select piece_id from piece where individu_id = :id";
+			$sql = "select piece_id from piece where individu_id = :id:";
 			$liste = $this->getListeParamAsPrepared($sql, array("id" => $id));
 			foreach ($liste as $item) {
-
 				$this->supprimer($item["piece_id"]);
 			}
 		}
@@ -149,7 +147,7 @@ class Piece extends PpciModel
 							left outer join traitementpiece using (traitementpiece_id)
 							left outer join sexe using (sexe_id)
 							join individu_experimentation using (individu_id)
-							where exp_id = :exp_id
+							where exp_id = :exp_id:
 							order by codeindividu, tag, piececode";
 		return ($this->getListeParamAsPrepared($sql, array("exp_id" => $exp_id)));
 	}
@@ -168,7 +166,7 @@ class Piece extends PpciModel
 					case when piececode is not null then piececode else piece_id::varchar end as identifier,
 					p.uuid,
 					piecetype_libelle as sample_type_name,
-					'$exp_name' as collection_name,
+					':exp_name:' as collection_name,
 					peche_date as sampling_date,
 					nom_id as md_taxon,
 					tag as md_tag,
@@ -185,18 +183,22 @@ class Piece extends PpciModel
 					left outer join sexe using (sexe_id)
 					left outer join peche using (peche_id)
 					where piece_id in (";
+		$param["exp_name"] = $exp_name;
 		/**
 		 * where content
 		 */
 		$where = "";
 		$comma = "";
+		$i = 0;
 		foreach ($pieces as $id) {
 			if (is_numeric($id)) {
-				$where .= $comma . $id;
+				$where .= $comma . ":id" . $i . ":";
+				$param["id" . $i] = $id;
+				$i++;
 				$comma = ",";
 			}
 		}
 		$sql .= $where . ")";
-		return $this->getListeParam($sql);
+		return $this->getListeParam($sql, $param);
 	}
 }

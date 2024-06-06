@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Ppci\Models\PpciModel;
@@ -29,19 +30,20 @@ class Metadatatype extends PpciModel
      * @param array $ids
      * @return array
      */
-    function getListFromIds(array $ids) {
+    function getListFromIds(array $ids)
+    {
         $comma = "";
         $sql = "select metadatatype_id, metadatatype_name, is_array, metadatatype_schema from metadatatype";
         $where = " where metadatatype_id in (";
+        $i = 0;
+        $param = [];
         foreach ($ids as $id) {
-            if (is_numeric($id) && $id > 0) {
-                $where .= $comma . $id;
-                $comma = ",";
-            }
+            $where .= $comma . "id" . $i;
+            $param["id" . $i] = $id;
+            $comma = ",";
+            $i++;
         }
         $where .= ")";
-        return $this->getListeParam($sql . $where);
+        return $this->getListeParam($sql . $where, $param);
     }
 }
-
-?>

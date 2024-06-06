@@ -1,7 +1,5 @@
 <?php
-namespace App\Models;
-
-use Ppci\Models\PpciModel;
+namespace App\Libraries;
 
 /**
  * Classe de base pour gerer des parametres de recherche
