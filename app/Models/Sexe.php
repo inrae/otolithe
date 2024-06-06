@@ -1,19 +1,21 @@
 <?php
+namespace App\Models;
+
+use Ppci\Models\PpciModel;
 /**
  * ORM de gestion de la table sexe
  *
  * @author quinton
  *
  */
-class Sexe extends ObjetBdd
+class Sexe extends PpciModel
 {
 
     function __construct($bdd, $param = array())
     {
-        $this->param = $param;
-        $this->table = "sexe";
+                $this->table = "sexe";
         $this->id_auto = "0";
-        $this->colonnes = array(
+        $this->fields = array(
             "sexe_id" => array(
                 "type" => 1,
                 "key" => 1,
@@ -29,7 +31,6 @@ class Sexe extends ObjetBdd
                 "requis" => 1
             )
         );
-        $param["fullDescription"] = 1;
-        parent::__construct($bdd, $param);
+                parent::__construct();
     }
 }

@@ -1,13 +1,16 @@
 <?php
-class Final_stripe extends ObjetBDD
+
+namespace App\Models;
+
+use Ppci\Models\PpciModel;
+
+class Final_stripe extends PpciModel
 {
 
-  public function __construct($bdd, $param = array())
+  public function __construct()
   {
-    $this->param = $param;
     $this->table = "final_stripe";
-    $this->id_auto = "1";
-    $this->colonnes = array(
+    $this->fields = array(
       "final_stripe_id" => array(
         "type" => 1,
         "key" => 1,
@@ -23,7 +26,6 @@ class Final_stripe extends ObjetBDD
         "requis" => 1,
       ),
     );
-    $param["fullDescription"] = 1;
-    parent::__construct($bdd, $param);
+    parent::__construct();
   }
 }

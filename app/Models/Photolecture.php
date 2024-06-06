@@ -1,4 +1,7 @@
 <?php
+namespace App\Models;
+
+use Ppci\Models\PpciModel;
 
 /***
  * ORM de gestion de la table photolecture
@@ -6,15 +9,13 @@
  * @author quinton
  *
  */
-class Photolecture extends ObjetBdd
+class Photolecture extends PpciModel
 {
 
-  public function __construct($bdd, $param = array())
+  public function __construct()
   {
-    $this->param = $param;
-    $this->table = "photolecture";
-    $this->id_auto = "1";
-    $this->colonnes = array(
+        $this->table = "photolecture";
+        $this->fields = array(
       "photolecture_id" => array(
         "type" => 1,
         "key" => 1,
@@ -85,8 +86,7 @@ class Photolecture extends ObjetBdd
       ),
     );
     $param["srid"] = -1;
-    $param["fullDescription"] = 1;
-    parent::__construct($bdd, $param);
+        parent::__construct();
   }
 
   /***
@@ -101,7 +101,7 @@ class Photolecture extends ObjetBdd
     /**
      * Lecture des valeurs existantes, et mise a jour des donnees "classiques"
      */
-    foreach ($this->colonnes as $key => $value) {
+    foreach ($this->fields as $key => $value) {
       /**
        * On recherche l'equivalence dans dataBrute
        */

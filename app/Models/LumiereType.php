@@ -1,19 +1,21 @@
 <?php
+namespace App\Models;
+
+use Ppci\Models\PpciModel;
 /**
  * Table de reference des types de lumiere
  *
  * @author quinton
  *
  */
-class LumiereType extends ObjetBDD
+class LumiereType extends PpciModel
 {
 
-    public function __construct($bdd, $param = array())
+    public function __construct()
     {
-        $this->param = $param;
-        $this->table = "lumieretype";
+                $this->table = "lumieretype";
         $this->id_auto = "0";
-        $this->colonnes = array(
+        $this->fields = array(
             "lumieretype_id" => array(
                 "type" => 1,
                 "key" => 1,
@@ -26,7 +28,6 @@ class LumiereType extends ObjetBDD
                 "longueur" => 255,
             ),
         );
-        $param["fullDescription"] = 1;
-        parent::__construct($bdd, $param);
+                parent::__construct();
     }
 }

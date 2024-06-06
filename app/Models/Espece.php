@@ -1,18 +1,22 @@
 <?php
+
+namespace App\Models;
+
+use Ppci\Models\PpciModel;
+
 /**
  * ORM de gestion de la table espece
  *
  * @author quinton
  *
  */
-class Espece extends ObjetBDD
+class Espece extends PpciModel
 {
 
-    public function __construct($p_connection, $param = array())
+    public function __construct()
     {
         $this->table = "espece";
-        $this->id_auto = 1;
-        $this->colonnes = array(
+        $this->fields = array(
             "espece_id" => array(
                 "type" => 1,
                 "requis" => 1,
@@ -27,8 +31,7 @@ class Espece extends ObjetBDD
                 "type" => 0
             )
         );
-        $param["fullDescription"] = 1;
-        parent::__construct($p_connection, $param);
+        parent::__construct();
     }
 
     /**
@@ -43,11 +46,11 @@ class Espece extends ObjetBDD
         if (strlen($nom) > 2) {
             $nom = $this->encodeData($nom);
             $sql = "select espece_id as id, nom_id ||' - ' || nom_fr as val
-				from " . $this->table . "
-				where upper(nom_id) like upper('%" . $nom . "%')
-						or upper(nom_fr) like upper ('%" . $nom . "%')
+				from espece
+				where upper(nom_id) like upper('%:nom:%')
+						or upper(nom_fr) like upper ('%:nomfr:%')
 				order by nom_id";
-            return $this->getListeParam($sql);
+            return $this->getListeParam($sql, ["nom"=>$nom, "nomfr"=>$nom]);
         }
     }
 }

@@ -1,4 +1,7 @@
 <?php
+namespace App\Models;
+
+use Ppci\Models\PpciModel;
 
 /**
  * ORM de gestion de la table des lecteurs
@@ -6,15 +9,13 @@
  * @author quinton
  *
  */
-class Lecteur extends ObjetBdd
+class Lecteur extends PpciModel
 {
 
-  public function __construct($bdd, $param = array())
+  public function __construct()
   {
-    $this->param = $param;
-    $this->table = "lecteur";
-    $this->id_auto = "1";
-    $this->colonnes = array(
+        $this->table = "lecteur";
+        $this->fields = array(
       "lecteur_id" => array(
         "type" => 1,
         "key" => 1,
@@ -33,8 +34,7 @@ class Lecteur extends ObjetBdd
         "longueur" => 50,
       ),
     );
-    $param["fullDescription"] = 1;
-    parent::__construct($bdd, $param);
+        parent::__construct();
   }
 
   /**

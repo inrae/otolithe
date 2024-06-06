@@ -1,4 +1,7 @@
 <?php
+namespace App\Models;
+
+use Ppci\Models\PpciModel;
 class PieceException extends Exception
 { }
 /**
@@ -6,14 +9,12 @@ class PieceException extends Exception
  * @author quinton
  *
  */
-class Piece extends ObjetBdd
+class Piece extends PpciModel
 {
-	function __construct($bdd, $param = array())
+	function __construct()
 	{
-		$this->param = $param;
-		$this->table = "piece";
-		$this->id_auto = "1";
-		$this->colonnes = array(
+				$this->table = "piece";
+				$this->fields = array(
 			"piece_id" => array(
 				"type" => 1,
 				"key" => 1,
@@ -37,8 +38,7 @@ class Piece extends ObjetBdd
 			),
 			"uuid" => array("type" => 0, "defaultValue" => "getUUID"),
 		);
-		$param["fullDescription"] = 1;
-		parent::__construct($bdd, $param);
+				parent::__construct();
 	}
 	/**
 	 * Affiche le detail d'une piece

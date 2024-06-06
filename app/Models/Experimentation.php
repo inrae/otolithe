@@ -1,19 +1,20 @@
 <?php
+namespace App\Models;
+
+use Ppci\Models\PpciModel;
 /**
  * ORM de gestion de la table experimentation
  *
  * @author quinton
  *
  */
-class Experimentation extends ObjetBdd
+class Experimentation extends PpciModel
 {
 
-    function __construct($bdd, $param = array())
+    function __construct()
     {
-        $this->param = $param;
-        $this->table = "experimentation";
-        $this->id_auto = "1";
-        $this->colonnes = array(
+                $this->table = "experimentation";
+                $this->fields = array(
             "exp_id" => array(
                 "type" => 1,
                 "key" => 1,
@@ -36,8 +37,7 @@ class Experimentation extends ObjetBdd
             )
         );
 
-        $param["fullDescription"] = 1;
-        parent::__construct($bdd, $param);
+                parent::__construct();
     }
 
     /**
@@ -46,25 +46,13 @@ class Experimentation extends ObjetBdd
      * {@inheritdoc}
      * @see ObjetBDD::ecrire()
      */
-    function ecrire($data)
+    function ecrire($data):int
     {
         $id = parent::ecrire($data);
         if ($id > 0) {
             $this->ecrireTableNN("lecteur_experimentation", "exp_id", "lecteur_id", $id, $data["lecteur_id"]);
         }
         return $id;
-    }
-
-    /**
-     * Reecriture de l'affichage de la liste
-     * (non-PHPdoc)
-     *
-     * @see ObjetBDD::getListe()
-     */
-    function getListe()
-    {
-        $sql = "select * from " . $this->table . " order by exp_fin desc, exp_nom";
-        return $this->getListeParam($sql);
     }
 
     /**
@@ -102,9 +90,11 @@ class Experimentation extends ObjetBdd
             $sql = "select e.exp_id, exp_nom, lecteur_id
 					from experimentation e
 					left outer join lecteur_experimentation l
-					on (e.exp_id = l.exp_id and l.lecteur_id = " . $lecteur_id . ")
+					on (e.exp_id = l.exp_id and l.lecteur_id = :id:)
 					order by exp_nom";
-            return $this->getListeParam($sql);
+            return $this->getListeParam($sql, ["id"=>$lecteur_id]);
+        } else {
+            return [];
         }
     }
 
@@ -120,7 +110,7 @@ class Experimentation extends ObjetBdd
             $sql = "select e.exp_id, exp_nom, individu_id
 					from experimentation e
 					left outer join individu_experimentation ie
-					on (e.exp_id = ie.exp_id and ie.individu_id = :individu_id)
+					on (e.exp_id = ie.exp_id and ie.individu_id = :individu_id:)
                     order by exp_nom";
                     $data = $this->getListeParamAsPrepared(
                         $sql,
@@ -141,14 +131,14 @@ class Experimentation extends ObjetBdd
      * Retourne les lecteurs associes a une experimentation
      *
      * @param int $exp_id
-     * @return array|string[]|array[]|string|boolean
+     * @return array
      */
     function getReaders($exp_id)
     {
         $sql = "select l.lecteur_id, login, lecteur_nom, lecteur_prenom,
                 case when exp_id is not null then 1 else 0 end as is_reader
                 from lecteur l
-                left outer join lecteur_experimentation le on (l.lecteur_id = le.lecteur_id and exp_id = :exp_id)
+                left outer join lecteur_experimentation le on (l.lecteur_id = le.lecteur_id and exp_id = :exp_id:)
                order by lecteur_nom, lecteur_prenom
 	           ";
         return $this->getListeParamAsPrepared($sql, array(
@@ -160,7 +150,7 @@ class Experimentation extends ObjetBdd
      * Retourne la liste des experimentations autorisees pour un lecteur
      *
      * @param int $lecteur_id
-     * @return array|NULL
+     * @return array
      */
     function getExpAutorisees($lecteur_id)
     {
@@ -168,11 +158,11 @@ class Experimentation extends ObjetBdd
             $sql = "select e.exp_id, e.exp_nom
 					from experimentation e
 					join lecteur_experimentation using (exp_id)
-					where lecteur_id = " . $lecteur_id . "
+					where lecteur_id = :id:
 					order by e.exp_nom";
-            return $this->getListeParam($sql);
+            return $this->getListeParam($sql, ["id"=>$lecteur_id]);
         } else {
-            return null;
+            return [];
         }
     }
 }

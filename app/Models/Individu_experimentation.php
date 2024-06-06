@@ -1,19 +1,23 @@
 <?php
+
+namespace App\Models;
+
+use Ppci\Models\PpciModel;
+
 /**
  * ORM de gestion de la table individu_experimentation
  *
  * @author quinton
  *
  */
-class Individu_experimentation extends ObjetBdd
+class Individu_experimentation extends PpciModel
 {
 
     function __construct($bdd, $param = array())
     {
-        $this->param = $param;
         $this->table = "individu_experimentation";
-        $this->id_auto = "0";
-        $this->colonnes = array(
+        $this->useAutoIncrement = false;
+        $this->fields = array(
             "individu_id" => array(
                 "type" => 1,
                 "key" => 1,
@@ -26,9 +30,7 @@ class Individu_experimentation extends ObjetBdd
                 "key" => 1
             )
         );
-        $param["fullDescription"] = 1;
-        $param["id_auto"] = 0;
-        parent::__construct($bdd, $param);
+        parent::__construct();
     }
 
     /**
@@ -37,15 +39,15 @@ class Individu_experimentation extends ObjetBdd
      * @param int $individu_id
      * @return array
      */
-    function getListeFromIndividu($individu_id)
+    function getListeFromIndividu(int $individu_id)
     {
         if ($individu_id > 0) {
-            $sql = "select * from " . $this->table . "
-				inner join experimentation using (exp_id)
-				where individu_id = " . $individu_id;
-            return $this->getListeParam($sql);
+            $sql = "select * from individu_experimentation
+				join experimentation using (exp_id)
+				where individu_id = :id:";
+            return $this->getListeParam($sql, ["id" => $individu_id]);
         } else {
-            return null;
+            return [];
         }
     }
 }

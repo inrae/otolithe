@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Models;
+
+use Ppci\Models\PpciModel;
+
 /**
  * Classe permettant de parametrer les imports
  * @author quinton
@@ -90,7 +94,7 @@ class ImportDataFile
 		/*
 		 * Gestion de la classe de manipulation XLS
 		 */
-/* 		if ($this->typeFichier == "xls") {
+		/* 		if ($this->typeFichier == "xls") {
 			if (class_exists ( "Spreadsheet_Excel_Reader" )) {
 				$this->spreadsheet = new Spreadsheet_Excel_Reader ();
 			} else {
@@ -127,7 +131,7 @@ class ImportDataFile
 		}
 		if (isset($descriptionImport["enclosure"]))
 			$this->enclosure = $descriptionImport["enclosure"];
-			/*
+		/*
 		 * Reformatage du separateur
 		 */
 		$this->reformatSeparateur($this->separateur);
@@ -139,12 +143,12 @@ class ImportDataFile
 		 * Gestion de la classe de manipulation XLS
 		 */
 		if ($this->typeFichier == "xls") {
-// 			if (class_exists ( "Spreadsheet_Excel_Reader" )) {
-// 				$this->spreadsheet = new Spreadsheet_Excel_Reader ();
-// 			} else {
-// 				echo "La classe Spreadsheet_Excel_Reader n'est pas decrite - arret de l'application";
-// 				die ();
-// 			}
+			// 			if (class_exists ( "Spreadsheet_Excel_Reader" )) {
+			// 				$this->spreadsheet = new Spreadsheet_Excel_Reader ();
+			// 			} else {
+			// 				echo "La classe Spreadsheet_Excel_Reader n'est pas decrite - arret de l'application";
+			// 				die ();
+			// 			}
 		}
 	}
 	/**
@@ -191,8 +195,7 @@ class ImportDataFile
 	/**
 	 * Ouvre le fichier specifie
 	 *
-	 * @param array $nomFichier        	
-	 * @param string $separateur        	
+	 * @param string $nomFichier        	     	
 	 */
 	function ouvrirFichier($nomFichier)
 	{
@@ -254,7 +257,7 @@ class ImportDataFile
 			 */
 			foreach ($data as $key => $value) {
 				if (is_string($value)) {
-					$data[$key] = utf8_encode($value);
+					$data[$key] = mb_convert_encoding($value, "UTF-8");
 				}
 			}
 		}
@@ -368,4 +371,3 @@ class ImportDataFile
 		echo $this->fichierExport;
 	}
 }
-?>

@@ -1,4 +1,7 @@
 <?php
+namespace App\Models;
+
+use Ppci\Models\PpciModel;
 
 /**
  * ORM de gestion de la table piecetype
@@ -6,14 +9,12 @@
  * @author quinton
  *
  */
-class Piecetype extends ObjetBdd
+class Piecetype extends PpciModel
 {
   function __construct($bdd, $param = array())
   {
-    $this->param = $param;
-    $this->table = "piecetype";
-    $this->id_auto = "1";
-    $this->colonnes = array(
+        $this->table = "piecetype";
+        $this->fields = array(
       "piecetype_id" => array(
         "type" => 1,
         "key" => 1,
@@ -24,7 +25,6 @@ class Piecetype extends ObjetBdd
         "longueur" => 255
       )
     );
-    $param["fullDescription"] = 1;
-    parent::__construct($bdd, $param);
+        parent::__construct();
   }
 }

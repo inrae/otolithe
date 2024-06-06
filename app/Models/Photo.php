@@ -1,4 +1,7 @@
 <?php
+namespace App\Models;
+
+use Ppci\Models\PpciModel;
 include_once "modules/classes/photolecture.class.php";
 /**
  * Traitement des exceptions
@@ -10,19 +13,17 @@ class PhotoException extends Exception
  * @author quinton
  *
  */
-class Photo extends ObjetBDD
+class Photo extends PpciModel
 {
 
     public $format_thumbnail;
 
     private $chemin = "img";
 
-    public function __construct($bdd, $param = array())
+    public function __construct()
     {
-        $this->param = $param;
-        $this->table = "photo";
-        $this->id_auto = "1";
-        $this->colonnes = array(
+                $this->table = "photo";
+                $this->fields = array(
             "photo_id" => array(
                 "type" => 1,
                 "key" => 1,
@@ -84,8 +85,7 @@ class Photo extends ObjetBDD
             ),
         );
         $this->format_thumbnail = 200;
-        $param["fullDescription"] = 1;
-        parent::__construct($bdd, $param);
+                parent::__construct();
     }
 
     public function ecrire($data)

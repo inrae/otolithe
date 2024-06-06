@@ -1,13 +1,17 @@
 <?php
-class Individu extends ObjetBdd
+
+namespace App\Models;
+
+use Ppci\Libraries\PpciException;
+use Ppci\Models\PpciModel;
+
+class Individu extends PpciModel
 {
 
-    function __construct($bdd, $param = array())
+    function __construct()
     {
-        $this->param = $param;
         $this->table = "individu";
-        $this->id_auto = "1";
-        $this->colonnes = array(
+        $this->fields = array(
             "individu_id" => array(
                 "type" => 1,
                 "key" => 1,
@@ -50,8 +54,7 @@ class Individu extends ObjetBdd
             "wgs84_y" => array("type" => 1)
         );
 
-        $param["fullDescription"] = 1;
-        parent::__construct($bdd, $param);
+        parent::__construct();
     }
 
     /**
@@ -62,7 +65,6 @@ class Individu extends ObjetBdd
      */
     function getListSearch($data)
     {
-        $data = $this->encodeData($data);
         $sql = "select i.individu_id, i.codeindividu, i.tag, e.nom_id, count (pc.piece_id) as nbrepiece,
                 s.sexe_libellecourt, p.peche_date, p.site, p.zonesite, ex.exp_nom, i.age, i.uuid
                 ,wgs84_x, wgs84_y
@@ -82,24 +84,30 @@ class Individu extends ObjetBdd
         if (strlen($data["exp_id"]) == 0) {
             $data["exp_id"] = 0;
         }
-        $where = " where ie.exp_id = " . $data["exp_id"];
+        $param["exp_id"] = $data["exp_id"];
+        $where = " where ie.exp_id = :exp_id:";
 
         if (strlen($data["codeindividu"]) > 0) {
-            $where .= $and . "(upper(i.codeindividu) like upper('%" . $data["codeindividu"] . "%')
-					or upper(i.tag) like upper('%" . $data["codeindividu"] . "%')
-							)";
+            $where .= $and . "(upper(i.codeindividu) like upper(:codeindividu:)
+					or upper(i.tag) like upper(:tag:))";
+            $param["codeindividu"] = "%" . $data["codeindividu"] . "%";
+            $param["tag"] = "%" . $data["codeindividu"] . "%";
         }
         if ($data["sexe"] > 0) {
-            $where .= $and . "i.sexe_id = " . $data["sexe"];
+            $where .= $and . "i.sexe_id = :sexe:";
+            $param["sexe"] = $data["sexe"];
         }
         if (strlen($data["site"]) > 0) {
-            $where .= $and . "p.site = '" . $data["site"] . "'";
+            $where .= $and . "p.site = :site:";
+            $param["site"] = $data["site"];
         }
         if (strlen($data["zone"]) > 0) {
-            $where .= $and . "p.zonesite = '" . $data["zone"] . "'";
+            $where .= $and . "p.zonesite = :zone:";
+            $param["zone"] = $data["zone"];
         }
         if ($data["espece_id"] > 0) {
-            $where .= $and . "e.espece_id = " . $data["espece_id"];
+            $where .= $and . "e.espece_id = :espece_id:";
+            $param["espece_id"] = $data["espece_id"];
         }
         /**
          * Recherche des lectures non réalisées
@@ -112,10 +120,12 @@ class Individu extends ObjetBdd
                 join piece pc2 on (i2.individu_id = pc2.individu_id)
                 join photo ph on (ph.piece_id = pc2.piece_id)
                 join photolecture phl on (phl.photo_id = ph.photo_id)
-                where ie2.exp_id = " . $data["exp_id"] . "
-                    and phl.lecteur_id = " . $data["lecteur_id"] . "
+                where ie2.exp_id = :exp_id2:
+                    and phl.lecteur_id = :lecteur_id: 
                 )
             ";
+            $param["exp_id2"] = $data["exp_id"];
+            $param["lecteur_id"] = $data["lecteur_id"];
         }
         /*
          * Preparation du group by
@@ -125,14 +135,8 @@ class Individu extends ObjetBdd
          * Preparation de la clause de tri
          */
         $tri = " order by codeindividu";
-        $listData = $this->getListeParam($sql . $where . $group . $tri);
-        /*
-         * Mise en forme des dates
-         */
-        foreach ($listData as $key => $value) {
-            $listData[$key]["peche_date"] = $this->formatDateDBversLocal($value["peche_date"]);
-        }
-        return $listData;
+        $this->fields["peche_date"] = ["type"=>2];
+        return $this->getListeParam($sql . $where . $group . $tri, $param);
     }
 
     /**
@@ -147,7 +151,7 @@ class Individu extends ObjetBdd
                 from individu
                 join espece using (espece_id)
                 join individu_experimentation using (individu_id)
-                where exp_id = :exp_id
+                where exp_id = :exp_id:
         ";
         return $this->getListeParamAsPrepared($sql, array("exp_id" => $exp_id));
     }
@@ -164,20 +168,13 @@ class Individu extends ObjetBdd
             $sql = "select individu_id, nom_id, peche_id, codeindividu, tag, longueur, poids,
                     remarque, parasite, age, sexe_libelle, peche_date, uuid
                     ,wgs84_x, wgs84_y
-				from " . $this->table . "
+				from individu
 						left outer join sexe using (sexe_id)
 						left outer join espece using (espece_id)
 						left outer join peche using (peche_id)
-						where individu_id = " . $id;
-            $data = $this->lireParam($sql);
-            /*
-             * Mise en forme de la date de peche
-             */
-
-            if (strlen($data["peche_date"]) > 0) {
-                $data["peche_date"] = $this->formatDateDBversLocal($data["peche_date"]);
-            }
-            return $data;
+						where individu_id = :id:";
+                        $this->fields["peche_date"] = ["type"=>2];
+            return $this->lireParam($sql, ["id"=>$id]);
         }
     }
 
@@ -187,7 +184,7 @@ class Individu extends ObjetBdd
      *
      * @see ObjetBDD::lire()
      */
-    function lire($id)
+    function lire(int $id, bool $getDefault = true, $parentKey = 0) :array
     {
         if ($id > 0) {
             $sql = "select individu_id, nom_id,
@@ -196,7 +193,7 @@ class Individu extends ObjetBdd
                     ,wgs84_x, wgs84_y
 				from " . $this->table . "
 						left outer join espece using (espece_id)
-						where individu_id = :id";
+						where individu_id = :id:";
             return $this->lireParamAsPrepared($sql, array("id" => $id));
         } else {
             return $this->getDefaultValue();
@@ -209,7 +206,7 @@ class Individu extends ObjetBdd
      *
      * @see ObjetBDD::write()
      */
-    function ecrire($data)
+    function ecrire($data):int
     {
         $id = parent::ecrire($data);
         if ($id > 0 && is_array($data["exp_id"])) {
@@ -237,20 +234,18 @@ class Individu extends ObjetBdd
             );
             $res = $this->lireParamAsPrepared($sql, $aid);
             if ($res["nb"] > 0) {
-                $this->addMessage(_("Des photos sont rattachées au poisson, sa suppression est impossible"));
-                throw new ObjetBDDException(_("Des photos sont rattachées au poisson, sa suppression est impossible"));
+                throw new PpciException(_("Des photos sont rattachées au poisson, sa suppression est impossible"));
             }
         }
         /*
          * Suppression des pieces rattachees
          */
-        include_once 'modules/classes/piece.class.php';
-        $piece = new Piece($this->connection, $this->paramori);
+        $piece = new Piece();
         $piece->supprimerFromIndividu($id);
         /*
          * Suppression dans la table des experimentations
          */
-        $sql = "delete from individu_experimentation where individu_id = :individu_id";
+        $sql = "delete from individu_experimentation where individu_id = :individu_id:";
         $this->executeAsPrepared($sql, $aid, true);
         return parent::supprimer($id);
     }

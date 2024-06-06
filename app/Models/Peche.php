@@ -1,11 +1,14 @@
 <?php
+namespace App\Models;
+
+use Ppci\Models\PpciModel;
 
 /**
  * ORM de gestion de la table peche
  * @author quinton
  *
  */
-class Peche extends ObjetBdd
+class Peche extends PpciModel
 {
     /**
      * __construct
@@ -15,12 +18,10 @@ class Peche extends ObjetBdd
      * 
      * @return mixed 
      */
-    public function __construct($bdd, $param = array())
+    public function __construct()
     {
-        $this->param = $param;
-        $this->table = "peche";
-        $this->id_auto = 1;
-        $this->colonnes = array(
+                $this->table = "peche";
+                $this->fields = array(
             "peche_id" => array(
                 "type" => 1,
                 "key" => 1,
@@ -48,9 +49,8 @@ class Peche extends ObjetBdd
                 "longueur" => 100,
             ),
         );
-        $param["fullDescription"] = 1;
-        $param["auto_date"] = 1;
-        parent::__construct($bdd, $param);
+                $param["auto_date"] = 1;
+        parent::__construct();
     }
     /**
      * Retourne la liste des sites peches

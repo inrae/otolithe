@@ -1,4 +1,7 @@
 <?php
+namespace App\Models;
+
+use Ppci\Models\PpciModel;
 
 /**
  * ORM de la table naturetraitement
@@ -6,14 +9,12 @@
  * @author quinton
  *
  */
-class Naturetraitement extends ObjetBdd
+class Naturetraitement extends PpciModel
 {
   function __construct($bdd, $param = array())
   {
-    $this->param = $param;
-    $this->table = "naturetraitement";
-    $this->id_auto = 1;
-    $this->colonnes = array(
+        $this->table = "naturetraitement";
+        $this->fields = array(
       "naturetraitement_id" => array(
         "type" => 1,
         "key" => 1,
@@ -24,7 +25,6 @@ class Naturetraitement extends ObjetBdd
         "requis" => 1
       )
     );
-    $param["fullDescription"] = 1;
-    parent::__construct($bdd, $param);
+        parent::__construct();
   }
 }

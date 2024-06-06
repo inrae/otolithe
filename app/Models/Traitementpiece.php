@@ -1,4 +1,7 @@
 <?php
+namespace App\Models;
+
+use Ppci\Models\PpciModel;
 
 /**
  * ORM de gestion de la table traitement
@@ -6,14 +9,12 @@
  * @author quinton
  *
  */
-class Traitementpiece extends ObjetBdd
+class Traitementpiece extends PpciModel
 {
   function __construct($bdd, $param = array())
   {
-    $this->param = $param;
-    $this->table = "traitementpiece";
-    $this->id_auto = "1";
-    $this->colonnes = array(
+        $this->table = "traitementpiece";
+        $this->fields = array(
       "traitementpiece_id" => array(
         "type" => 1,
         "key" => 1,
@@ -24,8 +25,7 @@ class Traitementpiece extends ObjetBdd
         "longueur" => 255
       )
     );
-    $this->id_auto = "1";
-    $this->colonnes = array(
+        $this->fields = array(
       "traitement_id" => array(
         "type" => 1,
         "key" => 1,
@@ -36,7 +36,6 @@ class Traitementpiece extends ObjetBdd
         "longueur" => 255
       )
     );
-    $param["fullDescription"] = 1;
-    parent::__construct($bdd, $param);
+        parent::__construct();
   }
 }
