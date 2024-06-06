@@ -79,29 +79,5 @@ class SearchParam
 		}
 	}
 }
-/**
- * Classe de gestion des parametres de recherche des poissons
- * @author Eric Quinton
- *
- */
-class SearchIndividu extends SearchParam
-{
-	function __construct()
-	{
-		$this->param = array("codeindividu" => "", "exp_id" => "", "sexe" => "", "site" => "", "zone" => "", "isNotRead" => 0, "lecteur_id"=>0, "espece_id"=>0);
-		parent::__construct();
-	}
-}
-/**
- * Classe de recherche des lectures de pieces
- * @author quinton
- *
- */
-class SearchLecture extends SearchParam
-{
-	function __construct()
-	{
-		$this->param = array("codeindividu" => "", "exp_id" => "", "site" => "", "zonesite" => "", "lecteur_id" => 0, "consensual"=>0, "espece_id"=>0);
-		parent::__construct();
-	}
-}
+
+

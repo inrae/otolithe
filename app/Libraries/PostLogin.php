@@ -1,28 +1,25 @@
 <?php
-namespace App\Libraries;
-use Ppci\Libraries\PpciLibrary;
-class PostLogin extends PpciLibrary {
-    static function index() {
-    }
-    
-    function temp () {
-		
-		$lecteur = new Lecteur($bdd, $ObjetBDDParam);
-$lecteur_id = $lecteur->getIdFromLogin($_SESSION['login']);
-if ($lecteur_id > 0) {
-    $_SESSION["droits"]["lecture"] = 1;
-    $_SESSION["droits"]["consult"] = 1;
-    $_SESSION["lecteur_id"] = $lecteur_id;
-    $_SESSION["searchIndividu"]->setParam(array("lecteur_id" => $lecteur_id));
-    $_SESSION["searchLecture"]->setParam(array("lecteur_id" => $lecteur_id));
-    //$vue->set($_SESSION["droits"], "droits");
 
-    /*
-     * Recuperation des experimentations autorisees
-     */
-    include_once 'modules/classes/experimentation.class.php';
-    $experimentation = new Experimentation($bdd, $ObjetBDDParam);
-    $_SESSION["experimentations"] = $experimentation->getExpAutorisees($lecteur_id);
-}
-}
+namespace App\Libraries;
+
+use App\Models\Experimentation;
+use App\Models\Lecteur;
+use Ppci\Libraries\PpciLibrary;
+
+class PostLogin extends PpciLibrary
+{
+    static function index()
+    {
+        $lecteur = new Lecteur();
+        $lecteur_id = $lecteur->getIdFromLogin($_SESSION['login']);
+        if ($lecteur_id > 0) {
+            $_SESSION["droits"]["read"] = 1;
+            $_SESSION["droits"]["consult"] = 1;
+            $_SESSION["lecteur_id"] = $lecteur_id;
+            $_SESSION["searchIndividu"]->setParam(array("lecteur_id" => $lecteur_id));
+            $_SESSION["searchLecture"]->setParam(array("lecteur_id" => $lecteur_id));
+            $experimentation = new Experimentation();
+            $_SESSION["experimentations"] = $experimentation->getExpAutorisees($lecteur_id);
+        }
+    }
 }

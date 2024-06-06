@@ -47,8 +47,6 @@ class Lecteur extends PpciModel
     public function getIdFromLogin($login)
     {
         if (strlen($login) > 0) {
-            $login = $this->encodeData($login);
-
             $sql = "select lecteur_id from lecteur where login = :login:";
             $res = $this->lireParam($sql, ["login" => $login]);
             if ($res["lecteur_id"] > 0) {

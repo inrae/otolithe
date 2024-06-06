@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use App\Filters\CommonFilter;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
@@ -35,7 +36,8 @@ class Filters extends BaseConfig
         'legacyRoute'   => LegacyRouteFilter::class,
         'startcall'     => StartCallFilter::class,
         'dbversioncheck'=> DbversioncheckFilter::class,
-        "admin"         => AdminFilter::class
+        "admin"         => AdminFilter::class,
+        "common"        => CommonFilter::class,
     ];
 
     /**
@@ -51,6 +53,7 @@ class Filters extends BaseConfig
             'invalidchars',
             'legacyRoute',
             'startcall',
+            'common',
             'dbversioncheck',
             'rights',
             'admin'

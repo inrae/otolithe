@@ -131,3 +131,4 @@ nb-configuration.xml
 # PPCI configuration
 id_app
 id_app.pub
+writable/templates_c/*

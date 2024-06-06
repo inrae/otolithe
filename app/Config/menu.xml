@@ -4,28 +4,23 @@
 		<its:translateRule selector="//item/@label" translate="yes" />
 		<its:translateRule selector="//item/@tooltip" translate="yes" />
 	</its:rules>
-<item module="individuList" label="Lectures" tooltip="Lecture des pièces calcifiées">
-	
-</item>
-	<item module="manage" label="Lectures" tooltip="Lectures des pièces calcifiées">
+	<item label="Lectures" tooltip="Lectures des pièces calcifiées">
 		<item module="individuList" label="Poissons" tooltip="Liste des poissons"/>
 		<item module="photolectureList" label="Lectures réalisées" tooltip="Liste des lectures réalisées" droits="lecture"/>
 		<item module="pieceList" label="Pièces" tooltip="Liste des pièces"/>
 		<item divider="1" droits="manage"/>
 		<item module="importChange" label="Import" tooltip="Importer des poissons" droits="manage"/>
-		<item divider='1' droits="admin" />
-		<item module="requestList" label="Requêtes SQL" tooltip="Exécution de requêtes SQL dans la base de données" droits="admin" />
 	</item>
 
-	<item module="parametre" label="Paramètres" tooltip="Paramètres de l'application" droits="manage">
+	<item module="parametre" label="Paramètres" tooltip="Paramètres de l'application" droits="consult">
 		<item module="experimentationList" label="Expérimentations" tooltip="Liste des expérimentations" droits="consult"/>
 		<item module="piecetypeList" label="Pièces" tooltip="Liste des types de pièces calcifiées" droits="consult"/>
 		<item module="especeList" label="Espèces" tooltip="Liste des espèces" droits="consult"/>
 		<item module="metadatatypeList" droits="consult" label="Métadonnées" tooltip="Modèles de métadonnées" />
 		<item divider='1' />
-		<item module="dbstructureSchema" droits="admin" label="Schéma de la base de données" tooltip="Schéma de la base de données" />
-		<item module="dbstructureHtml" droits='admin' label="Structure de la base de données (HTML)" tooltip="Liste des tables et des colonnes" />
-		<item module="dbstructureLatex" droits='admin' label="Structure de la base de données (Latex)" tooltip="Liste des tables et des colonnes sous forme de tableaux Latex" />
+		<item module="dbstructureSchema" droits="param" label="Schéma de la base de données" tooltip="Schéma de la base de données" />
+		<item module="dbstructureHtml" droits='param' label="Structure de la base de données (HTML)" tooltip="Liste des tables et des colonnes" />
+		<item module="dbstructureLatex" droits='param' label="Structure de la base de données (Latex)" tooltip="Liste des tables et des colonnes sous forme de tableaux Latex" />
 	</item>
 	<item module="administration" label="Administration" tooltip="Administration de l'application" droits="admin">
 		<item module="loginGestionList" droits="admin" label="Liste des comptes locaux" tooltip="Liste des logins - identification via la base de données" />
