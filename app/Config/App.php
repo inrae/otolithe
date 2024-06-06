@@ -189,7 +189,7 @@ class App extends BaseConfig
      * @var string
      */
     public string $versionDate = "13/12/2023";
-    public string $dbversion = "23.0";
+    public string $dbversion = "2.4";
     public string $databaseSchemaFile = ROOTPATH . "documentation/metabo_database.png";
     /**
      * Duration of conservation of logs in table log
@@ -241,13 +241,13 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $GACL_aco = "metabo";
+    public $GACL_aco = "otolithe";
     /**
      * Generic mail used to send messages to the administrators
      *
      * @var string
      */
-    public $APP_mail = "metabo@inrae.fr";
+    public $APP_mail = "";
     /**
      * Set true if send mails is enabled
      *
