@@ -13,7 +13,7 @@ use Ppci\Models\PpciModel;
 class Individu_experimentation extends PpciModel
 {
 
-    function __construct($bdd, $param = array())
+    function __construct()
     {
         $this->table = "individu_experimentation";
         $this->useAutoIncrement = false;

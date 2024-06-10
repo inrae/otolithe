@@ -1,16 +1,40 @@
 <?php
 
-require_once 'modules/classes/individu.class.php';
+namespace App\Libraries;
 
-$dataClass = new Individu($bdd, $ObjetBDDParam);
-/*
- * Initialisation de la classe de traduction des cles
- */
-$_REQUEST["individu_id"] = $_SESSION["it_individu"]->getValue($_REQUEST["individu_id"]);
-$id = $_REQUEST["individu_id"];
+use \Ppci\Libraries\PpciLibrary;
+use App\Models\Experimentation;
+use App\Models\Individu as ModelsIndividu;
+use App\Models\Individu_experimentation;
+use App\Models\Peche;
+use App\Models\Piece;
+use App\Models\Sexe;
+use Ppci\Libraries\PpciException;
 
-switch ($t_module["param"]) {
-    case "list":
+class Individu extends PpciLibrary
+{
+    /**
+     * 
+     *
+     * @var ModelsIndividu
+     */
+    protected $dataClass;
+
+    function __construct()
+    {
+        parent::__construct();
+        $this->dataClass = new ModelsIndividu();
+        $keyName = "individu_id";
+        if (isset($_REQUEST[$keyName])) {
+            $this->id = $_REQUEST[$keyName];
+        }
+        $_REQUEST["individu_id"] = $_SESSION["it_individu"]->getValue($_REQUEST["individu_id"]);
+    }
+
+
+
+    function list()
+    {
         /*
          * Display the list of all records of the table
          */
@@ -24,120 +48,113 @@ switch ($t_module["param"]) {
         if (isset($_REQUEST["exp_id"])) {
             $_REQUEST["exp_id"] = $_SESSION["it_experimentation"]->getValue($_REQUEST["exp_id"]);
         }
-        $searchIndividu->setParam($_REQUEST);
-        $dataRecherche = $searchIndividu->getParam();
-        if ($searchIndividu->isSearch() == 1) {
-            $data = $_SESSION["it_individu"]->translateList($dataClass->getListSearch($dataRecherche), true);
+        $_SESSION["searchIndividu"]->setParam($_REQUEST);
+        $dataRecherche = $_SESSION["searchIndividu"]->getParam();
+        if ($_SESSION["searchIndividu"]->isSearch() == 1) {
+            $data = $_SESSION["it_individu"]->translateList($this->dataClass->getListSearch($dataRecherche), true);
             $data = $_SESSION["it_peche"]->translateList($data);
-            $vue->set($data, "data");
-            $vue->set(1, "isSearch");
+            $this->vue->set($data, "data");
+            $this->vue->set(1, "isSearch");
         }
-        require_once 'modules/classes/sexe.class.php';
-        $sexe = new Sexe($bdd, $ObjetBDDParam);
-        $vue->set($sexe->getListe(), "sexe");
-
-
+        $sexe = new Sexe();
+        $this->vue->set($sexe->getListe(), "sexe");
 
         /*
          * Integration des experimentations
          */
-        $vue->set($_SESSION["it_experimentation"]->translateList($_SESSION["experimentations"]), "experimentation");
+        $this->vue->set($_SESSION["it_experimentation"]->translateList($_SESSION["experimentations"]), "experimentation");
 
         /*
          * Recherche des zones de peche
          */
-        include_once "modules/classes/peche.class.php";
-        $peche = new Peche($bdd, $ObjetBDDParam);
-        $vue->set($peche->getListeSite(), "site");
-        $vue->set($peche->getListeZone(), "zone");
+        $peche = new Peche();
+        $this->vue->set($peche->getListeSite(), "site");
+        $this->vue->set($peche->getListeZone(), "zone");
         $dataRecherche["exp_id"] = $_SESSION["it_experimentation"]->setValue($dataRecherche["exp_id"]);
-        $vue->set($dataRecherche, "individuSearch");
+        $this->vue->set($dataRecherche, "individuSearch");
 
         /*
          * Affectation du nom du module pour le cartouche de recherche
          */
-        $vue->set("individuList", "modulePostSearch");
-        $vue->set($data, "data");
-        $vue->set("gestion/individuListe.tpl", "corps");
-
-        break;
-    case "display":
+        $this->vue->set("individuList", "modulePostSearch");
+        $this->vue->set($data, "data");
+        $this->vue->set("gestion/individuListe.tpl", "corps");
+        return $this->vue->send();
+    }
+    function display()
+    {
         /*
          * Display the detail of the record
          */
-        $data = $dataClass->getDetail($id);
+        $data = $this->dataClass->getDetail($this->id);
         $dataT = $_SESSION["it_individu"]->translateRow($data);
         $dataT = $_SESSION["it_peche"]->translateRow($dataT);
-        $vue->set($dataT, "data");
+        $this->vue->set($dataT, "data");
 
         /*
          * Lecture des experimentations
          */
-        require_once "modules/classes/individu_experimentation.class.php";
-        $individu_experimentation = new Individu_experimentation($bdd, $ObjetBDDParam);
-        $dataIE = $individu_experimentation->getListeFromIndividu($id);
+        $individu_experimentation = new Individu_experimentation();
+        $dataIE = $individu_experimentation->getListeFromIndividu($this->id);
         $dataIE = $_SESSION["it_experimentation"]->translateList($dataIE);
         $dataIE = $_SESSION["it_individu"]->translateList($dataIE);
-        $vue->set($dataIE, "experimentation");
+        $this->vue->set($dataIE, "experimentation");
 
         /*
          * Lecture des pieces
          */
-        include_once 'modules/classes/piece.class.php';
-        $piece = new Piece($bdd, $ObjetBDDParam);
-        $dataPiece = $piece->getListFromIndividu($id);
+        $piece = new Piece();
+        $dataPiece = $piece->getListFromIndividu($this->id);
         $dataPiece = $_SESSION["it_piece"]->translateList($dataPiece);
         $dataPiece = $_SESSION["it_individu"]->translateList($dataPiece);
-        $vue->set($dataPiece, "piece");
+        $this->vue->set($dataPiece, "piece");
         /*
          * Lecture des donnees sur la peche
          */
-        include_once 'modules/classes/peche.class.php';
-        $peche = new Peche($bdd, $ObjetBDDParam);
+        $peche = new Peche();
         if ($data["peche_id"] > 0) {
             $dataPeche = $peche->lire($data["peche_id"]);
             $dataPeche = $_SESSION["it_peche"]->translateRow($dataPeche);
-            $vue->set($dataPeche, "peche");
+            $this->vue->set($dataPeche, "peche");
         }
-        $vue->set("gestion/individuDisplay.tpl", "corps");
-
-        break;
-    case "change":
+        $this->vue->set("gestion/individuDisplay.tpl", "corps");
+        return $this->vue->send();
+    }
+    function change()
+    {
         /*
          * open the form to modify the record
          * If is a new record, generate a new record with default value :
          * $_REQUEST["idParent"] contains the identifiant of the parent record
          */
-        $data = dataRead($dataClass, $id, "gestion/individuChange.tpl");
+        $data = $this->dataRead($this->id, "gestion/individuChange.tpl");
         $dataT = $_SESSION["it_individu"]->translateRow($data);
         $dataT = $_SESSION["it_peche"]->translateRow($dataT);
-        $vue->set($dataT, "data");
-        include_once 'modules/classes/peche.class.php';
+        $this->vue->set($dataT, "data");
         /*
          * Lecture des donnees de peche
          */
-        $peche = new Peche($bdd, $ObjetBDDParam);
+        $peche = new Peche();
         if ($data["peche_id"] > 0) {
             $dataPeche = $peche->lire($data["peche_id"]);
             $dataPeche = $_SESSION["it_peche"]->translateRow($dataPeche);
-            $vue->set($dataPeche, "peche");
+            $this->vue->set($dataPeche, "peche");
         }
         /*
          * Lecture des sexes
          */
-        require_once "modules/classes/sexe.class.php";
-        $sexe = new Sexe($bdd, $ObjetBDDParam);
-        $vue->set($sexe->getListe(), "sexes");
+        $sexe = new Sexe();
+        $this->vue->set($sexe->getListe(), "sexes");
 
         /*
          * Liste des experimentations
          */
-        require_once "modules/classes/experimentation.class.php";
-        $experimentation = new Experimentation($bdd, $ObjetBDDParam);
-        $vue->set($_SESSION["it_experimentation"]->translateList($experimentation->getAllListFromIndividu($id)), "experimentations");
-
-        break;
-    case "write":
+        $experimentation = new Experimentation();
+        $this->vue->set($_SESSION["it_experimentation"]->translateList($experimentation->getAllListFromIndividu($this->id)), "experimentations");
+        return $this->vue->send();
+    }
+    function write()
+    {
         /*
          * write record in database
          */
@@ -164,7 +181,6 @@ switch ($t_module["param"]) {
             foreach (array("site", "zonesite", "peche_date", "campagne", "peche_engin", "personne", "operateur") as $value) {
                 if (strlen($_REQUEST[$value]) > 0) {
                     $isPeche = true;
-                    break;
                 }
             }
             if (!$isPeche) {
@@ -174,25 +190,35 @@ switch ($t_module["param"]) {
             $isPeche = true;
         }
         if ($isPeche) {
-            include_once 'modules/classes/peche.class.php';
-            $peche = new Peche($bdd, $ObjetBDDParam);
+            $peche = new Peche();
             $_REQUEST["peche_id"] = $peche->ecrire($_REQUEST);
         }
-        $id = dataWrite($dataClass, $_REQUEST);
-        $_REQUEST["individu_id"] = $_SESSION["it_individu"]->setValue($id);
-        break;
-    case "delete":
+        try {
+            $this->id = $this->dataWrite($_REQUEST);
+            $_REQUEST["individu_id"] = $_SESSION["it_individu"]->setValue($this->id);
+            return $this->display();
+        } catch (PpciException) {
+            return $this->change();
+        }
+    }
+    function delete()
+    {
         /*
          * delete record
          */
 
-        dataDelete($dataClass, $id);
-
-        $_REQUEST["individu_id"] = $_SESSION["it_individu"]->setValue($id);
-
-        break;
-    case "listEspece":
+        try {
+            $this->dataDelete($this->id);
+            return $this->list();
+        } catch (PpciException $e) {
+            return $this->change();
+        }
+    }
+    function listEspece()
+    {
+        $this->vue = service ('AjaxView');
         $exp_id = $_SESSION["it_experimentation"]->getValue($_REQUEST["exp_id"]);
-        $vue->set($dataClass->getListEspeceFromExp($exp_id));
-        break;
+        $this->vue->set($this->dataClass->getListEspeceFromExp($exp_id));
+        return $this->vue->send();
+    }
 }

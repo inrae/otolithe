@@ -12,7 +12,7 @@ use Ppci\Models\PpciModel;
  */
 class Traitementpiece extends PpciModel
 {
-    function __construct($bdd, $param = array())
+    function __construct()
     {
         $this->table = "traitementpiece";
         $this->fields = array(

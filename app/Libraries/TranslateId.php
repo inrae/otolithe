@@ -159,7 +159,7 @@ class TranslateId
                     $this->setValue($value);
                 }
                 $value > 0 ? $row[$key] = $this->corresp_reverse[$value] : $row[$key]=0;
-                break;
+                }
             }
         }
         return $row;

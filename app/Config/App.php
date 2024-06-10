@@ -318,6 +318,11 @@ class App extends BaseConfig
     public $GACL_disable_new_right = 0;
 
     /**
+     * Max size of picture
+     */
+    public $APP_maxfilesize = 100000000;
+
+    /**
      * Get last release informations
      */
     /**
