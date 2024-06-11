@@ -1,6 +1,6 @@
 <h2>{t}Modification d'une expérimentation{/t}</h2>
 <div class="row">
-<a href="index.php?module=experimentationList">{t}Retour à la liste des expérimentations{/t}</a>
+<a href="experimentationList">{t}Retour à la liste des expérimentations{/t}</a>
 </div>
 <div class="row">
 <div class="col-md-8 col-lg-6">

@@ -33,7 +33,7 @@ $(document).ready(function() {
 <div class="row">
 <div class="col-md-6">
 <img src="display/images/list.png" height="25">
-<a href="index.php?module=metadatatypeList">{t}Retour à la liste{/t}</a>
+<a href="metadatatypeList">{t}Retour à la liste{/t}</a>
 
 <form class="form-horizontal protoform" id="metadataForm" method="post" action="index.php" enctype="multipart/form-data">
 {if $nbSample > 0}<fieldset disabled>{/if}

@@ -18,7 +18,7 @@
 <th>{t}Longueur de référence mesurée{/t}</th>
 <th>{t}Longueur réelle totale de la mesure{/t}</th>
 <th>{t}Age{/t}</th>
-{if $droits.gestion == 1}
+{if $rights.manage == 1}
 <th class="center">
 <img src="/display/images/delete.png" height="25">
 </th>
@@ -29,17 +29,17 @@
 {section name="lst" loop=$data}
 <tr>
 <td>
-<a href="index.php?module=individuDisplay&individu_id={$data[lst].individu_id}">
+<a href="individuDisplay?individu_id={$data[lst].individu_id}">
 {$data[lst].codeindividu}<br>{$data[lst].tag}
 </a>
 </td>
 <td>
-<a href="index.php?module=pieceDisplay&piece_id={$data[lst].piece_id}">
+<a href="pieceDisplay?piece_id={$data[lst].piece_id}">
 {$data[lst].piecetype_libelle}
 </a>
 <br>{$data[lst].traitementpiece_libelle}</td>
 <td>
-<a href="index.php?module=photoDisplay&photo_id={$data[lst].photo_id}">
+<a href="photoDisplay?photo_id={$data[lst].photo_id}">
 {$data[lst].photo_nom}
 </a>
 <br>{$data[lst].color}</td>
@@ -48,7 +48,7 @@
 <td><div class="center">{$data[lst].long_reference}</div></td>
 <td>{$data[lst].lecteur_prenom} {$data[lst].lecteur_nom}</td>
 <td>
-<a href="index.php?module=photolectureDisplay&photolecture_id={$data[lst].photolecture_id}&photo_id={$data[lst].photo_id}">
+<a href="photolectureDisplay?photolecture_id={$data[lst].photolecture_id}&photo_id={$data[lst].photo_id}">
 {$data[lst].photolecture_date}
 </a>
 </td>
@@ -56,9 +56,9 @@
 <td>{$data[lst].long_ref_mesuree}</td>
 <td>{$data[lst].long_totale_reel}</td>
 <td><div class="center">{$data[lst].age}</div></td>
-{if $droits.gestion == 1}
+{if $rights.manage == 1}
 <td class="center">
-<a href="index.php?module=photolectureDelete&photolecture_id={$data[lst].photolecture_id}">
+<a href="photolectureDelete?photolecture_id={$data[lst].photolecture_id}">
 <img src="/display/images/delete.png" height="25">
 </a>
 </td>

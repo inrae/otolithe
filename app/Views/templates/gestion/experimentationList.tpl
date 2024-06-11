@@ -1,6 +1,6 @@
 <h2>{t}Liste des expérimentations{/t}</h2>
-{if $droits["gestionCompte"] == 1}
-<a href="index.php?module=experimentationChange&exp_id=0">
+{if $rights["param"] == 1}
+<a href="experimentationChange?exp_id=0">
 {t}Nouvelle experimentation...{/t}
 </a>
 {/if}
@@ -19,8 +19,8 @@
 {section name=lst loop=$data}
 <tr>
 <td>
-{if $droits["admin"] == 1}
-<a href="index.php?module=experimentationChange&exp_id={$data[lst].exp_id}">
+{if $rights["admin"] == 1}
+<a href="experimentationChange?exp_id={$data[lst].exp_id}">
 {$data[lst].exp_id}
 </a>
 {else}

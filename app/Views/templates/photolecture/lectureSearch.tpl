@@ -156,7 +156,7 @@ getEspece();
 			<div class="center col-sm-1">
 				<button id="btn-submit" class="btn btn-success" type="button">{t}Rechercher...{/t}</button> 
 			</div>
-			{if $droits.gestion == 1}
+			{if $rights.manage == 1}
 				<div class="center col-sm-1">
 					<button id="btn-export" class="btn btn-info" type="button">{t}Exporter la liste{/t}</button>
 				</div>

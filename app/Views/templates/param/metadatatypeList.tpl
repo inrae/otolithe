@@ -15,8 +15,8 @@
 <h2>{t}Modèles de métadonnées{/t}</h2>
 <div class="row">
 	<div class="col-md-6">
-		{if $droits.gestionCompte == 1}
-			<a href="index.php?module=metadatatypeChange&metadatatype_id=0">
+		{if $rights.manageCompte == 1}
+			<a href="metadatatypeChange?metadatatype_id=0">
 				<img src="display/images/new.png" height="25">
 				{t}Nouveau...{/t}
 			</a>
@@ -39,7 +39,7 @@
 						<th>{t}Nom du modèle{/t}</th>
 						<th>{t}Résumé{/t}</th>
 						<th>{t}Données en tableau ?{/t}</th>
-						{if $droits.gestionCompte == 1}
+						{if $rights.manageCompte == 1}
 							<th>{t}Modifier{/t}</th>
 							<th>{t}Dupliquer{/t}</th>
 						{/if}
@@ -57,13 +57,13 @@
 							<td class="center">
 								{if $data[lst].is_array == 1}{t}oui{/t}{else}{t}non{/t}{/if}
 							</td>
-								{if $droits.gestionCompte == 1}
+								{if $rights.manageCompte == 1}
 									<td class="center">
-									<a href="index.php?module=metadatatypeChange&metadatatype_id={$data[lst].metadatatype_id}" title="{t}Modifier le modèle de métadonnées{/t}">
+									<a href="metadatatypeChange?metadatatype_id={$data[lst].metadatatype_id}" title="{t}Modifier le modèle de métadonnées{/t}">
 										<img src="display/images/edit.png" height="25">
 									</a>
 									<td class="center">
-										<a href="index.php?module=metadatatypeCopy&metadatatype_id={$data[lst].metadatatype_id}" title="{t}Dupliquer le modèle de métadonnées{/t}">
+										<a href="metadatatypeCopy?metadatatype_id={$data[lst].metadatatype_id}" title="{t}Dupliquer le modèle de métadonnées{/t}">
 											<img src="display/images/copy.png" height="25">
 										</a>
 									</td>
@@ -81,7 +81,7 @@
 	</div>
 </div>
 
-{if $droits["gestionCompte"] == 1}
+{if $rights["param"] == 1}
 	<div class="row col-md-6">
 		<fieldset>
 			<legend>{t}Importer des modèles de métadonnées provenant d'une autre base de données Otolithe{/t}</legend>

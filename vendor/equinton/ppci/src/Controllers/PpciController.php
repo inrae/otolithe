@@ -46,6 +46,11 @@ class PpciController extends \App\Controllers\BaseController
                 }
             }
         }
+        $this->response->setHeader("Cache-Control",
+        [
+            "max-age=05920000",
+            "private"
+        ]);
     }
 
 }

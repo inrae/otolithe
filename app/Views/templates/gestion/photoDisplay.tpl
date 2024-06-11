@@ -25,9 +25,9 @@ $(document).ready(function() {
 <h2>{t}Affichage d'une photo{/t}</h2>
 <div class="col-sm-12">
 <div class="row">
-<a href="index.php?module={$moduleListe}">{t}Retour à la liste{/t}</a> > 
-<a href="index.php?module=individuDisplay&individu_id={$piece.individu_id}">{t}Retour au détail du poisson{/t}</a> > 
-<a href="index.php?module=pieceDisplay&piece_id={$data.piece_id}">{t}Retour au détail de la pièce{/t}</a>
+<a href="{$moduleListe}">{t}Retour à la liste{/t}</a> > 
+<a href="individuDisplay?individu_id={$piece.individu_id}">{t}Retour au détail du poisson{/t}</a> > 
+<a href="pieceDisplay?piece_id={$data.piece_id}">{t}Retour au détail de la pièce{/t}</a>
 </div>
 <div class="row">
 <div class="col-lg-8">
@@ -35,10 +35,10 @@ $(document).ready(function() {
 {include file="gestion/pieceCartouche.tpl"}
 </div>
 </div>
-{if $droits.gestion == 1}
+{if $rights.manage == 1}
 <div class="row">
 <div class="col-sm-12">
-<a href="index.php?module=photoChange&photo_id={$data.photo_id}&piece_id={$data.piece_id}">
+<a href="photoChange?photo_id={$data.photo_id}&piece_id={$data.piece_id}">
 {t}Modifier la photo...{/t}
 </a>
 </div>
@@ -100,9 +100,9 @@ $(document).ready(function() {
 </div>
 </div>
 <div class="col-md-6 col-sm-12">
-<a href="index.php?module=photoGetPhoto&photo_id={$data.photo_id}&disposition=attachment&original_format=1" title="{t}Attention : le temps de chargement peut être (très) long, selon la taille originale de la photo !{/t}">
+<a href="photoGetPhoto?photo_id={$data.photo_id}&disposition=attachment&original_format=1" title="{t}Attention : le temps de chargement peut être (très) long, selon la taille originale de la photo !{/t}">
 <!--  img src="{$photoPath}"-->
-<img src="index.php?module=photoGetThumbnail&photo_id={$data.photo_id}">
+<img src="photoGetThumbnail?photo_id={$data.photo_id}">
 <br>
 {t}Télécharger la photo dans le format original{/t}
 </a>
@@ -110,7 +110,7 @@ $(document).ready(function() {
 </div>
 
 
-{if $droits.lecture == 1}
+{if $rights.lecture == 1}
 <div class="row">
 
 
@@ -152,11 +152,11 @@ $(document).ready(function() {
 </legend>
 
 {if $ageDisplay != 1}
-<a href="index.php?module=photoDisplay&photo_id={$data.photo_id}&ageDisplay=1">
+<a href="photoDisplay?photo_id={$data.photo_id}&ageDisplay=1">
 {t}Afficher l'age calculé (nbre de points positionnés - 1) par chaque lecteur{/t}
 </a>
 {else}
-<a href="index.php?module=photoDisplay&photo_id={$data.photo_id}&ageDisplay=0">
+<a href="photoDisplay?photo_id={$data.photo_id}&ageDisplay=0">
 {t}Masquer l'age calculé (nbre de points positionnés - 1) par chaque lecteur{/t}
 </a>
 {/if}
@@ -169,7 +169,7 @@ $(document).ready(function() {
 <table class="datatable-nopaging table-bordered table-hover" data-order='[[2,"desc"]]'>
 <thead>
 <tr>
-{if $droits.lecture == 1}
+{if $rights.lecture == 1}
 <th>{t}Modification unique{/t}</th>
 {/if}
 <th>{t}Lecteur{/t}</th>
@@ -187,7 +187,7 @@ $(document).ready(function() {
 <th>{t}Longueur réelle calculée{/t}</th>
 <th>{t}Lecture consensuelle{/t}</th>
 <th>{t}Commentaires{/t}</th>
-{if $droits.admin == 1}
+{if $rights.admin == 1}
 <th>{t}Supprimer{/t}</th>
 {/if}
 <th>{t}Consulter...{/t}</th>
@@ -197,17 +197,17 @@ $(document).ready(function() {
 <tbody>
 {section name="lst" loop=$photolecture}
 <tr>
-{if $droits.lecture == 1}
+{if $rights.lecture == 1}
 <td>
 <div class="center">
-<a href="index.php?module=photolectureChange&photolecture_id={$photolecture[lst].photolecture_id}&photo_id={$data.photo_id}">
+<a href="photolectureChange?photolecture_id={$photolecture[lst].photolecture_id}&photo_id={$data.photo_id}">
 <img src="/display/images/edit.png" height="24" border="0">
 </a>
 </div>
 </td>
 {/if}
 <td>
-<a href="index.php?module=photolectureDisplay&photo_id={$data.photo_id}&photolecture_id={$photolecture[lst].photolecture_id}">
+<a href="photolectureDisplay?photo_id={$data.photo_id}&photolecture_id={$photolecture[lst].photolecture_id}">
 {$photolecture[lst].lecteur_prenom} {$photolecture[lst].lecteur_nom}
 </a>
 </td>
@@ -266,10 +266,10 @@ i ++;
 <td class="textareaDisplay">
 {$photolecture[lst].commentaire}
 </td>
-{if $droits.lecture == 1}
+{if $rights.lecture == 1}
 <td>
 <div class="center">
-<a href="index.php?module=photolectureDelete&photolecture_id={$photolecture[lst].photolecture_id}&photo_id={$data.photo_id}" onclick="return confirm('Confirmez-vous la suppression ?'); return false">
+<a href="photolectureDelete?photolecture_id={$photolecture[lst].photolecture_id}&photo_id={$data.photo_id}" onclick="return confirm('Confirmez-vous la suppression ?'); return false">
 <img src="/display/images/delete.png" height="24" border="0">
 </a>
 </div>

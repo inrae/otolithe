@@ -6,15 +6,16 @@ use App\Models\Experimentation;
 use App\Models\Lecteur as ModelsLecteur;
 use Ppci\Libraries\PpciException;
 use ppci\Libraries\PpciLibrary;
+use Ppci\Models\PpciModel;
 
 class Lecteur extends PpciLibrary
 {
     /**
      * 
      *
-     * @var ModelsIndividu
+     * @var ModelsLecteur
      */
-    protected $dataClass;
+    protected PpciModel $dataClass;
 
     function __construct()
     {
@@ -33,6 +34,7 @@ class Lecteur extends PpciLibrary
         /*
 		 * Display the list of all records of the table
 		 */
+        $this->vue = service ('Smarty');
         $this->vue->set($this->dataClass->getListe(), "data");
         $this->vue->set("gestion/lecteurListe.tpl", "corps");
         return $this->vue->send();

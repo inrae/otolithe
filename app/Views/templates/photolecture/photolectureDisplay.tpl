@@ -5,10 +5,10 @@ body > iframe { display: none; }
 </style>
 
 <h2>{t}Affichage des mesures d'un otolithe{/t}</h2>
-<a href="index.php?module={$moduleListe}">{t}Retour à la liste{/t}</a> > 
-<a href="index.php?module=individuDisplay&individu_id={$piece.individu_id}">{t}Retour au détail du poisson{/t}</a> > 
-<a href="index.php?module=pieceDisplay&piece_id={$piece.piece_id}">{t}Retour au détail de la pièce{/t}</a> >
-<a href="index.php?module=photoDisplay&photo_id={$photo.photo_id}">{t}Retour à la photo{/t}</a>
+<a href="{$moduleListe}">{t}Retour à la liste{/t}</a> > 
+<a href="individuDisplay?individu_id={$piece.individu_id}">{t}Retour au détail du poisson{/t}</a> > 
+<a href="pieceDisplay?piece_id={$piece.piece_id}">{t}Retour au détail de la pièce{/t}</a> >
+<a href="photoDisplay?photo_id={$photo.photo_id}">{t}Retour à la photo{/t}</a>
 <div class="row">
 <div class="col-lg-8 col-sm-12">
 {include file="gestion/individuCartouche.tpl"}
@@ -26,7 +26,7 @@ body > iframe { display: none; }
     xmlns:xlink="http://www.w3.org/1999/xlink"
 	style="width:{$image_width}px;height:{$image_height}px">
 <image x="0" y="0" width="{$image_width}" height="{$image_height}"
-     xlink:href="index.php?module=photoGetPhoto&photo_id={$photo.photo_id}&sizeX={$image_width}&sizeY={$image_height}" /> 
+     xlink:href="photoGetPhoto&photo_id={$photo.photo_id}&sizeX={$image_width}&sizeY={$image_height}" /> 
 {section name="lst" loop=$data}
 {section name="lst1" loop=$data[lst].points}
 {if $smarty.section.lst1.index == 0 }

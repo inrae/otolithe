@@ -1,13 +1,13 @@
 <h2>{t}Affichage du détail d'un individu{/t}</h2>
-<a href="index.php?module={$moduleListe}">
+<a href="{$moduleListe}">
 <img src="display/images/list.png" height="25">
 {t}Retour à la liste{/t}</a>
 <div class="row">
 <div class="col-md-12">
 <fieldset class="col-md-6">
 <legend>{t}Données générales{/t}</legend>
-{if $droits.gestion == 1}
-<a href="index.php?module=individuChange&individu_id={$data.individu_id}">
+{if $rights.manage == 1}
+<a href="individuChange?individu_id={$data.individu_id}">
 <img src="display/images/edit.png" height="25">
 {t}Modifier...{/t}</a>
 {/if}
@@ -63,8 +63,8 @@
 </fieldset>
 <fieldset class="col-md-6">
 <legend>{t}Pièces rattachées{/t}</legend>
-{if $droits.gestion == 1}
-<a href="index.php?module=pieceChange&piece_id=0&individu_id={$data.individu_id}">
+{if $rights.manage == 1}
+<a href="pieceChange?piece_id=0&individu_id={$data.individu_id}">
 <img src="display/images/new.png" height="25">
 {t}Nouvelle pièce{/t}</a>
 {/if}
@@ -80,7 +80,7 @@
 <tbody>
 {section name="lst" loop=$piece}
 <tr>
-<td><a href="index.php?module=pieceDisplay&piece_id={$piece[lst].piece_id}&individu_id={$data.individu_id}">
+<td><a href="pieceDisplay?piece_id={$piece[lst].piece_id}&individu_id={$data.individu_id}">
 {$piece[lst].piecetype_libelle}
 </a></td>
 <td>{$piece[lst].piececode}</td>

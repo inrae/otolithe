@@ -1,6 +1,6 @@
 <h2>{t}Modification d'un lecteur{/t}</h2>
 <div class="row">
-<a href="index.php?module=lecteurList">{t}Retour à la liste des lecteurs{/t}</a>
+<a href="lecteurList">{t}Retour à la liste des lecteurs{/t}</a>
 </div>
 
 
@@ -43,7 +43,7 @@
 </div>
 {/foreach}
 </fieldset>
-{if $droits.admin == 1}
+{if $rights.admin == 1}
 <div class="form-group center">
       <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
       {if $data.lecteur_id > 0 }

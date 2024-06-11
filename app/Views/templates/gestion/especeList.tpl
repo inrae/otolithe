@@ -2,8 +2,8 @@
 
 	<div class="row">
 	<div class="col-md-6">
-	{if $droits.gestion == 1}
-	<a href="index.php?module=especeChange&espece_id=0">
+	{if $rights.manage == 1}
+	<a href="especeChange?espece_id=0">
 	<img src="display/images/new.png" height="25">
 	{t}Nouvelle espèce...{/t}
 	</a>
@@ -22,11 +22,11 @@
 {$data[lst].espece_id}
 </td>
 <td>
-{if $droits.gestion == 1}
-<a href="index.php?module=especeChange&espece_id={$data[lst].espece_id}">
+{if $rights.manage == 1}
+<a href="especeChange?espece_id={$data[lst].espece_id}">
 {/if}
 {$data[lst].nom_id}
-{if $droits.gestion == 1}</a>{/if}
+{if $rights.manage == 1}</a>{/if}
 </td>
 <td>{$data[lst].nom_fr}</td>
 </tr>

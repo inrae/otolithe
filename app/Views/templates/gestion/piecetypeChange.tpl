@@ -1,6 +1,6 @@
 <h2>{t}Modification d'un type de pièce{/t}</h2>
 <div class="row">
-<a href="index.php?module=piecetypeList">{t}Retour à la liste{/t}</a>
+<a href="piecetypeList">{t}Retour à la liste{/t}</a>
 </div>
 <div class="row">
 <div class="col-md-8 col-lg-6">

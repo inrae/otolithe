@@ -9,7 +9,7 @@ $("#recherche").keyup(function() {
 		/*
 		* declenchement de la recherche
 		*/
-		var url = "index.php?module=especeSearchAjax";
+		var url = "especeSearchAjax";
 		$.getJSON ( url, { "libelle": texte } , function( data ) {
 			var options = '';
 			 for (var i = 0; i < data.length; i++) {
@@ -25,12 +25,12 @@ $("#recherche").keyup(function() {
 
 <h2>{t}Modification d'un poisson{/t}</h2>
 <div class="row">
-	<a href="index.php?module={$moduleListe}">
+	<a href="{$moduleListe}">
 		<img src="display/images/list.png" height="25">
 		{t}Retour à la liste{/t}
 	</a>
 	{if $data.individu_id > 0}
-		<a href="index.php?module=individuDisplay&individu_id={$data.individu_id}">
+		<a href="individuDisplay?individu_id={$data.individu_id}">
 			<img src="display/images/fish.png" height="25">
 			{t}Retour au poisson{/t}
 		</a>
@@ -208,7 +208,7 @@ $("#recherche").keyup(function() {
 			</fieldset>
 			<div class="form-group center">
 				<button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
-				{if $data.individu_id > 0 && $droits["gestionCompte"] == 1 }
+				{if $data.individu_id > 0 && $rights["param"] == 1 }
 					<button class="btn btn-danger button-delete">{t}Supprimer{/t}</button>
 				{/if}
 		</div>

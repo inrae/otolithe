@@ -9,7 +9,7 @@
         function getMetadata(reponse) { 
             var schema = reponse.replace(/&quot;/g,'"');
             //console.log (schema);
-            var id = {$data.metadatatype_id};
+            var id = "{$data.metadatatype_id}";
             var readOnly = 1;
             var dataParse = "{$data.metadata}";
         	 dataParse = dataParse.replace(/&quot;/g,'"');
@@ -70,9 +70,9 @@
 <h2>{t}Métadonnées associées à la pièce{/t}</h2>
 <div class="row">
     <div class="col-sm-12"> 
-        <a href="index.php?module={$moduleListe}">{t}Retour à la liste{/t}</a> > 
-        <a href="index.php?module=individuDisplay&individu_id={$individu.individu_id}">{t}Retour au détail du poisson{/t}</a> > 
-        <a href="index.php?module=pieceDisplay&piece_id={$data.piece_id}">{t}Retour au détail de la pièce{/t}</a>
+        <a href="{$moduleListe}">{t}Retour à la liste{/t}</a> > 
+        <a href="individuDisplay?individu_id={$individu.individu_id}">{t}Retour au détail du poisson{/t}</a> > 
+        <a href="pieceDisplay?piece_id={$data.piece_id}">{t}Retour au détail de la pièce{/t}</a>
     </div>
 </div>
 <div class="row">
@@ -84,11 +84,11 @@
 <div class="col-sm-12">
 <div class="row">
     <div class="col-sm-12">
-        {if $droits.gestion == 1}
-            <a href="index.php?module=piecemetadataChange&piece_id={$data.piece_id}&piecemetadata_id={$data.piecemetadata_id}">
+        {if $rights.manage == 1}
+            <a href="piecemetadataChange?piece_id={$data.piece_id}&piecemetadata_id={$data.piecemetadata_id}">
                 <img src="display/images/edit.png" height="25">{t}Modifier...{/t}
             </a>
-            <a href="index.php?module=piecemetadataExport&piece_id={$data.piece_id}&piecemetadata_id={$data.piecemetadata_id}">
+            <a href="piecemetadataExport?piece_id={$data.piece_id}&piecemetadata_id={$data.piecemetadata_id}">
                 <img src="display/images/download.png" height="25">{t}Exporter les métadonnées au format CSV{/t}
             </a>
         {/if}

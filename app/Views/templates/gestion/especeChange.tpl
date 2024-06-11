@@ -1,5 +1,5 @@
 <h2>{t}Modification d'une espèce{/t}</h2>
-<a href="index.php?module=especeList">
+<a href="especeList">
 <img src="display/images/list.png" height="25">
 {t}Retour à la liste{/t}
 </a> 
@@ -31,7 +31,7 @@
 <div class="form-group">
 <div class="form-group center">
       <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
-      {if $data.espece_id>0&&$droits["admin"] == 1}
+      {if $data.espece_id>0&&$rights["admin"] == 1}
       <button class="btn btn-danger button-delete">{t}Supprimer{/t}</button>
       {/if}
  </div>

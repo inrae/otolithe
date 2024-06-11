@@ -81,9 +81,9 @@
 <h2>{t}Métadonnées associées à la pièce{/t}</h2>
 <div class="row">
     <div class="col-sm-12"> 
-        <a href="index.php?module={$moduleListe}">{t}Retour à la liste{/t}</a> > 
-        <a href="index.php?module=individuDisplay&individu_id={$individu.individu_id}">{t}Retour au détail du poisson{/t}</a> > 
-        <a href="index.php?module=pieceDisplay&piece_id={$data.piece_id}">{t}Retour au détail de la pièce{/t}</a>
+        <a href="{$moduleListe}">{t}Retour à la liste{/t}</a> > 
+        <a href="individuDisplay&individu_id={$individu.individu_id}">{t}Retour au détail du poisson{/t}</a> > 
+        <a href="pieceDisplay&piece_id={$data.piece_id}">{t}Retour au détail de la pièce{/t}</a>
     </div>
 </div>
 <div class="row">

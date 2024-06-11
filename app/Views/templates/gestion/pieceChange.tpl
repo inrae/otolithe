@@ -1,14 +1,14 @@
 <h2>{t}Modification d'une pièce{/t}</h2>
-<a href="index.php?module={$moduleListe}">
+<a href="{$moduleListe}">
 	<img src="display/images/list.png" height="25">
 	{t}Retour à la liste{/t}
 </a>
-<a href="index.php?module=individuDisplay&individu_id={$data.individu_id}">
+<a href="individuDisplay?individu_id={$data.individu_id}">
 	<img src="display/images/fish.png" height="25">
 	{t}Retour au détail du poisson{/t}
 </a>
 {if $data.piece_id > 0}
-	<a href="index.php?module=pieceDisplay&piece_id={$data.piece_id}">
+	<a href="pieceDisplay?piece_id={$data.piece_id}">
 		<img src="display/images/scale.png" height="25">
 		{t}Retour au détail de la pièce{/t}</a>
 {/if}
@@ -67,7 +67,7 @@
         <div class="form-group">
         <div class="form-group center">
           <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
-          {if $data.piece_id>0&&$droits["gestion"] == 1}
+          {if $data.piece_id>0&&$rights["gestion"] == 1}
             <button class="btn btn-danger button-delete">{t}Supprimer{/t}</button>
           {/if}
         </div>

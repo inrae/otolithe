@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Libraries;
 
 /**
@@ -77,7 +78,7 @@ class TranslateId
          */
         foreach ($data as $key => $value) {
             if (isset($value[$this->fieldname])) {
-                if (! isset($this->corresp_reverse[$value[$this->fieldname]])) {
+                if (!isset($this->corresp_reverse[$value[$this->fieldname]])) {
                     $this->setValue($value[$this->fieldname]);
                 }
                 $data[$key][$this->fieldname] = $this->corresp_reverse[$value[$this->fieldname]];
@@ -105,11 +106,11 @@ class TranslateId
     function setValue($dbId)
     {
         if ($dbId > 0) {
-            if (! isset($this->corresp_reverse[$dbId])) {
+            if (!isset($this->corresp_reverse[$dbId])) {
                 $this->corresp[$this->cle] = $dbId;
                 $this->corresp_reverse[$dbId] = $this->cle;
                 $key = $this->cle;
-                $this->cle ++;
+                $this->cle++;
             } else {
                 $key = $this->corresp_reverse[$dbId];
             }
@@ -138,7 +139,8 @@ class TranslateId
      * @param array $row
      * @return array
      */
-    function getDbkeyFromRow(array $row) {
+    function getDbkeyFromRow(array $row)
+    {
         if (isset($row[$this->fieldname])) {
             $row[$this->fieldname] = $this->corresp[$row[$this->fieldname]];
         }
@@ -155,11 +157,10 @@ class TranslateId
     {
         foreach ($row as $key => $value) {
             if ($key == $this->fieldname) {
-                if (! isset($this->corresp_reverse[$value])) {
+                if (!isset($this->corresp_reverse[$value])) {
                     $this->setValue($value);
                 }
-                $value > 0 ? $row[$key] = $this->corresp_reverse[$value] : $row[$key]=0;
-                }
+                $value > 0 ? $row[$key] = $this->corresp_reverse[$value] : $row[$key] = 0;
             }
         }
         return $row;
@@ -186,21 +187,21 @@ class TranslateId
         return $data;
     }
     /**
-	 * Fonction retournant la totalite des valeurs traduites
-	 * Utilise pour les selections multiples provenant depuis la page html,
-	 * sous forme de tableau : [campagne_id] => Array ( [0] => 1 [1] => 3 )
-	 *
-	 * @param array|int $data
-	 */
-	function getFromListForAllValue($data) {
-		foreach ( $data as $key => $value ) {
-			if (is_array ( $value )) {
-				$data [$key] = $this->getFromListForAllValue ( $value );
-			} else {
-				$data [$key] = $this->corresp [$value];
-			}
-		}
-		return $data;
-	}
-
+     * Fonction retournant la totalite des valeurs traduites
+     * Utilise pour les selections multiples provenant depuis la page html,
+     * sous forme de tableau : [campagne_id] => Array ( [0] => 1 [1] => 3 )
+     *
+     * @param array|int $data
+     */
+    function getFromListForAllValue($data)
+    {
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $data[$key] = $this->getFromListForAllValue($value);
+            } else {
+                $data[$key] = $this->corresp[$value];
+            }
+        }
+        return $data;
+    }
 }

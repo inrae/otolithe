@@ -2,7 +2,7 @@
 <div class=" col-sm-12 col-lg-6 form-display">
 <div class="row">
 <div class="col-sm-4">
-<a href="index.php?module=individuDisplay&individu_id={$individu.individu_id}">
+<a href="individuDisplay?individu_id={$individu.individu_id}">
 <img src="display/images/fish.png" height="25">
 </a>
 {$individu.nom_id} 

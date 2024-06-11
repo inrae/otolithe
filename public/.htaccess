@@ -47,3 +47,15 @@ Options -Indexes
 # Disable server signature start
 ServerSignature Off
 # Disable server signature end
+
+# Add specific parameters for app
+# Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate, private"
+# Header set Pragma "no-cache"
+# Header set X-Frame-Options SAMEORIGIN
+# Header set Access-Control-Allow-Origin: "https://*.openstreetmap.org; https://*.tile.openstreetmap.org"
+# <FilesMatch "\.(ico|flv|jpg|jpeg|png|gif|js|css|svg)$">
+#     Header set Cache-Control "max-age=604800, private"
+# </FilesMatch>
+# <FilesMatch ".*openstreetmap.*\.png$">
+#     Header set Cache-Control "max-age=2592000, public"
+# </FilesMatch>

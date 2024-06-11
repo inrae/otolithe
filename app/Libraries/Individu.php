@@ -18,7 +18,7 @@ class Individu extends PpciLibrary
      *
      * @var ModelsIndividu
      */
-    protected $dataClass;
+    protected PpciModel $dataClass;
 
     function __construct()
     {

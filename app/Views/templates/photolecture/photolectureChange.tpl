@@ -33,7 +33,7 @@ function drawIntro(svg) {
 	var couleur = "";
 	var fillOpacity = 0;
 
-	var lien = "index.php?module=photoGetPhoto&photo_id={$photo.photo_id}&sizeX={$image_width}&sizeY={$image_height}";
+	var lien = "photoGetPhoto&photo_id={$photo.photo_id}&sizeX={$image_width}&sizeY={$image_height}";
 
 	var myImage = svg.group();
 	svg.image(myImage, 0, 0, image_width, image_height, lien);
@@ -229,10 +229,10 @@ function setCircle(svg, x, y, rayon_initial,isRemarkable) {
 
 </script>
 <h2>{t}Mesure d'un otolithe ou d'une pièce calcifiée{/t}</h2>
-<a href="index.php?module={$moduleListe}" onclick="return confirm('{t}Les modifications apportées dans cette page vont être perdues. Confirmez-vous cette opération ?{/t}')">{t}Retour à la liste{/t}</a> > 
-<a href="index.php?module=individuDisplay&individu_id={$piece.individu_id}" onclick="return confirm('{t}Les modifications apportées dans cette page vont être perdues. Confirmez-vous cette opération ?{/t}')">{t}Retour au détail du poisson{/t}</a> > 
-<a href="index.php?module=pieceDisplay&piece_id={$piece.piece_id}" onclick="return confirm('{t}Les modifications apportées dans cette page vont être perdues. Confirmez-vous cette opération ?{/t}')">{t}Retour au détail de la pièce{/t}</a> >
-<a href="index.php?module=photoDisplay&photo_id={$data.photo_id}" onclick="return confirm('{t}Les modifications apportées dans cette page vont être perdues. Confirmez-vous cette opération ?{/t}')">{t}Retour à la photo{/t}</a>
+<a href="{$moduleListe}" onclick="return confirm('{t}Les modifications apportées dans cette page vont être perdues. Confirmez-vous cette opération ?{/t}')">{t}Retour à la liste{/t}</a> > 
+<a href="individuDisplay?individu_id={$piece.individu_id}" onclick="return confirm('{t}Les modifications apportées dans cette page vont être perdues. Confirmez-vous cette opération ?{/t}')">{t}Retour au détail du poisson{/t}</a> > 
+<a href="pieceDisplay?piece_id={$piece.piece_id}" onclick="return confirm('{t}Les modifications apportées dans cette page vont être perdues. Confirmez-vous cette opération ?{/t}')">{t}Retour au détail de la pièce{/t}</a> >
+<a href="photoDisplay?photo_id={$data.photo_id}" onclick="return confirm('{t}Les modifications apportées dans cette page vont être perdues. Confirmez-vous cette opération ?{/t}')">{t}Retour à la photo{/t}</a>
 <div class="row">
 <div class="col-lg-8 col-sm-12">
 {include file="gestion/individuCartouche.tpl"}

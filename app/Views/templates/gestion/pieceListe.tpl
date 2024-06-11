@@ -33,7 +33,7 @@ $(document).ready(function() {
 <form method="POST" id="containerFormListPrint" action="index.php">
   <input type="hidden" id="module" name="module" value="pieceExportCS">
   <input type="hidden" name="exp_id" value="{$exp_id}">
-  {if $droits.gestion == 1}
+  {if $rights.manage == 1}
     <div class="row">
       <button id="exportCS" class="btn btn-success" title="{t}Création d'un fichier utilisable pour importer les pièces dans le logiciel Collec-Science - import externe{/t}">{t}Export des pièces pour Collec-Science{/t}</button>
     </div>
@@ -64,18 +64,18 @@ $(document).ready(function() {
               <input type="checkbox" class="checkPiece" name="pieces[]" value="{$row.piece_id}" checked >
           </td>
           <td>
-            <a href="index.php?module=individuDisplay&individu_id={$row.individu_id}">
+            <a href="individuDisplay?individu_id={$row.individu_id}">
               {$row.codeindividu}
             </a>
           </td>
           <td>
-           <a href="index.php?module=individuDisplay&individu_id={$row.individu_id}">
+           <a href="individuDisplay?individu_id={$row.individu_id}">
               {$row.tag}
             </a>
           </td>
           <td>{$row.nom_id}</td>
           <td>
-            <a href="index.php?module=pieceDisplay&individu_id={$row.individu_id}&piece_id={$row.piece_id}">
+            <a href="pieceDisplay?individu_id={$row.individu_id}&piece_id={$row.piece_id}">
               {if strlen($row.piececode)>0}
                 {$row.piececode}
               {else}

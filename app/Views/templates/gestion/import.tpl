@@ -75,8 +75,8 @@
 <div class="bg-info">
 {t}Pour importer des individus dans la base, préparez un fichier CSV avec les informations suivantes :{/t}
 <ul>
-<li><b>exp_id</b> : {t}code de l'expérimentation (obligatoire){/t} <a href="index.php?module=experimentationList">{t}Consultez la liste des expérimentations{/t}</a></li> 
-<li><b>espece_id</b> : {t}code de l'espèce (obligatoire){/t} <a href="index.php?module=especeList">{t}Consultez la liste des espèces{/t}</a></li>
+<li><b>exp_id</b> : {t}code de l'expérimentation (obligatoire){/t} <a href="experimentationList">{t}Consultez la liste des expérimentations{/t}</a></li> 
+<li><b>espece_id</b> : {t}code de l'espèce (obligatoire){/t} <a href="especeList">{t}Consultez la liste des espèces{/t}</a></li>
 <li><b>tag</b> : {t}N° de l'étiquette posée sur le poisson (le codeindividu ou le tag sont obligatoires){/t}</li>
 <li><b>codeindividu</b> : {t}identifiant du poisson ou hptag{/t}</li>
 <li><b>sexe_id</b> : {t}sexe du poisson (1 : mâle, 2 : femelle, 3 : juvénile, 4 : indifférencié){/t}</li>
@@ -88,7 +88,7 @@
 <li><b>wgs84_x</b> : {t}Longitude du point de capture, en WGS84{/t}</li>
 <li><b>wgs84_y</b> : {t}Latitude du point de capture, en WGS84{/t}</li>
 <li><b>individu_uuid</b> : {t}UUID de l'individu{/t}</li>
-<li><b>piecetype_id</b> : {t}code du type de pièce calcifiée à analyser{/t} <a href="index.php?module=piecetypeList">{t}Consultez la liste des types de pièces{/t}</a></li>
+<li><b>piecetype_id</b> : {t}code du type de pièce calcifiée à analyser{/t} <a href="piecetypeList">{t}Consultez la liste des types de pièces{/t}</a></li>
 <li><b>piececode</b> : {t}si le type de pièce est indiqué, vous pouvez renseigner un code spécifique attaché à la pièce{/t}</li>
 <li><b>piece_uuid</b> : {t}UUID de la pièce{/t}</li>
 <li><b>peche_date</b> : {t}date de la pêche, au format aaaa-mm-dd ou dd/mm/aaaa{/t}</li>
@@ -98,7 +98,7 @@
 <li><b>peche_engin</b> : {t}engin utilisé{/t}</li>
 <li><b>personne</b> : {t}références du pêcheur{/t}</li>
 <li><b>operateur</b> : {t}références de l'opérateur ayant traité le poisson{/t}</li>
-<li><b>metadatatype_id</b> : {t}code du type de méta-données importées{/t} <a href="index.php?module=metadatatypeList">{t}Consultez la liste des types de méta-données{/t}</a></li>
+<li><b>metadatatype_id</b> : {t}code du type de méta-données importées{/t} <a href="metadatatypeList">{t}Consultez la liste des types de méta-données{/t}</a></li>
 <li><b>piecemetadata_date</b> : {t}Date d'obtention des méta-données{/t}</li>
 <li><b>piecemetadata_comment</b> : {t}Commentaires associés aux méta-données{/t}</li>
 <li><b>metadata</b> : {t}Méta-données, au format JSON. Peut prendre la forme d'un tableau ou des valeurs uniques. Les champs doivent être identiques à ceux décrits dans le type de méta-données (cf. metadatatype_id){/t}</li>

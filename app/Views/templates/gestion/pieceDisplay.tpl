@@ -1,9 +1,9 @@
 <h2>{t}Affichage d'une pièce{/t}</h2>
-<a href="index.php?module={$moduleListe}">
+<a href="{$moduleListe}">
 <img src="display/images/list.png" height="25">
 {t}Retour à la liste{/t}
 </a>
-<a href="index.php?module=individuDisplay&individu_id={$data.individu_id}">
+<a href="individuDisplay?individu_id={$data.individu_id}">
 <img src="display/images/fish.png" height="25">
 {t}Retour au poisson{/t}
 </a>
@@ -15,8 +15,8 @@
 <div class="row">
 <fieldset class="col-md-6">
 <legend>{t}Détail de la pièce{/t}</legend>
-{if $droits.gestion == 1}
-<a href="index.php?module=pieceChange&piece_id={$data.piece_id}&individu_id={$data.individu_id}">
+{if $rights.manage == 1}
+<a href="pieceChange?piece_id={$data.piece_id}&individu_id={$data.individu_id}">
 <img src="display/images/edit.png" height="25">{t}Modifier...{/t}
 </a>
 {/if}
@@ -48,8 +48,8 @@
 <div class="row">
 <fieldset class="col-md-6">
 <legend>{t}Photos rattachées{/t}</legend>
-{if $droits.gestion == 1}
-<a href="index.php?module=photoChange&photo_id=0&piece_id={$data.piece_id}">
+{if $rights.manage == 1}
+<a href="photoChange?photo_id=0&piece_id={$data.piece_id}">
 <img src="display/images/camera.png" height="25">
 {t}Nouvelle photo{/t}
 </a>
@@ -57,7 +57,7 @@
 <table class="table table-bordered table-hover">
 <thead>
 <tr>
-{if $droits.gestion == 1}
+{if $rights.manage == 1}
 <th class="center"><img src="display/images/edit.png"></th>
 {/if}
 <th>{t}Nom{/t}</th>
@@ -71,15 +71,15 @@
 <tbody>
 {section name="lst" loop=$photo}
 <tr>
-{if $droits.gestion == 1}
+{if $rights.manage == 1}
 <td class="center" title="{t}Modifier...{/t}">
-<a href="index.php?module=photoChange&photo_id={$photo[lst].photo_id}&piece_id={$data.piece_id}"> 
+<a href="photoChange?photo_id={$photo[lst].photo_id}&piece_id={$data.piece_id}"> 
 <img src="display/images/edit.png">
 </a>
 </td>
 {/if}
 <td>
-<a href="index.php?module=photoDisplay&photo_id={$photo[lst].photo_id}&piece_id={$data.piece_id}">
+<a href="photoDisplay?photo_id={$photo[lst].photo_id}&piece_id={$data.piece_id}">
 {$photo[lst].photo_nom}
 </a>
 </td>
@@ -88,8 +88,8 @@
 <td class="center">{$photo[lst].color}</td>
 <td>{$photo[lst].photo_width}x{$photo[lst].photo_height}</td>
 <td>
-<a href="index.php?module=photoDisplay&photo_id={$photo[lst].photo_id}&piece_id={$data.piece_id}">
-<img src="index.php?module=photoGetThumbnail&photo_id={$photo[lst].photo_id}" height="200" border="0">
+<a href="photoDisplay?photo_id={$photo[lst].photo_id}&piece_id={$data.piece_id}">
+<img src="photoGetThumbnail&photo_id={$photo[lst].photo_id}" height="200" border="0">
 </a>
 </td>
 </tr>
@@ -101,8 +101,8 @@
 <div class="col-md-6">
 <fieldset>
 <legend>{t}Liste des métadonnées rattachées{/t}</legend>
-{if $droits.gestion == 1}
-<a href="index.php?module=piecemetadataChange&piece_id={$data.piece_id}&piecemetadata_id=0">
+{if $rights.manage == 1}
+<a href="piecemetadataChange?piece_id={$data.piece_id}&piecemetadata_id=0">
 <img src="display/images/metadata.png" height="25">
 {t}Nouveau...{/t}
 </a>
@@ -110,7 +110,7 @@
 <table class="table datatable table-bordered table-hover" data-order='[[2,"desc"], [1, "asc"]]''>
 <thead>
 <tr>
-{if $droits.gestion == 1}
+{if $rights.manage == 1}
     <th class="center">
      <img src="display/images/edit.png" height="25">
     </th>
@@ -126,16 +126,16 @@
 <tbody>
 {foreach $metadatas as $metadata}
     <tr>
-    {if $droits.gestion == 1}
+    {if $rights.manage == 1}
         <td class="center">
-            <a href="index.php?module=piecemetadataChange&piece_id={$data.piece_id}&piecemetadata_id={$metadata.piecemetadata_id}">
+            <a href="piecemetadataChange?piece_id={$data.piece_id}&piecemetadata_id={$metadata.piecemetadata_id}">
                 <img src="display/images/edit.png" height="25">
             </a>
         </td>
     {/if}
     <td>
-        {if $droits.gestion == 1}
-            <a href="index.php?module=piecemetadataDisplay&piece_id={$data.piece_id}&piecemetadata_id={$metadata.piecemetadata_id}">
+        {if $rights.manage == 1}
+            <a href="piecemetadataDisplay?piece_id={$data.piece_id}&piecemetadata_id={$metadata.piecemetadata_id}">
                 {$metadata.metadatatype_name}
             </a>
         {else}
@@ -149,7 +149,7 @@
 </tbody>
 </table>
 </fieldset>
-{if $droits.gestion == 1}
+{if $rights.manage == 1}
     <fieldset>
         <legend>{t}Importer des métadonnées{/t}</legend>
         <form id="metadataImport" class="form-horizontal protoform" method="post" action="index.php" enctype="multipart/form-data">

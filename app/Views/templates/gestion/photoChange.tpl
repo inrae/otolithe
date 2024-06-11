@@ -2,15 +2,15 @@
 <div class="row">
 <div class="col-sm-12">
 <div class="col-md-12">
-<a href="index.php?module={$moduleListe}">
+<a href="{$moduleListe}">
 <img src="display/images/list.png" height="25">
 {t}Retour à la liste{/t}
 </a>
-<a href="index.php?module=individuDisplay&individu_id={$data.individu_id}">
+<a href="individuDisplay?individu_id={$data.individu_id}">
 <img src="display/images/fish.png" height="25">
 {t}Retour au poisson{/t}
 </a>
-<a href="index.php?module=pieceDisplay&piece_id={$data.piece_id}">
+<a href="pieceDisplay?piece_id={$data.piece_id}">
 <img src="display/images/scale.png" height="25">
 {t}Retour au détail de la pièce{/t}
 </a>

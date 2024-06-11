@@ -1,9 +1,9 @@
 <h2>{t}Liste des poissons{/t}</h2>
-<a href="index.php?module=individuChange&individu_id=0">{t}Code de l'individu{/t}</a>
+<a href="individuChange?individu_id=0">{t}Code de l'individu{/t}</a>
 {include file="gestion/individuSearch.tpl"}
 {if $isSearch == 1}
-{if $droits.gestion == 1}
-<a href="index.php?module=individuChange&individu_id=0">
+{if $rights.manage == 1}
+<a href="individuChange?individu_id=0">
 <img src="display/images/new.png" height="25">
 {t}Nouveau poisson...{/t}</a>
 {/if}
@@ -27,12 +27,12 @@
 <tdata>
 {section name="lst" loop=$data}
 <tr>
-<td><a href="index.php?module=individuDisplay&individu_id={$data[lst].individu_id}">
+<td><a href="individuDisplay?individu_id={$data[lst].individu_id}">
 {$data[lst].codeindividu}
 </a>
 </td>
 <td>
-<a href="index.php?module=individuDisplay&individu_id={$data[lst].individu_id}">
+<a href="individuDisplay?individu_id={$data[lst].individu_id}">
 {$data[lst].tag}
 </a>
 </td>
