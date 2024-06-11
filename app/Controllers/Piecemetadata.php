@@ -3,22 +3,14 @@
 namespace App\Controllers;
 
 use \Ppci\Controllers\PpciController;
-use App\Libraries\Individu as LibrariesIndividu;
+use App\Libraries\Piecemetadata as LibrariesPiecemetadata;
 
-class Individu extends PpciController
+class Piecemetadata extends PpciController
 {
     protected $lib;
     function __construct()
     {
-        $this->lib = new LibrariesIndividu();
-    }
-    function list()
-    {
-        return $this->lib->list();
-    }
-    function display()
-    {
-        return $this->lib->display();
+        $this->lib = new LibrariesPiecemetadata();
     }
     function change()
     {
@@ -32,8 +24,16 @@ class Individu extends PpciController
     {
         return $this->lib->delete();
     }
-    function listEspece()
+    function import()
     {
-        return $this->lib->listEspece();
+        return $this->lib->import();
+    }
+    function display()
+    {
+        return $this->lib->display();
+    }
+    function export()
+    {
+        return $this->lib->export();
     }
 }

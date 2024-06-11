@@ -24,7 +24,6 @@ $routes->post('photoDelete', 'Photo::delete');
 $routes->add('photoGetPhoto', 'Photo::getPhoto');
 $routes->add('photoGetThumbnail', 'Photo::getThumbnail');
 $routes->add('lecteurList', 'Lecteur::list');
-$routes->add('lecteurDisplay', 'Lecteur::display');
 $routes->add('lecteurChange', 'Lecteur::change');
 $routes->post('lecteurWrite', 'Lecteur::write');
 $routes->post('lecteurDelete', 'Lecteur::delete');

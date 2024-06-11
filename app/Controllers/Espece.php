@@ -3,22 +3,18 @@
 namespace App\Controllers;
 
 use \Ppci\Controllers\PpciController;
-use App\Libraries\Individu as LibrariesIndividu;
+use App\Libraries\Espece as LibrariesEspece;
 
-class Individu extends PpciController
+class Espece extends PpciController
 {
     protected $lib;
     function __construct()
     {
-        $this->lib = new LibrariesIndividu();
+        $this->lib = new LibrariesEspece();
     }
     function list()
     {
         return $this->lib->list();
-    }
-    function display()
-    {
-        return $this->lib->display();
     }
     function change()
     {
@@ -32,8 +28,8 @@ class Individu extends PpciController
     {
         return $this->lib->delete();
     }
-    function listEspece()
+    function searchAjax()
     {
-        return $this->lib->listEspece();
+        return $this->lib->searchAjax();
     }
 }
