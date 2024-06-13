@@ -155,11 +155,11 @@ class PpciModel extends Model
         }
         $isInsert = false;
         if ($row[$this->primaryKey] == 0) {
-            unset($row[$this->primaryKey]);
             $isInsert = true;
         } else {
             $id = $row[$this->primaryKey];
         }
+        unset($row[$this->primaryKey]);
         if ($this->autoFormatDate) {
             $row = $this->formatDatesToDB($row);
         }
@@ -185,9 +185,27 @@ class PpciModel extends Model
                 throw new \Ppci\Libraries\PpciException($this->db->error()["message"]);
             }
         } else {
-            if (!parent::update($id, $row)) {
-                throw new \Ppci\Libraries\PpciException($this->db->error()["message"]);
+            /**
+             * Generate update sql
+             */
+            $sql = "update " . $this->qi . $this->table . $this->qi . " set ";
+            $param = [];
+            $comma = "";
+            foreach ($row as $k => $v) {
+                if (array_key_exists($k, $this->fields) && $this->fields["type"] != 4) {
+                    $sql .= $comma . $this->qi . $k . $this->qi . " = :$k: ";
+                    $param[$k] = $v;
+                    $comma = ",";
+                }
             }
+            $sql .= " where " . $this->qi . $this->primaryKey . $this->qi. " = :id:";
+            $param["id"] = $id;
+            if ($comma == ",") {
+               $this->executeQuery($sql, $param, true); 
+            }
+            // if (!parent::update($id, $row)) {
+            //     throw new \Ppci\Libraries\PpciException($this->db->error()["message"]);
+            // }
         }
         /**
          * Geom fields update
@@ -559,6 +577,25 @@ class PpciModel extends Model
     function formatDateLocaleVersDB($value)
     {
         return $this->formatDateLocaleToDB($value);
+    }
+    /**
+     * Format a date/time furnished by the database to the locale format
+     *
+     * @param string $value
+     * @return string
+     */
+    function formatDateDBtoLocal(string $value)
+    {
+        $date = date_create_from_format("Y-m-d H:i:s", $value);
+        if ($date) {
+            return date_format($date, $this->dateFormatMask);
+        } else {
+            return "";
+        }
+    }
+    function formatDateDBversLocal(string $value)
+    {
+        return $this->formatDateDBtoLocal($value);
     }
     function getBinaryField(int $id, string $fieldName)
     {
