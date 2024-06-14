@@ -13,8 +13,8 @@ class PostLogin extends PpciLibrary
         $lecteur = new Lecteur();
         $lecteur_id = $lecteur->getIdFromLogin($_SESSION['login']);
         if ($lecteur_id > 0) {
-            $_SESSION["droits"]["read"] = 1;
-            $_SESSION["droits"]["consult"] = 1;
+            $_SESSION["userRights"]["read"] = 1;
+            $_SESSION["userRights"]["consult"] = 1;
             $_SESSION["lecteur_id"] = $lecteur_id;
             $_SESSION["searchIndividu"]->setParam(array("lecteur_id" => $lecteur_id));
             $_SESSION["searchLecture"]->setParam(array("lecteur_id" => $lecteur_id));

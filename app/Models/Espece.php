@@ -44,13 +44,12 @@ class Espece extends PpciModel
     function getEspeceJSON($nom)
     {
         if (strlen($nom) > 2) {
-            $nom = $this->encodeData($nom);
             $sql = "select espece_id as id, nom_id ||' - ' || nom_fr as val
 				from espece
-				where upper(nom_id) like upper('%:nom:%')
-						or upper(nom_fr) like upper ('%:nomfr:%')
+				where upper(nom_id) like upper(:nom:)
+						or upper(nom_fr) like upper (:nomfr:)
 				order by nom_id";
-            return $this->getListeParam($sql, ["nom"=>$nom, "nomfr"=>$nom]);
+            return $this->getListeParam($sql, ["nom"=>"%$nom%", "nomfr"=>"%$nom%"]);
         }
     }
 }

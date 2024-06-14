@@ -26,7 +26,6 @@ class Lecteur extends PpciModel
             "login" => array(
                 "type" => 0,
                 "requis" => 1,
-                "type" => 0,
             ),
             "lecteur_nom" => array(
                 "type" => 0,
@@ -82,9 +81,9 @@ class Lecteur extends PpciModel
      *
      * @see ObjetBDD::write()
      */
-    public function ecrire($data): int
+    public function write($data): int
     {
-        $id = parent::ecrire($data);
+        $id = parent::write($data);
 
         if ($id > 0) {
             $this->ecrireTableNN("lecteur_experimentation", "lecteur_id", "exp_id", $id, $data["exp_id"]);

@@ -24,7 +24,7 @@
 		<item module="dbstructureLatex" droits='param' label="Structure de la base de données (Latex)" tooltip="Liste des tables et des colonnes sous forme de tableaux Latex" />
 	</item>
 	<item module="administration" label="Administration" tooltip="Administration de l'application" droits="admin">
-		<item module="loginmanageList" droits="admin" label="Liste des comptes locaux" tooltip="Liste des logins - identification via la base de données" />
+		<item module="loginGestionList" droits="admin" label="Liste des comptes locaux" tooltip="Liste des logins - identification via la base de données" />
 		<item module="appliList" drsoits="admin" label="ACL - droits" tooltip="applications et droits gérés" />
 		<item module="aclloginList" droits="admin" label="ACL - logins" tooltip="Logins déclarés dans le module de manage des droits" />
 		<item module="groupList" droits="admin" label="ACL - groupes de logins" tooltip="Groupes de logins et logins rattachés aux groupes" />

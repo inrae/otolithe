@@ -96,7 +96,7 @@ class Photolecture extends PpciModel
      *
      * @see ObjetBDD::ecrire()
      */
-    public function ecrire($data): int
+    public function write($data): int
     {
         /**
          * Mise a jour de l'heure
@@ -286,7 +286,7 @@ class Photolecture extends PpciModel
                 $data["long_totale_reel"] = $data["long_totale_lue"] / $data["long_ref_mesuree"] * $dataPhoto["long_reference"];
             }
         }
-        return parent::ecrire($data);
+        return parent::write($data);
     }
 
     /***

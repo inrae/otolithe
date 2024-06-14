@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Ppci\Libraries\PpciException;
 use Ppci\Models\PpciModel;
 
 /**
@@ -13,7 +14,7 @@ use Ppci\Models\PpciModel;
 class Experimentation extends PpciModel
 {
 
-    function __construct()
+    function initialize()
     {
         $this->table = "experimentation";
         $this->fields = array(
@@ -39,7 +40,7 @@ class Experimentation extends PpciModel
             )
         );
 
-        parent::__construct();
+        parent::initialize();
     }
 
     /**
@@ -48,13 +49,35 @@ class Experimentation extends PpciModel
      * {@inheritdoc}
      * @see ObjetBDD::ecrire()
      */
-    function ecrire($data): int
+    function write($data): int
     {
-        $id = parent::ecrire($data);
+        $id = parent::write($data);
         if ($id > 0) {
             $this->ecrireTableNN("lecteur_experimentation", "exp_id", "lecteur_id", $id, $data["lecteur_id"]);
         }
         return $id;
+    }
+    /**
+     * Add the deletion of readers when delete an experimentation
+     *
+     * @param [type] $id
+     * @param boolean $purge
+     * @return void
+     */
+    function delete($id = null, bool $purge = false)
+    {
+        /**
+         * Verify if the deletion is available
+         */
+        $sql = "select count(*) as nb from individu_experimentation where exp_id = :id:";
+        $param = ["id" => $id];
+        $res = $this->executeSQL($sql, $param);
+        if ($res[0]["nb"] > 0) {
+            throw new PpciException(sprintf(_("%s individus sont rattachés à l'expérimentation, elle ne peut pas être supprimée"), $res[0]["nb"]));
+        }
+        $sql = "delete from lecteur_experimentation where exp_id = :id:";
+        $this->executeSQL($sql, $param, true);
+        parent::delete($id);
     }
 
     /**

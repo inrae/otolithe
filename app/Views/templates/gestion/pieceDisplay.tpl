@@ -89,7 +89,7 @@
 <td>{$photo[lst].photo_width}x{$photo[lst].photo_height}</td>
 <td>
 <a href="photoDisplay?photo_id={$photo[lst].photo_id}&piece_id={$data.piece_id}">
-<img src="photoGetThumbnail&photo_id={$photo[lst].photo_id}" height="200" border="0">
+<img src="photoGetThumbnail?photo_id={$photo[lst].photo_id}" height="200" border="0">
 </a>
 </td>
 </tr>
@@ -107,7 +107,7 @@
 {t}Nouveau...{/t}
 </a>
 {/if}
-<table class="table datatable table-bordered table-hover" data-order='[[2,"desc"], [1, "asc"]]''>
+<table class="table datatable table-bordered table-hover" data-order='[[2,"desc"], [1, "asc"]]'>
 <thead>
 <tr>
 {if $rights.manage == 1}

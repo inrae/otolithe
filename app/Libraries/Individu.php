@@ -10,6 +10,7 @@ use App\Models\Peche;
 use App\Models\Piece;
 use App\Models\Sexe;
 use Ppci\Libraries\PpciException;
+use Ppci\Models\PpciModel;
 
 class Individu extends PpciLibrary
 {
@@ -35,6 +36,7 @@ class Individu extends PpciLibrary
 
     function list()
     {
+        $this->vue = service('Smarty');
         /*
          * Display the list of all records of the table
          */
@@ -83,6 +85,7 @@ class Individu extends PpciLibrary
     }
     function display()
     {
+        $this->vue = service('Smarty');
         /*
          * Display the detail of the record
          */
@@ -216,7 +219,7 @@ class Individu extends PpciLibrary
     }
     function listEspece()
     {
-        $this->vue = service ('AjaxView');
+        $this->vue = service('AjaxView');
         $exp_id = $_SESSION["it_experimentation"]->getValue($_REQUEST["exp_id"]);
         $this->vue->set($this->dataClass->getListEspeceFromExp($exp_id));
         return $this->vue->send();

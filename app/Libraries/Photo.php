@@ -77,11 +77,7 @@ class Photo extends PpciLibrary
     }
     function change()
     {
-        /*
-         * open the form to modify the record
-         * If is a new record, generate a new record with default value :
-         * $_REQUEST["idParent"] contains the identifiant of the parent record
-         */
+        $this->vue = service('Smarty');
         /*
          * Recuperation des informations sur la piece et le poisson
          */
@@ -125,7 +121,7 @@ class Photo extends PpciLibrary
         /*
          * Recherche des erreurs de telechargement
          */
-        if (isset($_FILES["photoload"]["error"]) && $_FILES["photoload"]["error"] != UPLOAD_ERR_OK) {
+        if ($_FILES["photoload"]["error"] != 4 && $_FILES["photoload"]["error"] != UPLOAD_ERR_OK) {
             switch ($_FILES["photoload"]["error"]) {
                 case (UPLOAD_ERR_INI_SIZE or UPLOAD_ERR_FORM_SIZE):
                     $this->message->set(_("La taille de la photo excède la taille autorisée"), true);
@@ -151,11 +147,15 @@ class Photo extends PpciLibrary
         }
         $_REQUEST["photo_id"] = $_SESSION["it_photo"]->getValue($_REQUEST["photo_id"]);
         $_REQUEST["piece_id"] = $_SESSION["it_piece"]->getValue($_REQUEST["piece_id"]);
-        $this->id = $this->dataWrite($_REQUEST);
-        if ($this->id > 0) {
-            $_REQUEST["photo_id"] = $_SESSION["it_photo"]->setValue($this->id);
+        try {
+            $this->id = $this->dataWrite($_REQUEST);
+            if ($this->id > 0) {
+                $_REQUEST["photo_id"] = $_SESSION["it_photo"]->setValue($this->id);
+            }
+            return $this->display();
+        } catch (PpciException) {
+            return $this->change();
         }
-        return $this->vue->send();
     }
     function delete()
     {
@@ -175,7 +175,7 @@ class Photo extends PpciLibrary
         /*
          * Affiche le contenu d'une photo
          */
-        $vue = service('BinaryView');
+        $this->vue = service('BinaryView');
         if (!isset($_REQUEST["sizeX"])) {
             $_REQUEST["sizeX"] = 0;
         }
@@ -205,7 +205,7 @@ class Photo extends PpciLibrary
             $this->message->setSyslog($pe->getMessage());
         }
         $this->vue = service('BinaryView');
-        $this->vue->setParam(array("disposition" => "inline", "filename" => $this->dataClass->getPhotoName($this->id, 1), "tmp_name" => $this->appConfig->APP_temp . "/" . $photoname));
+        $this->vue->setParam(array("disposition" => "inline", "filename" => $photoname, "tmp_name" => $this->appConfig->APP_temp . "/" . $photoname));
         return $this->vue->send();
     }
     function photoDisplay()

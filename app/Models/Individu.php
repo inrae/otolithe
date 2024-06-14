@@ -206,9 +206,9 @@ class Individu extends PpciModel
      *
      * @see ObjetBDD::write()
      */
-    function ecrire($data):int
+    function write($data):int
     {
-        $id = parent::ecrire($data);
+        $id = parent::write($data);
         if ($id > 0 && is_array($data["exp_id"])) {
             /*
              * Ecriture des experimentations
