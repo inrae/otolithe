@@ -1,13 +1,7 @@
-{* Paramètres > Métadonnées > Nouveau > *}
-{*
-    inclus dans metadataChange.tpl
-    anciennement <script type="text/javascript" src="display/javascript/alpaca/js/defineForm.js"></script>
-*}
 <!--alpaca -->
-<script type="text/javascript" src="display/javascript/alpaca/handlebars.runtime.min.js"></script>
-<script type="text/javascript" src="display/javascript/alpaca/alpaca.min.js"></script>
-<link type="text/css" href="display/javascript/alpaca/css/alpaca.min.css" rel="stylesheet">
-<script type="text/javascript" src="display/javascript/alpaca/formbuilder.js"></script>
+<script type="text/javascript" src="display/node_modules/handlebars/dist/handlebars.runtime.min.js"></script>
+<script type="text/javascript" src="display/node_modules/alpaca/dist/alpaca/bootstrap/alpaca.min.js"></script>
+<link type="text/css" href="display/node_modules/alpaca/dist/alpaca/bootstrap/alpaca.min.css" rel="stylesheet">
 
 <script type="text/javascript">
 /*

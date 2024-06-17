@@ -19,7 +19,7 @@ class Metadatatype extends PpciModel
             "metadatatype_name" => array("requis" => 1),
             "metadatatype_comment" => array('type' => 0),
             "metadatatype_description" => array("type" => 0),
-            "is_array" => array("type" => 0),
+            "is_array" => array("type" => 1),
             "metadatatype_schema" => array("type" => 0)
         );
         parent::__construct();
@@ -38,7 +38,7 @@ class Metadatatype extends PpciModel
         $i = 0;
         $param = [];
         foreach ($ids as $id) {
-            $where .= $comma . "id" . $i;
+            $where .= $comma . ":id" . $i.':';
             $param["id" . $i] = $id;
             $comma = ",";
             $i++;

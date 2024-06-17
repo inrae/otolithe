@@ -42,6 +42,7 @@ class Piecemetadata extends PpciLibrary
         include_once 'modules/classes/individu.class.php';
         $individu = new Individu();
         $this->vue->set($_SESSION["it_individu"]->translateRow($individu->getDetail($dpiece["individu_id"])), "individu");
+        $this->vue->set($_SESSION["moduleListe"],"moduleListe");
         return $this->vue->send();
     }
     function change()
@@ -64,6 +65,7 @@ class Piecemetadata extends PpciLibrary
         include_once 'modules/classes/metadatatype.class.php';
         $mdt = new Metadatatype();
         $this->vue->set($mdt->getListe(), "metadatatypes");
+        $this->vue->set($_SESSION["moduleListe"],"moduleListe");
         return $this->vue->send();
     }
     function write()

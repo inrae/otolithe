@@ -9,13 +9,18 @@ use Ppci\Models\Import;
 
 class Metadatatype extends PpciLibrary
 {
+    protected array $ids;
     function __construct()
     {
         parent::__construct();
         $this->dataClass = new ModelsMetadatatype();
         $keyName = "metadatatype_id";
         if (isset($_REQUEST[$keyName])) {
-            $this->id = $_REQUEST[$keyName];
+            if (is_array($_REQUEST[$keyName])) {
+                $this->ids = $_REQUEST[$keyName];
+            } else {
+                $this->id = $_REQUEST[$keyName];
+            }
         }
     }
 
@@ -46,7 +51,6 @@ class Metadatatype extends PpciLibrary
         /*
          * write record in database
          */
-
         try {
             $this->id = $this->dataWrite($_REQUEST);
             $_REQUEST["metadatatype_id"] = $this->id;
@@ -96,7 +100,7 @@ class Metadatatype extends PpciLibrary
     function export()
     {
         $this->vue = service("CsvView");
-        $this->vue->set($this->dataClass->getListFromIds($_POST["metadatatype_id"]));
+        $this->vue->set($this->dataClass->getListFromIds($this->ids));
         return $this->vue->send();
     }
     function import()
