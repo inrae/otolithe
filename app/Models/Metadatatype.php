@@ -19,7 +19,7 @@ class Metadatatype extends PpciModel
             "metadatatype_name" => array("requis" => 1),
             "metadatatype_comment" => array('type' => 0),
             "metadatatype_description" => array("type" => 0),
-            "is_array" => array("type" => 1),
+            "is_array" => array("type" => 0),
             "metadatatype_schema" => array("type" => 0)
         );
         parent::__construct();

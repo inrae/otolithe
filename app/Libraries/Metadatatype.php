@@ -95,7 +95,9 @@ class Metadatatype extends PpciLibrary
     {
         $this->vue = service("AjaxView");
         $data = $this->dataClass->lire($this->id);
-        $this->vue->setJson($data["is_array"]);
+        $data["is_array"] == "t" ? $val = 1 : $val = 0;
+        $this->vue->setJson($val);
+        return $this->vue->send();
     }
     function export()
     {

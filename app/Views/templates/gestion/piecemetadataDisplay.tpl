@@ -1,7 +1,7 @@
-<script type="text/javascript" src="display/javascript/alpaca/handlebars.runtime.min.js"></script>
-<script type="text/javascript" src="display/javascript/alpaca/alpaca.min.js"></script>
-<link type="text/css" href="display/javascript/alpaca/css/alpaca.min.css" rel="stylesheet">
-<script type="text/javascript" src="display/javascript/alpaca/formbuilder.js"></script>
+<script type="text/javascript" src="display/javascript/formbuilder.js"></script>
+<script type="text/javascript" src="display/node_modules/handlebars/dist/handlebars.runtime.min.js"></script>
+<script type="text/javascript" src="display/node_modules/alpaca/dist/alpaca/bootstrap/alpaca.min.js"></script>
+<link type="text/css" href="display/node_modules/alpaca/dist/alpaca/bootstrap/alpaca.min.css" rel="stylesheet">
 <script>
     $(document).ready(function() {
 
@@ -14,15 +14,15 @@
             var dataParse = "{$data.metadata}";
         	 dataParse = dataParse.replace(/&quot;/g,'"');
         	 dataParse = dataParse.replace(/\n/g,"\\n");
-             console.log(dataParse);
+             //console.log(dataParse);
         	 if (dataParse.length > 2) {
         		 dataParse = JSON.parse(dataParse);
         	 }
             /*
              Recuperation du type de metadonnees (tableau ou non)
              */
-             $.ajax( { url: "index.php",
-       	    		data: { "module": "metadatatypeIsarray", "metadatatype_id": id }})
+             $.ajax( { url: "metadatatypeIsarray",
+       	    		data: { "metadatatype_id": id }})
              .done(function (isArray) { 
                  if (isArray) {
                     isArray = JSON.parse(isArray);
@@ -37,8 +37,8 @@
         function appelAjaxMetadata(fonctionRappel) {
             var id = {$data.metadatatype_id};
             $.ajax( { 
-       	    		url: "index.php",
-       	    		data: { "module": "metadatatypeGetschema", "metadatatype_id": id },
+       	    		url: "metadatatypeGetschema",
+       	    		data: { "metadatatype_id": id },
                     success: fonctionRappel
                 });
         }
@@ -49,15 +49,15 @@
             var dataParse = "{$data.metadata}";
         	 dataParse = dataParse.replace(/&quot;/g,'"');
         	 dataParse = dataParse.replace(/\n/g,"\\n");
-             console.log(dataParse);
+             //console.log(dataParse);
         	 if (dataParse.length > 2) {
         		 dataParse = JSON.parse(dataParse);
         	 }
              var schema = "{$metadatatype.metadatatype_schema}";
              schema = schema.replace(/&quot;/g,'"');
              schema = schema.replace(/\n/g,"\\n");
-             console.log(schema);
-             console.log(dataParse);
+             //console.log(schema);
+             //console.log(dataParse);
              var isArray = "{$metadatatype.is_array}";
              showForm(JSON.parse(schema), dataParse, isArray, 1);
         }

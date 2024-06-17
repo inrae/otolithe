@@ -10,16 +10,28 @@
  * @returns
  */
 
-function getSchema(formdef) {
+function getSchema(formdef, isArray = 0) {
     // récupération du schéma du form
-    var schema = {
-        "type": "object",
-        "properties": {}
-    };
+    if (isArray == 1) {
+        var schema = {
+            "type": "array",
+            "properties": {},
+            "items": {
+                "type": "object",
+                "properties": {}
+            }
+        };
+    } else {
+        var schema = {
+            "type": "object",
+            "properties": {}
+        };
+    }
 
     var baseProps = function (index, value) {
         var prop = {
-            "type": value.type
+            "type": value.type,
+            "title": value.name
         };
 
         if (value.type == "select" || value.type == "radio") {
@@ -38,23 +50,26 @@ function getSchema(formdef) {
         if (value.required) {
             prop.required = value.required;
         }
+
         return prop;
     };
 
     $.each(formdef, function (index, value) {
         var prop = baseProps(index, value);
-
-        schema.properties[value.name] = prop;
-        if (value.default) {
-            schema.default = value.default;
+        //console.log(value.name);
+        if (isArray == 1) {
+            schema.items.properties[value.name] = prop;
+        } else {
+            schema.properties[value.name] = prop;
         }
+        // console.log(schema.items.properties[value.name]);
     });
     return schema;
 }
 
 // ===========================================================//
 // récupération des options du form
-var baseFields = function (index, value) {
+var baseFields = function (index, value, isArray = 0) {
     var field = {
         "type": value.type
     };
@@ -62,7 +77,11 @@ var baseFields = function (index, value) {
     /*if(value.type != "checkbox" && value.type != "radio"){
         field.label = value.name;
     }*/
-    field.label = value.name;
+    if (isArray == 0) {
+        field.label = value.name;
+    } else {
+        field.label = "";
+    }
 
     if (value.type == "string") {
         field.type = "text";
@@ -70,10 +89,6 @@ var baseFields = function (index, value) {
 
     if (value.type == "string" || value.type == "number" || value.type == "textarea") {
         field.placeholder = value.measureUnit;
-    }
-
-    if (value.defaultValue) {
-        field.default = value.defaultValue;
     }
 
 
@@ -104,10 +119,23 @@ var baseFields = function (index, value) {
     return field;
 };
 
-function getOptions(formdef) {
-    var options = {
-        "fields": {}
-    };
+function getOptions(formdef, isArray = 0) {
+    if (isArray == 1) {
+        var options = {
+            "type": "table",
+            "fields": {},
+            "datatables": {
+                "ordering": false,
+                "info": false,
+                "paging": false,
+                "searching": false
+            }
+        };
+    } else {
+        var options = {
+            "fields": {}
+        };
+    }
     $.each(formdef, function (index, value) {
         var field = baseFields(index, value);
         options.fields[value.name] = field;
@@ -115,35 +143,36 @@ function getOptions(formdef) {
     return options;
 }
 
-function setDefault(value) {
-    var d = [];
-    $.each(value, function (index, val) {
-        
-        if (val.defaultValue) {
-            d[val.name] = val.defaultValue;
-        }
-    });
-      return d;
-}
-
 // ===========================================================//
 // construction du formulaire
-function showForm(value, data = "") {
+function showForm(value, data = "", isArray = 0, readOnly = 0) {
 
-    var schema = getSchema(value);
-    var options = getOptions(value);
-    if (!data) {
-        data = setDefault(value);
-    }
+    var schema = getSchema(value, isArray);
+    var options = getOptions(value, isArray);
+    /*console.log("schema");
+    console.log(schema);
+    console.log("options");
+    console.log(options);*/
     var config = {
         "data": data,
         "schema": schema,
         "options": options,
-        "view": "bootstrap-edit-horizontal"
+        //"view": "bootstrap-edit-horizontal"
     }
+    var viewParm = "bootstrap";
+    if (readOnly == 1) {
+        viewParm += "-display";
+    } else {
+        viewParm += "-edit";
+    }
+    if (isArray != 1) {
+        viewParm += "-horizontal";
+    }
+    config["view"] = viewParm;
     var exists = $("#metadata").alpaca("exists");
     if (exists) {
         $("#metadata").alpaca("destroy");
     }
     $("#metadata").alpaca(config);
+    console.log(config);
 }

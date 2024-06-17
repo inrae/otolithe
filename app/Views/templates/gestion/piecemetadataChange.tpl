@@ -1,8 +1,8 @@
 <!--alpaca -->
+<script type="text/javascript" src="display/javascript/formbuilder.js"></script>
 <script type="text/javascript" src="display/node_modules/handlebars/dist/handlebars.runtime.min.js"></script>
 <script type="text/javascript" src="display/node_modules/alpaca/dist/alpaca/bootstrap/alpaca.min.js"></script>
 <link type="text/css" href="display/node_modules/alpaca/dist/alpaca/bootstrap/alpaca.min.css" rel="stylesheet">
-<script type="text/javascript" src="display/javascript/formbuilder.js"></script>
 <script>
     $(document).ready(function () {
 
@@ -25,8 +25,10 @@
                 data: { "metadatatype_id": id }
             })
                 .done(function (isArray) {
+                    console.log(isArray);
                     if (isArray) {
                         isArray = JSON.parse(isArray);
+                        console.log(isArray);
                     } else {
                         var isArray = 0;
                     }
@@ -49,7 +51,7 @@
         });
 
         $('#piecemetadataForm').submit(function (event) {
-            if ($("#action").val() == "Write") {
+            if ($("#testAction").val() == "Write") {
                 var error = false;
                 var metadatatype_id = $("#metadatatypeId").val();
                 if (metadatatype_id) {
@@ -101,9 +103,10 @@
     <div class="row">
         <div class="col-md-8 col-sm-12">
 
-            <div class="form-horizontal protoform col-md-8 col-sm-12">
+            <div class="form-horizontal col-md-8 col-sm-12">
                 <input type="hidden" name="piecemetadata_id" value="{$data.piecemetadata_id}">
                 <input type="hidden" name="moduleBase" value="piecemetadata">
+                <input type="hidden" id="testAction" name="testAction" value="Write">
                 <input type="hidden" id="action" name="action" value="Write">
                 <input type="hidden" name="piece_id" value="{$data.piece_id}">
                 <input type="hidden" name="metadata" id="metadataField" value="{$data.metadata}">
