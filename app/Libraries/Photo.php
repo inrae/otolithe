@@ -19,10 +19,6 @@ class Photo extends PpciLibrary
     {
         parent::__construct();
         $this->dataClass = new ModelsPhoto();
-        $keyName = "photo_id";
-        if (isset($_REQUEST[$keyName])) {
-            $this->id = $_REQUEST[$keyName];
-        }
         $this->id = $_SESSION["it_photo"]->getValue($_REQUEST["photo_id"]);
     }
 
@@ -72,6 +68,7 @@ class Photo extends PpciLibrary
          */
         $this->vue->set($this->dataClass->writeFilePhoto($this->id, 1), "photoPath");
         $this->vue->set($dataT, "data");
+        $this->vue->set($_SESSION["moduleListe"],"moduleListe");
         $this->vue->set("gestion/photoDisplay.tpl", "corps");
         return $this->vue->send();
     }

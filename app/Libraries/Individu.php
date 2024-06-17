@@ -25,11 +25,8 @@ class Individu extends PpciLibrary
     {
         parent::__construct();
         $this->dataClass = new ModelsIndividu();
-        $keyName = "individu_id";
-        if (isset($_REQUEST[$keyName])) {
-            $this->id = $_REQUEST[$keyName];
-        }
         $_REQUEST["individu_id"] = $_SESSION["it_individu"]->getValue($_REQUEST["individu_id"]);
+        $this->id = $_REQUEST["individu_id"];
     }
 
 
@@ -120,6 +117,7 @@ class Individu extends PpciLibrary
             $dataPeche = $_SESSION["it_peche"]->translateRow($dataPeche);
             $this->vue->set($dataPeche, "peche");
         }
+        $this->vue->set($_SESSION["moduleListe"], "moduleListe");
         $this->vue->set("gestion/individuDisplay.tpl", "corps");
         return $this->vue->send();
     }
@@ -161,42 +159,48 @@ class Individu extends PpciLibrary
         /*
          * write record in database
          */
-        /*
+        try {
+            /*
          * Recuperation des cles reelles
          */
-        if (is_array($_REQUEST["exp_id"])) {
-            $exp_id = array();
-            foreach ($_REQUEST["exp_id"] as $value) {
-                $exp_id[] = $_SESSION["it_experimentation"]->getValue($value);
+            if (is_array($_REQUEST["exp_id"])) {
+                $exp_id = array();
+                foreach ($_REQUEST["exp_id"] as $value) {
+                    $exp_id[] = $_SESSION["it_experimentation"]->getValue($value);
+                }
+                $_REQUEST["exp_id"] = $exp_id;
+            } else {
+                $_REQUEST["exp_id"][0] = $_SESSION["it_experimentation"]->getValue($_REQUEST["exp_id"]);
             }
-            $_REQUEST["exp_id"] = $exp_id;
-        } else {
-            $_REQUEST["exp_id"] = $_SESSION["it_experimentation"]->getValue($_REQUEST["exp_id"]);
-        }
-        $_REQUEST["peche_id"] = $_SESSION["it_peche"]->getValue($_REQUEST["peche_id"]);
+            if (empty($_REQUEST["exp_id"])) {
+                $this->message->set(_("Au moins une expérimentation doit être associée avec le poisson"), true);
+                die;
+                throw new PpciException();
+            }
+            $_REQUEST["peche_id"] = $_SESSION["it_peche"]->getValue($_REQUEST["peche_id"]);
 
-        $isPeche = false;
-        if ($_REQUEST["peche_id"] == 0) {
-            /*
+            $isPeche = false;
+            if ($_REQUEST["peche_id"] == 0) {
+                /*
              * Recherche si un enregistrement peche doit etre cree ou non
              */
 
-            foreach (array("site", "zonesite", "peche_date", "campagne", "peche_engin", "personne", "operateur") as $value) {
-                if (strlen($_REQUEST[$value]) > 0) {
-                    $isPeche = true;
+                foreach (array("site", "zonesite", "peche_date", "campagne", "peche_engin", "personne", "operateur") as $value) {
+                    if (strlen($_REQUEST[$value]) > 0) {
+                        $isPeche = true;
+                    }
                 }
+                if (!$isPeche) {
+                    unset($_REQUEST["peche_id"]);
+                }
+            } else {
+                $isPeche = true;
             }
-            if (!$isPeche) {
-                unset($_REQUEST["peche_id"]);
+            if ($isPeche) {
+                $peche = new Peche();
+                $_REQUEST["peche_id"] = $peche->ecrire($_REQUEST);
             }
-        } else {
-            $isPeche = true;
-        }
-        if ($isPeche) {
-            $peche = new Peche();
-            $_REQUEST["peche_id"] = $peche->ecrire($_REQUEST);
-        }
-        try {
+
             $this->id = $this->dataWrite($_REQUEST);
             $_REQUEST["individu_id"] = $_SESSION["it_individu"]->setValue($this->id);
             return $this->display();

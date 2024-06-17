@@ -1,5 +1,4 @@
 <h2>{t}Liste des poissons{/t}</h2>
-<a href="individuChange?individu_id=0">{t}Code de l'individu{/t}</a>
 {include file="gestion/individuSearch.tpl"}
 {if $isSearch == 1}
 {if $rights.manage == 1}

@@ -209,6 +209,9 @@ class Individu extends PpciModel
     function write($data):int
     {
         $id = parent::write($data);
+        if (!empty($data["exp_id"]) && !is_array($data["exp_id"])) {
+            $data["exp_id"] = array($data["exp_id"]);
+        }
         if ($id > 0 && is_array($data["exp_id"])) {
             /*
              * Ecriture des experimentations

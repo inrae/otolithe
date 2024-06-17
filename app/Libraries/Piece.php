@@ -105,6 +105,7 @@ class Piece extends PpciLibrary
             $listePhoto[$key]["photoPath"] = $photo->writeFilePhoto($value["photo_id"], 1);
         }
         $this->vue->set($_SESSION["it_photo"]->translateList($listePhoto), "photo");
+        $this->vue->set($_SESSION["moduleListe"],"moduleListe");
         $this->vue->set("gestion/pieceDisplay.tpl", "corps");
         return $this->vue->send();
     }

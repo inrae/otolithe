@@ -130,6 +130,7 @@ class Photolecture extends PpciLibrary
         $dataPhoto = $_SESSION["it_photo"]->translateRow($dataPhoto);
         $dataPhoto = $_SESSION["it_piece"]->translateRow($dataPhoto);
         $this->vue->set($dataPhoto, "photo");
+        $this->vue->set($_SESSION["moduleListe"],"moduleListe");
         $this->vue->set("photolecture/photolectureDisplay.tpl", "corps");
         return $this->vue->send();
     }
@@ -317,6 +318,7 @@ class Photolecture extends PpciLibrary
          */
         $finalStripe = new Final_stripe();
         $this->vue->set($finalStripe->getListe(1), "finalStripe");
+        $this->vue->set($_SESSION["moduleListe"],"moduleListe");
         return $this->vue->send();
     }
 
@@ -510,7 +512,8 @@ class Photolecture extends PpciLibrary
             }
             $this->vue = service('CsvView');
             $this->vue->set($dataExport);
-            return $this->vue->send();
+            $this->vue->regenerateHeader();
+            $this->vue->send();
         }
     }
     function swap()

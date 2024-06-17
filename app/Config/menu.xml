@@ -6,7 +6,7 @@
 	</its:rules>
 	<item label="Lectures" tooltip="Lectures des pièces calcifiées">
 		<item module="individuList" label="Poissons" tooltip="Liste des poissons"/>
-		<item module="photolectureList" label="Lectures réalisées" tooltip="Liste des lectures réalisées" droits="lecture"/>
+		<item module="photolectureList" label="Lectures réalisées" tooltip="Liste des lectures réalisées" droits="read"/>
 		<item module="pieceList" label="Pièces" tooltip="Liste des pièces"/>
 		<item divider="1" droits="manage"/>
 		<item module="importChange" label="Import" tooltip="Importer des poissons" droits="manage"/>
