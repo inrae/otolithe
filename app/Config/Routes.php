@@ -40,7 +40,7 @@ $routes->post('piecetypeDelete', 'Piecetype::delete');
 $routes->add('photolectureDisplay', 'Photolecture::display');
 $routes->add('photolectureChange', 'Photolecture::change');
 $routes->post('photolectureWrite', 'Photolecture::write');
-$routes->post('photolectureDelete', 'Photolecture::delete');
+$routes->add('photolectureDelete', 'Photolecture::delete');
 $routes->add('photolectureList', 'Photolecture::list');
 $routes->add('photolectureExport', 'Photolecture::export');
 $routes->add('photolectureSwap', 'Photolecture::swap');

@@ -1,6 +1,6 @@
-<script type="text/javascript" src="/display/javascript/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<!--script type="text/javascript" src="/display/javascript/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script-->
 <script type="text/javascript" src="/display/javascript/jquery-svg-1.5/jquery.svg.min.js"></script>
-<link type="text/css" href="/display/javascript/jquerysvg/jquery.svg.css" rel="stylesheet">
+<link type="text/css" href="/display/javascript/jquery-svg-1.5/jquery.svg.css" rel="stylesheet">
 <style type="text/css">
 body > iframe { display: none; }
 </style>
@@ -33,7 +33,7 @@ function drawIntro(svg) {
 	var couleur = "";
 	var fillOpacity = 0;
 
-	var lien = "photoGetPhoto&photo_id={$photo.photo_id}&sizeX={$image_width}&sizeY={$image_height}";
+	var lien = "photoGetPhoto?photo_id={$photo.photo_id}&sizeX={$image_width}&sizeY={$image_height}";
 
 	var myImage = svg.group();
 	svg.image(myImage, 0, 0, image_width, image_height, lien);
@@ -60,7 +60,6 @@ function drawIntro(svg) {
 		
 	$("#resetCompteur").click(function(event) { 
 		/* Reinitialisation du compteur */
-		console.log("reinitialisation du compteur");
 		compteur = 0;
 		event.preventDefault();
 	});
@@ -240,9 +239,8 @@ function setCircle(svg, x, y, rayon_initial,isRemarkable) {
 {include file="gestion/pieceCartouche.tpl"}
 </div>
 </div>
-<form class="form-inline" name="myForm" id="myForm" action="index.php" method="POST">
+<form class="form-inline" name="myForm" id="myForm" action="photolectureWrite" method="POST">
 <input type="hidden" name="photo_id" id="photo_id" value="{$data.photo_id}">
-<input type="hidden" name="module" value="photolectureWrite"}>
 <input type="hidden" name="lecteur_id" id="lecteur_id" value="{$data.lecteur_id}">
 <input type="hidden" name="photolecture_date" value="{$data.photolecture_date}">
 <input type="hidden" name="photolecture_id" value="{$data.photolecture_id}">

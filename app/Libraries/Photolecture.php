@@ -13,13 +13,14 @@ use Ppci\Libraries\PpciLibrary;
 
 class Photolecture extends PpciLibrary
 {
+    protected $ids = [];
     function __construct()
     {
         parent::__construct();
         $this->dataClass = new ModelsPhotolecture();
         if (is_array($_REQUEST["photolecture_id"])) {
             foreach ($_REQUEST["photolecture_id"] as $value) {
-                $this->id[] = $_SESSION["it_photolecture"]->getValue($value);
+                $this->ids[] = $_SESSION["it_photolecture"]->getValue($value);
             }
         } else {
             $this->id = $_SESSION["it_photolecture"]->getValue($_REQUEST["photolecture_id"]);
@@ -93,7 +94,11 @@ class Photolecture extends PpciLibrary
         /**
          * Recuperation des lectures effectuees
          */
-        $data = $this->dataClass->getDetailLecture($this->id, $coef);
+        if (!empty($this->ids)) {
+            $data = $this->dataClass->getDetailLecture($this->ids, $coef);
+        } else {
+            $data = $this->dataClass->getDetailLecture($this->id, $coef);
+        }
         $data = $_SESSION["it_photolecture"]->translateList($data);
         $data = $_SESSION["it_photo"]->translateList($data);
         $this->vue->set($data, "data");
@@ -115,7 +120,7 @@ class Photolecture extends PpciLibrary
          * Assignation du coefficient de transparence
          */
         if (!isset($_REQUEST["fill"])) {
-            $_REQUEST["fill"] = 0;
+            $_REQUEST["fill"] = 0.5;
         }
         $this->vue->set($_REQUEST["fill"], "fill");
 
@@ -140,7 +145,11 @@ class Photolecture extends PpciLibrary
          * $this->id contient le tableau des lectures a afficher, $photolecture_id_modif la lecture a modifier
          */
         if (isset($_REQUEST["photolecture_id_modif"])) {
-            $mesurePrecId = $this->id;
+            if (!empty($this->ids)) {
+                $mesurePrecId = $this->ids;
+            } else {
+                $mesurePrecId = $this->id;
+            }
             $this->id = $_SESSION["it_photolecture"]->getValue($_REQUEST["photolecture_id_modif"]);
         }
         $lecteur_id = $lecteur->getIdFromLogin($_SESSION["login"]);
@@ -151,7 +160,7 @@ class Photolecture extends PpciLibrary
                  */
                 $data = $this->dataClass->lire($this->id);
                 if ($data["lecteur_id"] != $lecteur_id) {
-                    $message = "Vous n'êtes pas le lecteur initial : vous ne pouvez modifier cette lecture";
+                    $this->message->set(_("Vous n'êtes pas le lecteur initial : vous ne pouvez modifier cette lecture"), true);
                     return $this->display();
                 }
             }
@@ -295,7 +304,6 @@ class Photolecture extends PpciLibrary
         $dataPhoto = $_SESSION["it_photo"]->translateRow($dataPhoto);
         $dataPhoto = $_SESSION["it_piece"]->translateRow($dataPhoto);
         $this->vue->set($dataPhoto, "photo");
-
         /**
          * Integration du facteur de transparence
          */
@@ -307,7 +315,6 @@ class Photolecture extends PpciLibrary
         /**
          * Recuperation de la table des stries finales
          */
-        require_once "modules/classes/final_stripe.class.php";
         $finalStripe = new Final_stripe();
         $this->vue->set($finalStripe->getListe(1), "finalStripe");
         return $this->vue->send();

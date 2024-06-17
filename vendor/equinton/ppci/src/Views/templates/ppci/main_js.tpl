@@ -146,7 +146,7 @@
             "language": dataTableLanguage,
             "paging": false,
             "searching": true,
-            "scrollY": scroll,
+            /*"scrollY": scroll,*/
             "scrollX": true,
             fixedHeader: {
                 header: true,

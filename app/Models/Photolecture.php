@@ -356,7 +356,7 @@ class Photolecture extends PpciModel
                             final_stripe_libelle,
                             read_fiability, consensual_reading, annee_naissance, remarkable_points
                             from photolecture
-                            left outer join lecteur using(lecteur_id)
+                            left outer join lecteur using (lecteur_id)
                             left outer join final_stripe using (final_stripe_id)";
             /**
              * Preparation de la clause where
@@ -374,7 +374,7 @@ class Photolecture extends PpciModel
                 $virgule = "";
                 foreach ($id as $value) {
                     if ($value != $id_exclu && $value > 0) {
-                        $where .= $virgule . "id" . $i;
+                        $where .= $virgule . ":id" . $i.':';
                         $param["id" . $i] = $value;
                         $virgule = ",";
                         $i++;
@@ -400,7 +400,7 @@ class Photolecture extends PpciModel
              * Lecture de la liste concernee
              */
             $icolor = 0;
-            $data = $this->getListeParam($sql . $where);
+            $data = $this->getListeParam($sql . $where, $param);
             foreach ($data as $key => $value) {
                 if (strlen($data[$key]["listepoint"]) > 0) {
                     $data[$key]["points"] = $this->calculPointsAffichage($data[$key]["listepoint"], $coef);
@@ -472,7 +472,7 @@ class Photolecture extends PpciModel
             /** 
              * Ajout du point remarquable
              */
-            if (in_array($i, $rp)) {
+            if (!is_null($rp) && in_array($i, $rp)) {
                 $data[$i]["remarkablePoint"] = 1;
             }
             $i++;
