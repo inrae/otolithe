@@ -162,11 +162,11 @@ class Piece extends PpciModel
 	function getListForCollec(array $pieces, string $exp_name): ?array
 	{
 		$sql = "select
-					p.uuid as dbuid_origin,
+					'otolithe:'||piece_id::varchar as dbuid_origin,
 					case when piececode is not null then piececode else piece_id::varchar end as identifier,
 					p.uuid,
 					piecetype_libelle as sample_type_name,
-					':exp_name:' as collection_name,
+					'$exp_name' as collection_name,
 					peche_date as sampling_date,
 					nom_id as md_taxon,
 					tag as md_tag,
@@ -183,7 +183,7 @@ class Piece extends PpciModel
 					left outer join sexe using (sexe_id)
 					left outer join peche using (peche_id)
 					where piece_id in (";
-		$param["exp_name"] = $exp_name;
+		$param = [];
 		/**
 		 * where content
 		 */

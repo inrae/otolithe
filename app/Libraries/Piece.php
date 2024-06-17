@@ -180,7 +180,6 @@ class Piece extends PpciLibrary
          */
         try {
             $exp_id = $_SESSION["it_experimentation"]->getValue($_REQUEST["exp_id"]);
-            require_once "modules/classes/experimentation.class.php";
             $experimentation = new Experimentation();
             $dexp = $experimentation->lire($exp_id);
             $exp_name = $dexp["exp_nom"];

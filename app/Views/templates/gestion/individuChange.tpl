@@ -53,7 +53,9 @@ $("#recherche").keyup(function() {
 					<div class="col-md-8">
 					<input class="form-control" id="recherche" autocomplete="off" autofocus placeholder="{t}espèce à chercher{/t}" title="{t}Tapez au moins 3 caractères...{/t}">
 						<select id="espece_id" name="espece_id" class="form-control">
-						<option value="{$data.espece_id}">{$data.nom_id}</option>
+							{if $data.espece_id > 0}
+							<option value="{$data.espece_id}" selected>{$data.nom_id}</option>
+							{/if}
 						</select>
 					</div>
 				</div>

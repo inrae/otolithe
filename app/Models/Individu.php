@@ -184,16 +184,16 @@ class Individu extends PpciModel
      *
      * @see ObjetBDD::lire()
      */
-    function lire(int $id, bool $getDefault = true, $parentKey = 0) :array
+    function read(int $id, bool $getDefault = true, $parentKey = 0) :array
     {
         if ($id > 0) {
             $sql = "select individu_id, nom_id,
                     peche_id, espece_id, codeindividu, tag, longueur, poids,
                     remarque, parasite, age, sexe_id, uuid
                     ,wgs84_x, wgs84_y
-				from " . $this->table . "
-						left outer join espece using (espece_id)
-						where individu_id = :id:";
+				    from individu
+					left outer join espece using (espece_id)
+					where individu_id = :id:";
             return $this->lireParamAsPrepared($sql, array("id" => $id));
         } else {
             return $this->getDefaultValue();

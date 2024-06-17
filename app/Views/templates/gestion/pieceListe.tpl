@@ -30,8 +30,7 @@ $(document).ready(function() {
 </form>
 </div>
 {if count ($data) > 0}
-<form method="POST" id="containerFormListPrint" action="index.php">
-  <input type="hidden" id="module" name="module" value="pieceExportCS">
+<form method="POST" id="containerFormListPrint" action="pieceExportCS">
   <input type="hidden" name="exp_id" value="{$exp_id}">
   {if $rights.manage == 1}
     <div class="row">
