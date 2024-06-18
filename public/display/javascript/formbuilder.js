@@ -174,5 +174,5 @@ function showForm(value, data = "", isArray = 0, readOnly = 0) {
         $("#metadata").alpaca("destroy");
     }
     $("#metadata").alpaca(config);
-    console.log(config);
+    //console.log(config);
 }

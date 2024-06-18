@@ -28,7 +28,7 @@
                     console.log(isArray);
                     if (isArray) {
                         isArray = JSON.parse(isArray);
-                        console.log(isArray);
+                        //console.log(isArray);
                     } else {
                         var isArray = 0;
                     }
