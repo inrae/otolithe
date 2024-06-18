@@ -4,29 +4,6 @@ namespace App\Models;
 
 use Ppci\Libraries\PpciException;
 
-/**
- * Created : 17 août 2016
- * Creator : quinton
- * Encoding : UTF-8
- * Copyright 2016 - All rights reserved
- */
-/**
- * Classes d'exception
- *
- * @author quinton
- *
- */
-class FichierException extends \Exception
-{
-}
-
-class HeaderException extends \Exception
-{
-}
-
-class ImportException extends \Exception
-{
-}
 
 /**
  * Classe realisant l'import
@@ -79,6 +56,7 @@ class Import
         "wgs84_y"
     );
 
+
     private $handle;
 
     private $fileColumn = array();
@@ -90,12 +68,25 @@ class Import
     private $piecetype = array();
 
     private $espece = array();
-
+    protected  $sexe = array();
     private $metadatatype = array();
+    protected Individu $individu;
+    protected Piece $piece;
+    protected Peche $peche;
+    protected Individu_experimentation $ie;
 
-    private $individu, $piece, $ie, $peche, $pm, $sexe;
+    protected Piecemetadata $pm;
 
     public $minuid, $maxuid;
+
+    function __construct()
+    {
+        $this->individu = new Individu();
+        $this->piece = new Piece();
+        $this->peche = new Peche();
+        $this->ie = new Individu_experimentation();
+        $this->pm = new Piecemetadata();
+    }
 
     /**
      * Initialise la lecture du fichier, et lit la ligne d'entete
@@ -127,27 +118,12 @@ class Import
                 if (in_array($value, $this->fields) || substr($data[$range], 0, 3) == "md_") {
                     $this->fileColumn[$range] = $value;
                 } else {
-                    throw new HeaderException(sprintf(_("L'entête de colonne %1\$s n'est pas reconnue (%2\$s)"), $range, $value));
+                    throw new PpciException(sprintf(_("L'entête de colonne %1\$s n'est pas reconnue (%2\$s)"), $range, $value));
                 }
             }
         } else {
-            throw new FichierException(sprintf(_("%s non trouvé ou non lisible"), $filename));
+            throw new PpciException(sprintf(_("%s non trouvé ou non lisible"), $filename));
         }
-    }
-
-    /**
-     * Initialise les classes utilisees pour realiser les imports
-     *
-     * @param Individu $individu
-     * @param Piece $piece
-     */
-    public function initClasses(Individu $individu, Piece $piece, Individu_experimentation $ie, Peche $peche, Piecemetadata $pm)
-    {
-        $this->individu = $individu;
-        $this->piece = $piece;
-        $this->ie = $ie;
-        $this->peche = $peche;
-        $this->pm = $pm;
     }
 
     /**
@@ -195,8 +171,8 @@ class Import
         /**
          * Suppression du reformatage de la date
          */
-        $this->peche->auto_date = 0;
-        $this->pm->auto_date = 0;
+        $this->peche->autoFormatDate = false;
+        $this->pm->autoFormatDate = false;
         while ($data = $this->readLine()) {
             if (count($data) > 0) {
                 /**
@@ -236,14 +212,6 @@ class Import
                      */
                     $individu_id = $this->individu->ecrire($di);
                     /**
-                     * Rattachement a l'experimentation
-                     */
-                    $data_ie = array(
-                        "individu_id" => $individu_id,
-                        "exp_id" => $values["exp_id"],
-                    );
-                    $this->ie->ecrire($data_ie);
-                    /**
                      * Rajout de la piece
                      */
                     if ($values["piecetype_id"] > 0) {
@@ -253,7 +221,6 @@ class Import
                         unset($dp["piece_uuid"]);
                         $pieceId = $this->piece->ecrire($dp);
                     }
-
                     if ($pieceId > 0 && $values["metadatatype_id"] > 0) {
                         /***
                          * Recherche des metadonnees attachees
@@ -279,7 +246,7 @@ class Import
                         }
                     }
                 } catch (PpciException $pe) {
-                    throw new ImportException("Error - Line $num: error when import data. " . $pe->getMessage());
+                    throw new PpciException("Error - Line $num: error when import data. " . $pe->getMessage());
                 }
                 /**
                  * Mise a jour des bornes de l'uid
@@ -534,7 +501,7 @@ class Import
         /**
          * Verification du format de date
          */
-        $result = date_parse_from_format($_SESSION["MASKDATE"], $date);
+        $result = date_parse_from_format($_SESSION["date"]["maskdate"], $date);
 
         if ($result["warning_count"] > 0 || $result["error_count"] > 0) {
             /***

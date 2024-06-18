@@ -20,14 +20,12 @@ class Individu_experimentation extends PpciModel
         $this->fields = array(
             "individu_id" => array(
                 "type" => 1,
-                "key" => 1,
                 "requis" => 1,
                 "parentAttrib" => 1
             ),
             "exp_id" => array(
                 "type" => 1,
                 "requis" => 1,
-                "key" => 1
             )
         );
         parent::__construct();

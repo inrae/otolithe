@@ -24,18 +24,17 @@
 <!-- Selection du fichier a importer -->
 <div class="row">
 <div class="col-md-6">
-<form class="form-horizontal protoform" id="controlForm" method="post" action="index.php" enctype="multipart/form-data">
-<input type="hidden" name="module" value="importControl">
+<form class="form-horizontal" id="controlForm" method="post" action="importControl" enctype="multipart/form-data">
 <div class="form-group">
 <label for="upfile" class="control-label col-md-4"><span class="red">*</span> {t}Nom du fichier à importer (CSV) :{/t}</label>
 <div class="col-md-8">
-<input type="file" name="upfile" required>
+<input type="file" name="upfile"  class="form-control" required>
 </div>
 </div>
 <div class="form-group">
 <label for="separator" class="control-label col-md-4">{t}Séparateur utilisé :{/t}</label>
 <div class="col-md-8">
-<select id="separator" name="separator">
+<select id="separator" name="separator" class="form-control">
 <option value=";" {if $separator == ";"}selected{/if}>{t}Point-virgule{/t}</option>
 <option value="," {if $separator == ","}selected{/if}>{t}Virgule{/t}</option>
 <option value="tab" {if $separator == "tab"}selected{/if}>{t}Tabulation{/t}</option>
@@ -45,7 +44,7 @@
 <div class="form-group">
 <label for="utf8_encode" class="control-label col-md-4">{t}Encodage du fichier :{/t}</label>
 <div class="col-md-8">
-<select id="utf8_encode" name="utf8_encode">
+<select id="utf8_encode" name="utf8_encode" class="form-control">
 <option value="0" {if $utf8_encode == 0}selected{/if}>UTF-8</option>
 <option value="1" {if $utf8_encode == 1}selected{/if}>ISO-8859-x</option>
 </select>
@@ -62,8 +61,7 @@
 <!-- Lancement de l'import -->
 {if $controleOk == 1}
 
-<form class="protoform" id="importForm" method="post" action="index.php">
-<input type="hidden" name="module" value="importImport">
+<form class="protoform" id="importForm" method="post" action="importImport">
 {t}Contrôles OK. Vous pouvez réaliser l'import du fichier{/t} {$filename} : 
 <button type="submit" class="btn btn-danger">{t}Déclencher l'import{/t}</button>
 {$csrf}
@@ -99,10 +97,10 @@
 <li><b>personne</b> : {t}références du pêcheur{/t}</li>
 <li><b>operateur</b> : {t}références de l'opérateur ayant traité le poisson{/t}</li>
 <li><b>metadatatype_id</b> : {t}code du type de méta-données importées{/t} <a href="metadatatypeList">{t}Consultez la liste des types de méta-données{/t}</a></li>
-<li><b>piecemetadata_date</b> : {t}Date d'obtention des méta-données{/t}</li>
+<li><b>piecemetadata_date</b> : {t}Date d'obtention des métadonnées{/t}</li>
 <li><b>piecemetadata_comment</b> : {t}Commentaires associés aux méta-données{/t}</li>
-<li><b>metadata</b> : {t}Méta-données, au format JSON. Peut prendre la forme d'un tableau ou des valeurs uniques. Les champs doivent être identiques à ceux décrits dans le type de méta-données (cf. metadatatype_id){/t}</li>
-<li><b>md_nom-du-champ</b> : {t}Pour des méta-données uniques (pas en tableau), chaque champ peut être indiqué dans une colonne pré-fixée par md_. Le programme reconstituera les données pour les stocker au format JSON.{/t}</li>
+<li><b>metadata</b> : {t}Méta-données, au format JSON. Peut prendre la forme d'un tableau ou des valeurs uniques. Les champs doivent être identiques à ceux décrits dans le type de métadonnées (cf. metadatatype_id){/t}</li>
+<li><b>md_nom-du-champ</b> : {t}Pour des métadonnées uniques (pas en tableau), chaque champ peut être indiqué dans une colonne pré-fixée par md_. Le programme reconstituera les données pour les stocker au format JSON.{/t}</li>
 
 </ul>
 <div class="center">
