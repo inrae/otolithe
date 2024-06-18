@@ -190,7 +190,7 @@ class App extends BaseConfig
      */
     public string $versionDate = "13/12/2023";
     public string $dbversion = "2.4";
-    public string $databaseSchemaFile = ROOTPATH . "documentation/metabo_database.png";
+    public string $databaseSchemaFile = ROOTPATH . "documentation/otolithe-schema.png";
     /**
      * Duration of conservation of logs in table log
      *
@@ -315,7 +315,7 @@ class App extends BaseConfig
      */
     public $APPLI_absolute_session = 36000; // 10 hours
 
-    public $GACL_disable_new_right = 0;
+    public $GACL_disable_new_right = 1;
 
     /**
      * Max size of picture

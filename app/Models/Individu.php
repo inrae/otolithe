@@ -135,7 +135,7 @@ class Individu extends PpciModel
          * Preparation de la clause de tri
          */
         $tri = " order by codeindividu";
-        $this->fields["peche_date"] = ["type"=>2];
+        $this->dateFields[] = "peche_date";
         return $this->getListeParam($sql . $where . $group . $tri, $param);
     }
 
