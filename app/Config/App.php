@@ -173,7 +173,7 @@ class App extends BaseConfig
      * @see http://www.html5rocks.com/en/tutorials/security/content-security-policy/
      * @see http://www.w3.org/TR/CSP/
      */
-    public bool $CSPEnabled = false;
+    public bool $CSPEnabled = true;
 
     /**
      * --------------------------------------------------------------------------
@@ -235,7 +235,7 @@ class App extends BaseConfig
             "maskdateexport" => 'Y-m-d'
         ]
     ];
-    public $localePath = APPPATH.'locale';
+    public $localePath = APPPATH . 'locale';
     /**
      * Domain of defined rights
      *
@@ -321,6 +321,15 @@ class App extends BaseConfig
      * Max size of picture
      */
     public $APP_maxfilesize = 100000000;
+
+    /**
+     * CSP configuration (header send)
+     */
+    public $APP_csp = [
+        "addImageSrc" => ["*.openstreetmap.org"],
+        "addConnectSrc" => ["*.openstreetmap.org"]
+    ];
+
 
     /**
      * Get last release informations
