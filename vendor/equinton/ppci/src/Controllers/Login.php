@@ -2,9 +2,6 @@
 
 namespace Ppci\Controllers;
 
-
-use \Ppci\Controllers\PpciController;
-
 class Login extends PpciController
 {
     function index()
@@ -77,7 +74,7 @@ class Login extends PpciController
             return redirect()->to(site_url());
         }
     }
-    public function oidcGetLogo() {
+    public function getLogo() {
         $vue = service("BinaryView");
         $config = service("IdentificationConfig");
 
