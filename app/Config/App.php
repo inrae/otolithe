@@ -182,14 +182,14 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public string $version = "v23.0.0";
+    public string $version = "v24.0.0";
     /**
      * versionDate - don't change here, but in function setParameters() below
      *
      * @var string
      */
-    public string $versionDate = "13/12/2023";
-    public string $dbversion = "2.4";
+    public string $versionDate = "19/06/2024";
+    public string $dbversion = "24.0";
     public string $databaseSchemaFile = ROOTPATH . "documentation/otolithe-schema.png";
     /**
      * Duration of conservation of logs in table log
