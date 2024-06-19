@@ -184,7 +184,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="metadatatypeId" class="control-label col-md-4">{t}Modèle de métadonnées à utiliser :{/t}</label>
+                <label for="metadatatypeId" class="control-label col-md-4">
+                    {t}Modèle de métadonnées à utiliser :{/t}
+                </label>
                 <div class="col-md-8">
                     <select id="metadatatypeId" name="metadatatype_id" class="form-control">
                         {foreach $metadatatypes as $mt}
