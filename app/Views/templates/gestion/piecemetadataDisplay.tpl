@@ -2,7 +2,7 @@
 <script type="text/javascript" src="display/node_modules/handlebars/dist/handlebars.runtime.min.js"></script>
 <script type="text/javascript" src="display/node_modules/alpaca/dist/alpaca/bootstrap/alpaca.min.js"></script>
 <link type="text/css" href="display/node_modules/alpaca/dist/alpaca/bootstrap/alpaca.min.css" rel="stylesheet">
-<script {$csp_script_nonce}>
+<script >
     $(document).ready(function() {
 
         /** Fonction non utilisee, conservee pour l'exemple d'integration de deux requetes ajax successives */

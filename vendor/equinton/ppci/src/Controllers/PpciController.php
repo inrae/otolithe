@@ -50,15 +50,6 @@ class PpciController extends \App\Controllers\BaseController
                 }
             }
         }
-        $this->response->setHeader("Cache-Control",
-        [
-            "max-age=05920000",
-            "private"
-        ]);
-        $csp = $this->response->getCSP();
-        foreach ($this->config->APP_csp as $k => $v) {
-            $csp->$k($v);
-        }
     }
 
 }

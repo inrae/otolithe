@@ -1,4 +1,4 @@
-<script {$csp_script_nonce}>
+<script >
 	$(document).ready(function () {
 		/*
 		 * gestion des cookies pour conserver les valeurs sélectionnées
@@ -245,7 +245,7 @@
 											{$photolecture[lst].read_fiability}
 										</td>
 										<td class="center">
-											<script {$csp_script_nonce}>
+											<script >
 												var rp = "{$photolecture[lst].remarkable_points}";
 												if (rp.length > 0) {
 													var arp = JSON.parse(rp);

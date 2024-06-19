@@ -1,15 +1,15 @@
 <!-- Jquery -->
-<script src="display/node_modules/jquery/dist/jquery.min.js"></script>
+<script  src="display/node_modules/jquery/dist/jquery.min.js"></script>
 <!--script src="display/javascript/jquery-3.6.0.min.js"></script-->
 
 <!-- Bootstrap -->
 <link rel="stylesheet" href="display/javascript/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="display/javascript/bootstrap/css/bootstrap-theme.min.css">
-<script src="display/javascript/bootstrap/js/bootstrap.min.js"></script>
+<script  src="display/javascript/bootstrap/js/bootstrap.min.js"></script>
 
 <!--JqueryUI-->
-<script src="display/node_modules/jquery-ui/dist/jquery-ui.min.js"></script>
-<script src="display/node_modules/jquery-ui/ui/widgets/tooltip.js"></script>
+<script  src="display/node_modules/jquery-ui/dist/jquery-ui.min.js"></script>
+<script  src="display/node_modules/jquery-ui/ui/widgets/tooltip.js"></script>
 <link rel="stylesheet" href="display/node_modules/jquery-ui/dist/themes/base/jquery-ui.min.css">
 
 <!-- translations date/time -->
@@ -24,28 +24,28 @@
 <script type="text/javascript" charset="utf-8" src="display/javascript/jquery-ui-custom/combobox.js"></script>
 
 <!-- extension pour le menu -->
-<script src="display/node_modules/smartmenus/dist/jquery.smartmenus.min.js" type="text/javascript"></script>
+<script  src="display/node_modules/smartmenus/dist/jquery.smartmenus.min.js" type="text/javascript"></script>
 <link type="text/css" href="display/node_modules/smartmenus/dist/addons/bootstrap/jquery.smartmenus.bootstrap.css"
     rel="stylesheet">
-<script src="display/node_modules/smartmenus/dist/addons/bootstrap/jquery.smartmenus.bootstrap.min.js"
+<script  src="display/node_modules/smartmenus/dist/addons/bootstrap/jquery.smartmenus.bootstrap.min.js"
     type="text/javascript"></script>
 
 <!-- Datatables -->
-<script src="display/node_modules/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="display/node_modules/datatables.net-bs/js/dataTables.bootstrap.js"></script>
+<script  src="display/node_modules/datatables.net/js/jquery.dataTables.min.js"></script>
+<script  src="display/node_modules/datatables.net-bs/js/dataTables.bootstrap.js"></script>
 <link rel="stylesheet" type="text/css" href="display/node_modules/datatables.net-bs/css/dataTables.bootstrap.min.css" />
-<script src="display/javascript/intl.js"></script>
+<script  src="display/javascript/intl.js"></script>
 
 <!-- Buttons to export from Datatables - classe datatable-export -->
-<script src="display/node_modules/jszip/dist/jszip.min.js"></script>
-<script src="display/node_modules/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-<script src="display/node_modules/datatables.net-buttons/js/buttons.print.min.js"></script>
-<script src="display/node_modules/datatables.net-buttons/js/buttons.html5.min.js"></script>
-<script src="display/node_modules/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-<script src="display/node_modules/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+<script  src="display/node_modules/jszip/dist/jszip.min.js"></script>
+<script  src="display/node_modules/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script  src="display/node_modules/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script  src="display/node_modules/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script  src="display/node_modules/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+<script  src="display/node_modules/datatables.net-buttons/js/buttons.colVis.min.js"></script>
 <link rel="stylesheet" type="text/css"
     href="display/node_modules/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" />
-<script src="display/node_modules/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+<script  src="display/node_modules/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
 
 <!-- Add sort on date/time -->
 <script type="text/javascript" src="display/node_modules/moment/min/moment.min.js"></script>
@@ -61,17 +61,17 @@
 
 <!-- Display pictures -->
 <link rel="stylesheet" href="display/node_modules/magnific-popup/dist/magnific-popup.css">
-<script src="display/node_modules/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+<script  src="display/node_modules/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
 
 <!-- Cookies -->
-<script src="display/javascript/js-cookie-master/src/js.cookie.js"></script>
+<script  src="display/javascript/js-cookie-master/src/js.cookie.js"></script>
 
 <!-- specific code -->
 <script type="text/javascript" src="display/javascript/bootstrap-prototypephp.js"></script>
 
 
 <!--  Automatic implementation of classes -->
-<script {$csp_script_nonce}>
+<script >
     var dataTableLanguage = {
         "sProcessing": "{t}Traitement en cours...{/t}",
         "sSearch": "{t}Rechercher :{/t}",

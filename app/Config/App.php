@@ -327,7 +327,8 @@ class App extends BaseConfig
      */
     public $APP_csp = [
         "addImageSrc" => ["*.openstreetmap.org"],
-        "addConnectSrc" => ["*.openstreetmap.org"]
+        "addConnectSrc" => ["*.openstreetmap.org"],
+        "addScriptSrc" => ["unsafe-inline", "unsafe-eval"],
     ];
 
 

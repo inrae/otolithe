@@ -1,4 +1,4 @@
-<script {$csp_script_nonce}>
+<script >
   scroll = "75vh";
 </script>
 <div class="col-md-12">

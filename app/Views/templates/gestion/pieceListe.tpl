@@ -1,4 +1,4 @@
-<script {$csp_script_nonce}>
+<script >
 $(document).ready(function() {
   $("#checkPiece").change( function() {
 		$('.checkPiece').prop('checked', this.checked);
