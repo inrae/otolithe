@@ -142,6 +142,7 @@ class SmartyPpci
              * Generate the CSRF Field
              */
             $this->smarty->assign("csrf", csrf_field());
+            $this->smarty->assign("csp_script_nonce", csp_script_nonce());
 
             /**
              * Get messages

@@ -1,4 +1,4 @@
-<script>
+<script {$csp_script_nonce}>
 $(document).ready(function() {
 	var lecteur_id = "{$individuSearch.lecteur_id}";
 	var espece_id = "{$individuSearch.espece_id}";

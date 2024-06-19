@@ -5,7 +5,7 @@
 body > iframe { display: none; }
 </style>
 
-<script>
+<script {$csp_script_nonce}>
 
 var compteur=0;
 var numPointLigne = 1;
@@ -425,7 +425,7 @@ x
 {$mesurePrec[lst].lecteur_prenom} {$mesurePrec[lst].lecteur_nom} - {t}lecture du{/t} {$mesurePrec[lst].photolecture_date}
  - {t}Résolution{/t} : {$mesurePrec[lst].photolecture_width}x{$mesurePrec[lst].photolecture_height}
  - {t}Points remarquables :{/t} 
-<script>
+<script {$csp_script_nonce}>
 var rp = "{$mesurePrec[lst].remarkable_points}";
 if (rp.length > 0) {
 var arp = JSON.parse(rp);

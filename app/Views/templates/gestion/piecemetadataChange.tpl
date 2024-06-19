@@ -3,7 +3,7 @@
 <script type="text/javascript" src="display/node_modules/handlebars/dist/handlebars.runtime.min.js"></script>
 <script type="text/javascript" src="display/node_modules/alpaca/dist/alpaca/bootstrap/alpaca.min.js"></script>
 <link type="text/css" href="display/node_modules/alpaca/dist/alpaca/bootstrap/alpaca.min.css" rel="stylesheet">
-<script>
+<script {$csp_script_nonce}>
     $(document).ready(function () {
 
         function getMetadata(reponse) {

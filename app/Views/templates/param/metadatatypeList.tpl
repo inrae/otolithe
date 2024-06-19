@@ -1,5 +1,5 @@
 {* Paramètres > Métadonnées > Nouveau > *}
-<script>
+<script {$csp_script_nonce}>
 	$(document).ready(function () {
 		$("#checkMetadata").change(function () {
 			$('.checkMetadata').prop('checked', this.checked);

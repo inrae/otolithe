@@ -1,4 +1,4 @@
-<script>
+<script {$csp_script_nonce}>
 	$(document).ready(function () {
 		var mails = "";
 		$(".mail").each(function (i, elem) {

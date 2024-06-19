@@ -1,4 +1,4 @@
-<script>
+<script {$csp_script_nonce}>
 $(document).ready(function() {
 	function toHex(txt){
 		const encoder = new TextEncoder();
