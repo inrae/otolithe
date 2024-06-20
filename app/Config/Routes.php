@@ -67,3 +67,10 @@ $routes->post('piecemetadataDelete', 'Piecemetadata::delete');
 $routes->add('piecemetadataImport', 'Piecemetadata::import');
 $routes->add('piecemetadataDisplay', 'Piecemetadata::display');
 $routes->add('piecemetadataExport', 'Piecemetadata::export');
+
+/**
+ * Submenus
+ */
+$routes->add('parametre', '\Ppci\Controllers\Utils::submenu/parametre');
+$routes->add('read', '\Ppci\Controllers\Utils::submenu/read');
+$routes->add('help', '\Ppci\Controllers\Utils::submenu/help');
