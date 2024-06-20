@@ -184,7 +184,8 @@ class Log extends PpciModel
                 $sql,
                 array(
                     "login" => $_SESSION["login"],
-                    "datefrom" => $date->format($_SESSION["date"]["maskdatelong"]),
+                    //"datefrom" => $date->format($_SESSION["date"]["maskdatelong"]),
+                    "datefrom" => $date->format("Y-m-d H:i:s"),
                     "module" => $module,
                     "token" => $token
                 )
