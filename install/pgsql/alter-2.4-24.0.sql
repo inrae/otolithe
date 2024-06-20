@@ -16,3 +16,5 @@ INSERT INTO otolithe.dbparam (dbparam_name,dbparam_value,dbparam_description,dbp
 	 ('APPLI_code','OTOLITHE','Code de l''application','Code of the application'),
 	 ('APPLI_title','Otolithe','Titre de l''application, affiché à côté de l''icône',''),
 	 ('otp_issuer','otolithe.local','Nom affiché dans les applications de génération de codes uniques pour l''identification à double facteur','Name displayed in applications generating unique codes for two-factor identification');
+
+insert into otolithe.dbversion(dbversion_number, dbversion_date) values ('24.0','2024-06-19');
