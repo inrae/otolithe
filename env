@@ -23,7 +23,7 @@ app.baseURL = 'https://myapp.mysociety.com'
 BASE_DIR = "/var/www/otolitheApp/otolithe2"
 FRONT_DIR = "${BASE_DIR}/public"
 # If you have trouble with `.`, you could also use `_`.
-app.CSPEnabled = true
+app.CSPEnabled = false
 # Duration of conservation of logs in table gacl.log
 # logDuration = 365
 
@@ -75,7 +75,6 @@ Ppci\Config\IdentificationConfig.identificationMode = CAS-BDD
 
 # List of parameters to use SAML identification with apache2-mellon
 #
-# Ppci\Config\IdentificationConfig.identification_type = BDD
 # Ppci\Config\IdentificationConfig.ident_header_vars.radical = 'MELLON'
 # Ppci\Config\IdentificationConfig.ident_header_vars.login = 'MELLON_MAIL'
 # Ppci\Config\IdentificationConfig.ident_header_vars.mail = 'MELLON_MAIL'
