@@ -7,3 +7,5 @@ chgrp -R www-data .
 find . -type d -exec chmod 750 {} \;
 find . -type f -exec chmod 640 {} \;
 chmod -R g+w writable
+apt-get install php$VER-intl
+

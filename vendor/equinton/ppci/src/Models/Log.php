@@ -81,9 +81,12 @@ class Log extends PpciModel
             $module = "unknown";
         }
         $data["nom_module"] = $GACL_aco . "-" . $module;
-        $data["log_date"] = $this->currentDate;
+        $data["log_date"] = date("Y-m-d H:i:s");
         $data["ipaddress"] = $this->getIPClientAddress();
-        return $this->ecrire($data);
+        $this->autoFormatDate = false;
+        $res = $this->ecrire($data);
+        $this->autoFormatDate = true;
+        return $res;
     }
 
 

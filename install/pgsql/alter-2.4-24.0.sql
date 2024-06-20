@@ -1,6 +1,5 @@
 alter table gacl.logingestion add column nbattempts int2;
 alter table gacl.logingestion add column lastattempt timestamp;
-alter table gacl.acllogin add column totp_key varchar;
 alter table gacl.acllogin add column email varchar;
 update gacl.aclaco set aco = 'read' where aco = 'lecture';
 update gacl.aclaco set aco = 'manage' where aco = 'gestion';
@@ -12,6 +11,8 @@ create sequence otolithe.dbparam_id_seq;
 alter table otolithe.dbparam alter column dbparam_id set default nextval('otolithe.dbparam_id_seq');
 alter sequence otolithe.dbparam_id_seq owned by otolithe.dbparam.dbparam_id ;
 select setval('otolithe.dbparam_id_seq', (select max(dbparam_id) from otolithe.dbparam));
+alter table otolithe.dbparam add column dbparam_description varchar;
+alter table otolithe.dbparam add column dbparam_description_en varchar;
 INSERT INTO otolithe.dbparam (dbparam_name,dbparam_value,dbparam_description,dbparam_description_en) VALUES
 	 ('APPLI_code','OTOLITHE','Code de l''application','Code of the application'),
 	 ('APPLI_title','Otolithe','Titre de l''application, affiché à côté de l''icône',''),

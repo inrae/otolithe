@@ -93,7 +93,7 @@ Ppci\Config\IdentificationConfig.identificationMode = CAS-BDD
 
 
 # CAS parameters
-# Ppci\Config\IdentificationConfig.CAS.CAS_address = 
+# Ppci\Config\IdentificationConfig.CAS.CAS_address = "address.without.https"
 # Ppci\Config\IdentificationConfig.CAS.CAS_uri = "/cas"
 # Ppci\Config\IdentificationConfig.CAS.CAS_Port = 443
 # Ppci\Config\IdentificationConfig.CAS.CAS_debug = false
