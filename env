@@ -143,6 +143,8 @@ Ppci\Config\IdentificationConfig.identificationLogo = "${FRONT_DIR}/favicon.png"
 #--------------------------------------------------------------------
 # Ppci Rights
 #--------------------------------------------------------------------
+# Name of the application in the right module
+app.GACL_aco = otolithe
 
 # Set 1 to disable the creation of new rights in table aclaco
 #
