@@ -1,7 +1,7 @@
 mv lang.po _old.po
 
 #extrait les chaines {t}texte{/t} des templates smarty .tpl
-../../../vendor/smarty-gettext/smarty-gettext/tsmarty2c.php -o _tpl.pot ../..
+../../../vendor/smarty-gettext/smarty-gettext/tsmarty2c.php -o _tpl.pot ../../..
 
 #extrait les chaines _("Module gestion") du code php 
 #pour laisser une note au traducteur :
