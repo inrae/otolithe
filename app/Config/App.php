@@ -309,7 +309,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $copyright = "Copyright © 2024 - All rights reserved. Author : - Software distributed under AGPL license";
+    public $copyright = "Copyright © 2013-2024 - All rights reserved. Author : Éric Quinton, for INRAE-EABX - Software distributed under AGPL license";
 
     /**
      * Max duration of a session
