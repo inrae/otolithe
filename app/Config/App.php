@@ -303,7 +303,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $APP_help_address = "";
+    public $APP_help_address = "https://github.com/inrae/otolithe/issues/new/choose";
     /**
      * Copyright - don't change directly here, but in setParameters function
      *
@@ -343,10 +343,10 @@ class App extends BaseConfig
      */
     public $APPLI_release = [
         "provider" => "github",
-        "url" => "https://api.github.com/repos/collec-science/collec-science/releases/latest",
+        "url" => "https://api.github.com/repos/inrae/otolithe/releases/latest",
         "tag" => "tag_name",
         "date" => "published_at",
-        "user_agent" => 'collec-science/collec-science',
+        "user_agent" => 'inrae/otolithe',
         "description" => "body",
     ];
     /**
