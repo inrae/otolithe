@@ -173,7 +173,7 @@ class App extends BaseConfig
      * @see http://www.html5rocks.com/en/tutorials/security/content-security-policy/
      * @see http://www.w3.org/TR/CSP/
      */
-    public bool $CSPEnabled = true;
+    public bool $CSPEnabled = false;
 
     /**
      * --------------------------------------------------------------------------
@@ -235,7 +235,10 @@ class App extends BaseConfig
             "maskdateexport" => 'Y-m-d'
         ]
     ];
-    public $localePath = APPPATH . 'locale';
+    public $localesGettext = [
+        "en" => "en_GB.UTF-8",
+        "fr" => "C.UTF-8"
+    ];
     /**
      * Domain of defined rights
      *
