@@ -68,14 +68,14 @@ class Individu extends PpciModel
         $sql = "select i.individu_id, i.codeindividu, i.tag, e.nom_id, count (pc.piece_id) as nbrepiece,
                 s.sexe_libellecourt, p.peche_date, p.site, p.zonesite, ex.exp_nom, i.age, i.uuid
                 ,wgs84_x, wgs84_y
-				from individu i
-					left outer join espece e on (e.espece_id = i.espece_id)
-					left outer join piece pc on (pc.individu_id = i.individu_id)
-					left outer join individu_experimentation ie on (ie.individu_id = i.individu_id)
-					left outer join experimentation ex on (ex.exp_id = ie.exp_id)
-					left outer join peche p on (p.peche_id = i.peche_id)
-					left outer join sexe s on (s.sexe_id = i.sexe_id)
-						";
+                from individu i
+                    left outer join espece e on (e.espece_id = i.espece_id)
+                    left outer join piece pc on (pc.individu_id = i.individu_id)
+                    left outer join individu_experimentation ie on (ie.individu_id = i.individu_id)
+                    left outer join experimentation ex on (ex.exp_id = ie.exp_id)
+                    left outer join peche p on (p.peche_id = i.peche_id)
+                    left outer join sexe s on (s.sexe_id = i.sexe_id)
+                        ";
         /*
          * Preparation de la clause where
          */
@@ -89,7 +89,7 @@ class Individu extends PpciModel
 
         if (strlen($data["codeindividu"]) > 0) {
             $where .= $and . "(upper(i.codeindividu) like upper(:codeindividu:)
-					or upper(i.tag) like upper(:tag:))";
+                    or upper(i.tag) like upper(:tag:))";
             $param["codeindividu"] = "%" . $data["codeindividu"] . "%";
             $param["tag"] = "%" . $data["codeindividu"] . "%";
         }
@@ -121,7 +121,7 @@ class Individu extends PpciModel
                 join photo ph on (ph.piece_id = pc2.piece_id)
                 join photolecture phl on (phl.photo_id = ph.photo_id)
                 where ie2.exp_id = :exp_id2:
-                    and phl.lecteur_id = :lecteur_id: 
+                    and phl.lecteur_id = :lecteur_id:
                 )
             ";
             $param["exp_id2"] = $data["exp_id"];
@@ -168,11 +168,11 @@ class Individu extends PpciModel
             $sql = "select individu_id, nom_id, peche_id, codeindividu, tag, longueur, poids,
                     remarque, parasite, age, sexe_libelle, peche_date, uuid
                     ,wgs84_x, wgs84_y
-				from individu
-						left outer join sexe using (sexe_id)
-						left outer join espece using (espece_id)
-						left outer join peche using (peche_id)
-						where individu_id = :id:";
+                from individu
+                        left outer join sexe using (sexe_id)
+                        left outer join espece using (espece_id)
+                        left outer join peche using (peche_id)
+                        where individu_id = :id:";
                         $this->fields["peche_date"] = ["type"=>2];
             return $this->lireParam($sql, ["id"=>$id]);
         }
@@ -191,9 +191,9 @@ class Individu extends PpciModel
                     peche_id, espece_id, codeindividu, tag, longueur, poids,
                     remarque, parasite, age, sexe_id, uuid
                     ,wgs84_x, wgs84_y
-				    from individu
-					left outer join espece using (espece_id)
-					where individu_id = :id:";
+                    from individu
+                    left outer join espece using (espece_id)
+                    where individu_id = :id:";
             return $this->lireParamAsPrepared($sql, array("id" => $id));
         } else {
             return $this->getDefaultValue();

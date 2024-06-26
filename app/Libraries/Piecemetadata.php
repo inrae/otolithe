@@ -36,13 +36,11 @@ class Piecemetadata extends PpciLibrary
         $dpiece = $piece->getDetail($this->piece_id);
         $this->vue->set($_SESSION["it_piece"]->translateRow($dpiece), "piece");
         /** Recuperation du modele de metadonnees */
-        include_once 'modules/classes/metadatatype.class.php';
         $mt = new Metadatatype();
         $this->vue->set($mt->lire($data["metadatatype_id"]), "metadatatype");
-        include_once 'modules/classes/individu.class.php';
         $individu = new Individu();
         $this->vue->set($_SESSION["it_individu"]->translateRow($individu->getDetail($dpiece["individu_id"])), "individu");
-        $this->vue->set($_SESSION["moduleListe"],"moduleListe");
+        $this->vue->set($_SESSION["moduleListe"], "moduleListe");
         return $this->vue->send();
     }
     function change()
@@ -54,18 +52,15 @@ class Piecemetadata extends PpciLibrary
         $data = $_SESSION["it_piecemetadata"]->translateRow($data);
         $this->vue->set($data, "data");
         /** Recuperation des donnees des objets precedents */
-        include_once 'modules/classes/piece.class.php';
         $piece = new Piece();
         $dpiece = $piece->getDetail($this->piece_id);
         $this->vue->set($_SESSION["it_piece"]->translateRow($dpiece), "piece");
-        include_once 'modules/classes/individu.class.php';
         $individu = new Individu();
         $this->vue->set($_SESSION["it_individu"]->translateRow($individu->getDetail($dpiece["individu_id"])), "individu");
         /** Liste des types de metadonnees disponibles */
-        include_once 'modules/classes/metadatatype.class.php';
         $mdt = new Metadatatype();
         $this->vue->set($mdt->getListe(), "metadatatypes");
-        $this->vue->set($_SESSION["moduleListe"],"moduleListe");
+        $this->vue->set($_SESSION["moduleListe"], "moduleListe");
         return $this->vue->send();
     }
     function write()
@@ -128,11 +123,11 @@ class Piecemetadata extends PpciLibrary
             $this->message->set(_("Impossible de charger le fichier à importer"));
         }
         $piece = new AppLibrariesPiece();
-            return $piece->display();
+        return $piece->display();
     }
     function export()
     {
-        $this->vue = service ("CsvView");
+        $this->vue = service("CsvView");
         $data = $this->dataClass->lire($this->id);
         $this->vue->set(json_decode($data["metadata"], true));
         return $this->vue->send();

@@ -105,7 +105,7 @@ class Piece extends PpciLibrary
             $listePhoto[$key]["photoPath"] = $photo->writeFilePhoto($value["photo_id"], 1);
         }
         $this->vue->set($_SESSION["it_photo"]->translateList($listePhoto), "photo");
-        $this->vue->set($_SESSION["moduleListe"],"moduleListe");
+        $this->vue->set($_SESSION["moduleListe"], "moduleListe");
         $this->vue->set("gestion/pieceDisplay.tpl", "corps");
         return $this->vue->send();
     }
@@ -163,8 +163,8 @@ class Piece extends PpciLibrary
         } else {
             $_REQUEST["piece_id"] = $_SESSION["it_piece"]->setValue($this->id);
             /**
-             * Reaffectation de l'identifiant en cas d'échec de la suppression 
-             * 
+             * Reaffectation de l'identifiant en cas d'échec de la suppression
+             *
              **/
             return $this->change();
         }

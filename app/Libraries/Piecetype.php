@@ -20,8 +20,8 @@ class Piecetype extends PpciLibrary
     function list()
     {
         /*
-		 * Display the list of all records of the table
-		 */
+         * Display the list of all records of the table
+         */
         $this->vue = service("Smarty");
         $this->vue->set($this->dataClass->getListe(1), "data");
         $this->vue->set("gestion/piecetypeList.tpl", "corps");
@@ -31,10 +31,10 @@ class Piecetype extends PpciLibrary
     function change()
     {
         /*
-		 * open the form to modify the record
-		 * If is a new record, generate a new record with default value :
-		 * $_REQUEST["idParent"] contains the identifiant of the parent record
-		 */
+         * open the form to modify the record
+         * If is a new record, generate a new record with default value :
+         * $_REQUEST["idParent"] contains the identifiant of the parent record
+         */
         $this->vue = service("Smarty");
         $this->dataRead($this->id, "gestion/piecetypeChange.tpl");
         return $this->vue->send();
@@ -42,8 +42,8 @@ class Piecetype extends PpciLibrary
     function write()
     {
         /*
-		 * write record in database
-		 */
+         * write record in database
+         */
         try {
             $this->dataWrite($_REQUEST);
             return $this->list();
@@ -54,8 +54,8 @@ class Piecetype extends PpciLibrary
     function delete()
     {
         /*
-		 * delete record
-		 */
+         * delete record
+         */
         try {
             $this->dataDelete($this->id);
             return $this->list();

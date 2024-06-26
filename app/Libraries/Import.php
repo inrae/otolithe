@@ -114,31 +114,29 @@ class Import extends PpciLibrary
     }
     function import()
     {
-        if (isset($_SESSION["filename"])) {
-            if (file_exists($_SESSION["filename"])) {
-                try {
-                    $db = db_connect();
-                    $db->transException(true)->transStart();
-                    $this->import->initFile($_SESSION["filename"], $_SESSION["separator"], $_SESSION["utf8_encode"]);
-                    $this->import->importAll();
-                    $this->message->set("Import effectué. " . $this->import->nbTreated . " lignes traitées");
-                    $this->message->set("Premier id généré : " . $this->import->minuid);
-                    $this->message->set("Dernier id généré : " . $this->import->maxuid);
-                    $this->log->setLog(
-                        $_SESSION["login"],
-                        "importImportResult",
-                        $this->import->nbTreated . " records - min: " . $this->import->minuid . " max: " . $this->import->maxuid
-                    );
-                    $db->transComplete();
-                    unset($_SESSION["filename"]);
-                    return defaultPage();
-                } catch (PpciException | DatabaseException $e) {
-                    $this->message->set($e->getMessage(), true);
-                    $this->message->setSyslog($e->getMessage());
-                    unset($_SESSION["filename"]);
-                    $this->log->setLog($_SESSION["login"], "importImportResult", "ko");
-                    return $this->change();
-                }
+        if (isset($_SESSION["filename"]) && file_exists($_SESSION["filename"])) {
+            try {
+                $db = db_connect();
+                $db->transException(true)->transStart();
+                $this->import->initFile($_SESSION["filename"], $_SESSION["separator"], $_SESSION["utf8_encode"]);
+                $this->import->importAll();
+                $this->message->set("Import effectué. " . $this->import->nbTreated . " lignes traitées");
+                $this->message->set("Premier id généré : " . $this->import->minuid);
+                $this->message->set("Dernier id généré : " . $this->import->maxuid);
+                $this->log->setLog(
+                    $_SESSION["login"],
+                    "importImportResult",
+                    $this->import->nbTreated . " records - min: " . $this->import->minuid . " max: " . $this->import->maxuid
+                );
+                $db->transComplete();
+                unset($_SESSION["filename"]);
+                return defaultPage();
+            } catch (PpciException | DatabaseException $e) {
+                $this->message->set($e->getMessage(), true);
+                $this->message->setSyslog($e->getMessage());
+                unset($_SESSION["filename"]);
+                $this->log->setLog($_SESSION["login"], "importImportResult", "ko");
+                return $this->change();
             }
         }
     }

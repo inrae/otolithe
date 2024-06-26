@@ -66,7 +66,7 @@ class Lecteur extends PpciModel
      */
     public function getListFromExp($exp_id)
     {
-        $sql = "select l.* 
+        $sql = "select l.*
                 from lecteur l
                 join lecteur_experimentation using (lecteur_id)
                 where exp_id = :exp_id:

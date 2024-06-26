@@ -123,11 +123,6 @@ class Photolecture extends PpciModel
                  */
                 $num = preg_replace('#[^0-9]#', "", $key);
                 /**
-                 * Recalcul des coordonnees exactes
-                 */
-                // $X = floor ( $data ["pointx" . $num] * $coef );
-                // $Y = floor ( $data ["pointy" . $num] * $coef );
-                /**
                  * Mise en tableau
                  */
                 if ($data["pointRef" . $num] == 1) {
@@ -186,10 +181,6 @@ class Photolecture extends PpciModel
                 /**
                  * Ecriture du point le plus pres
                  */
-                /**$points[$i]["x"] = $pointTemp[$ref]["x"];
-                $points[$i]["y"] = $pointTemp[$ref]["y"];
-                $points[$i]["remarkablePoint"] = $pointTemp[$ref]["remarkablePoint"];
-                 */
                 $points[$i] = $pointTemp[$ref];
                 /**
                  * Suppression du point traite
@@ -205,7 +196,7 @@ class Photolecture extends PpciModel
         /**
          * Mise en forme des coordonnees
          */
-        if (count($points) > 0) {
+        if (!empty($points)) {
             $data["points"] = "MULTIPOINT(";
             $virgule = "";
             $x0 = 0;
@@ -219,7 +210,6 @@ class Photolecture extends PpciModel
                  */
                 if ($i > 0) {
                     $long = $this->calculDistance($x0, $y0, $value["x"], $value["y"]);
-                    // echo $x0.' '.$y0.' '.$value["x"].' '. $value["y"].' '.$long."<br>";
                     $longueur_totale = $longueur_totale + $long;
                 }
                 $x0 = $value["x"];
@@ -237,15 +227,15 @@ class Photolecture extends PpciModel
             $data["points"] .= ')';
             $data["long_totale_lue"] = $longueur_totale * $coef;
         }
-        /** 
+        /**
          * Encodage de la liste des points remarquables
          */
-        count($rp) > 0 ? $data["remarkable_points"] = json_encode($rp) : $data["remarkable_points"] = "";
+        !empty($rp) ? $data["remarkable_points"] = json_encode($rp) : $data["remarkable_points"] = "";
 
         /**
          * Gestion de la longueur de reference
          */
-        if (count($pointsMesure) > 0) {
+        if (!empty($pointsMesure)) {
             $data["points_ref_lecture"] = "MULTIPOINT(";
             $virgule = "";
             $i = 0;
@@ -280,11 +270,8 @@ class Photolecture extends PpciModel
         /**
          * Calcul de la distance reelle
          */
-        if ($data["long_ref_mesuree"] > 0 && $data["long_totale_lue"] > 0) {
-
-            if ($dataPhoto["long_reference"] > 0) {
-                $data["long_totale_reel"] = $data["long_totale_lue"] / $data["long_ref_mesuree"] * $dataPhoto["long_reference"];
-            }
+        if ($data["long_ref_mesuree"] > 0 && $data["long_totale_lue"] > 0 && $dataPhoto["long_reference"] > 0) {
+            $data["long_totale_reel"] = $data["long_totale_lue"] / $data["long_ref_mesuree"] * $dataPhoto["long_reference"];
         }
         return parent::write($data);
     }
@@ -374,7 +361,7 @@ class Photolecture extends PpciModel
                 $virgule = "";
                 foreach ($id as $value) {
                     if ($value != $id_exclu && $value > 0) {
-                        $where .= $virgule . ":id" . $i.':';
+                        $where .= $virgule . ":id" . $i . ':';
                         $param["id" . $i] = $value;
                         $virgule = ",";
                         $i++;
@@ -455,7 +442,7 @@ class Photolecture extends PpciModel
         $alpt = explode(",", $lpt);
         $i = 0;
         $data = array();
-        /** 
+        /**
          * Decodage du champ json
          */
         $rp = json_decode($remarkable_points);
@@ -469,7 +456,7 @@ class Photolecture extends PpciModel
              */
             $data[$i]["x"] = floor($xy[0] / $coef);
             $data[$i]["y"] = floor($xy[1] / $coef);
-            /** 
+            /**
              * Ajout du point remarquable
              */
             if (!is_null($rp) && in_array($i, $rp)) {
@@ -480,11 +467,11 @@ class Photolecture extends PpciModel
         return $data;
     }
 
-    /***
+    /**
      * Retourne les points saisis en format lisible (st_astext)
      *
-     * @param integer $id 
-     * 
+     * @param integer $id
+     *
      * @return array
      */
     public function lirePoints($id)
@@ -497,14 +484,14 @@ class Photolecture extends PpciModel
                             remarkable_points
                             from photolecture where photolecture_id = :id:";
             $data = $this->lireParamAsPrepared($sql, array("id" => $id));
-            /** 
+            /**
              * recuperation des points remarquables
              */
         }
         return $data;
     }
 
-    /***
+    /**
      * Retourne la liste des lectures effectuees en fonction des criteres de recherche indiques
      *
      * @param array $param
@@ -571,7 +558,6 @@ class Photolecture extends PpciModel
         }
         $order = " order by codeindividu, tag, piece_id, photo_id, photolecture_date";
         $this->fields["photo_date"] = ["type" => 2];
-        $data = $this->getListeParam($sql . $where . $order, $sqlparam);
-        return ($data);
+        return $this->getListeParam($sql . $where . $order, $sqlparam);
     }
 }

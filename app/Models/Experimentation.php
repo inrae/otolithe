@@ -113,10 +113,10 @@ class Experimentation extends PpciModel
     {
         if ($lecteur_id >= 0) {
             $sql = "select e.exp_id, exp_nom, lecteur_id
-					from experimentation e
-					left outer join lecteur_experimentation l
-					on (e.exp_id = l.exp_id and l.lecteur_id = :id:)
-					order by exp_nom";
+                    from experimentation e
+                    left outer join lecteur_experimentation l
+                    on (e.exp_id = l.exp_id and l.lecteur_id = :id:)
+                    order by exp_nom";
             return $this->getListeParam($sql, ["id" => $lecteur_id]);
         } else {
             return [];
@@ -133,9 +133,9 @@ class Experimentation extends PpciModel
     {
         if ($individu_id > 0) {
             $sql = "select e.exp_id, exp_nom, individu_id
-					from experimentation e
-					left outer join individu_experimentation ie
-					on (e.exp_id = ie.exp_id and ie.individu_id = :individu_id:)
+                    from experimentation e
+                    left outer join individu_experimentation ie
+                    on (e.exp_id = ie.exp_id and ie.individu_id = :individu_id:)
                     order by exp_nom";
             $data = $this->getListeParamAsPrepared(
                 $sql,
@@ -163,7 +163,7 @@ class Experimentation extends PpciModel
                 from lecteur l
                 left outer join lecteur_experimentation le on (l.lecteur_id = le.lecteur_id and exp_id = :exp_id:)
                order by lecteur_nom, lecteur_prenom
-	           ";
+               ";
         return $this->getListeParamAsPrepared($sql, array(
             "exp_id" => $exp_id
         ));
@@ -179,10 +179,10 @@ class Experimentation extends PpciModel
     {
         if ($lecteur_id >= 0) {
             $sql = "select e.exp_id, e.exp_nom
-					from experimentation e
-					join lecteur_experimentation using (exp_id)
-					where lecteur_id = :id:
-					order by e.exp_nom";
+                    from experimentation e
+                    join lecteur_experimentation using (exp_id)
+                    where lecteur_id = :id:
+                    order by e.exp_nom";
             return $this->getListeParam($sql, ["id" => $lecteur_id]);
         } else {
             return [];

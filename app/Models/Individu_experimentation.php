@@ -41,8 +41,8 @@ class Individu_experimentation extends PpciModel
     {
         if ($individu_id > 0) {
             $sql = "select * from individu_experimentation
-				join experimentation using (exp_id)
-				where individu_id = :id:";
+                join experimentation using (exp_id)
+                where individu_id = :id:";
             return $this->getListeParam($sql, ["id" => $individu_id]);
         } else {
             return [];

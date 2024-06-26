@@ -135,11 +135,9 @@ class Import
     {
         if ($this->handle) {
             $data = fgetcsv($this->handle, null, $this->separator);
-            if ($data !== false) {
-                if ($this->utf8_encode) {
-                    foreach ($data as $key => $value) {
-                        $data[$key] = mb_convert_encoding($value, "UTF-8");
-                    }
+            if ($data !== false && $this->utf8_encode) {
+                foreach ($data as $key => $value) {
+                    $data[$key] = mb_convert_encoding($value, "UTF-8");
                 }
             }
             return $data;
@@ -234,7 +232,7 @@ class Import
                                 $metadata[substr($colonne, 3)] = $values[$colonne];
                             }
                         }
-                        if (count($metadata) > 0) {
+                        if (!empty($metadata)) {
                             $dm["piece_id"] = $pieceId;
                             $dm["metadatatype_id"] = $values["metadatatype_id"];
                             $dm["metadata"] = json_encode($metadata);
@@ -461,30 +459,24 @@ class Import
          * Verification des champs numeriques
          */
         foreach ($this->colnum as $key) {
-            if (strlen($data[$key]) > 0) {
-                if (!is_numeric($data[$key])) {
-                    $retour["code"] = false;
-                    $retour["message"] .= " " . sprintf(_("Le champ %s n'est pas numérique."), $key);
-                }
+            if (strlen($data[$key]) > 0 && !is_numeric($data[$key])) {
+                $retour["code"] = false;
+                $retour["message"] .= " " . sprintf(_("Le champ %s n'est pas numérique."), $key);
             }
         }
         /**
          * Verification de la date
          */
-        if (strlen($data["peche_date"]) > 0) {
-            if (strlen($this->formatDate($data["peche_date"])) == 0) {
-                $retour["code"] = false;
-                $retour["message"] .= " " . _("La date de pêche est mal formatée");
-            }
+        if (strlen($data["peche_date"]) > 0 && strlen($this->formatDate($data["peche_date"])) == 0) {
+            $retour["code"] = false;
+            $retour["message"] .= " " . _("La date de pêche est mal formatée");
         }
         /**
          * Verification de la date de meta-donnees
          */
-        if (strlen($data["piecemetadata_date"]) > 0) {
-            if (strlen($this->formatDate($data["piecemetadata_date"])) == 0) {
-                $retour["code"] = false;
-                $retour["message"] .= " " . _("La date associée aux méta-données est mal formatée");
-            }
+        if (strlen($data["piecemetadata_date"]) > 0 && strlen($this->formatDate($data["piecemetadata_date"])) == 0) {
+            $retour["code"] = false;
+            $retour["message"] .= " " . _("La date associée aux méta-données est mal formatée");
         }
         return $retour;
     }

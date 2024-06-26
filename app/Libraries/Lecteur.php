@@ -32,8 +32,8 @@ class Lecteur extends PpciLibrary
     function list()
     {
         /*
-		 * Display the list of all records of the table
-		 */
+         * Display the list of all records of the table
+         */
         $this->vue = service ('Smarty');
         $this->vue->set($this->dataClass->getListe(), "data");
         $this->vue->set("gestion/lecteurListe.tpl", "corps");
@@ -49,8 +49,8 @@ class Lecteur extends PpciLibrary
     function write()
     {
         /*
-		 * write record in database
-		 */
+         * write record in database
+         */
         try {
             $this->id = $this->dataWrite($_REQUEST);
             if ($this->id > 0) {
@@ -71,8 +71,8 @@ class Lecteur extends PpciLibrary
     function delete()
     {
         /*
-		 * delete record
-		 */
+         * delete record
+         */
         try {
             $this->dataDelete($this->id);
             return $this->list();

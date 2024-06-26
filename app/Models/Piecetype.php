@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Ppci\Models\PpciModel;
@@ -11,20 +12,20 @@ use Ppci\Models\PpciModel;
  */
 class Piecetype extends PpciModel
 {
-  function __construct()
-  {
+    function __construct()
+    {
         $this->table = "piecetype";
         $this->fields = array(
-      "piecetype_id" => array(
-        "type" => 1,
-        "key" => 1,
-        "requis" => 1,
-        "defaultValue" => 0
-      ),
-      "piecetype_libelle" => array(
-        "type"=>0
-      )
-    );
+            "piecetype_id" => array(
+                "type" => 1,
+                "key" => 1,
+                "requis" => 1,
+                "defaultValue" => 0
+            ),
+            "piecetype_libelle" => array(
+                "type" => 0
+            )
+        );
         parent::__construct();
-  }
+    }
 }

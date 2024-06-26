@@ -135,7 +135,6 @@ class Photo extends PpciModel
             $data["photo_width"] = $geo["width"];
             $data["photo_height"] = $geo["height"];
             $dataPhoto["photo_data"] = pg_escape_bytea($data["photoload"]);
-            //$dataPhoto["photo_data"] = $data["photoload"];
             unset($data["photoload"]);
             /*
              * Generation du thumbnail
@@ -155,7 +154,6 @@ class Photo extends PpciModel
                 throw new PpciException($message);
             }
             $dataPhoto["photo_thumbnail"] = pg_escape_bytea($this->db->connID, $image->getimageblob());
-            //$dataPhoto["photo_thumbnail"] = $image->getimageblob();
             /*
              * Suppression le cas echeant de la photo dans le dossier img
              */
@@ -194,10 +192,6 @@ class Photo extends PpciModel
             /*
              * Ecriture de la photo en base
              */
-            // $this->UTF8 = false;
-            // $this->codageHtml = false;
-            // $dataPhoto["photo_id"] = $id;
-            // parent::write($dataPhoto);
             $sql = "update photo set photo_data = '" . $dataPhoto["photo_data"] . "', photo_thumbnail = '" . $dataPhoto["photo_thumbnail"] . "' where photo_id = :id:";
             $this->executeSQL($sql, ["id" => $id], true);
         }
@@ -230,7 +224,7 @@ class Photo extends PpciModel
     {
         if ($piece_id > 0) {
             $sql = "select photo_id, piece_id, photo_nom, description, photo_date, color, photo_height, photo_width
-				from photo where piece_id = :id:";
+                from photo where piece_id = :id:";
             return $this->getListParam($sql, ["id" => $piece_id]);
         } else {
             return [];
@@ -302,42 +296,39 @@ class Photo extends PpciModel
              */
             $appParam = service("AppConfig");
             $path = $appParam->APP_temp . '/' . $nomPhoto;
-            if (!file_exists($path)) {
+            if (!file_exists($path) && !empty($data["picture"])) {
                 /*
                  * On cree la photo
                  */
-                if (!empty($data["picture"])) {
-                    $image = new \Imagick();
-                    try {
-                        $image->readImageBlob(pg_unescape_bytea($data["picture"]));
-                        if ($sizeX > 0 && $sizeY > 0) {
-                            /*
+                $image = new \Imagick();
+                try {
+                    $image->readImageBlob(pg_unescape_bytea($data["picture"]));
+                    if ($sizeX > 0 && $sizeY > 0) {
+                        /*
                              * Mise a l'image de la photo
                              */
-                            $geo = $image->getimagegeometry();
-                            if ($geo["width"] > $sizeX || $geo["height"] > $sizeY) {
-                                $image->resizeImage($sizeX, $sizeY, \Imagick::FILTER_LANCZOS, 1, true);
-                                // $image->setformat ( "JPEG" );
-                            }
-                            /*
-                             * Transformation le cas echeant en jpeg
-                             */
-                            if (!$isOrigin) {
-                                $image->setformat("JPEG");
-                            }
+                        $geo = $image->getimagegeometry();
+                        if ($geo["width"] > $sizeX || $geo["height"] > $sizeY) {
+                            $image->resizeImage($sizeX, $sizeY, \Imagick::FILTER_LANCZOS, 1, true);
                         }
                         /*
+                             * Transformation le cas echeant en jpeg
+                             */
+                        if (!$isOrigin) {
+                            $image->setformat("JPEG");
+                        }
+                    }
+                    /*
                          * Ecriture de la photo
                          */
-                        $image->writeImage($path);
-                    } catch (\Exception $e) {
-                        $message = _("Problème d'écriture de la photo dans le dossier temporaire");
-                        $message .= $e->getMessage();
-                        throw (new PpciException($message));
-                    }
+                    $image->writeImage($path);
+                } catch (\Exception $e) {
+                    $message = _("Problème d'écriture de la photo dans le dossier temporaire");
+                    $message .= $e->getMessage();
+                    throw new PpciException($message);
                 }
             }
-            return ($path);
+            return $path;
         }
     }
 
@@ -351,11 +342,11 @@ class Photo extends PpciModel
     {
         if ($id > 0) {
             $sql = "select photo_id, piece_id, photo_nom, description, photo_filename, photo_date, color,
-				lumieretype_libelle, grossissement, repere, uri, long_reference, photo_width, photo_height, long_ref_pixel
-				from photo
-				left outer join lumieretype using(lumieretype_id)
-				where photo_id = :id:";
-            return ($this->lireParam($sql, ["id" => $id]));
+                lumieretype_libelle, grossissement, repere, uri, long_reference, photo_width, photo_height, long_ref_pixel
+                from photo
+                left outer join lumieretype using(lumieretype_id)
+                where photo_id = :id:";
+            return $this->lireParam($sql, ["id" => $id]);
         } else {
             return [];
         }

@@ -120,7 +120,7 @@ class Photo extends PpciLibrary
          */
         if ($_FILES["photoload"]["error"] != 4 && $_FILES["photoload"]["error"] != UPLOAD_ERR_OK) {
             switch ($_FILES["photoload"]["error"]) {
-                case (UPLOAD_ERR_INI_SIZE or UPLOAD_ERR_FORM_SIZE):
+                case UPLOAD_ERR_INI_SIZE || UPLOAD_ERR_FORM_SIZE:
                     $this->message->set(_("La taille de la photo excède la taille autorisée"), true);
                     break;
                 case UPLOAD_ERR_NO_FILE:
