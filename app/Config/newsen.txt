@@ -1,0 +1,161 @@
+News
+====================
+Version 2024.0.0 of 26 June 2024
+---------------------------
+Porting of the application to the Codeigniter framework, using the equinton/ppci module to emulate the functions of the old framework.
+
+Version 2.4.0 of August 5, 2022
+---------------------------
+Framework upgrade:
+- added CAS-BDD identification
+- support of dual identification with TOTP
+
+Version 2.3.0 of April 6, 2020
+--------------------------
+Bug fixes :
+- in the list of metadata templates, the identifier
+
+What's New :
+- integration of the UUID for fish and piece
+- addition of a list of pieces per experiment
+- added a pieces export compatible with Collec-Science (https://www.collec-science.org)
+
+Version 2.2.1 of February 22, 2019
+---------------------------
+What's New :
+- in the tables, the selected number of rows is now kept
+- new sorting criteria have been introduced: species, consensus reading, reading not done
+
+Version 2.2 of January 10, 2019
+---------------------------
+Bug fixes :
+- deletion of a piece was not successful
+
+What's New :
+- in the tables, when a link has been clicked, it changes color (old functioning, present in versions 1.x)
+- added metadata management: it is possible to add technical information to a piece, either in a single form (single value for a field), or in the form of a table (multi-values). The data is described in the form of metadata and stored in a JSON field (export possible in CSV).
+
+Version 2.1 of December 13, 2018
+---------------------------
+Bug fixes :
+- when importing fishes, the dates were badly managed
+- it was not possible to export a single reading
+- when a new fish was entered, the list of experiments to which it could be attached was not displayed
+- it was not possible for a reader to delete a reading he had made.
+
+What's new :
+- it is possible to add a textual comment during a reading
+- when reading, it is possible to define certain points as "remarkable", e.g. to indicate particular growth streaks
+- added an icon allowing to delete a point from the table summarizing the positioned points: this allows the deletion of a point not only by double-clicking on it, but also from the list when the double-click is not usable (input from a smartphone, in particular)
+
+Version 2.0 of August 18, 2018
+---------------------------
+Redesign of the interface and integration of the latest version of the framework
+New features and improvements :
+- it is possible to directly modify a species or add a new one
+- TIFF photo management: it is possible to upload a photo in TIFF format. However, the points must be entered with a JPG format photo (dynamic transformation). Some limitations to the use of TIFF photos:
+> They must be "clean", i.e. without anomalies (laboratory equipment can generate badly formatted files).
+> their size is deliberately limited to 50 MB. Beyond this limit, performance problems at the server level may be experienced, or even block the server completely.
+- the data displayed in the details of a fish have been voluntarily reduced, in order not to "pollute" all the experiments with data specific to certain fishes.
+- the data import allows to fill in all the fields managed by the application for fish. A blank CSV file can be downloaded.
+- it is now possible to inform readers directly from the details of an experiment
+
+Bug correction
+- if the operator who creates an experiment is indicated as the reader of the experiment, he recovers the rights automatically without having to reconnect.
+
+Version 1.5.1 of October 11, 2017
+------------------------------
+Extension of the automatic import function, to add additional information (need expressed for sturgeon ray readings)
+
+Version 1.5 of February 16, 2017
+------------------------------
+Modifications concerning photo playback :
+- if all the dots have been removed, it is now possible to resume the numbering at 0
+- if the last point has been deleted, the counter is decremented by 1 (the next point will have the correct value).
+- when displaying readings, the circle is now opaque. The resolution and transparency factor is also maintained from one photo to the next.
+- addition of 2 resolutions for reading or displaying, one of which corresponds to the initial size of the photo (10000x10000 pixels)
+- the displayed photo cannot be larger than the uploaded photo (it was possible before)
+
+Modifications concerning the management of parameters and the automatic import of individuals
+- a new experiment can be added (necessary fee: accountmanagement)
+- A new document type can be added (required entitlement: Account Management).
+- it is now possible to automatically import individuals and the reference of the calcified part to be analysed
+
+Version 1.4 of December 3, 2015
+------------------------------
+General improvements :
+- when adding a photo, the program proposes the default incident light. In addition, new photos are scanned with an antivirus before being saved in the database.
+- fish or readings are displayed per page of 100
+- the date the fish was caught is now indicated in the cartridge
+
+Data added to complete the reading of the parts (positioning of the points) :
+- indicator to indicate whether it is a consensual reading
+- estimated year of birth (to be calculated manually from the number of points positioned and the date of fishing)
+- nature of the final streak (hyaline, shaded, undefined, or empty)
+- reading reliability coefficient, estimated by the reader (0, 0.5, 1 or empty)
+
+The last 3 pieces of information are not displayed by default when viewing a photo (reading table).
+
+Bug fixes :
+- following the June modifications, and in particular the reinforcement of the global security of the application, it was no longer possible to modify a reading by consulting other readings.
+
+Version 1.3 of June 15, 2015
+---------------------------
+Improvements :
+- it is now possible to add a fish (and the associated fishing) to an experiment
+- Readers can only access the experiments for which they have been authorized.
+- the management of global rights has evolved, the phpgacl module has been replaced by a new module fully integrated into the application
+- the rights have been amended accordingly
+
+Version 1.2.2 of July 29, 2014
+--------------------------------
+Added the default masking of the number of points positioned by the readers; a link allows to reactivate the initial display
+
+Version 1.2.1 of February 26, 2014
+--------------------------------
+Display bugs fixed :
+- the part number was not displayed correctly in the fish viewer window
+- the wording concerning the "size in pixels of the reference length" was wrong, both in display and input
+
+Version 1.2 of February 10, 2014
+------------------------------
+Improvements in intrinsic operation
+- multilingual support: all labels have been translated into English
+- Entering the size in pixels of the reference length: In each photo, a reference length is given. It is now possible to enter the size in pixels of this reference, which will then be transferred in each reading (only if the calculation of the reference size is not performed by the player).
+- Input with display of points already drawn: it is now possible to make a new reading, or to modify an existing one, also displaying the readings already made.
+- Opacify the background of the disc in display: when consulting the points, it is now possible to indicate a transparency factor, which allows a better visualization of the points (the background of the points can be more or less opaque).
+
+ Improvements in general ergonomics
+- Multiple identification support: the application identifies users first from the LDAP directory, then from the list of accounts declared directly in the application.
+- Accounts stored in the database can now be locked manually. It is also possible to generate a random password for locally created accounts.
+- If the account is stored locally, the user now has the possibility to change the password by clicking on the key in the top right corner.
+- Logging: the application now logs connections (failed or successful), as well as standardised posting operations.
+
+Version 1.1.2 of December 20, 2013
+---------------------------------
+- Correction of an ergonomic point: when entering points, the validate button has been duplicated at the top of the screen, and the back links to the photo, part, etc. are preceded by a confirmation message.
+
+Version 1.1.1 of December 13, 2013
+---------------------------------
+- Fixed an anomaly: if the uploaded photo was empty (upload problem, among others), the program would crash when creating photos for display.
+
+Version 1.1, December 4, 2013
+-------------------------------
+- Changing the display of photos: Photos are generated in a temporary folder and then loaded from the browser from that temporary folder. This speeds up the upload time when the photo has been processed at least once. The program deletes photos automatically if they have not been played back in the last 24 hours.
+- When entering points, the program now automatically recalculates the order of the points (smallest distance to the previous point). This automatic recalculation can be inhibited.
+- When displaying a part, clicking on a thumbnail will display the photo detail, not the original photo.
+
+Version 1.0 of December 2, 2013
+------------------------------
+Initial version, allowing :
+- add a piece to be analyzed to a fish;
+- add a photo to a part;
+- to carry out an analysis of a photo, i.e. to position points on it. The points are referenced according to the ratio between the initial size of the photo and the display size.
+- consult the different analyses performed, and export the results in CSV format.
+
+This version has been developed quickly, and does not allow:
+- to manage different display languages;
+- to add fishes, fishing grounds, etc.
+- as it is, it cannot be used in extranet mode (access from internet).
+
+Translated with www.DeepL.com/Translator (free version)

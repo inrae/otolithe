@@ -182,15 +182,15 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public string $version = "v23.0.0";
+    public string $version = "v24.0.0";
     /**
      * versionDate - don't change here, but in function setParameters() below
      *
      * @var string
      */
-    public string $versionDate = "13/12/2023";
-    public string $dbversion = "23.0";
-    public string $databaseSchemaFile = ROOTPATH . "documentation/metabo_database.png";
+    public string $versionDate = "19/06/2024";
+    public string $dbversion = "24.0";
+    public string $databaseSchemaFile = ROOTPATH . "documentation/otolithe-schema.png";
     /**
      * Duration of conservation of logs in table log
      *
@@ -203,8 +203,8 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $privateKey = ROOTPATH . "id_metabo";
-    public $pubKey = ROOTPATH . "id_metabo.pub";
+    public $privateKey = ROOTPATH . "id_app";
+    public $pubKey = ROOTPATH . "id_app.pub";
     /**
      * List of supported locales
      *
@@ -235,19 +235,22 @@ class App extends BaseConfig
             "maskdateexport" => 'Y-m-d'
         ]
     ];
-    public $localePath = APPPATH.'locale';
+    public $localesGettext = [
+        "en" => "en_GB.UTF-8",
+        "fr" => "C.UTF-8"
+    ];
     /**
      * Domain of defined rights
      *
      * @var string
      */
-    public $GACL_aco = "metabo";
+    public $GACL_aco = "otolithe";
     /**
      * Generic mail used to send messages to the administrators
      *
      * @var string
      */
-    public $APP_mail = "metabo@inrae.fr";
+    public $APP_mail = "";
     /**
      * Set true if send mails is enabled
      *
@@ -300,13 +303,13 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $APP_help_address = "https://gitlab.irstea.fr/eabx-applis_web/metabo/-/issues/new";
+    public $APP_help_address = "https://github.com/inrae/otolithe/issues/new/choose";
     /**
      * Copyright - don't change directly here, but in setParameters function
      *
      * @var string
      */
-    public $copyright = "Copyright © 2020-2024 - All rights reserved. Author : Éric Quinton, for INRAE - EABX - Logiciel distributed under AGPL license";
+    public $copyright = "Copyright © 2013-2024 - All rights reserved. Author : Éric Quinton, for INRAE-EABX - Software distributed under AGPL license";
 
     /**
      * Max duration of a session
@@ -315,7 +318,22 @@ class App extends BaseConfig
      */
     public $APPLI_absolute_session = 36000; // 10 hours
 
-    public $GACL_disable_new_right = 0;
+    public $GACL_disable_new_right = 1;
+
+    /**
+     * Max size of picture
+     */
+    public $APP_maxfilesize = 100000000;
+
+    /**
+     * CSP configuration (header send)
+     */
+    public $APP_csp = [
+        "addImageSrc" => ["*.openstreetmap.org"],
+        "addConnectSrc" => ["*.openstreetmap.org"],
+        "addScriptSrc" => ["unsafe-inline", "unsafe-eval"],
+    ];
+
 
     /**
      * Get last release informations
@@ -325,10 +343,10 @@ class App extends BaseConfig
      */
     public $APPLI_release = [
         "provider" => "github",
-        "url" => "https://api.github.com/repos/collec-science/collec-science/releases/latest",
+        "url" => "https://api.github.com/repos/inrae/otolithe/releases/latest",
         "tag" => "tag_name",
         "date" => "published_at",
-        "user_agent" => 'collec-science/collec-science',
+        "user_agent" => 'inrae/otolithe',
         "description" => "body",
     ];
     /**

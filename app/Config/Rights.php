@@ -1,0 +1,77 @@
+<?php
+
+namespace App\Config;
+
+use Ppci\Config\RightsPpci;
+
+/**
+ * List of all rights required by modules
+ */
+class Rights extends RightsPpci
+{
+    protected array $rights = [
+        "individuList" => ["read"],
+        "individuDisplay" => ["read"],
+        "individuChange" => ["manage"],
+        "individuWrite" => ["manage"],
+        "individuDelete" => ["manage"],
+        "individuGetListEspece" => ["read"],
+        "pieceDisplay" => ["read"],
+        "pieceChange" => ["manage"],
+        "pieceWrite" => ["manage"],
+        "pieceDelete" => ["manage"],
+        "pieceList" => ["read"],
+        "pieceExportCS" => ["manage"],
+        "photoDisplay" => ["read"],
+        "photoChange" => ["manage"],
+        "photoWrite" => ["manage"],
+        "photoDelete" => ["manage"],
+        "photoGetPhoto" => ["read"],
+        "photoGetThumbnail" => ["read"],
+        "lecteurList" => ["param"],
+        "lecteurDisplay" => ["param"],
+        "lecteurChange" => ["param"],
+        "lecteurWrite" => ["param"],
+        "lecteurDelete" => ["param"],
+        "lecteurListFromExp" => ["read"],
+        "parametres" => ["param"],
+        "experimentationList" => ["consult"],
+        "experimentationChange" => ["param"],
+        "experimentationWrite" => ["param"],
+        "experimentationDelete" => ["param"],
+        "piecetypeList" => ["consult"],
+        "piecetypeChange" => ["param"],
+        "piecetypeWrite" => ["param"],
+        "piecetypeDelete" => ["param"],
+        "photolectureDisplay" => ["read"],
+        "photolectureChange" => ["read"],
+        "photolectureWrite" => ["read"],
+        "photolectureDelete" => ["manage", "read"],
+        "photolectureList" => ["read"],
+        "photolectureExport" => ["manage"],
+        "photolectureSwap" => ["read"],
+        "especeList" => ["consult"],
+        "especeChange" => ["manage"],
+        "especeWrite" => ["manage"],
+        "especeDelete" => ["manage"],
+        "especeSearchAjax" => ["manage"],
+        "importChange" => ["manage"],
+        "importControl" => ["manage"],
+        "importImport" => ["manage"],
+        "metadatatypeList" => ["consult"],
+        "metadatatypeChange" => ["param"],
+        "metadatatypeWrite" => ["param"],
+        "metadatatypeDelete" => ["param"],
+        "metadatatypeCopy" => ["param"],
+        "metadatatypeGetschema" => ["param"],
+        "metadatatypeIsarray" => ["param"],
+        "metadatatypeExport" => ["consult"],
+        "metadatatypeImport" => ["param"],
+        "piecemetadataChange" => ["manage"],
+        "piecemetadataWrite" => ["manage"],
+        "piecemetadataDelete" => ["manage"],
+        "piecemetadataImport" => ["manage"],
+        "piecemetadataDisplay" => ["manage"],
+        "piecemetadataExport" => ["manage"],
+    ];
+}

@@ -63,6 +63,9 @@ writable/uploads/*
 writable/debugbar/*
 !writable/debugbar/.gitkeep
 
+writable/temp/*
+!writable/temp/.gitkeep
+
 php_errors.log
 
 #-------------------------
@@ -79,12 +82,12 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 tests/coverage*
 
 # Don't save phpunit under version control.
-phpunit
+#phpunit
 
 #-------------------------
 # Composer
 #-------------------------
-vendor/
+#vendor/
 
 #-------------------------
 # IDE / Development Files
@@ -100,27 +103,18 @@ _modules/*
 .idea/
 *.iml
 
-# Netbeans
-nbproject/
-build/
-nbbuild/
-dist/
-nbdist/
-nbactions.xml
-nb-configuration.xml
-.nb-gradle/
-
-# Sublime Text
-*.tmlanguage.cache
-*.tmPreferences.cache
-*.stTheme.cache
-*.sublime-workspace
-*.sublime-project
-.phpintel
-/api/
 
 # Visual Studio Code
 .vscode/
 
 /results/
 /phpunit*.xml
+
+# PPCI configuration
+id_app
+id_app.pub
+writable/templates_c/*
+writable/templates_c/24502e4c43394705af8811af03665c59ff4bd499_0.file.main_js.tpl.php
+id_otolithe
+id_otolithe.pub
+.scannerwork

@@ -1,0 +1,160 @@
+Nouveautés
+============
+Version 2024.0.0 du 26 juin 2024
+---------------------------
+Portage de l'application vers le framework Codeigniter, en utilisant le module equinton/ppci pour émuler les fonctions de l'ancien framework.
+
+Version 2.4.0 du 5 août 2022
+---------------------------
+Mise à niveau du framework :
+- ajout de l'identification CAS-BDD
+- support de la double identification avec TOTP
+
+Version 2.3.0 du 6 avril 2020
+--------------------------
+Correction de bugs :
+- dans la liste des modèles de métadonnées, il manquait l'identifiant
+
+Nouveautés :
+- intégration de l'UUID pour le poisson et la pièce
+- ajout d'une liste des pièces par expérimentation
+- ajout d'un export des pièces compatible avec Collec-Science (https://www.collec-science.org)
+
+Version 2.2.1 du 22 février 2019
+---------------------------
+Nouveautés :
+- dans les tableaux, le nombre de lignes sélectionné est maintenant conservé
+- de nouveaux critères de tri ont été introduits : espèce, lecture consensuelle, lecture non réalisée
+
+Version 2.2 du 10 janvier 2019
+---------------------------
+Corrections de bugs :
+- la suppression d'une pièce n'aboutissait pas
+
+Nouveautés :
+- dans les tableaux, lorsqu'un lien a été cliqué, celui-ci change de couleur (ancien fonctionnement, présent dans les versions 1.x)
+- ajout d'une gestion de méta-données : il est possible d'ajouter des informations techniques à une pièce, soit sous forme unique (valeur unique pour un champ), soit sous la forme d'un tableau (multi-valeurs). Les données sont décrites sous forme de méta-données et stockées dans un champ JSON (export possible en CSV)
+
+Version 2.1 du 13 décembre 2018
+---------------------------
+Corrections de bugs :
+- lors de l'importation des poissons, les dates étaient mal gérées
+- il n'était pas possible d'exporter une seule lecture
+- lors de la saisie d'un nouveau poisson, la liste des expérimentations auxquelles il pouvait être rattaché n'était pas affichée
+- il n'était pas possible pour un lecteur de supprimer une lecture qu'il avait effectuée
+
+Nouveautés :
+- il est possible de rajouter un commentaire textuel lors d'une lecture
+- lors de la lecture, il est possible de définir certains points comme "remarquables", par exemple pour signaler des stries de croissance particulières
+- ajout d'un icone permettant de supprimer un point depuis la table récapitulant les points positionnés : cela permet la suppression d'un point non seulement par double-clic sur celui-ci, mais également depuis la liste quand le double-clic n'est pas utilisable (saisie depuis un smartphone, notamment)
+
+Version 2.0 du 18 août 2018
+---------------------------
+Refonte de l'interface et intégration de la dernière version du framework
+Nouveautés et améliorations :
+- il est possible de modifier directement une espèce ou en rajouter une
+- gestion des photos TIFF : il est possible de télécharger une photo au format TIFF. Toutefois, la saisie des points se fait obligatoirement avec une photo au format JPG (transformation dynamique). Quelques limitations à l'utilisation des photos TIFF :
+> Elles doivent être "propres", c'est à dire sans anomalies (les appareils de laboratoire peuvent générer des fichiers mal formatés)
+> leur taille est volontairement limitée à 50 Mo. Au delà, des problèmes de performance au niveau du serveur peuvent être ressenties, voire bloquer totalement le serveur.
+- les données affichées dans le détail d'un poisson ont été volontairement réduites, pour ne pas "polluer" toutes les expérimentations avec des données spécifiques à certaines
+- l'importation de données permet de renseigner tous les champs gérés par l'application pour les poissons. Un fichier CSV vierge peut être téléchargé
+- il est maintenant possible de renseigner directement les lecteurs depuis le détail d'une expérimentation
+
+Correction de bugs
+- si l'opérateur qui crée une expérimentation est indiqué comme lecteur de celle-ci, il récupère les droits automatiquement sans être obligé de se reconnecter
+
+Version 1.5.1 du 11 octobre 2017
+------------------------------
+Extension de la fonction d'import automatique, pour rajouter des informations complémentaires (besoin exprimé pour des lectures de rayons d'esturgeons)
+
+Version 1.5 du 16 février 2017
+------------------------------
+Modifications concernant la lecture des photos :
+- si tous les points ont été supprimés, il est maintenant possible de reprendre la numérotation à 0
+- si le dernier point a été supprimé, le compteur est décrémenté de 1 (le point suivant aura la bonne valeur)
+- lors de l'affichage des lectures, le cercle est maintenant opaque. La résolution et le facteur de transparence sont également conservés d'une photo à l'autre
+- rajout de 2 résolutions pour la lecture ou l'affichage, dont une correspondant à la taille (en principe) initiale de la photo (10000x10000 pixels)
+- la photo affichée ne peut pas être plus grande que la photo téléchargée (c'était possible avant)
+
+Modifications concernant la gestion des paramètres et l'import automatique d'individus
+- une nouvelle expérimentation peut être rajoutée (droit nécessaire : gestionCompte)
+- un nouveau type de pièce peut être rajouté (droit nécessaire : gestionCompte)
+- il est maintenant possible d'importer automatiquement des individus et la référence de la pièce calcifiée à analyser
+
+
+Version 1.4 du 3 décembre 2015
+------------------------------
+Améliorations générales :
+- en ajout d'une photo, le programme propose la lumière incidente par défaut. De plus, les nouvelles photos sont analysées avec un antivirus avant enregistrement dans la base
+- les poissons ou les lectures sont affichés par page de 100
+- la date de pêche du poisson est maintenant indiquée dans le cartouche
+
+Données rajoutées pour compléter la lecture des pièces (positionnement des points) :
+- indicateur permettant de préciser s'il s'agit d'une lecture consensuelle
+- année estimée de naissance (à calculer manuellement à partir du nombre de points positionnés et de la date de pêche)
+- nature de la strie finale (hyaline, ombrée, non définie, ou vide)
+- coefficient de fiabilité de la lecture, estimé par le lecteur (0, 0.5, 1 ou vide)
+
+Ces 3 dernières informations ne sont pas affichées par défaut lors de la consultation d'une photo (tableau des lectures)
+
+Corrections de bugs :
+- suite aux modifications de juin, et en particulier le renforcement de la sécurité globale de l'application, il n'était plus possible de modifier une lecture en en consultant d'autres
+
+Version 1.3 du 15 juin 2015
+---------------------------
+Améliorations :
+- il est maintenant possible de rajouter un poisson (et la pêche associée) à une expérimentation
+- les lecteurs ne peuvent accéder qu'aux expérimentations pour lesquels ils ont été autorisés
+- la gestion des droits globaux a évolué, le module phpgacl a été remplacé par un nouveau module totalement intégré à l'application
+- les droits ont été modifiés en conséquence
+
+Version 1.2.2 du 29 juillet 2014
+--------------------------------
+Rajout du masquage par défaut du nombre de points positionnés par les lecteurs ; un lien permet de réactiver l'affichage initial
+
+Version 1.2.1 du 26 février 2014
+--------------------------------
+Correction de bogues d'affichage :
+- la référence de la pièce ne s'affichait pas correctement dans la fenêtre de visualisation du poisson
+- le libellé concernant la "taille en pixels de la longueur de référence" était erroné, tant en affichage qu'en saisie
+
+Version 1.2 du 10 février 2014
+------------------------------
+Améliorations du fonctionnement intrinsèque
+- support du multilangage : tous les libellés ont été traduits en anglais
+- Saisie de la taille en pixels de la longueur de référence : dans chaque photo, une longueur de référence est donnée. Il est maintenant possible de saisir la taille en pixel de cette référence, qui sera ensuite reportée dans chaque lecture (uniquement si le calcul de la taille de référence n'est pas réalisé par le lecteur).
+- Saisie avec visualisation des points déjà tracés : il est maintenant possible de faire une nouvelle lecture, ou d'en modifier une existante, en affichant également les lectures déjà effectuées.
+- Opacifier le fond du disque en affichage : lors de la consultation des points, il est maintenant possible d'indiquer un facteur de transparence, qui permet de mieux visualiser les points (le fond des points peut être plus ou moins opaque)
+
+ Améliorations apportées à l'ergonomie générale
+- Support de l'identification multiple : l'application identifie les utilisateurs d'abord auprès de l'annuaire LDAP, puis à partir de la liste de comptes déclarés directement dans l'application
+- Les comptes stockés en base de données peuvent maintenant être verrouillés manuellement. Il est également possible de générer un mot de passe aléatoire pour les comptes créés localement.
+- Si le compte est stocké localement, l'utilisateur a maintenant la possibilité de changer son mot de passe en cliquant sur la clé, en haut à droite.
+- Enregistrement des logs : l'application enregistre maintenant les connexions (ratées ou réussies), ainsi que les opérations d'écritures standardisées.
+
+Version 1.1.2 du 20 décembre 2013
+---------------------------------
+- Correction d'un point d'ergonomie : lors de la saisie des points, le bouton valider a été dupliqué en haut d'écran, et les liens de retour vers la photo, pièce, etc. sont précédés d'un message de confirmation
+
+Version 1.1.1 du 13 décembre 2013
+---------------------------------
+- Correction d'une anomalie : si la photo téléchargée était vide (problème de téléchargement, entre autres), le programme plantait au moment de la création des photos dédiées à l'affichage
+
+Version 1.1, du 4 décembre 2013
+-------------------------------
+- Modification de l'affichage des photos : les photos sont générées dans un dossier temporaire, puis chargées depuis le navigateur à partir de ce dossier temporaire. Cela permet d'accélérer le temps de téléchargement quand la photo a été traitée au moins une fois. Le programme supprime les photos automatiquement si elles n'ont pas été lues dans les dernières 24 heures.
+- Lors de la saisie des points, le programme recalcule maintenant automatiquement l'ordre des points (plus faible distance par rapport au point précédent). Ce recalcul automatique peut être inhibé.
+- Lors de l'affichage d'une pièce, un clic sur une miniature entraîne l'affichage du détail de la photo, et non plus l'affichage de la photo originale.
+
+Version 1.0 du 2 décembre 2013
+------------------------------
+Version initiale, permettant de :
+- rajouter une pièce à analyser à un poisson ;
+- rajouter une photo à une pièce ;
+- réaliser une analyse d'une photo, c'est à dire positionner des points sur celle-ci. Les points sont référencés en fonction du ratio entre la taille initiale de la photo et la taille d'affichage.
+- consulter les différentes analyses réalisées, et exporter les résultats au format CSV.
+
+Cette version a été développée rapidement, et ne permet pas :
+- de gérer différents langages d'affichage ;
+- de rajouter des poissons, des lieux de pêche, etc.
+- en l'état, elle ne peut être utilisée en mode extranet (accès depuis internet).

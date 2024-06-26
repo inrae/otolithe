@@ -434,16 +434,16 @@
         },
         {
             "name": "equinton/ppci",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/equinton/ppci.git",
-                "reference": "6d04638cf20bc66065950cd5190a510d3177b6d7"
+                "reference": "6346ecba30bc4fedfff7ed70035f1ed4d306f5ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/equinton/ppci/zipball/6d04638cf20bc66065950cd5190a510d3177b6d7",
-                "reference": "6d04638cf20bc66065950cd5190a510d3177b6d7",
+                "url": "https://api.github.com/repos/equinton/ppci/zipball/6346ecba30bc4fedfff7ed70035f1ed4d306f5ab",
+                "reference": "6346ecba30bc4fedfff7ed70035f1ed4d306f5ab",
                 "shasum": ""
             },
             "require": {
@@ -475,9 +475,9 @@
             "description": "PrototypePHP to CodeIgniter",
             "support": {
                 "issues": "https://github.com/equinton/ppci/issues",
-                "source": "https://github.com/equinton/ppci/tree/v1.0.2"
+                "source": "https://github.com/equinton/ppci/tree/v1.0.3"
             },
-            "time": "2024-06-03T13:48:04+00:00"
+            "time": "2024-06-05T12:26:25+00:00"
         },
         {
             "name": "jumbojett/openid-connect-php",
