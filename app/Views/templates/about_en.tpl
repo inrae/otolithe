@@ -1,9 +1,18 @@
-<h2>About <b>APP</b></h2>
+<h2>About <b>Otolith</b></h2>
 <p>
 Version {$version} of {$versiondate}.
 </p>
 
 <p>
+    Otolith is an application for positioning dots on photos of calcified fish parts,
+    such as scales, otoliths, fin rays, etc.
+    <br>
+    Each reader positions the points that correspond, for him, to a growth indicator (annual ring, for example).
+    Once all the readings have been taken, it is possible to display all the readings taken on a species, 
+    then create a 'consensus reading'.
+</p>
+
+<p>Author: Éric Quinton, for EABX - INRAE</p>
 
 <br>
     This program is free software: you can redistribute it and/or modify<br>

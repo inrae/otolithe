@@ -1,7 +1,16 @@
-<h2>À propos de <b>APP</b></h2>
+<h2>À propos de <b>Otolithe</b></h2>
 <p>
-Version {$version} of {$versiondate}.
+Version {$version} du {$versiondate}.
 </p>
+<p>
+    Otolithe est une application permettant de positionner des points sur des photos de pièces calcifiées de poissons,
+    comme des écailles, des otolithes, des rayons de nageoire, etc.
+    <br>
+    Chaque lecteur positionne les points qui correspondent, pour lui, à un indicateur de croissance (cerne annuel, par exemple).
+    Une fois toutes les lectures réalisées, il est possible d'afficher l'ensemble des lectures effectuée sur une pîèce, 
+    puis de créer une "lecture consensuelle".
+</p>
+<p>Auteur : Éric Quinton, pour EABX - INRAE</p>
 
 <br>
     This program is free software: you can redistribute it and/or modify<br>
