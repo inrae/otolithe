@@ -1,0 +1,1824 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="1.1.3" use-changelog="false" author="Éric Quinton" max-obj-count="33"
+	 last-position="0,1082" last-zoom="0.85" scene-rect="-8,-30,1578.8,2292.72"
+	 default-owner="postgres"
+	 layers="Default,gacl"
+	 active-layers="0"
+	 layer-name-colors="#000000,#000000"
+	 layer-rect-colors="#9a44e6,#b3c8e5"
+	 show-layer-names="false" show-layer-rects="false">
+<role name="otolithe"
+ inherit="true"
+ login="true"
+ password="b94866f346fc0b2478904d086f909c4e">
+</role>
+
+<role name="alosa_r"
+ inherit="true"
+ password="********">
+</role>
+
+<role name="quinton"
+ superuser="true"
+ createdb="true"
+ createrole="true"
+ inherit="true"
+ login="true"
+ password="********">
+	<roles names="alosa_r" role-type="member" />
+</role>
+
+<database name="otolithe" encoding="UTF8" lc-collate="fr_FR.UTF-8" lc-ctype="fr_FR.UTF-8" is-template="false" allow-conns="true">
+	<role name="otolithe"/>
+	<tablespace name="pg_default"/>
+	<comment> <![CDATA[Analyses réalisées sur des poissons migrateurs]]> </comment>
+</database>
+
+<schema name="public" layers="0" rect-visible="true" fill-color="#e1e1e1" name-color="#000000" sql-disabled="true">
+</schema>
+
+<schema name="otolithe" layers="0" rect-visible="true" fill-color="#7ad7cd" name-color="#000000">
+	<role name="otolithe"/>
+</schema>
+
+<schema name="gacl" layers="0" rect-visible="true" fill-color="#ff00ff" name-color="#000000">
+	<role name="otolithe"/>
+</schema>
+
+<tag name="individu">
+	<style id="table-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-ext-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-name" colors="#ffffff"/>
+	<style id="table-schema-name" colors="#000000"/>
+	<style id="table-title" colors="#1a5fb4,#1a5fb4,#20486f"/>
+	<style id="table-toggler-body" colors="#ffffff,#ffffff,#000000"/>
+	<style id="table-toggler-btns" colors="#ffffff,#ffffff,#000000"/>
+</tag>
+<tag name="piece">
+	<style id="table-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-ext-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-name" colors="#000000"/>
+	<style id="table-schema-name" colors="#000000"/>
+	<style id="table-title" colors="#ff5500,#ff5500,#20486f"/>
+	<style id="table-toggler-body" colors="#ffffff,#ffffff,#000000"/>
+	<style id="table-toggler-btns" colors="#ffffff,#ffffff,#000000"/>
+</tag>
+<tag name="photo">
+	<style id="table-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-ext-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-name" colors="#000000"/>
+	<style id="table-schema-name" colors="#000000"/>
+	<style id="table-title" colors="#55aa00,#55aa00,#20486f"/>
+	<style id="table-toggler-body" colors="#ffffff,#ffffff,#000000"/>
+	<style id="table-toggler-btns" colors="#ffffff,#ffffff,#000000"/>
+</tag>
+<tag name="experimentation">
+	<style id="table-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-ext-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-name" colors="#000000"/>
+	<style id="table-schema-name" colors="#000000"/>
+	<style id="table-title" colors="#ff0000,#ff0000,#20486f"/>
+	<style id="table-toggler-body" colors="#ffffff,#ffffff,#000000"/>
+	<style id="table-toggler-btns" colors="#ffffff,#ffffff,#000000"/>
+</tag>
+<tag name="acl">
+	<style id="table-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-ext-body" colors="#fcfcfc,#fcfcfc,#808080"/>
+	<style id="table-name" colors="#000000"/>
+	<style id="table-schema-name" colors="#000000"/>
+	<style id="table-title" colors="#aa0000,#aa0000,#20486f"/>
+	<style id="table-toggler-body" colors="#ffffff,#ffffff,#000000"/>
+	<style id="table-toggler-btns" colors="#ffffff,#ffffff,#000000"/>
+</tag>
+<extension name="postgis" cur-version="2.3.3">
+	<schema name="public"/>
+	<comment> <![CDATA[PostGIS geometry, geography, and raster spatial types and functions]]> </comment>
+</extension>
+
+<sequence name="espece_espece_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="espece" layers="0" collapse-mode="1" max-obj-count="3" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[Liste des especes]]> </comment>
+	<tag name="individu"/>
+	<position x="1160" y="660"/>
+	<column name="espece_id" not-null="true" sequence="otolithe.espece_espece_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nom_id" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="nom_fr">
+		<type name="character varying" length="0"/>
+	</column>
+	<constraint name="espece_pkey" type="pk-constr" table="otolithe.espece">
+		<columns names="espece_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[nom_id;nom_fr
+Abramis brama;Brème d'eau douce
+Abramis sp.;Brèmes d'eau douce nca
+Acipenser baerii;Esturgeon de Sibérie
+Acipenser sp.;Esturgeons
+Acipenser sturio;Esturgeon commun
+Acipenseridae;Esturgeons nca
+Acipenseriformes;
+Agonus cataphractus;Souris de mer
+Alburnus alburnus;Ablette
+Alosa alosa;Alose vraie (=Grande alose)
+Alosa alosa, Alosa fallax;Aloses vraie et feinte
+Alosa fallax;Alose feinte
+Alosa sp.;Aloses nca
+Ammodytes tobianus;Equille
+Anguilla anguilla;Anguille d'Europe
+Anguilla sp.;Anguilles nca
+Anguillidae;Anguilles
+Argyrosomus regius;Maigre commun
+Argyrosomus sp.;
+Atherina boyeri;Joêl
+Atherina presbyter;Prêtre
+Atherina sp.;
+Atherinidae;Athérinidés nca
+Barbatula barbatula;Loche franche
+Barbus barbus;Barbeau fluviatile
+Barbus sp.;
+Belone belone;Orphie
+Belone sp.;
+Blicca bjoerkna;Brème bordelière
+Boops boops;Bogue
+Buglossidium luteum;Petite sole jaune
+Callionymus phaeton;Callionyme paille-en-queue
+Callionymus risso;Callionyme bélène
+Callionymus sp.;Callionymes
+Carassius auratus;Poisson rouge(=Cyprin doré)
+Carassius carassius;Carassin(=Cyprin)
+Carassius sp.;
+Carcinus maenas;Crabe vert
+Chelon labrosus;Mulet lippu
+Chelon sp.;
+Chondrostoma nasus;Nase commun
+Ciliata mustela;Motelle à cinq barbillons
+Ciliata sp.;Motelle
+Clupea harengus;Hareng de l'Atlantique
+Clupea sp.;
+Cobitis taenia;Loche de rivière
+Conger conger;Congre d'Europe
+Cottus gobio;Chabot
+Cottus sp.;
+Crangon crangon;Crevette grise
+Crangon sp.;Crevettes crangon nca
+Crangonidae;Crevettes crangonidés nca
+Crassostrea gigas;Huître creuse du Pacifique
+Ctenolabrus rupestris;Rouquié
+Umbrina sp.;
+Cyprinidae;Cyprinidés nca
+Cypriniformes;
+Cyprinus carpio;Carpe commune
+Cyprinus sp.;
+Dasyatis pastinaca;Pastenague
+Dasyatis sp.;Pastenagues nca
+Dicentrarchus labrax;Bar européen
+Dicentrarchus punctatus;Bar tacheté
+Dicentrarchus sp.;Bars nca
+Dicologlossa cuneata;Cèteau
+Diplodus sargus;Sar commun
+Diplodus vulgaris;Sar à tête noire
+Echiichthys vipera;Petite vive
+Engraulis encrasicolus;Anchois
+Engraulis sp.;Anchois nca
+Enophrys bubalis;chabot buffle
+Eriocheir sinensis;Crabe chinois
+Esox lucius;Brochet du Nord
+Gadus morhua;Morue de l'Atlantique
+Galeorhinus galeus;Requin-hâ
+Gambusia affinis;Gambusie
+Gambusia sp.;
+Gasterosteus aculeatus;Epinoche à trois épines
+Gasterosteus sp.;Epinoches
+Gobio gobio;Goujon
+Gobius niger;Gobie noir
+Gobiusculus flavescens;Gobie nageur
+Gymnocephalus cernuus;Grémille
+Hippocampus erectus;Hippocampe rayé
+Hippocampus hippocampus;Hippocampe à museau court
+Hippocampus ingens;
+Hippocampus ramulosus;Hippocampe moucheté
+Hippocampus reidi;
+Hippocampus sp.;
+Hippocampus zosterae;Hippocampe Atlantique ouest
+Hyperoplus lanceolatus;Lançon commun
+Ictalurus melas;Poisson chat
+Ictalurus punctatus;Barbue d'Amérique
+Ictalurus sp.;Barbottes nca
+Labrus bergylta;Vieille commune
+Lampetra fluviatilis;Lamproie de rivière
+Lampetra planeri;Lamproie de Planer
+Lampetra sp.;
+Lepomis gibbosus;Perche soleil
+Lepomis sp.;
+Leucaspius delineatus;Able de Heckel
+Leuciscus cephalus;Chevaine
+Liza aurata;Mulet doré
+Liza ramada;Mulet porc
+Liza sp.;
+Lophius piscatorius;Baudroie commune
+Merlangius merlangus;Merlan
+Merluccius merluccius;Merlu européen
+Micropterus salmoides;Black bass
+Misgurnus fossilis;Loche d'étang
+Mugil liza;Mulet lebranche
+Mugil sp.;
+Mugilidae;Mulets nca
+Mullus sp.;Rougets nca
+Mullus surmuletus;Rouget de roche
+Myoxocephalus scorpius;Chaboisseau à épines courtes
+Nerophis ophidion;Nérophis tête bleue
+NoName;
+Orconectes limosus;Ecrevisse américaine
+Osmerus eperlanus;Eperlan européen
+Osmerus mordax;Eperlan arc-en-ciel
+Osmerus mordax dentex;
+Osmerus mordax mordax;
+Osmerus sp.;
+Osmerus sp., Hypomesus sp.;Eperlans nca
+Pachygrapsus transversus;Anglette africaine
+Palaemon longirostris;crevette blanche
+Palaemon longirostris, P. serratus;crevettes blanche et rose
+Palaemon serratus;Bouquet commun
+Palaemon sp.;
+Palaemonidae;Crevettes d'eau douce nca
+Perca fluviatilis;Perche européenne
+Petromyzon marinus;Lamproie marine
+Petromyzon marinus, Lampetra fluviatilis;lamproie marine et lamproie de rivière
+Petromyzon sp.;
+Petromyzontiformes;
+Petromyzontidae;Lamproies nca
+Pholis gunnellus;Gonelle
+Phoxinus phoxinus;Arlequin
+Phoxinus sp.;
+Platichthys flesus;Flet d'Europe
+Platichthys flesus flesus;
+Platichthys flesus italicus;
+Platichthys flesus luscus;
+Platichthys sp.;
+Pleuronectes platessa;Plie d'Europe
+Pleuronectes sp.;
+Pollachius pollachius;Lieu jaune
+Pomatoschistus microps;Gobie tacheté
+Pomatoschistus minutus;Gobie buhotte
+Pomatoschistus pictus;Gobie varié
+Pomatoschistus sp.;
+Procambarus clarkii;Ecrevisse rouge de marais
+Procambarus sp.;
+Psetta maxima;Turbot
+Psetta sp.;
+Pungitius pungitius;Epinochette
+Raja clavata;Raie bouclée
+Raja naevus;Raie fleurie
+Raja undulata;Raie brunette
+Rhodeus sericeus;Bouvière
+Rutilus rutilus;Gardon
+Rutilus sp.;Gardons nca
+Salmo salar;Saumon de l'Atlantique
+Salmo sp.;Truites nca
+Salmo trutta;Truite de mer
+Salmonidae;
+Sardina pilchardus;Sardine commune
+Scardinius erythrophthalmus;Rotengle
+Scomber scombrus;Maquereau commun
+Scophthalmus maximus;Turbot
+Scophthalmus rhombus;Barbue
+Scophthalmus sp.;
+Scyliorhinus canicula;Petite roussette
+Scyliorhinus stellaris;Grande roussette
+Sepia officinalis;Seiche commune
+Silurus glanis;Silure glane
+Silurus sp.;
+Solea lascaris;Sole-pole
+Solea senegalensis;Sole sénégalaise
+Solea solea;Sole commune
+Solea sp.;
+Solea vulgaris;Sole commune
+Sparus aurata;Dorade royale
+Spondyliosoma cantharus;Dorade grise
+Sprattus sp.;
+Sprattus sprattus;Sprat
+Stizostedion lucioperca;Sandre
+Stizostedion sp.;Sandres nca
+Symphodus melops;Crénilabre melops
+Symphodus roissali;Crénilabre langaneu
+Syngnathus acus;Syngnathe aiguille
+Syngnathus rostellatus;Syngnathe de Duméril
+Syngnathus sp.;Syngnathes
+Tinca sp.;
+Tinca tinca;Tanche
+Torpedo marmorata;Torpille marbrée
+Trachurus trachurus;Chinchard d'Europe
+Trigla lucerna;Grondin perlon
+Trigla sp.;Grondins nca
+Triglidae;Grondins, cavillones nca
+Trisopterus luscus;Tacaud commun
+Trisopterus minutus;Capelan de Méditerranée
+Umbrina canariensis;Ombrine bronze
+Umbrina cirrosa;Ombrine côtière
+Pseudorasbora parva;Pseudorasbora
+Callionymus lyra;Callionyme lyre
+Alburnoides bipunctatus;Spirlin
+Ammodytes marinus;Lançon équille
+Ammodytes semisquamatus;Lançon aiguille
+Aphia minuta;Nonnat
+Arnoglossus laterna;Arnoglosse de Méditerranée
+Arnoglossus thori;Arnoglosse tacheté
+Aspitrigla cuculus;Grondin rouge
+Balistes carolinensis;Baliste
+Blennius fluviatilis;Blennie fluviatile
+Callionymus reticulatus;Callionyme réticulé
+Carassius gibelio;Carassin argenté
+Centrolabrus exoletus;Petite vieille
+Ciliata septentrionalis;Motelle à moustaches
+Coris julis;Girelle
+Crystallogobius linearis;Gobie cristal
+Cyclopterus lumpus;Lompe
+Diplodus annularis;Sparaillon commun
+Diplodus cervinus;Sar à grosses lèvres
+Enchelyopus cimbrius;Motelle à quatre barbillons
+Entelurus aequoreus;Entélure
+Eutrigla gurnardus;Grondin gris
+Gaidropsarus mediterraneus;Motelle de Méditerranée
+Gaidropsarus vulgaris;Motelle commune
+Galeus melastomus;Chien espagnol
+Gobius cobitis;Gobie céphalote
+Gobius cruentatus;Gobie ensanglanté
+Gobius geniporus;Gobie à joues poreuses
+Gobius paganellus;Gobie paganel
+Gobius roulei;Gobie paganel gros oeil
+Hippocampus guttulatus;Cheval marin
+Hippoglossoides platessoides;Balai de l'Atlantique
+Labrus merula;Merle
+Labrus mixtus;Coquette
+Lepadogaster candolii;Gluette petite queue
+Lepadogaster lepadogaster;Gluette barbier
+Lepidorhombus whiffiagonis;Cardine franche
+Lesueurigobius friesii;Gobie raôlet
+Leuciscus idus;Ide mélanote
+Leuciscus leuciscus;Vandoise
+Leuroraja naevus;Raie fleurie
+Limanda limanda;Limande
+Liparis liparis;Limace de mer
+Liparis montagui;Limace anicotte
+Lipophrys pholis;Blennie mordocet
+Lithognathus mormyrus;Marbré
+Liza saliens;Mulet sauteur
+Maurolicus muelleri;Brossé améthyste
+Melanogrammus aeglefinus;Eglefin
+Micrenophrys lilljeborgi;Chabot têtu
+Micromesistius poutassou;Merlan bleu
+Microstomus kitt;Limande sole
+Molva molva;Lingue
+Mugil cephalus;Mulet à grosse tête
+Mullus barbatus;Rouget de vase
+Mustelus asterias;Emissole tachetée
+Mustelus mustelus;Emissole lisse
+Myxine glutinosa;Myxine
+Nerophis lumbriciformis;Nérophis petit nez
+Oblada melanura;Oblade
+Oncorhynchus mykiss;Truite arc-en-ciel
+Parablennius gattorugine;Blennie cabot
+Parablennius sanguinolentus;Baveuse
+Pollachius virens;Lieu noir
+Pomatoschistus lozanoi;Gobie rouillé
+Raja brachyura;Raie lisse
+Raja microocellata;Raie mélée
+Raniceps raninus;Trident
+Rhodeus amarus;Bouvière
+Salaria pavo;Blennie paon
+Spinachia spinachia;Epinoche de mer
+Squalus acanthias;Aiguillat commun
+Syngnathus abaster;Syngnathe gorge claire
+Syngnathus taenionotus;Syngnathe taenionotus
+Syngnathus typhle;Siphonostome
+Taurulus bubalis;Chabot buffle
+Telestes souffia;Blageon
+Thymallus thymallus;Ombre commun
+Trachinus draco;Grande vive
+Trigla lyra;Grondin lyre
+Trisopterus esmarkii;Tacaud norvégien
+Zeugopterus punctatus;Targeur
+Zeus faber;Saint Pierre
+Zoarces viviparus;Loquette d'Europe
+Zosterisessor ophiocephalus;Gobie lotte
+Abramis brama, Blicca bjoerkna;Brèmes
+Syngnathidae;Syngnathes
+Clupeidae;Harengs, sardines nca
+Gadidae;Gadidés
+Gobiidae;Gobidés
+Sciaena umbra;Corb commun
+Sardinella aurita;Allache
+Palaemon macrodactylus;Bouquet migrateur
+Alloteuthis sp.;"calmar"
+Alloteuthis subulata;Casseron commun
+Atelecyclus rotundatus;"crabe"
+Atyaephyra desmaresti,Palemon varians;crevettes divers
+Bivalves;bivalves
+Cancer pagurus;Tourteau
+Carcinus aestuarii;Crabe vert de la Méditerranée
+Dromia sp.;"Dormeur"
+Dromia personata;Crabe dormeur
+Galathea strigosa;Galathée striée
+Gammaridae;Gammares
+Goneplax rhomboides;"crabe"
+Liocarcinus depurator;Etrille pattes bleues
+Liocarcinus holsatus;"Etrille"
+Loliginidae;Calmars côtiers nca
+Loligo sp.;Calmars nca
+Macoma balthica;Telline de la Baltique
+Loligo vulgaris;Encornet
+Macropodia sp.;"Macropodia"
+Necora puber;Etrille commune
+Pachygrapsus marmoratus;Grapse marbré
+Pachygrapsus sp.;"crabe"
+Palaemon elegans;Bouquet flaque
+Palaemonetes varians;Bouquet atlantique des canaux
+Panopeus africanus;Crabe caillou africain
+Penaeus japonicus;Crevette kuruma
+Penaeus kerathurus;Caramote
+Pilumnus hirtellus;Crabe rouge poilu
+Pisidia longicornis;"crabe"
+Planes minutus;"crabe"
+Pleuronectidae;Plies nca
+Porcellana platycheles;"crabe"
+Portumnus latipes;Etrille elegante
+Processa edulis;Guernade nica
+Salmo trutta trutta;Truite de mer brune
+Salmo trutta fario;Truite fario
+Sepia sp.;Seiches
+Sepiola atlantica;Sépiole grandes oreilles
+Sepiola sp.;Sépioles
+Zebrus zebrus;Gobie zébré
+Aphanius fasciatus;Aphanius de Corse
+Microchirus variegatus;Sole perdrix
+Palaemon adspersus;
+Pomatoschistus marmoratus;Gobie marbré
+Symphodus cinereus;Crénilabre balafré
+Symphodus tinca;Crénilabre paon
+Rajelle fyllae;Raie ronde
+Sarpa salpa;Saupe
+Meduse sp.;Meduse]]>
+	</initial-data>
+</table>
+
+<sequence name="experimentation_exp_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="experimentation" layers="0" collapse-mode="1" max-obj-count="6" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[Experimentation a laquelle est rattache le poisson]]> </comment>
+	<tag name="experimentation"/>
+	<position x="20" y="660"/>
+	<column name="exp_id" not-null="true" sequence="otolithe.experimentation_exp_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="exp_nom" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="exp_description">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="exp_debut">
+		<type name="date" length="0"/>
+	</column>
+	<column name="exp_fin">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="pk_experimentation" type="pk-constr" table="otolithe.experimentation">
+		<columns names="exp_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="final_stripe_final_stripe_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="final_stripe" layers="0" collapse-mode="1" max-obj-count="3" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[Natures de la strie finale]]> </comment>
+	<tag name="photo"/>
+	<position x="20" y="1860"/>
+	<column name="final_stripe_id" not-null="true" sequence="otolithe.final_stripe_final_stripe_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="final_stripe_code" not-null="true">
+		<type name="character varying" length="0"/>
+		<comment> <![CDATA[Code utilisé]]> </comment>
+	</column>
+	<column name="final_stripe_libelle" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<constraint name="final_stripe_pk" type="pk-constr" table="otolithe.final_stripe">
+		<columns names="final_stripe_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[final_stripe_code;final_stripe_libelle
+HS;Hialine stripe
+DS;Dark stripe
+IN;Indefinite]]>
+	</initial-data>
+</table>
+
+<sequence name="individu_individu_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="individu" layers="0" collapse-mode="1" max-obj-count="16" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<tag name="individu"/>
+	<position x="800" y="660"/>
+	<column name="individu_id" not-null="true" sequence="otolithe.individu_individu_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="espece_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="peche_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="sexe_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="codeindividu">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="poids">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="remarque">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="parasite">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="age">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="longueur">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="tag">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="uuid" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="wgs84_x">
+		<type name="double precision" length="0"/>
+		<comment> <![CDATA[Longitude of the capture, in wgs84]]> </comment>
+	</column>
+	<column name="wgs84_y">
+		<type name="double precision" length="0"/>
+		<comment> <![CDATA[Latitude of the capture, in wgs84]]> </comment>
+	</column>
+	<constraint name="pk_individu" type="pk-constr" table="otolithe.individu">
+		<columns names="individu_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="individu_experimentation" layers="0" collapse-mode="1" max-obj-count="3" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<tag name="experimentation"/>
+	<position x="400" y="660"/>
+	<column name="individu_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="exp_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="individu_experimentation_pk" type="pk-constr" table="otolithe.individu_experimentation">
+		<columns names="individu_id,exp_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="lecteur_lecteur_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="lecteur" layers="0" collapse-mode="1" max-obj-count="4" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[personne realisant la lecture d'une photo]]> </comment>
+	<tag name="photo"/>
+	<position x="20" y="1040"/>
+	<column name="lecteur_id" not-null="true" sequence="otolithe.lecteur_lecteur_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="login" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="lecteur_nom">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="lecteur_prenom">
+		<type name="character varying" length="0"/>
+	</column>
+	<constraint name="pk_lecteur" type="pk-constr" table="otolithe.lecteur">
+		<columns names="lecteur_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="lecteur_experimentation" layers="0" collapse-mode="1" max-obj-count="3" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[Table des experimentations autorisees pour un lecteur]]> </comment>
+	<tag name="experimentation"/>
+	<position x="20" y="840"/>
+	<column name="lecteur_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="exp_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="lecteur_experimentation_pk" type="pk-constr" table="otolithe.lecteur_experimentation">
+		<columns names="lecteur_id,exp_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="lumieretype" layers="0" collapse-mode="1" max-obj-count="2" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<tag name="photo"/>
+	<position x="800" y="1860"/>
+	<column name="lumieretype_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="lumieretype_libelle" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<constraint name="pk_lumieretype" type="pk-constr" table="otolithe.lumieretype">
+		<columns names="lumieretype_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[lumieretype_libelle
+Reflected light
+Transmitted light]]>
+	</initial-data>
+</table>
+
+<sequence name="peche_peche_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="peche" layers="0" collapse-mode="1" max-obj-count="9" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[Date de peche et lieu de capture]]> </comment>
+	<tag name="individu"/>
+	<position x="1160" y="1040"/>
+	<column name="peche_id" not-null="true" sequence="otolithe.peche_peche_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="site">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="zonesite">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="peche_date">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="campagne">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="peche_engin">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="personne">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="operateur">
+		<type name="character varying" length="0"/>
+	</column>
+	<constraint name="pk_sitepeche" type="pk-constr" table="otolithe.peche">
+		<columns names="peche_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="photo_photo_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="photo" layers="0" collapse-mode="1" max-obj-count="20" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[photos associees a une piece]]> </comment>
+	<tag name="photo"/>
+	<position x="800" y="1300"/>
+	<column name="photo_id" not-null="true" sequence="otolithe.photo_photo_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="piece_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="lumieretype_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="photo_nom">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="description">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="photo_filename">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="photo_date">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="color">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="grossissement">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="repere">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="photo_data">
+		<type name="bytea" length="0"/>
+	</column>
+	<column name="photo_thumbnail">
+		<type name="bytea" length="0"/>
+	</column>
+	<column name="uri">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="long_reference">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="photo_height">
+		<type name="integer" length="0"/>
+		<comment> <![CDATA[Hauteur de la photo originale]]> </comment>
+	</column>
+	<column name="photo_width">
+		<type name="integer" length="0"/>
+		<comment> <![CDATA[Largeur de la photo originale]]> </comment>
+	</column>
+	<column name="long_ref_pixel">
+		<type name="integer" length="0"/>
+		<comment> <![CDATA[Longueur de reference en pixels - valeur par defaut pour photolecture, si non lu]]> </comment>
+	</column>
+	<constraint name="pk_photo" type="pk-constr" table="otolithe.photo">
+		<columns names="photo_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="photolecture_photolecture_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="photolecture" layers="0" collapse-mode="1" max-obj-count="24" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[Lecture realisee par une personne]]> </comment>
+	<tag name="photo"/>
+	<position x="20" y="1300"/>
+	<column name="photolecture_id" not-null="true" sequence="otolithe.photolecture_photolecture_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="photo_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="lecteur_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="final_stripe_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="centre">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="bordure">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="points">
+		<type name="geometry" length="0"/>
+	</column>
+	<column name="points_ref_lecture">
+		<type name="geometry" length="0"/>
+		<comment> <![CDATA[Emplacement des points utilises pour lire la longueur de reference]]> </comment>
+	</column>
+	<column name="photolecture_date" not-null="true">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="long_ref_mesuree">
+		<type name="double precision" length="0"/>
+	</column>
+	<column name="photolecture_height">
+		<type name="integer" length="0"/>
+		<comment> <![CDATA[Hauteur de la photo utilisee pour la lecture]]> </comment>
+	</column>
+	<column name="photolecture_width">
+		<type name="integer" length="0"/>
+		<comment> <![CDATA[Largeur de la photo affichee pour realiser la lecture]]> </comment>
+	</column>
+	<column name="long_totale_lue">
+		<type name="double precision" length="0"/>
+		<comment> <![CDATA[Somme des segments entre chacun des points]]> </comment>
+	</column>
+	<column name="long_totale_reel">
+		<type name="double precision" length="0"/>
+		<comment> <![CDATA[Longueur totale réelle calculée pour le lecteur
+(long_reference / long_ref_mesuree * long_totale_lue)]]> </comment>
+	</column>
+	<column name="rayon_point_initial">
+		<type name="real" length="0"/>
+	</column>
+	<column name="read_fiability">
+		<type name="real" length="0"/>
+		<comment> <![CDATA[Fiabilité de la lecture]]> </comment>
+	</column>
+	<column name="consensual_reading">
+		<type name="smallint" length="0"/>
+		<comment> <![CDATA[1 si lecture consensuelle]]> </comment>
+	</column>
+	<column name="annee_naissance">
+		<type name="integer" length="0"/>
+		<comment> <![CDATA[Année de naissance estimée]]> </comment>
+	</column>
+	<column name="commentaire">
+		<type name="varchar" length="0"/>
+		<comment> <![CDATA[Commentaire sur la lecture]]> </comment>
+	</column>
+	<column name="remarkable_points">
+		<type name="json" length="0"/>
+		<comment> <![CDATA[Liste des points remarquables identifiés sur la photo]]> </comment>
+	</column>
+	<constraint name="enforce_dims_points" type="ck-constr" table="otolithe.photolecture">
+			<expression> <![CDATA[(st_ndims(points) = 2)]]> </expression>
+	</constraint>
+	<constraint name="enforce_dims_points_ref_lecture" type="ck-constr" table="otolithe.photolecture">
+			<expression> <![CDATA[(st_ndims(points_ref_lecture) = 2)]]> </expression>
+	</constraint>
+	<constraint name="enforce_geotype_points" type="ck-constr" table="otolithe.photolecture">
+			<expression> <![CDATA[((geometrytype(points) = 'MULTIPOINT'::text) OR (points IS NULL))]]> </expression>
+	</constraint>
+	<constraint name="enforce_geotype_points_ref_lecture" type="ck-constr" table="otolithe.photolecture">
+			<expression> <![CDATA[((geometrytype(points_ref_lecture) = 'MULTIPOINT'::text) OR (points_ref_lecture IS NULL))]]> </expression>
+	</constraint>
+	<constraint name="pk_photolecture" type="pk-constr" table="otolithe.photolecture">
+		<columns names="photolecture_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="piece_piece_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="piece" layers="0" collapse-mode="1" max-obj-count="7" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[Pieces analysees]]> </comment>
+	<tag name="piece"/>
+	<position x="800" y="1040"/>
+	<column name="piece_id" not-null="true" sequence="otolithe.piece_piece_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="individu_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="piecetype_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="traitementpiece_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="piececode">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="uuid" default-value="gen_random_uuid()">
+		<type name="uuid" length="0"/>
+	</column>
+	<constraint name="pk_piece" type="pk-constr" table="otolithe.piece">
+		<columns names="piece_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="piecetype_piecetype_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="piecetype" layers="0" collapse-mode="1" max-obj-count="2" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[Type de piece]]> </comment>
+	<tag name="piece"/>
+	<position x="400" y="1040"/>
+	<column name="piecetype_id" not-null="true" sequence="otolithe.piecetype_piecetype_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="piecetype_libelle" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<constraint name="pk_piecetype" type="pk-constr" table="otolithe.piecetype">
+		<columns names="piecetype_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="sexe" layers="0" collapse-mode="1" max-obj-count="3" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<tag name="individu"/>
+	<position x="1160" y="840"/>
+	<column name="sexe_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="sexe_libelle" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="sexe_libellecourt" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<constraint name="pk_sexe" type="pk-constr" table="otolithe.sexe">
+		<columns names="sexe_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA["sexe_id";"sexe_libelle";"sexe_libellecourt"
+"1";"Mâle";"m"
+"2";"Femelle";"f"
+"3";"Indéterminé";"i"
+]]>
+	</initial-data>
+</table>
+
+<sequence name="traitementpiece_traitementpiece_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="traitementpiece" layers="0" collapse-mode="1" max-obj-count="2" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<tag name="piece"/>
+	<position x="400" y="1140"/>
+	<column name="traitementpiece_id" not-null="true" sequence="otolithe.traitementpiece_traitementpiece_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="traitementpiece_libelle" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<constraint name="pk_traitementpiece" type="pk-constr" table="otolithe.traitementpiece">
+		<columns names="traitementpiece_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[traitementpiece_libelle
+polishing
+grinding,polishing
+grinding,polishing,staining
+burning,cracking,grinding,polishing
+burning,cracking
+cracking,grinding,polishing
+not recorded]]>
+	</initial-data>
+</table>
+
+<table name="dbparam" layers="0" collapse-mode="1" max-obj-count="6" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[Table des parametres associes de maniere intrinseque a l'instance]]> </comment>
+	<position x="380" y="1860"/>
+	<column name="dbparam_id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="dbparam_name" not-null="true">
+		<type name="character varying" length="0"/>
+		<comment> <![CDATA[Nom du parametre]]> </comment>
+	</column>
+	<column name="dbparam_value">
+		<type name="character varying" length="0"/>
+		<comment> <![CDATA[Valeur du paramètre]]> </comment>
+	</column>
+	<column name="dbparam_description">
+		<type name="varchar" length="0"/>
+	</column>
+	<column name="dbparam_description_en">
+		<type name="varchar" length="0"/>
+	</column>
+	<constraint name="dbparam_pk" type="pk-constr" table="otolithe.dbparam">
+		<columns names="dbparam_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA["dbparam_id";"dbparam_name";"dbparam_value";"dbparam_description";"dbparam_description_en"
+"1";"APPLI_code";"OTOLITHE";"Code de l'application";"Code of the application"
+"2";"APPLI_title";"Otolithe";"Titre de l'application, affiché à côté de l'icône";""
+"3";"otp_issuer";"otolithe";"Nom affiché dans les applications de génération de codes uniques pour l'identification à double facteur";"Name displayed in applications generating unique codes for two-factor identification"
+]]>
+	</initial-data>
+</table>
+
+<sequence name="dbversion_dbversion_id_seq" cycle="false" start="1" increment="1" min-value="1" cache="1">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="dbversion" layers="0" collapse-mode="1" max-obj-count="3" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[Table des versions de la base de donnees]]> </comment>
+	<position x="380" y="1680"/>
+	<column name="dbversion_id" not-null="true" sequence="otolithe.dbversion_dbversion_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="dbversion_number" not-null="true">
+		<type name="character varying" length="0"/>
+		<comment> <![CDATA[Numero de la version]]> </comment>
+	</column>
+	<column name="dbversion_date" not-null="true">
+		<type name="timestamp" length="0"/>
+		<comment> <![CDATA[Date de la version]]> </comment>
+	</column>
+	<constraint name="dbversion_pk" type="pk-constr" table="otolithe.dbversion">
+		<columns names="dbversion_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA["dbversion_number";"dbversion_date"
+"24.0";"2024-06-19"
+]]>
+	</initial-data>
+</table>
+
+<sequence name="metadatatype_metadatatype_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+</sequence>
+
+<sequence name="piecemetadata_piecemetadata_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="piecemetadata" layers="0" collapse-mode="1" max-obj-count="7" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[Métadonnées rattachées à une pièce calcifiée]]> </comment>
+	<tag name="piece"/>
+	<position x="1160" y="1300"/>
+	<column name="piecemetadata_id" not-null="true" sequence="otolithe.piecemetadata_piecemetadata_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="piece_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="metadatatype_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="metadata">
+		<type name="json" length="0"/>
+		<comment> <![CDATA[Valeurs associées, au format Json]]> </comment>
+	</column>
+	<column name="piecemetadata_date">
+		<type name="timestamp" length="0"/>
+		<comment> <![CDATA[Date d'acquisition des informations]]> </comment>
+	</column>
+	<column name="piecemetadata_comment">
+		<type name="varchar" length="0"/>
+		<comment> <![CDATA[Commentaires libres]]> </comment>
+	</column>
+	<constraint name="piecemetadata_pk" type="pk-constr" table="otolithe.piecemetadata">
+		<columns names="piecemetadata_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="metadatatype" layers="0" collapse-mode="1" max-obj-count="7" z-value="0">
+	<schema name="otolithe"/>
+	<role name="otolithe"/>
+	<tag name="piece"/>
+	<position x="1160" y="1540"/>
+	<column name="metadatatype_id" not-null="true" sequence="otolithe.metadatatype_metadatatype_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="metadatatype_name" not-null="true">
+		<type name="varchar" length="0"/>
+		<comment> <![CDATA[Nom du type de métadonnées]]> </comment>
+	</column>
+	<column name="metadatatype_comment">
+		<type name="varchar" length="0"/>
+		<comment> <![CDATA[Description du type de métadonnées]]> </comment>
+	</column>
+	<column name="metadatatype_description">
+		<type name="bytea" length="0"/>
+		<comment> <![CDATA[Description externe du jeu de métadonnées (fichier PDF attaché, par exemple)]]> </comment>
+	</column>
+	<column name="is_array" default-value="false">
+		<type name="boolean" length="0"/>
+		<comment> <![CDATA[Définit si les données sont sous forme de tableau ou uniques]]> </comment>
+	</column>
+	<column name="metadatatype_schema">
+		<type name="json" length="0"/>
+		<comment> <![CDATA[Description JSON au format AlpacaJS du type de métadonnées]]> </comment>
+	</column>
+	<constraint name="metadatatype_pk" type="pk-constr" table="otolithe.metadatatype">
+		<columns names="metadatatype_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<extension name="pgcrypto">
+	<schema name="public"/>
+</extension>
+
+<table name="aclacl" layers="0" collapse-mode="1" max-obj-count="6" z-value="0">
+	<schema name="gacl"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[Rights table]]> </comment>
+	<tag name="acl"/>
+	<position x="420" y="400"/>
+
+	<customidxs object-type="column">
+		<object name="aclaco_id" index="0"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="aclacl_pk" index="0"/>
+		<object name="aclaco_fk" index="1"/>
+	</customidxs>	<initial-data>
+<![CDATA[aclaco_id;aclgroup_id
+1;1
+2;2
+3;3
+4;4]]>
+	</initial-data>
+</table>
+
+<sequence name="aclaco_aclaco_id_seq" cycle="false" start="6" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="gacl"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="aclaco" layers="0" collapse-mode="1" max-obj-count="3" z-value="0">
+	<schema name="gacl"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[List of managed rights]]> </comment>
+	<tag name="acl"/>
+	<position x="420" y="180"/>
+	<column name="aclaco_id" not-null="true" sequence="gacl.aclaco_aclaco_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="aco" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<constraint name="aclaco_pk" type="pk-constr" table="gacl.aclaco">
+		<columns names="aclaco_id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="aclappli_id" index="2"/>
+	</customidxs>
+	<customidxs object-type="constraint">
+		<object name="aclappli_fk" index="1"/>
+	</customidxs>	<initial-data>
+<![CDATA["aclaco_id";"aclappli_id";"aco"
+"1";"1";"admin"
+"2";"1";"manage"
+"3";"1";"consult"
+"4";"1";"param"
+"5";"1";"read"
+]]>
+	</initial-data>
+</table>
+
+<sequence name="aclappli_aclappli_id_seq" cycle="false" start="2" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="gacl"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="aclappli" layers="0" collapse-mode="1" max-obj-count="3" z-value="0">
+	<schema name="gacl"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[Managed software table]]> </comment>
+	<tag name="acl"/>
+	<position x="820" y="20"/>
+	<column name="aclappli_id" not-null="true" sequence="gacl.aclappli_aclappli_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="appli" not-null="true">
+		<type name="character varying" length="0"/>
+		<comment> <![CDATA[Software name from rights management]]> </comment>
+	</column>
+	<column name="applidetail">
+		<type name="character varying" length="0"/>
+		<comment> <![CDATA[Software description]]> </comment>
+	</column>
+	<constraint name="aclappli_pk" type="pk-constr" table="gacl.aclappli">
+		<columns names="aclappli_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[aclappli_id;appli;applidetail
+1;otolithe;]]>
+	</initial-data>
+</table>
+
+<sequence name="aclgroup_aclgroup_id_seq" cycle="false" start="5" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="gacl"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="aclgroup" layers="0" collapse-mode="1" max-obj-count="3" z-value="0">
+	<schema name="gacl"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[Login groups]]> </comment>
+	<tag name="acl"/>
+	<position x="40" y="400"/>
+	<column name="aclgroup_id" not-null="true" sequence="gacl.aclgroup_aclgroup_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="groupe" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="aclgroup_id_parent">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="aclgroup_pk" type="pk-constr" table="gacl.aclgroup">
+		<columns names="aclgroup_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA["aclgroup_id";"groupe";"aclgroup_id_parent"
+"1";"admin";""
+"2";"consult";""
+"3";"manage";"2"
+"4";"param";"3"
+]]>
+	</initial-data>
+</table>
+
+<sequence name="acllogin_acllogin_id_seq" cycle="false" start="2" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="gacl"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="acllogin" layers="0" collapse-mode="1" max-obj-count="3" z-value="0">
+	<schema name="gacl"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[Users login]]> </comment>
+	<tag name="acl"/>
+	<position x="420" y="20"/>
+	<column name="acllogin_id" not-null="true" sequence="gacl.acllogin_acllogin_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="login" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="logindetail" not-null="true">
+		<type name="character varying" length="0"/>
+		<comment> <![CDATA[Nom affiché]]> </comment>
+	</column>
+	<constraint name="acllogin_pk" type="pk-constr" table="gacl.acllogin">
+		<columns names="acllogin_id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[acllogin_id;login;logindetail
+1;admin;admin]]>
+	</initial-data>
+</table>
+
+<table name="acllogingroup" layers="0" collapse-mode="1" max-obj-count="4" z-value="0">
+	<schema name="gacl"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[Relationship between logins and groups]]> </comment>
+	<tag name="acl"/>
+	<position x="40" y="20"/>
+	<initial-data>
+<![CDATA[acllogin_id;aclgroup_id
+1;1
+1;4]]>
+	</initial-data>
+</table>
+
+<sequence name="seq_logingestion_id" cycle="false" start="2" increment="1" min-value="1" max-value="999999" cache="1">
+	<schema name="gacl"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="logingestion" layers="0" collapse-mode="1" max-obj-count="15" z-value="0">
+	<schema name="gacl"/>
+	<role name="otolithe"/>
+	<tag name="acl"/>
+	<position x="1180" y="20"/>
+	<column name="id" not-null="true" sequence="gacl.seq_logingestion_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="login" not-null="true">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="password">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="nom">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="prenom">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="mail">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="datemodif">
+		<type name="date" length="0"/>
+	</column>
+	<column name="actif" default-value="1">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="is_clientws" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="tokenws">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="is_expired" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="nb_attempts">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="lastattempt">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="logingestion_pk" type="pk-constr" table="gacl.logingestion">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+	<initial-data>
+<![CDATA[id;login;password;nom;prenom;mail;datemodif;actif;is_clientws;tokenws;is_expired
+1;admin;cd916028a2d8a1b901e831246dd5b9b4d3832786ddc63bbf5af4b50d9fc98f50;admin;;;;1;false;;false]]>
+	</initial-data>
+</table>
+
+<sequence name="log_log_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="gacl"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="log" layers="0" collapse-mode="1" max-obj-count="7" z-value="0">
+	<schema name="gacl"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[list of connexions and actions recorded]]> </comment>
+	<tag name="acl"/>
+	<position x="820" y="400"/>
+	<column name="log_id" not-null="true" sequence="gacl.log_log_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="login" not-null="true">
+		<type name="character varying" length="32"/>
+	</column>
+	<column name="nom_module">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="log_date" not-null="true">
+		<type name="timestamp" length="0"/>
+		<comment> <![CDATA[Connexion time]]> </comment>
+	</column>
+	<column name="commentaire">
+		<type name="character varying" length="0"/>
+		<comment> <![CDATA[others data]]> </comment>
+	</column>
+	<column name="ipaddress">
+		<type name="character varying" length="0"/>
+		<comment> <![CDATA[ip address of client]]> </comment>
+	</column>
+	<constraint name="log_pk" type="pk-constr" table="gacl.log">
+		<columns names="log_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<index name="log_date_idx" table="gacl.log"
+	 concurrent="false" unique="false" fast-update="false" buffering="false" nulls-not-distinct="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="log_date"/>
+		</idxelement>
+</index>
+
+<index name="log_login_idx" table="gacl.log"
+	 concurrent="false" unique="false" fast-update="false" buffering="false" nulls-not-distinct="false"
+	 index-type="btree" factor="90">
+		<idxelement use-sorting="false">
+			<column name="login"/>
+		</idxelement>
+</index>
+
+<sequence name="passwordlost_passwordlost_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="gacl"/>
+	<role name="otolithe"/>
+</sequence>
+
+<table name="passwordlost" layers="0" collapse-mode="1" max-obj-count="6" z-value="0">
+	<schema name="gacl"/>
+	<role name="otolithe"/>
+	<comment> <![CDATA[password lost table]]> </comment>
+	<tag name="acl"/>
+	<position x="1180" y="400"/>
+	<column name="passwordlost_id" not-null="true" sequence="gacl.passwordlost_passwordlost_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="token" not-null="true">
+		<type name="character varying" length="0"/>
+		<comment> <![CDATA[token used for renewal]]> </comment>
+	</column>
+	<column name="expiration" not-null="true">
+		<type name="timestamp" length="0"/>
+		<comment> <![CDATA[Token expiration date]]> </comment>
+	</column>
+	<column name="usedate">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="passwordlost_pk" type="pk-constr" table="gacl.passwordlost">
+		<columns names="passwordlost_id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="aclaco_has_many_aclacl" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#a40000"
+	 src-table="gacl.aclaco"
+	 dst-table="gacl.aclacl"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+
+	 deferrable="true" defer-type="INITIALLY IMMEDIATE"/>
+
+<relationship name="aclappli_has_many_aclaco" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#a40000"
+	 src-table="gacl.aclappli"
+	 dst-table="gacl.aclaco"
+	 src-required="true" dst-required="false"
+	 deferrable="true" defer-type="INITIALLY IMMEDIATE"/>
+
+<relationship name="aclgroup_has_many_aclacl" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#a40000"
+	 src-table="gacl.aclgroup"
+	 dst-table="gacl.aclacl"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+
+	 deferrable="true" defer-type="INITIALLY IMMEDIATE"/>
+
+<relationship name="acllogin_has_many_acllogingroup" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#a40000"
+	 src-table="gacl.acllogin"
+	 dst-table="gacl.acllogingroup"
+	 src-required="true" dst-required="false"
+	 identifier="true"
+
+	 deferrable="true" defer-type="INITIALLY IMMEDIATE"/>
+
+<relationship name="logingestion_has_many_passwordlost" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#a40000"
+	 src-table="gacl.logingestion"
+	 dst-table="gacl.passwordlost"
+	 src-required="true" dst-required="false"
+	 deferrable="true" defer-type="INITIALLY IMMEDIATE"/>
+
+<extension name="tablefunc" cur-version="1.0">
+	<schema name="public"/>
+	<comment> <![CDATA[functions that manipulate whole tables, including crosstab]]> </comment>
+</extension>
+
+<sequence name="login_oldpassword_login_oldpassword_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="9223372036854775807" cache="1">
+	<schema name="gacl"/>
+	<role name="quinton"/>
+</sequence>
+
+<relationship name="aclgroup_has_many_acllogingroup" type="rel1n" layers="0"
+	 src-col-pattern="{sc}"
+	 pk-pattern="{dt}" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}"
+	 custom-color="#a40000"
+	 src-table="gacl.aclgroup"
+	 dst-table="gacl.acllogingroup"
+	 src-required="true" dst-required="false"
+	 deferrable="true" defer-type="INITIALLY IMMEDIATE"/>
+
+<constraint name="espece_individu_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="otolithe.espece" table="otolithe.individu">
+	<columns names="espece_id" ref-type="src-columns"/>
+	<columns names="espece_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="peche_individu_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="otolithe.peche" table="otolithe.individu">
+	<columns names="peche_id" ref-type="src-columns"/>
+	<columns names="peche_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="sexe_individu_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="otolithe.sexe" table="otolithe.individu">
+	<columns names="sexe_id" ref-type="src-columns"/>
+	<columns names="sexe_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="experimentation_individu_experimentation_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="otolithe.experimentation" table="otolithe.individu_experimentation">
+	<columns names="exp_id" ref-type="src-columns"/>
+	<columns names="exp_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="individu_individu_experimentation_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="otolithe.individu" table="otolithe.individu_experimentation">
+	<columns names="individu_id" ref-type="src-columns"/>
+	<columns names="individu_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="experimentation_lecteur_experimentation_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="otolithe.experimentation" table="otolithe.lecteur_experimentation">
+	<columns names="exp_id" ref-type="src-columns"/>
+	<columns names="exp_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="lecteur_lecteur_experimentation_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="otolithe.lecteur" table="otolithe.lecteur_experimentation">
+	<columns names="lecteur_id" ref-type="src-columns"/>
+	<columns names="lecteur_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_photo_lumieretype" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="otolithe.lumieretype" table="otolithe.photo">
+	<columns names="lumieretype_id" ref-type="src-columns"/>
+	<columns names="lumieretype_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_photo_piece" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="otolithe.piece" table="otolithe.photo">
+	<columns names="piece_id" ref-type="src-columns"/>
+	<columns names="piece_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="final_stripe_photolecture_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="otolithe.final_stripe" table="otolithe.photolecture">
+	<columns names="final_stripe_id" ref-type="src-columns"/>
+	<columns names="final_stripe_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_photolecture_lecteur" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="otolithe.lecteur" table="otolithe.photolecture">
+	<columns names="lecteur_id" ref-type="src-columns"/>
+	<columns names="lecteur_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_photolecture_photo" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="otolithe.photo" table="otolithe.photolecture">
+	<columns names="photo_id" ref-type="src-columns"/>
+	<columns names="photo_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="individu_piece_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="otolithe.individu" table="otolithe.piece">
+	<columns names="individu_id" ref-type="src-columns"/>
+	<columns names="individu_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_piece_piecetype" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="otolithe.piecetype" table="otolithe.piece">
+	<columns names="piecetype_id" ref-type="src-columns"/>
+	<columns names="piecetype_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_piece_traitement" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="otolithe.traitementpiece" table="otolithe.piece">
+	<columns names="traitementpiece_id" ref-type="src-columns"/>
+	<columns names="traitementpiece_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="piece_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="otolithe.piece" table="otolithe.piecemetadata">
+	<columns names="piece_id" ref-type="src-columns"/>
+	<columns names="piece_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="metadatatype_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="otolithe.metadatatype" table="otolithe.piecemetadata">
+	<columns names="metadatatype_id" ref-type="src-columns"/>
+	<columns names="metadatatype_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="aclaco_aclacl_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclaco" table="gacl.aclacl">
+	<columns names="aclaco_id" ref-type="src-columns"/>
+	<columns names="aclaco_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="aclgroup_aclacl_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclgroup" table="gacl.aclacl">
+	<columns names="aclgroup_id" ref-type="src-columns"/>
+	<columns names="aclgroup_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="aclappli_aclaco_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclappli" table="gacl.aclaco">
+	<columns names="aclappli_id" ref-type="src-columns"/>
+	<columns names="aclappli_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="aclgroup_aclgroup_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.aclgroup" table="gacl.aclgroup">
+	<columns names="aclgroup_id_parent" ref-type="src-columns"/>
+	<columns names="aclgroup_id" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="acllogin_acllogingroup_fk" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="gacl.acllogin" table="gacl.acllogingroup">
+	<columns names="acllogin_id" ref-type="src-columns"/>
+	<columns names="acllogin_id" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_individu_espece" type="relfk" layers="0"
+	 src-table="otolithe.individu"
+	 dst-table="otolithe.espece" reference-fk="espece_individu_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_individu_peche" type="relfk" layers="0"
+	 src-table="otolithe.individu"
+	 dst-table="otolithe.peche" reference-fk="peche_individu_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_individu_sexe" type="relfk" layers="0"
+	 src-table="otolithe.individu"
+	 dst-table="otolithe.sexe" reference-fk="sexe_individu_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_individu_experimentation_experimentation" type="relfk" layers="0"
+	 src-table="otolithe.individu_experimentation"
+	 dst-table="otolithe.experimentation" reference-fk="experimentation_individu_experimentation_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_individu_experimentation_individu" type="relfk" layers="0"
+	 src-table="otolithe.individu_experimentation"
+	 dst-table="otolithe.individu" reference-fk="individu_individu_experimentation_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_lecteur_experimentation_experimentation" type="relfk" layers="0"
+	 src-table="otolithe.lecteur_experimentation"
+	 dst-table="otolithe.experimentation" reference-fk="experimentation_lecteur_experimentation_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_lecteur_experimentation_lecteur" type="relfk" layers="0"
+	 src-table="otolithe.lecteur_experimentation"
+	 dst-table="otolithe.lecteur" reference-fk="lecteur_lecteur_experimentation_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_photo_lumieretype" type="relfk" layers="0"
+	 src-table="otolithe.photo"
+	 dst-table="otolithe.lumieretype" reference-fk="fk_photo_lumieretype"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_photo_piece" type="relfk" layers="0"
+	 src-table="otolithe.photo"
+	 dst-table="otolithe.piece" reference-fk="fk_photo_piece"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_photolecture_final_stripe" type="relfk" layers="0"
+	 src-table="otolithe.photolecture"
+	 dst-table="otolithe.final_stripe" reference-fk="final_stripe_photolecture_fk"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_photolecture_lecteur" type="relfk" layers="0"
+	 src-table="otolithe.photolecture"
+	 dst-table="otolithe.lecteur" reference-fk="fk_photolecture_lecteur"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_photolecture_photo" type="relfk" layers="0"
+	 src-table="otolithe.photolecture"
+	 dst-table="otolithe.photo" reference-fk="fk_photolecture_photo"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_piece_individu" type="relfk" layers="0"
+	 src-table="otolithe.piece"
+	 dst-table="otolithe.individu" reference-fk="individu_piece_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_piece_piecetype" type="relfk" layers="0"
+	 src-table="otolithe.piece"
+	 dst-table="otolithe.piecetype" reference-fk="fk_piece_piecetype"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_piece_traitementpiece" type="relfk" layers="0"
+	 src-table="otolithe.piece"
+	 dst-table="otolithe.traitementpiece" reference-fk="fk_piece_traitement"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_piecemetadata_piece" type="relfk" layers="0"
+	 src-table="otolithe.piecemetadata"
+	 dst-table="otolithe.piece" reference-fk="piece_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_piecemetadata_metadatatype" type="relfk" layers="0"
+	 src-table="otolithe.piecemetadata"
+	 dst-table="otolithe.metadatatype" reference-fk="metadatatype_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_aclgroup_aclgroup" type="relfk" layers="0"
+	 src-table="gacl.aclgroup"
+	 dst-table="gacl.aclgroup" reference-fk="aclgroup_aclgroup_fk"
+	 src-required="false" dst-required="false">
+	<line>
+		<position x="411.747" y="438.241"/>
+	<position x="411.747" y="367"/>
+	<position x="265.831" y="367"/>
+	</line>
+</relationship>
+
+<relationship name="rel_aclacl_aclaco" type="relfk" layers="0"
+	 src-table="gacl.aclacl"
+	 dst-table="gacl.aclaco" reference-fk="aclaco_aclacl_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_aclacl_aclgroup" type="relfk" layers="0"
+	 src-table="gacl.aclacl"
+	 dst-table="gacl.aclgroup" reference-fk="aclgroup_aclacl_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_aclaco_aclappli" type="relfk" layers="0"
+	 src-table="gacl.aclaco"
+	 dst-table="gacl.aclappli" reference-fk="aclappli_aclaco_fk"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_acllogingroup_acllogin" type="relfk" layers="0"
+	 src-table="gacl.acllogingroup"
+	 dst-table="gacl.acllogin" reference-fk="acllogin_acllogingroup_fk"
+	 src-required="false" dst-required="true"/>
+
+<permission>
+	<object name="gacl" type="schema"/>
+	<roles names="postgres"/>
+	<privileges create="true" usage="true"/>
+</permission>
+<permission>
+	<object name="gacl.aclacl" type="table"/>
+	<roles names="quinton"/>
+	<privileges select="true" delete="true" insert="true" update="true" truncate="true" references="true" trigger="true"/>
+</permission>
+<permission>
+	<object name="gacl.aclaco" type="table"/>
+	<roles names="quinton"/>
+	<privileges select="true" delete="true" insert="true" update="true" truncate="true" references="true" trigger="true"/>
+</permission>
+<permission>
+	<object name="gacl.aclappli" type="table"/>
+	<roles names="quinton"/>
+	<privileges select="true" delete="true" insert="true" update="true" truncate="true" references="true" trigger="true"/>
+</permission>
+<permission>
+	<object name="gacl.aclgroup" type="table"/>
+	<roles names="quinton"/>
+	<privileges select="true" delete="true" insert="true" update="true" truncate="true" references="true" trigger="true"/>
+</permission>
+<permission>
+	<object name="gacl.acllogin" type="table"/>
+	<roles names="quinton"/>
+	<privileges select="true" delete="true" insert="true" update="true" truncate="true" references="true" trigger="true"/>
+</permission>
+<permission>
+	<object name="gacl.acllogingroup" type="table"/>
+	<roles names="quinton"/>
+	<privileges select="true" delete="true" insert="true" update="true" truncate="true" references="true" trigger="true"/>
+</permission>
+<permission>
+	<object name="gacl.log" type="table"/>
+	<roles names="quinton"/>
+	<privileges select="true" delete="true" insert="true" update="true" truncate="true" references="true" trigger="true"/>
+</permission>
+<permission>
+	<object name="gacl.logingestion" type="table"/>
+	<roles names="postgres"/>
+	<privileges select="true" delete="true" insert="true" update="true" truncate="true" references="true" trigger="true"/>
+</permission>
+</dbmodel>

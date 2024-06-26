@@ -20,7 +20,7 @@
 # Ppci configuration
 #--------------------------------------------------------------------
 app.baseURL = 'https://myapp.mysociety.com'
-BASE_DIR = "/var/www/otolitheApp/otolithe2"
+BASE_DIR = "/var/www/otolitheApp/otolithe"
 FRONT_DIR = "${BASE_DIR}/public"
 # If you have trouble with `.`, you could also use `_`.
 app.CSPEnabled = false
