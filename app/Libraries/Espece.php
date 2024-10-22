@@ -11,11 +11,11 @@ class Espece extends PpciLibrary
     /**
      * @var ModelsEspece
      */
-    protected $dataclass;
+    
     function __construct()
     {
         parent::__construct();
-        $this->dataClass = new ModelsEspece();
+        $this->dataclass = new ModelsEspece();
         $keyName = "espece_id";
         if (isset($_REQUEST[$keyName])) {
             $this->id = $_REQUEST[$keyName];
@@ -26,7 +26,7 @@ class Espece extends PpciLibrary
     {
         $this->vue = service('AjaxView');
         if (strlen($_REQUEST["libelle"]) > 2) {
-            $this->vue->set($this->dataClass->getEspeceJSON($_REQUEST["libelle"]));
+            $this->vue->set($this->dataclass->getEspeceJSON($_REQUEST["libelle"]));
             return $this->vue->send();
         }
     }
@@ -36,7 +36,7 @@ class Espece extends PpciLibrary
          * Display the list of all records of the table
          */
         $this->vue = service('Smarty');
-        $this->vue->set($this->dataClass->getListe(), "data");
+        $this->vue->set($this->dataclass->getListe(), "data");
         $this->vue->set("gestion/especeList.tpl", "corps");
         return $this->vue->send();
     }

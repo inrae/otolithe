@@ -8,14 +8,14 @@ use CodeIgniter\Cookie\Cookie;
 
 class Login extends PpciLibrary
 {
-    protected $dataclass;
+    protected $datalogin;
     public $identificationConfig;
     protected $acllogin;
     protected $gacltotp;
     function __construct()
     {
         parent::__construct();
-        $this->dataclass = new \Ppci\Models\Login();
+        $this->datalogin = new \Ppci\Models\Login();
         $this->identificationConfig = service('IdentificationConfig');
         $this->acllogin = new \Ppci\Models\Acllogin();
         $this->gacltotp = new Gacltotp($this->appConfig->privateKey, $this->appConfig->pubKey);
@@ -28,7 +28,16 @@ class Login extends PpciLibrary
     function getLogin()
     {
         try {
-            $ident_type = $this->identificationConfig->identificationMode;
+            if (!empty($_REQUEST["token"]) && !empty($_REQUEST["login"])) {
+                $ident_type = "ws";
+                $_SESSION["login"] = strtolower($this->datalogin->getLogin($ident_type));
+                if (!empty($_SESSION["login"])) {
+                    $this->postLogin($ident_type);
+                }
+                return;
+            } else {
+                $ident_type = $this->identificationConfig->identificationMode;
+            }
             if (in_array($ident_type, ["BDD", "CAS", "CAS-BDD", "OIDC", "OIDC-BDD"]) && in_array($_REQUEST["identificationType"], ["CAS", "BDD", "OIDC"])) {
                 $ident_type = $_REQUEST["identificationType"];
             }
@@ -48,10 +57,8 @@ class Login extends PpciLibrary
                  * Verify the login
                  */
                 if (empty($_SESSION["login"])) {
-                    if (!empty($_REQUEST["token"]) && !empty($_REQUEST["login"])) {
-                        $ident_type = "ws";
-                    }
-                    $_SESSION["login"] = strtolower($this->dataclass->getLogin($ident_type));
+
+                    $_SESSION["login"] = strtolower($this->datalogin->getLogin($ident_type));
                 }
             }
             if (!empty($_SESSION["login"])) {
@@ -104,11 +111,11 @@ class Login extends PpciLibrary
         $CAS_enabled = 0;
         if ($this->identificationConfig->identificationMode == "CAS-BDD") {
             $CAS_enabled = 1;
-            $vue->set($this->identificationConfig->identificationLogo,"getLogo");
+            $vue->set($this->identificationConfig->identificationLogo, "getLogo");
         }
         if ($this->identificationConfig->identificationMode == "OIDC-BDD") {
             $OIDC_enabled = 1;
-            $vue->set($this->identificationConfig->identificationLogo,"getLogo");
+            $vue->set($this->identificationConfig->identificationLogo, "getLogo");
         }
         $vue->set($CAS_enabled, "CAS_enabled");
         $vue->set($OIDC_enabled, "OIDC_enabled");

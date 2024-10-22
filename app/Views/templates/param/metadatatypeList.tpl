@@ -33,7 +33,7 @@
 				</div>
 			</div>
 
-			<table id="metadataList" class="table table-bordered table-hover datatable" data-order='[[1,"asc"]]'>
+			<table id="metadataList" class="table table-bordered table-hover datatable display" data-order='[[1,"asc"]]'>
 				<thead>
 					<tr>
 						<th>{t}Identifiant{/t}</th>

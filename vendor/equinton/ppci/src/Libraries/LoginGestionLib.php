@@ -9,13 +9,13 @@ class LoginGestionLib extends PpciLibrary
     function __construct()
     {
         parent::__construct();
-        $this->dataClass = new LoginGestion();
+        $this->dataclass = new LoginGestion();
     }
 
     function index()
     {
         $vue = service("Smarty");
-        $data = $this->dataClass->getlist();
+        $data = $this->dataclass->getlist();
         $vue->set($data, "data");
         $vue->set("ppci/ident/loginliste.tpl", "corps");
         return $vue->send();
@@ -31,7 +31,7 @@ class LoginGestionLib extends PpciLibrary
              * Add dbconnect_provisional_nb
              */
             if (!empty($data["login"])) {
-                $data["dbconnect_provisional_nb"] = $this->dataClass->getDbconnectProvisionalNb($data["login"]);
+                $data["dbconnect_provisional_nb"] = $this->dataclass->getDbconnectProvisionalNb($data["login"]);
             }
             $vue->set($data, "data");
             return $vue->send();
@@ -43,7 +43,7 @@ class LoginGestionLib extends PpciLibrary
     function write()
     {
         try {
-            $id = $this->dataClass->write($_REQUEST);
+            $id = $this->dataclass->write($_REQUEST);
             if ($id > 0) {
                 /*
                  * Ecriture du compte dans la table acllogin
@@ -66,7 +66,7 @@ class LoginGestionLib extends PpciLibrary
     }
     function delete()
     {
-        if ($this->dataDelete($this->id)) {
+        if ($this->dataDelete($_REQUEST["id"])) {
             return $this->index();
         } else {
             return $this->change();
@@ -88,17 +88,17 @@ class LoginGestionLib extends PpciLibrary
     function changePasswordExec()
     {
         try {
-            $this->dataClass->changePassword($_REQUEST["oldPassword"], $_REQUEST["pass1"], $_REQUEST["pass2"]);
+            $this->dataclass->changePassword($_REQUEST["oldPassword"], $_REQUEST["pass1"], $_REQUEST["pass2"]);
             /**
              * Send mail to the user
              */
-            $data = $this->dataClass->lireByLogin($_SESSION["login"]);
+            $data = $this->dataclass->lireByLogin($_SESSION["login"]);
             if (!empty($data["mail"]) && $this->appConfig->MAIL_enabled) {
                 $dbparam = service("Dbparam");
                 $subject = sprintf(_("%s - changement de mot de passe"), $dbparam->getParam("APPLI_title"));
                 $mail = new Mail($this->appConfig->MAIL_param);
                 $data["APPLI_address"] = $this->appConfig->baseURL;
-                $data["applicationName"] = $_SESSION["APPLI_title"];
+                $data["applicationName"] = $_SESSION["dbparams"]["APPLI_title"];
                 if ($mail->SendMailSmarty( $data["mail"], $subject, "ppci/mail/passwordChanged.tpl", $data)) {
                     $this->log->setLog($_SESSION["login"], "password mail confirm", "ok");
                 } else {

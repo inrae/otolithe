@@ -1,6 +1,10 @@
 News
 ====================
-Version 2024.0.0 of 26 June 2024
+Version 24.0.1 of 22/10/2024
+----------------------------
+Upgrade of third-party libraries
+
+Version 24.0.0 of 26 June 2024
 ---------------------------
 Porting of the application to the Codeigniter framework, using the equinton/ppci module to emulate the functions of the old framework.
 

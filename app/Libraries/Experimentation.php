@@ -12,12 +12,12 @@ class Experimentation extends PpciLibrary
     /**
      * @var ModelsExperimentation
      */
-    protected $dataclass;
+    
 
     function __construct()
     {
         parent::__construct();
-        $this->dataClass = new ModelsExperimentation();
+        $this->dataclass = new ModelsExperimentation();
         $keyName = "exp_id";
         if (isset($_REQUEST[$keyName])) {
             $this->id = $_REQUEST[$keyName];
@@ -30,7 +30,7 @@ class Experimentation extends PpciLibrary
         /*
          * Display the list of all records of the table
          */
-        $this->vue->set($this->dataClass->getListe(), "data");
+        $this->vue->set($this->dataclass->getListe(), "data");
         $this->vue->set("gestion/experimentationList.tpl", "corps");
         return $this->vue->send();
     }
@@ -39,7 +39,7 @@ class Experimentation extends PpciLibrary
     {
         $this->vue = service('Smarty');
         $this->dataRead($this->id, "gestion/experimentationChange.tpl");
-        $this->vue->set($this->dataClass->getReaders($this->id), "lecteurs");
+        $this->vue->set($this->dataclass->getReaders($this->id), "lecteurs");
         return $this->vue->send();
     }
     function write()

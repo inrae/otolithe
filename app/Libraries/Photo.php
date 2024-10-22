@@ -18,7 +18,7 @@ class Photo extends PpciLibrary
     function __construct()
     {
         parent::__construct();
-        $this->dataClass = new ModelsPhoto();
+        $this->dataclass = new ModelsPhoto();
         $this->id = $_SESSION["it_photo"]->getValue($_REQUEST["photo_id"]);
     }
 
@@ -28,7 +28,7 @@ class Photo extends PpciLibrary
          * Display the detail of the record
          */
         $this->vue = service("Smarty");
-        $data = $this->dataClass->getDetail($this->id);
+        $data = $this->dataclass->getDetail($this->id);
         $dataT = $_SESSION["it_photo"]->translateRow($data);
         $dataT = $_SESSION["it_piece"]->translateRow($dataT);
         /*
@@ -66,7 +66,7 @@ class Photo extends PpciLibrary
         /*
          * Preparation de l'affichage de la miniature
          */
-        $this->vue->set($this->dataClass->writeFilePhoto($this->id, 1), "photoPath");
+        $this->vue->set($this->dataclass->writeFilePhoto($this->id, 1), "photoPath");
         $this->vue->set($dataT, "data");
         $this->vue->set($_SESSION["moduleListe"],"moduleListe");
         $this->vue->set("gestion/photoDisplay.tpl", "corps");
@@ -181,7 +181,7 @@ class Photo extends PpciLibrary
         }
         $_REQUEST["original_format"] == 1 ? $isOrigin = true : $isOrigin = false;
         try {
-            $photopath = $this->dataClass->writeFilePhoto($this->id, 0, $_REQUEST["sizeX"], $_REQUEST["sizeY"], $isOrigin);
+            $photopath = $this->dataclass->writeFilePhoto($this->id, 0, $_REQUEST["sizeX"], $_REQUEST["sizeY"], $isOrigin);
         } catch (PpciException $pe) {
             $this->message->setSyslog($pe->getMessage());
         }
@@ -197,7 +197,7 @@ class Photo extends PpciLibrary
          * Affiche le contenu de la vignette
          */
         try {
-            $photoname = $this->dataClass->getPhotoName($this->id, 1);
+            $photoname = $this->dataclass->getPhotoName($this->id, 1);
         } catch (PpciException $pe) {
             $this->message->setSyslog($pe->getMessage());
         }
@@ -211,7 +211,7 @@ class Photo extends PpciLibrary
          * Affiche a l'ecran la photo en pleine resolution
          */
         $this->vue = service('BinaryView');
-        $this->dataClass->writeFilePhoto($this->id, 0, 0, 0, true);
+        $this->dataclass->writeFilePhoto($this->id, 0, 0, 0, true);
         $this->vue->set($_SESSION["it_photo"]->setValue($this->id), "photo_id");
         $this->vue->set("gestion/photoDisplayPhoto.tpl", "corps");
         return $this->vue->send();

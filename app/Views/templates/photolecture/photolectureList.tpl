@@ -3,7 +3,7 @@
 {if $isSearch == 1}
 <div class="row">
     <div class="col-md-12">
-        <table id="idListe" class="table table-bordered table-hover datatable">
+        <table id="idListe" class="table table-bordered table-hover datatable display">
             <thead>
                 <tr>
                     <th>{t}Individu{/t}</th>

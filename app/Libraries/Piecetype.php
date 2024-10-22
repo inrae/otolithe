@@ -11,7 +11,7 @@ class Piecetype extends PpciLibrary
     function __construct()
     {
         parent::__construct();
-        $this->dataClass = new ModelsPiecetype();
+        $this->dataclass = new ModelsPiecetype();
         if (isset($_REQUEST["piecetype_id"])) {
             $this->id = $_REQUEST["piecetype_id"];
         }
@@ -23,7 +23,7 @@ class Piecetype extends PpciLibrary
          * Display the list of all records of the table
          */
         $this->vue = service("Smarty");
-        $this->vue->set($this->dataClass->getListe(1), "data");
+        $this->vue->set($this->dataclass->getListe(1), "data");
         $this->vue->set("gestion/piecetypeList.tpl", "corps");
         return $this->vue->send();
     }

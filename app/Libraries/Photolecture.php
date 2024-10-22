@@ -17,7 +17,7 @@ class Photolecture extends PpciLibrary
     function __construct()
     {
         parent::__construct();
-        $this->dataClass = new ModelsPhotolecture();
+        $this->dataclass = new ModelsPhotolecture();
         if (is_array($_REQUEST["photolecture_id"])) {
             foreach ($_REQUEST["photolecture_id"] as $value) {
                 $this->ids[] = $_SESSION["it_photolecture"]->getValue($value);
@@ -95,9 +95,9 @@ class Photolecture extends PpciLibrary
          * Recuperation des lectures effectuees
          */
         if (!empty($this->ids)) {
-            $data = $this->dataClass->getDetailLecture($this->ids, $coef);
+            $data = $this->dataclass->getDetailLecture($this->ids, $coef);
         } else {
-            $data = $this->dataClass->getDetailLecture($this->id, $coef);
+            $data = $this->dataclass->getDetailLecture($this->id, $coef);
         }
         $data = $_SESSION["it_photolecture"]->translateList($data);
         $data = $_SESSION["it_photo"]->translateList($data);
@@ -159,7 +159,7 @@ class Photolecture extends PpciLibrary
                 /**
                  * On verifie que le lecteur est celui qui a precedemment fait la lecture
                  */
-                $data = $this->dataClass->lire($this->id);
+                $data = $this->dataclass->lire($this->id);
                 if ($data["lecteur_id"] != $lecteur_id) {
                     $this->message->set(_("Vous n'êtes pas le lecteur initial : vous ne pouvez modifier cette lecture"), true);
                     return $this->display();
@@ -256,7 +256,7 @@ class Photolecture extends PpciLibrary
         $image_height = floor($dataPhoto["photo_height"] / $coef);
         $this->vue->set($image_width, "image_width");
         $this->vue->set($image_height, "image_height");
-        $dataDetail = $this->dataClass->getDetailLecture($this->id, $coef);
+        $dataDetail = $this->dataclass->getDetailLecture($this->id, $coef);
         $dataT = $_SESSION["it_photolecture"]->translateRow($dataDetail);
         $dataT = $_SESSION["it_photo"]->translateRow($dataT);
         $this->vue->set($dataT, "data");
@@ -265,7 +265,7 @@ class Photolecture extends PpciLibrary
          * Recuperation des lectures precedentes
          */
         if (isset($mesurePrecId)) {
-            $mesurePrec = $this->dataClass->getDetailLecture($mesurePrecId, $coef, $this->id);
+            $mesurePrec = $this->dataclass->getDetailLecture($mesurePrecId, $coef, $this->id);
             $this->vue->set($mesurePrec, "mesurePrec");
         }
         $this->vue->set($coef, "coef_correcteur");
@@ -274,16 +274,16 @@ class Photolecture extends PpciLibrary
          * Calcul des points pour reaffichage en mode saisie
          */
         if ($data["photolecture_id"] > 0) {
-            $dataPoint = $this->dataClass->lirePoints($data["photolecture_id"]);
+            $dataPoint = $this->dataclass->lirePoints($data["photolecture_id"]);
             if (strlen($dataPoint["points"]) > 0) {
-                $data["points"] = $this->dataClass->calculPointsAffichage(
+                $data["points"] = $this->dataclass->calculPointsAffichage(
                     $dataPoint["points"],
                     $coef,
                     $data["remarkable_points"]
                 );
             }
             if (strlen($dataPoint["points_ref_lecture"]) > 0) {
-                $data["points_ref_lecture"] = $this->dataClass->calculPointsAffichage($dataPoint["points_ref_lecture"], $coef);
+                $data["points_ref_lecture"] = $this->dataclass->calculPointsAffichage($dataPoint["points_ref_lecture"], $coef);
             }
         }
         /**
@@ -358,7 +358,7 @@ class Photolecture extends PpciLibrary
             /**
              * Recherche si l'utilisateur modifie sa lecture
              */
-            if ($this->dataClass->getLecteur($this->id)["login"] == $_SESSION["login"]) {
+            if ($this->dataclass->getLecteur($this->id)["login"] == $_SESSION["login"]) {
                 $deleteOk = true;
             }
         }
@@ -392,7 +392,7 @@ class Photolecture extends PpciLibrary
         $_SESSION["searchLecture"]->setParam($_REQUEST);
         $dataRecherche = $_SESSION["searchLecture"]->getParam();
         if ($_SESSION["searchLecture"]->isSearch() == 1) {
-            $data = $this->dataClass->getListSearch($dataRecherche);
+            $data = $this->dataclass->getListSearch($dataRecherche);
             $data = $_SESSION["it_photolecture"]->translateList($data);
             $data = $_SESSION["it_photo"]->translateList($data);
             $data = $_SESSION["it_individu"]->translateList($data);
@@ -434,7 +434,7 @@ class Photolecture extends PpciLibrary
          */
 
         $dataRecherche = $_SESSION["searchLecture"]->getParam();
-        $data = $this->dataClass->getListSearch($dataRecherche);
+        $data = $this->dataclass->getListSearch($dataRecherche);
         $data = $_SESSION["it_photolecture"]->translateList($data);
         $data = $_SESSION["it_photo"]->translateList($data);
         $data = $_SESSION["it_individu"]->translateList($data);
@@ -481,7 +481,7 @@ class Photolecture extends PpciLibrary
 
                 /** Traitement des points - calcul des coordonnees */
                 if (strlen($row["points"]) > 0) {
-                    $dataPoints["points"] = $this->dataClass->calculPointsAffichage($row["points"], 1);
+                    $dataPoints["points"] = $this->dataclass->calculPointsAffichage($row["points"], 1);
                 }
 
                 /**
@@ -497,7 +497,7 @@ class Photolecture extends PpciLibrary
                         /**
                          * Rajout de la distance au point precedent
                          */
-                        $ligne["dist-" . ($i - 1) . "-" . $i] = $this->dataClass->calculDistance($x1, $y1, $value1["x"], $value1["y"]);
+                        $ligne["dist-" . ($i - 1) . "-" . $i] = $this->dataclass->calculDistance($x1, $y1, $value1["x"], $value1["y"]);
                     }
 
                     $x1 = $value1["x"];

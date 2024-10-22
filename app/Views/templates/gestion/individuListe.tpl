@@ -8,7 +8,7 @@
 {/if}
 	<div class="row">
 	<div class="col-md-12">
-<table id="idListe" class="table table-bordered table-hover datatable" data-searching="true">
+<table id="idListe" class="table table-bordered table-hover datatable display" data-searching="true">
 <thead>
 <tr>
 <th>{t}Code individu{/t}</th>

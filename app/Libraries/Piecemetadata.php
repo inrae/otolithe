@@ -18,7 +18,7 @@ class Piecemetadata extends PpciLibrary
     function __construct()
     {
         parent::__construct();
-        $this->dataClass = new ModelsPiecemetadata();
+        $this->dataclass = new ModelsPiecemetadata();
         $this->id = $_SESSION["it_piecemetadata"]->getValue($_REQUEST["piecemetadata_id"]);
         $this->piece_id = $_SESSION["it_piece"]->getValue($_REQUEST["piece_id"]);
     }
@@ -114,7 +114,7 @@ class Piecemetadata extends PpciLibrary
                 $data["piecemetadata_date"] = $_REQUEST["piecemetadata_date"];
                 $data["piecemetadata_comment"] = $_REQUEST["piecemetadata_comment"];
                 $data["metadata"] = json_encode($import->getContentAsArray());
-                $this->dataClass->ecrire($data);
+                $this->dataclass->ecrire($data);
                 $this->message->set(_("Importation du jeu de métadonnées effectué"));
             } catch (PpciException $e) {
                 $this->message->set($e->getMessage(), true);
@@ -128,7 +128,7 @@ class Piecemetadata extends PpciLibrary
     function export()
     {
         $this->vue = service("CsvView");
-        $data = $this->dataClass->lire($this->id);
+        $data = $this->dataclass->lire($this->id);
         $this->vue->set(json_decode($data["metadata"], true));
         return $this->vue->send();
     }

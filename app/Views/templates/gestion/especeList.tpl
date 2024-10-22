@@ -8,7 +8,7 @@
 	{t}Nouvelle espèce...{/t}
 	</a>
 	{/if}
-<table id="ptList" class="table table-bordered table-hover datatable" data-searching="true" data-order='[[1,"asc"]]'>
+<table id="ptList" class="table table-bordered table-hover datatable display" data-searching="true" data-order='[[1,"asc"]]'>
 <thead>
 <tr>
 <th>{t}Id{/t}</th>

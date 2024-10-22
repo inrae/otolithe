@@ -170,7 +170,7 @@
 					<input type="hidden" name="photo_id" value="{$data.photo_id}">
 					<div class="row">
 						<div class="col-lg-12">
-							<table class="datatable-nopaging table-bordered table-hover" data-order='[[2,"desc"]]'>
+							<table class="datatable-nopaging display display table-bordered table-hover" data-order='[[2,"desc"]]'>
 								<thead>
 									<tr>
 										{if $rights.read == 1}

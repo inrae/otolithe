@@ -1,4 +1,5 @@
 <?php
+
 namespace Ppci\Filters;
 
 use CodeIgniter\Filters\FilterInterface;
@@ -24,15 +25,19 @@ class RightFilter implements FilterInterface
                 $ppciRights = new \Ppci\Config\Rights();
                 $requiredRights = $ppciRights->getRights($moduleName);
             }
-            if (!empty($requiredRights)) {
+            if (!empty($requiredRights) || (isset($_REQUEST["login"]) && isset($_REQUEST["token"]))) {
+                $hasRedirect = true;
                 $ok = false;
                 if (!isset($_SESSION["isLogged"])) {
                     if ($request->is("get")) {
                         $_SESSION["moduleRequired"] = $moduleName;
+                        $_SESSION["get"] = $_GET;
+                        $_SESSION["request"] = $_REQUEST;
+                        $hasRedirect = false;
                     }
                     $login = new \Ppci\Libraries\Login();
                     $retour = $login->getLogin();
-                    if (isset($retour)) {
+                    if (!empty($retour)) {
                         return redirect()->to(site_url($retour));
                     }
                 }
@@ -47,12 +52,15 @@ class RightFilter implements FilterInterface
                     $message->set(_("Vous ne disposez pas des droits nécessaires pour exécuter cette fonction"), true);
                     helper("ppci");
                     setLogRequest($request, "ko: insufficient rights");
-                    $defaultPage = new \Ppci\Libraries\DefaultPage();
-                    return ($defaultPage->display());
+                    return defaultPage();
                 } else {
-                    if (isset($_SESSION["moduleRequired"])) {
+                    if (!empty($_SESSION["moduleRequired"]) && $hasRedirect) {
                         $retour = $_SESSION["moduleRequired"];
-                        unset ($_SESSION["moduleRequired"]);
+                        unset($_SESSION["moduleRequired"]);
+                        $_GET = $_SESSION["get"];
+                        $_REQUEST = $_SESSION["request"];
+                        unset($_SESSION["get"]);
+                        unset($_SESSION["request"]);
                         return redirect($retour);
                     }
                 }
@@ -60,7 +68,5 @@ class RightFilter implements FilterInterface
         }
     }
 
-    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
-    {
-    }
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null) {}
 }
