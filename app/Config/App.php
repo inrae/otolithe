@@ -182,13 +182,13 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public string $version = "v24.0.0";
+    public string $version = "v24.0.1";
     /**
      * versionDate - don't change here, but in function setParameters() below
      *
      * @var string
      */
-    public string $versionDate = "19/06/2024";
+    public string $versionDate = "22/10/2024";
     public string $dbversion = "24.0";
     public string $databaseSchemaFile = ROOTPATH . "documentation/otolithe-schema.png";
     /**
