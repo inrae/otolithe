@@ -6,7 +6,7 @@
 {/if}
 	<div class="row">
 	<div class="col-md-6">
-<table id="expList" class="table table-bordered table-hover datatable">
+<table id="expList" class="table table-bordered table-hover datatable display">
 <thead>
 <tr>
 <th>{t}Id{/t}</th>
