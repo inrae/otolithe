@@ -40,7 +40,7 @@ class Acllogin extends PpciModel
          * Delete from groups
          */
         $sql = "delete from acllogingroup where acllogin_id = :id:";
-        $this->executeQuery($sql, ["id" => $id]);
+        $this->executeQuery($sql, ["id" => $id], true);
         parent::delete($id);
     }
     function getListLogins()
@@ -114,7 +114,9 @@ class Acllogin extends PpciModel
                 }
             }
             $data["login"] = strtolower($login);
-            $data["email"] = strtolower($email);
+            if (!empty($email)) {
+                 $data["email"] = strtolower($email);
+            }
             return $this->ecrire($data);
         } else {
             throw new \Ppci\Libraries\PpciException(_("L'ajout d'un login à la table des comptes (gestion des droits) n'est pas possible : le login n'est pas fourni"));
@@ -215,7 +217,7 @@ class Acllogin extends PpciModel
              * Suppression du login dans les groupes
              */
             $sql = "delete from acllogingroup where acllogin_id = :id:";
-            $this->executeQuery($sql, array("id" => $id));
+            $this->executeQuery($sql, array("id" => $id), true);
             parent::supprimer($id);
             /*
              * Recherche s'il existe un login correspondant

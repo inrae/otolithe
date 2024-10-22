@@ -137,6 +137,6 @@ class Totp extends PpciLibrary
             unset($_SESSION["moduleRequired"]);
             return redirect()->to($retour);
         }
-        return $this->defaultPage->display();
+        return defaultPage();
     }
 }

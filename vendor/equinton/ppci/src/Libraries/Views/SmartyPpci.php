@@ -5,6 +5,7 @@ use Config\App;
 use \Smarty\Smarty;
 use \Ppci\Config\SmartyParam;
 use \Ppci\Models\Menu;
+use \App\Libraries\BeforeDisplay;
 
 
 class SmartyPpci
@@ -20,7 +21,7 @@ class SmartyPpci
         "corps" => "main.tpl",
         "display" => "/display",
         "favicon" => "/favicon.png",
-        "APP_title" => "Ppci",
+        "APPLI_title" => "Ppci",
         "APPLI_titre" => "Ppci",
         "LANG" => array(
             "date" => array(
@@ -84,7 +85,7 @@ class SmartyPpci
          * Assign variables from dbparam table
          */
         $dbparam = service("Dbparam");
-        $this->set($dbparam->getParam("APPLI_title"), "APP_title");
+        $this->set($dbparam->getParam("APPLI_title"), "APPLI_title");
         /**
          * Development mode
          */
@@ -131,6 +132,10 @@ class SmartyPpci
             }
             $this->set($_SESSION["userRights"], "rights");
             /**
+             * Add specific variables
+             */
+            BeforeDisplay::setGeneric($this);
+            /**
              * Encode data before send
              */
             foreach ($this->smarty->getTemplateVars() as $key => $value) {
@@ -142,7 +147,6 @@ class SmartyPpci
              * Generate the CSRF Field
              */
             $this->smarty->assign("csrf", csrf_field());
-            $this->smarty->assign("csp_script_nonce", csp_script_nonce());
 
             /**
              * Get messages

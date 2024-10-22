@@ -182,15 +182,25 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public string $version = "v23.0.0";
+    public string $version = "v24.0.0";
     /**
      * versionDate - don't change here, but in function setParameters() below
      *
      * @var string
      */
-    public string $versionDate = "13/12/2023";
-    public string $dbversion = "23.0";
-    public string $databaseSchemaFile = ROOTPATH . "documentation/metabo_database.png";
+    public string $versionDate = "30/06/2024";
+    /**
+     * Number of the database version
+     *
+     * @var string
+     */
+    public string $dbversion = "24.0";
+    /**
+     * Location of the database schema
+     *
+     * @var string
+     */
+    public string $databaseSchemaFile = ROOTPATH . "documentation/schema.png";
     /**
      * Duration of conservation of logs in table log
      *
@@ -206,7 +216,7 @@ class App extends BaseConfig
     public $privateKey = ROOTPATH . "id_app";
     public $pubKey = ROOTPATH . "id_app.pub";
     /**
-     * List of supported locales
+     * List of locales date formats
      *
      * @var array
      */
@@ -225,29 +235,30 @@ class App extends BaseConfig
             "maskdatelong" => "d/m/Y H:i:s",
             "maskdate" => "d/m/Y",
             "maskdateexport" => 'd-m-Y'
-        ],
-        "us" => [
-            "formatdate" => "MM/DD/YYYY",
-            "formatdatetime" => "MM/DD/YYYY HH:mm:ss",
-            "formatdatecourt" => "mm/dd/yy",
-            "maskdatelong" => "m/d/Y H:i:s",
-            "maskdate" => "m/d/Y",
-            "maskdateexport" => 'Y-m-d'
         ]
     ];
-    public $localePath = APPPATH.'locale';
+    /**
+     * List of locales used in the app. The second parameter must be declared in 
+     * /etc/locale.gen (locale-gen en-GB.UTF-8 to generate it)
+     *
+     * @var array
+     */
+    public $localesGettext = [
+        "en" => "en_GB.UTF-8",
+        "fr" => "C.UTF-8"
+    ];
     /**
      * Domain of defined rights
      *
      * @var string
      */
-    public $GACL_aco = "metabo";
+    public $GACL_aco = "app";
     /**
      * Generic mail used to send messages to the administrators
      *
      * @var string
      */
-    public $APP_mail = "metabo@inrae.fr";
+    public $APP_mail = "mail@society.com";
     /**
      * Set true if send mails is enabled
      *
@@ -288,7 +299,6 @@ class App extends BaseConfig
     /**
      * Ini file to add new parameters
      */
-    public $paramIniFile = ROOTPATH . "param.ini";
     public $APP_menufile = APPPATH . "Config/menu.xml";
     /**
      * Address to give help or to declare bug
@@ -300,13 +310,13 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $APP_help_address = "https://gitlab.irstea.fr/eabx-applis_web/metabo/-/issues/new";
+    public $APP_help_address = "https://github.com/equinton/ppci/issues/new";
     /**
      * Copyright - don't change directly here, but in setParameters function
      *
      * @var string
      */
-    public $copyright = "Copyright © 2020-2024 - All rights reserved. Author : Éric Quinton, for INRAE - EABX - Logiciel distributed under AGPL license";
+    public $copyright = "Copyright © 2024 - All rights reserved. Author : Éric Quinton - Software distributed under AGPL license";
 
     /**
      * Max duration of a session
@@ -315,20 +325,27 @@ class App extends BaseConfig
      */
     public $APPLI_absolute_session = 36000; // 10 hours
 
-    public $GACL_disable_new_right = 0;
+    /**
+     * Disable the possibility to create or modifiy a right into the application
+     *
+     * @var integer
+     */
+    public $GACL_disable_new_right = 1;
 
     /**
      * Get last release informations
+     * Ask Github or Gitlab to obtains informations on the last published release
      */
+    public $checkRelease = 1;
     /**
      * Github server
      */
     public $APPLI_release = [
         "provider" => "github",
-        "url" => "https://api.github.com/repos/collec-science/collec-science/releases/latest",
+        "url" => "https://api.github.com/repos/equinton/ppci/releases/latest",
         "tag" => "tag_name",
         "date" => "published_at",
-        "user_agent" => 'collec-science/collec-science',
+        "user_agent" => 'equinton/ppci',
         "description" => "body",
     ];
     /**

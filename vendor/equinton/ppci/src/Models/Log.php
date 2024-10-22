@@ -332,7 +332,7 @@ class Log extends PpciModel
         $this->setLog($login, "connectionBlocking");
         $message->setSyslog("connectionBlocking for login $login");
         $this->sendMailToAdmin(
-            sprintf(_("%s - Compte bloqué"), $_SESSION["APP_title"]),
+            sprintf(_("%s - Compte bloqué"), $_SESSION["APPLI_title"]),
             "ppci/mail/accountBlocked.tpl",
             array(
                 "login" => $login,
@@ -378,7 +378,7 @@ class Log extends PpciModel
             $message->setSyslog($GACL_aco . "-" . $APPLI_address . ":nbMaxCallReached-" . $messageLog);
             $message->set(_("Le nombre d'accès autorisés pour le module demandé a été atteint. Si vous considérez que la valeur est trop faible, veuillez contacter l'administrateur de l'application"), true);
             $this->sendMailToAdmin(
-                sprintf(_("%s - Trop d'accès à un module"), $_SESSION["APP_title"]),
+                sprintf(_("%s - Trop d'accès à un module"), $_SESSION["APPLI_title"]),
                 "ppci/mail/maxAccessToModule.tpl",
                 array("login" => $_SESSION["login"], "module" => $moduleName, "date" => date($_SESSION["MASKDATELONG"])),
                 $moduleName,
@@ -401,13 +401,9 @@ class Log extends PpciModel
     public function sendMailToAdmin($subject, $templateName, $data, $moduleName, $login)
     {
         /**
-         * @var MessagePpci
-         */
-        $message = service('MessagePpci');
-        /**
          * @var App
          */
-        $paramApp = config("App");
+        $paramApp = service("AppConfig");
         $APP_mail = $paramApp->APP_mail;
         $MAIL_enabled = $paramApp->MAIL_enabled;
         $APP_mailToAdminPeriod = $paramApp->APP_mailToAdminPeriod;
@@ -416,9 +412,6 @@ class Log extends PpciModel
         $moduleNameComplete = $GACL_aco . "-" . $moduleName;
 
         if ($MAIL_enabled == 1) {
-            include_once 'framework/utils/mail.class.php';
-            include_once 'framework/droits/droits.class.php';
-            include_once 'framework/identification/loginGestion.class.php';
             $MAIL_param = array(
                 "from" => "$APP_mail"
             );
@@ -461,7 +454,7 @@ class Log extends PpciModel
                         $dataSql
                     );
                     if (!$logval["log_id"] > 0) {
-                        if ($mail->SendMailSmarty( $dataLogin["mail"], $subject, $templateName, $data)) {
+                        if ($mail->SendMailSmarty( $dataLogin["email"], $subject, $templateName, $data)) {
                             $this->setLog($login, $moduleName, $value["login"]);
                         } else {
                             $this->message->setSyslog("error_sendmail_to_admin:" . $dataLogin["mail"]);

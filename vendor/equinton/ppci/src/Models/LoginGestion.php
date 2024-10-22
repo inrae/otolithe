@@ -1,6 +1,7 @@
 <?php
 namespace Ppci\Models;
 
+use Config\App;
 use ZxcvbnPhp\Zxcvbn;
 use Ppci\Config\SmartyParam;
 use Ppci\Libraries\Mail;
@@ -40,7 +41,7 @@ class LoginGestion extends PpciModel
             ),
             "datemodif" => array(
                 "type" => 3,
-                "defaultValue" => "getDateHeure",
+                "defaultValue" => date($this->datetimeFormat),
             ),
             "mail" => array(
                 "pattern" => "#^.+@.+\.[a-zA-Z]{2,6}$#",
@@ -76,7 +77,12 @@ class LoginGestion extends PpciModel
             "nbattempts" => array("type" => 1),
             "lastattempt" => array("type" => 3)
         );
+        /**
+         * @var App
+         */
         $this->paramApp = config("App");
+        $this->privateKey = $this->paramApp->privateKey;
+        $this->publicKey = $this->paramApp->pubKey;
         parent::__construct();
     }
 
@@ -274,7 +280,8 @@ class LoginGestion extends PpciModel
                 if (openssl_public_encrypt($token, $crypted, $this->getKey("pub"), OPENSSL_PKCS1_OAEP_PADDING)) {
                     $data["tokenws"] = base64_encode($crypted);
                 } else {
-                    throw new \Ppci\Libraries\PpciException(_("Une erreur est survenue pendant le chiffrement du jeton d'identification"));
+                    $this->message->set(_("Une erreur est survenue pendant le chiffrement du jeton d'identification, qui n'a pas pu être mis à jour"), true);
+                    unset ($data["tokenws"]);
                 }
             } else {
                 /**
@@ -300,7 +307,7 @@ class LoginGestion extends PpciModel
                     $this->mail = new Mail($this->paramApp->MAIL_param);
                 }
                 $APPLI_address = "https://" . $_SERVER["HTTP_HOST"];
-                $subject = $_SESSION["APP_title"] . " - " . _("Activation de votre compte");
+                $subject = $_SESSION["dbparams"]["APP_title"] . " - " . _("Activation de votre compte");
                 $this->mail->SendMailSmarty(
                     $data["mail"],
                     $subject,
@@ -308,20 +315,19 @@ class LoginGestion extends PpciModel
                     array(
                         "prenom" => $data["prenom"],
                         "nom" => $data["nom"],
-                        "applicationName" => $_SESSION["APP_title"],
+                        "applicationName" => $_SESSION["dbparams"]["APP_title"],
                         "APPLI_address" => $APPLI_address
                     )
                 );
-                global $message;
-                $message->set(_("Un message vient d'être envoyé à l'utilisateur pour l'informer de l'activation de son compte"));
+                $this->message->set(_("Un message vient d'être envoyé à l'utilisateur pour l'informer de l'activation de son compte"));
             }
         }
         return $id;
     }
 
-    function lire(int $id, bool $getDefault = true, $parentValue = 0): array
+    function read(int $id, bool $getDefault = true, $parentValue = 0): array
     {
-        $data = parent::lire($id, $getDefault, $parentValue);
+        $data = parent::read($id, $getDefault, $parentValue);
         if (!empty($data["tokenws"])) {
             /**
              * decode the token
@@ -329,7 +335,8 @@ class LoginGestion extends PpciModel
             if (openssl_private_decrypt(base64_decode($data["tokenws"]), $decrypted, $this->getKey("priv"), OPENSSL_PKCS1_OAEP_PADDING)) {
                 $data["tokenws"] = $decrypted;
             } else {
-                throw new \Ppci\Libraries\PpciException(_("Une erreur est survenue pendant le déchiffrement du jeton d'identification"));
+                $this->message->set(_("Une erreur est survenue pendant le déchiffrement du jeton d'identification"),true);
+                $data["tokenws"] = "";
             }
         }
         return $data;
@@ -408,6 +415,8 @@ class LoginGestion extends PpciModel
         if (!empty($login)) {
             $sql = "select * from logingestion where login = :login:";
             return $this->lireParamAsPrepared($sql, array("login" => $login));
+        } else {
+            return [];
         }
     }
 

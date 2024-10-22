@@ -23,7 +23,7 @@ class PpciModel extends Model
      */
     public bool $autoFormatDate = true;
     public string $dateFormatMask = 'd/m/Y';
-    public string $datetimeFormat = 'd/m/Y h:i:s';
+    public string $datetimeFormat = 'd/m/Y H:i:s';
     /**
      * If true, for numbers, the comma is transformed in point before write in database
      *
@@ -116,7 +116,7 @@ class PpciModel extends Model
             return $query;
         }
     }
-    protected function executeSQL(string $sql, array $data = null, $onlyExecute = false)
+    public function executeSQL(string $sql, array $data = null, $onlyExecute = false)
     {
         return $this->executeQuery($sql, $data, $onlyExecute);
     }
@@ -158,11 +158,28 @@ class PpciModel extends Model
             }
         }
         $isInsert = false;
-        if ($row[$this->primaryKey] == 0) {
-            $isInsert = true;
+        if ($this->useAutoIncrement) {
+            if ($row[$this->primaryKey] == 0) {
+                $isInsert = true;
+            } else {
+                $id = $row[$this->primaryKey];
+            }
         } else {
-            $id = $row[$this->primaryKey];
+            /**
+             * Search for existent record
+             */
+            $sql = "select " . $this->qi . $this->primaryKey . $this->qi . " as id 
+            from ". $this->qi . $this->table . $this->qi .
+            " where " . $this->qi . $this->primaryKey . $this->qi . " = :id:";
+            $param["id"] = $row[$this->primaryKey];
+            $exists = $this->readParam($sql, $param);
+            if (!$exists["id"] > 0) {
+                $isInsert = true;
+            } else {
+                $id = $row[$this->primaryKey];
+            }
         }
+
         /**
          * Disable the deletion of primary key if not autoincrement in insert context
          */
@@ -184,7 +201,7 @@ class PpciModel extends Model
              * Remove all empty fields
              */
             foreach ($row as $k => $v) {
-                if (empty($v)) {
+                if (!is_array($v) && strlen($v) == 0) {
                     unset($row[$k]);
                 }
             }
@@ -303,7 +320,7 @@ class PpciModel extends Model
             $sql = "insert into $tablename (" . $k1 . "," . $k2 . ") values ( :id:, :key2:)";
             foreach ($create as $key2) {
                 $param["key2"] = $key2;
-                $this->executeQuery($sql, $param,true);
+                $this->executeQuery($sql, $param, true);
             }
         }
     }
@@ -336,7 +353,7 @@ class PpciModel extends Model
     /**
      * Delete an item
      *
-     * @param [type] $id
+     * @param int $id
      * @param boolean $purge
      * @return void
      */
@@ -439,7 +456,7 @@ class PpciModel extends Model
     {
         $data = array();
         foreach ($this->defaultValues as $k => $v) {
-            if ($v != 0 && is_callable(array($this, $v))) {
+            if ($v != 0 && method_exists($this, $v)) {
                 $data[$k] = $this->{$v}();
             } else {
                 $data[$k] = $v;
@@ -627,10 +644,15 @@ class PpciModel extends Model
     }
     function getBinaryField(int $id, string $fieldName)
     {
-        $sql = "select " . $this->db->escape($fieldName) .
-            "from " . $this->db->escape($this->tablename) .
-            " where " . $this->db->escape($this->key) . " = :id:";
-        return $this->executeQuery($sql, ["id" => $id]);
+        $sql = "select " . $this->escapeField($fieldName) .
+            " as binarycontent from " . $this->escapeField($this->table) .
+            " where " . $this->escapeField($this->primaryKey) . " = :id:";
+        $data = $this->executeQuery($sql, ["id" => $id]);
+        if (!empty($data[0]["binarycontent"])) {
+            return pg_unescape_bytea($data[0]["binarycontent"]);
+        } else {
+            return null;
+        }
     }
 
     /**************************
@@ -699,5 +721,15 @@ class PpciModel extends Model
                 break;
             }
         }
+    }
+
+    /**
+     * surround the name of a column or a table with "
+     *
+     * @param string $name
+     * @return string
+     */
+    private function escapeField($name) {
+        return $this->qi.$name.$this->qi;
     }
 }
