@@ -19,11 +19,11 @@ class Piece extends PpciLibrary
      *
      * @var Piece
      */
-    protected $dataclass;
+    
     function __construct()
     {
         parent::__construct();
-        $this->dataClass = new ModelsPiece();
+        $this->dataclass = new ModelsPiece();
 
         $this->id = $_SESSION["it_piece"]->getValue($_REQUEST["piece_id"]);
     }
@@ -47,7 +47,7 @@ class Piece extends PpciLibrary
          * Recherche des pieces
          */
         if ($exp_id > 0) {
-            $data = $this->dataClass->getListFromExperimentation($exp_id);
+            $data = $this->dataclass->getListFromExperimentation($exp_id);
             $this->vue->set(
                 $_SESSION["it_piece"]->translateList(
                     $_SESSION["it_individu"]->translateList(
@@ -66,7 +66,7 @@ class Piece extends PpciLibrary
         /**
          * Display the detail of the record
          */
-        $data = $this->dataClass->getDetail($this->id);
+        $data = $this->dataclass->getDetail($this->id);
         $dataT = $_SESSION["it_piece"]->translateRow($data);
         $dataT = $_SESSION["it_individu"]->translateRow($dataT);
         $this->vue->set($dataT, "data");
@@ -196,7 +196,7 @@ class Piece extends PpciLibrary
             foreach ($_REQUEST["pieces"] as $value) {
                 $pieces[] = $_SESSION["it_piece"]->getValue($value);
             }
-            $data = $this->dataClass->getListForCollec($pieces, $exp_name);
+            $data = $this->dataclass->getListForCollec($pieces, $exp_name);
             if (count($data) == 0) {
                 throw new PpciException(_("Aucune pièce n'a été sélectionnée dans la base de données"));
             }

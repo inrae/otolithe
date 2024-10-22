@@ -15,12 +15,12 @@ class Lecteur extends PpciLibrary
      *
      * @var ModelsLecteur
      */
-    protected PpciModel $dataClass;
+    protected PpciModel $dataclass;
 
     function __construct()
     {
         parent::__construct();
-        $this->dataClass = new ModelsLecteur();
+        $this->dataclass = new ModelsLecteur();
         $keyName = "lecteur_id";
         if (isset($_REQUEST[$keyName])) {
             $this->id = $_REQUEST[$keyName];
@@ -35,7 +35,7 @@ class Lecteur extends PpciLibrary
          * Display the list of all records of the table
          */
         $this->vue = service ('Smarty');
-        $this->vue->set($this->dataClass->getListe(), "data");
+        $this->vue->set($this->dataclass->getListe(), "data");
         $this->vue->set("gestion/lecteurListe.tpl", "corps");
         return $this->vue->send();
     }
@@ -55,7 +55,7 @@ class Lecteur extends PpciLibrary
             $this->id = $this->dataWrite($_REQUEST);
             if ($this->id > 0) {
                 $_REQUEST["lecteur_id"] = $this->id;
-                if ($this->id == $this->dataClass->getIdFromLogin($_SESSION["login"])) {
+                if ($this->id == $this->dataclass->getIdFromLogin($_SESSION["login"])) {
                     /*
                  * Rechargement des droits
                  */
@@ -84,7 +84,7 @@ class Lecteur extends PpciLibrary
     {
         $this->vue = service('AjaxView');
         $exp_id = $_SESSION["it_experimentation"]->getValue($_REQUEST["exp_id"]);
-        $this->vue->set($this->dataClass->getListFromExp($exp_id));
+        $this->vue->set($this->dataclass->getListFromExp($exp_id));
         return $this->vue->send();
     }
 }

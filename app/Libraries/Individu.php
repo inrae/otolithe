@@ -19,12 +19,12 @@ class Individu extends PpciLibrary
      *
      * @var ModelsIndividu
      */
-    protected PpciModel $dataClass;
+    protected PpciModel $dataclass;
 
     function __construct()
     {
         parent::__construct();
-        $this->dataClass = new ModelsIndividu();
+        $this->dataclass = new ModelsIndividu();
         $_REQUEST["individu_id"] = $_SESSION["it_individu"]->getValue($_REQUEST["individu_id"]);
         $this->id = $_REQUEST["individu_id"];
     }
@@ -50,7 +50,7 @@ class Individu extends PpciLibrary
         $_SESSION["searchIndividu"]->setParam($_REQUEST);
         $dataRecherche = $_SESSION["searchIndividu"]->getParam();
         if ($_SESSION["searchIndividu"]->isSearch() == 1) {
-            $data = $_SESSION["it_individu"]->translateList($this->dataClass->getListSearch($dataRecherche), true);
+            $data = $_SESSION["it_individu"]->translateList($this->dataclass->getListSearch($dataRecherche), true);
             $data = $_SESSION["it_peche"]->translateList($data);
             $this->vue->set($data, "data");
             $this->vue->set(1, "isSearch");
@@ -86,7 +86,7 @@ class Individu extends PpciLibrary
         /*
          * Display the detail of the record
          */
-        $data = $this->dataClass->getDetail($this->id);
+        $data = $this->dataclass->getDetail($this->id);
         $dataT = $_SESSION["it_individu"]->translateRow($data);
         $dataT = $_SESSION["it_peche"]->translateRow($dataT);
         $this->vue->set($dataT, "data");
@@ -225,7 +225,7 @@ class Individu extends PpciLibrary
     {
         $this->vue = service('AjaxView');
         $exp_id = $_SESSION["it_experimentation"]->getValue($_REQUEST["exp_id"]);
-        $this->vue->set($this->dataClass->getListEspeceFromExp($exp_id));
+        $this->vue->set($this->dataclass->getListEspeceFromExp($exp_id));
         return $this->vue->send();
     }
 }

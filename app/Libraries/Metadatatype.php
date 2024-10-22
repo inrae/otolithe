@@ -13,7 +13,7 @@ class Metadatatype extends PpciLibrary
     function __construct()
     {
         parent::__construct();
-        $this->dataClass = new ModelsMetadatatype();
+        $this->dataclass = new ModelsMetadatatype();
         $keyName = "metadatatype_id";
         if (isset($_REQUEST[$keyName])) {
             if (is_array($_REQUEST[$keyName])) {
@@ -30,7 +30,7 @@ class Metadatatype extends PpciLibrary
          * Display the list of all records of the table
          */
         $this->vue = service("Smarty");
-        $this->vue->set($this->dataClass->getListe(2), "data");
+        $this->vue->set($this->dataclass->getListe(2), "data");
         $this->vue->set("param/metadatatypeList.tpl", "corps");
         return $this->vue->send();
     }
@@ -77,7 +77,7 @@ class Metadatatype extends PpciLibrary
          * Duplication d'un modele
          */
         $this->vue = service("Smarty");
-        $data = $this->dataClass->lire($this->id);
+        $data = $this->dataclass->lire($this->id);
         $data["metadatatype_id"] = 0;
         $data["metadatatype_name"] .= " - new version";
         $this->vue->set($data, "data");
@@ -87,14 +87,14 @@ class Metadatatype extends PpciLibrary
     function getSchema()
     {
         $this->vue = service("AjaxView");
-        $data = $this->dataClass->lire($this->id);
+        $data = $this->dataclass->lire($this->id);
         $this->vue->setJson($data["metadatatype_schema"]);
         return $this->vue->send();
     }
     function isArray()
     {
         $this->vue = service("AjaxView");
-        $data = $this->dataClass->lire($this->id);
+        $data = $this->dataclass->lire($this->id);
         $data["is_array"] == "t" ? $val = 1 : $val = 0;
         $this->vue->setJson($val);
         return $this->vue->send();
@@ -102,7 +102,7 @@ class Metadatatype extends PpciLibrary
     function export()
     {
         $this->vue = service("CsvView");
-        $this->vue->set($this->dataClass->getListFromIds($this->ids));
+        $this->vue->set($this->dataclass->getListFromIds($this->ids));
         return $this->vue->send();
     }
     function import()
@@ -126,7 +126,7 @@ class Metadatatype extends PpciLibrary
                         "is_array" => $row["is_array"],
                         "metadatatype_comment" => $row["metadatatype_comment"]
                     );
-                    $this->dataClass->ecrire($data);
+                    $this->dataclass->ecrire($data);
                     $i++;
                 }
                 $this->message->set(sprintf(_("%s description(s) de métadonnée(s) importée(s)"), $i));
