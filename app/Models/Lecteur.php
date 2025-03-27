@@ -84,7 +84,9 @@ class Lecteur extends PpciModel
     public function write($data): int
     {
         $id = parent::write($data);
-
+        if (!isset($data["exp_id"])){
+            $data["exp_id"] = [];
+        }
         if ($id > 0) {
             $this->ecrireTableNN("lecteur_experimentation", "lecteur_id", "exp_id", $id, $data["exp_id"]);
         }
