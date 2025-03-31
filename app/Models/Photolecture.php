@@ -43,7 +43,7 @@ class Photolecture extends PpciModel
             ),
             "photolecture_date" => array(
                 "type" => 3,
-                "defaultValue" => "getDateHeure",
+                "defaultValue" => $this->getDateTime(),
             ),
             "points_ref_lecture" => array(
                 "type" => 4,
@@ -85,6 +85,9 @@ class Photolecture extends PpciModel
             "remarkable_points" => array(
                 "type" => 0,
             ),
+            "version" => array(
+                "type" => 1
+            )
         );
         $param["srid"] = -1;
         parent::__construct();
@@ -102,6 +105,7 @@ class Photolecture extends PpciModel
          * Mise a jour de l'heure
          */
         $data["photolecture_date"] = $this->getDateHeure();
+        $data["version"] = 2025;
         /**
          * Traitement des points
          */
@@ -342,6 +346,7 @@ class Photolecture extends PpciModel
                             final_stripe_id,
                             final_stripe_libelle,
                             read_fiability, consensual_reading, annee_naissance, remarkable_points
+                            ,version
                             from photolecture
                             left outer join lecteur using (lecteur_id)
                             left outer join final_stripe using (final_stripe_id)";
@@ -388,9 +393,30 @@ class Photolecture extends PpciModel
              */
             $icolor = 0;
             $data = $this->getListeParam($sql . $where, $param);
+            $remarkableType = new RemarkableType;
+            $types = $remarkableType->getAsArray();
             foreach ($data as $key => $value) {
                 if (strlen($data[$key]["listepoint"]) > 0) {
                     $data[$key]["points"] = $this->calculPointsAffichage($data[$key]["listepoint"], $coef);
+                    /**
+                     * Add remarkable information
+                     */
+                    if (!empty($data[$key]["remarkable_points"])) {
+                        $remarkable = json_decode($data[$key]["remarkable_points"], true);
+                        foreach ($data[$key]["points"] as $k => $point) {
+                            if ($data[$key]["version"] == 2013) {
+                                if (in_array($k, $remarkable)) {
+                                    $point["remarkable"] = _("remarquable");
+                                    $data[$key]["points"][$k] = $point;
+                                }
+                            } else if ($data[$key]["version"] == 2025) {
+                                if (array_key_exists($k, $remarkable)) {
+                                    $point["remarkable"] = $types[$remarkable[$k]["id"]];
+                                }    
+                            }
+                        }
+                    }
+                    $data[$key]["pointsJson"] = json_encode($data[$key]["points"]);
                     /**
                      * Rajout de la couleur
                      */

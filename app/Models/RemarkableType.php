@@ -44,4 +44,17 @@ class RemarkableType extends PpciModel
         }
         return $this->getListParam($sql);
     }
+    /**
+     * Format the list to search the name from the id
+     *
+     * @return array
+     */
+    function getAsArray():array {
+        $data = $this->getList();
+        $arr = [];
+        foreach ($data as $row) {
+            $arr[$row["remarkable_type_id"]] = $row["remarkable_type_name"];
+        }
+        return $arr;
+    }
 }

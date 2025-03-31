@@ -794,7 +794,7 @@ Transmitted light]]>
 	<role name="otolithe"/>
 </sequence>
 
-<table name="photolecture" layers="0" collapse-mode="1" max-obj-count="24" z-value="0">
+<table name="photolecture" layers="0" collapse-mode="1" max-obj-count="25" z-value="0">
 	<schema name="otolithe"/>
 	<role name="otolithe"/>
 	<comment> <![CDATA[Lecture realisee par une personne]]> </comment>
@@ -870,6 +870,10 @@ Transmitted light]]>
 	<column name="remarkable_points">
 		<type name="json" length="0"/>
 		<comment> <![CDATA[Liste des points remarquables identifiés sur la photo]]> </comment>
+	</column>
+	<column name="version" not-null="true" default-value="2013">
+		<type name="smallint" length="0"/>
+		<comment> <![CDATA[Version of the reading]]> </comment>
 	</column>
 	<constraint name="enforce_dims_points" type="ck-constr" table="otolithe.photolecture">
 			<expression> <![CDATA[(st_ndims(points) = 2)]]> </expression>
@@ -1554,11 +1558,11 @@ not recorded]]>
 		<columns names="remarkable_type_id" ref-type="src-columns"/>
 	</constraint>
 	<initial-data>
-<![CDATA["remarkable_type_id";"remarkable_type_name";"sort_order"
-"";"Point remarquable";"1"
-"";"Reproduction";"2"
-"";"Rivière";"3"
-"";"Mer";"4"
+<![CDATA["remarkable_type_name";"sort_order"
+"Point remarquable";"1"
+"Reproduction";"2"
+"Rivière";"3"
+"Mer";"4"
 ]]>
 	</initial-data>
 </table>

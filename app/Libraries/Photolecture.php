@@ -17,6 +17,9 @@ class Photolecture extends PpciLibrary
     function __construct()
     {
         parent::__construct();
+        /**
+         * @var ModelsPhotolecture
+         */
         $this->dataclass = new ModelsPhotolecture();
         if (is_array($_REQUEST["photolecture_id"])) {
             foreach ($_REQUEST["photolecture_id"] as $value) {
@@ -102,6 +105,7 @@ class Photolecture extends PpciLibrary
         $data = $_SESSION["it_photolecture"]->translateList($data);
         $data = $_SESSION["it_photo"]->translateList($data);
         $this->vue->set($data, "data");
+        printA($data);
         /**
          * Lecture des informations concernant la piece et le poisson
          */

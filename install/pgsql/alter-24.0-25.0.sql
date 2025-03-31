@@ -18,4 +18,6 @@ INSERT INTO remarkable_type ( remarkable_type_name, sort_order) VALUES (E'Riviè
 -- ddl-end --
 INSERT INTO remarkable_type ( remarkable_type_name, sort_order) VALUES ( E'Mer', E'4');
 -- ddl-end --
+alter table photolecture add column version smallint NOT NULL DEFAULT 2013;
+
 insert into dbversion (dbversion_date,dbversion_number) values ('2025-03-28','25.0');
