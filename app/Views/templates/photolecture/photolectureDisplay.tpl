@@ -65,16 +65,18 @@
 	- {t}Année de naissance estimée :{/t} {$data[lst].annee_naissance}
 	- {t}Points remarquables :{/t}
 	<script>
-		var rp = "{$data[lst].remarkable_points}";
-		if (rp.length > 0) {
+		var rp = '{$data[lst].pointsJson}';
+		if (rp) {
 			var arp = JSON.parse(rp);
 			var i = 0;
-			arp.forEach(function (p) {
-				if (i > 0) {
-					document.write(",");
+			Object.keys(arp).forEach(p => {
+				if (arp[p].remarkable != undefined ) {
+					if (i > 0) {
+						document.write(", ");
+					}
+					document.write(p + " " + arp[p].remarkable);
+					i++;
 				}
-				document.write(p + 1);
-				i++;
 			})
 		};
 	</script>

@@ -15,13 +15,14 @@
 	var pointLigneY;
 	var pointLigne2X;
 	var pointLigne2Y;
+	var remarkableTypes = {$remarkableTypesJson};
 
-	$(document).ready(function () {
+	document.addEventListener("DOMContentLoaded", function(event) {
 		var image_width = $('#image_width').val();
 		var image_height = $('#image_height').val();
 		$('#container')
 			.css({ "width": image_width + "px", "height": image_height + "px", "border": "none" })
-			.svg({ onLoad: drawIntro })
+			.svg({ onLoad: drawIntro });
 
 	});
 
@@ -42,8 +43,8 @@
 		//var myImage = svg.image(0, 0, image_width, image_height, "");
 		{section name = "lst" loop = $mesurePrec }
 		{section name = "lst1" loop = $mesurePrec[lst].points }
-		{ if $smarty.section.lst1.index == 0 }
-		{ if $mesurePrec[lst].rayon_point_initial > 0}
+		{if $smarty.section.lst1.index == 0 }
+		{if $mesurePrec[lst].rayon_point_initial > 0}
 		{assign var = 'r' value = $mesurePrec[lst].rayon_point_initial }
 		{else }
 		{assign var = 'r' value = '7' }
@@ -79,25 +80,33 @@
 		/*
 		 * Generation des points existants (mode modification)
 		 */
-		{ if $data.photolecture_id > 0}
-		$("#modeLecture").val(1);
-		{section name = "lst" loop = $data.points }
-		{ if $smarty.section.lst.index == 0 }
-		var rayon_initial = 1;
-		{else }
-		var rayon_initial = 0;
-		{/if }
-		setCircle(svg, { $data.points[lst].x }, { $data.points[lst].y }, rayon_initial, { $data.points[lst].remarkablePoint });
-		{/section }
+		var photolecture_id = "{$data.photolecture_id}";
+		if (photolecture_id > 0) {
+			var points = JSON.parse({$data.pointsJson});
+			var i = 0;
+			Object.keys(points).forEach(k => {
+				$("#modeLecture").val(1);
+				if (i == 0) {
+					var rayon_initial = 1;
+				} else {
+					var rayon_initial = 0;
+				}
+				setCircle(svg, points[k].x, points[k].y, rayon_initial, points[k].remarkable_type_id);
+				i++;
+			});
 		$("#modeLecture").val(2);
-		{section name = "lst" loop = $data.points_ref_lecture }
-		setCircle(svg, { $data.points_ref_lecture[lst].x }, { $data.points_ref_lecture[lst].y }, 0, { $data.points_ref_lecture[lst].remarkablePoint });
-		{/section }
+		var pointsRef = {$data.pointsRefJson};
+		if (pointsRef) {
+			var pr = JSON.parse(pointsRef);
+			Object.keys(pr).forEach(k => { 
+				setCircle(svg, pr[k].x, pr[k].y, rayon_initial, 0);
+			});
+		}
 		$("#modeLecture").val(1);
-		{/if }
+		}
 	};
 
-	function setCircle(svg, x, y, rayon_initial, isRemarkable) {
+	function setCircle(svg, x, y, rayon_initial, remarkableTypeId) {
 		var ident = "circle" + compteur;
 		var valeurCompteur = compteur;
 		compteur++;
@@ -142,11 +151,21 @@
 			} else {
 				pointReference = '<td>&nbsp;</td>';
 			};
-			var remarkablePoint = '<td class="center"><input type="checkbox" name="remarkablePoint' + valeurCompteur + '" id="remarkablePoint' + valeurCompteur + '" value="1"';
-			if (isRemarkable == 1) {
-				remarkablePoint += ' checked ';
-			}
-			remarkablePoint += '></td>';
+			var remarkablePoint = '<td class="center"><select name="remarkablePoint' + valeurCompteur + '" id="remarkablePoint' + valeurCompteur + '">';
+				remarkablePoint += '<option value=""';
+				if (remarkableTypeId == 0 ) {
+					remarkablePoint += 'selected';
+				}
+				remarkablePoint += '></option>';
+				remarkableTypes.forEach(element => {
+					remarkablePoint += '<option value="'+element.remarkable_type_id+'"';
+					if ( remarkableTypeId == element.remarkable_type_id) {
+						remarkablePoint += ' selected';
+					}
+					remarkablePoint += '>'+element.remarkable_type_name+'</option>';
+				});
+		
+			remarkablePoint += '</select></td>';
 			var dp = '<td class="center" id="point' + valeurCompteur + '"><img src="display/images/delete.png" height="25" title="{t}Supprimer le point courant{/t}"></td>';
 			var ligneFin = "</tr>";
 			$('#tableData').append(ligneDebut + pointX + pointY + rang + remarkablePoint + pointReference + dp + ligneFin);
@@ -449,16 +468,18 @@
 	- {t}Résolution{/t} : {$mesurePrec[lst].photolecture_width}x{$mesurePrec[lst].photolecture_height}
 	- {t}Points remarquables :{/t}
 	<script>
-		var rp = "{$mesurePrec[lst].remarkable_points}";
-		if (rp.length > 0) {
+		var rp = "{$mesurePrec[lst].pointsJson}";
+		if (rp) {
 			var arp = JSON.parse(rp);
 			var i = 0;
-			arp.forEach(function (p) {
-				if (i > 0) {
-					document.write(",");
+			Object.keys(arp).forEach(p => {
+				if (arp[p].remarkable != undefined ) {
+					if (i > 0) {
+						document.write(", ");
+					}
+					document.write(p + " " + arp[p].remarkable);
+					i++;
 				}
-				document.write(p + 1);
-				i++;
 			})
 		};
 	</script>

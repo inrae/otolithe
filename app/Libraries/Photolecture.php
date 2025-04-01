@@ -9,6 +9,7 @@ use App\Models\Peche;
 use App\Models\Photo;
 use App\Models\Photolecture as ModelsPhotolecture;
 use App\Models\Piece;
+use App\Models\RemarkableType;
 use Ppci\Libraries\PpciLibrary;
 
 class Photolecture extends PpciLibrary
@@ -104,8 +105,18 @@ class Photolecture extends PpciLibrary
         }
         $data = $_SESSION["it_photolecture"]->translateList($data);
         $data = $_SESSION["it_photo"]->translateList($data);
+        /**
+         * manual html encoding
+         */
+        foreach ($data as $k => $row) {
+            if (!empty($row["commentaire"])) {
+                $row["commentaire"] = esc($row["commentaire"]);   
+            }
+            //$row["remarkable_points"] = json_encode(json_decode($row["remarkable_points"],true));
+            $data[$k] = $row;
+        }
+        $this->vue->htmlVars[] = "data";
         $this->vue->set($data, "data");
-        printA($data);
         /**
          * Lecture des informations concernant la piece et le poisson
          */
@@ -134,7 +145,7 @@ class Photolecture extends PpciLibrary
         $dataPhoto = $_SESSION["it_photo"]->translateRow($dataPhoto);
         $dataPhoto = $_SESSION["it_piece"]->translateRow($dataPhoto);
         $this->vue->set($dataPhoto, "photo");
-        $this->vue->set($_SESSION["moduleListe"],"moduleListe");
+        $this->vue->set($_SESSION["moduleListe"], "moduleListe");
         $this->vue->set("photolecture/photolectureDisplay.tpl", "corps");
         return $this->vue->send();
     }
@@ -264,7 +275,6 @@ class Photolecture extends PpciLibrary
         $dataT = $_SESSION["it_photolecture"]->translateRow($dataDetail);
         $dataT = $_SESSION["it_photo"]->translateRow($dataT);
         $this->vue->set($dataT, "data");
-
         /**
          * Recuperation des lectures precedentes
          */
@@ -283,12 +293,20 @@ class Photolecture extends PpciLibrary
                 $data["points"] = $this->dataclass->calculPointsAffichage(
                     $dataPoint["points"],
                     $coef,
-                    $data["remarkable_points"]
+                    $data["remarkable_points"],
+                    $data["version"]
                 );
             }
             if (strlen($dataPoint["points_ref_lecture"]) > 0) {
-                $data["points_ref_lecture"] = $this->dataclass->calculPointsAffichage($dataPoint["points_ref_lecture"], $coef);
+                $data["points_ref_lecture"] = $this->dataclass->calculPointsAffichage(
+                    $dataPoint["points_ref_lecture"],
+                    $coef,
+                    null,
+                    $data["version"]
+                );
+                
             }
+            $data["pointsRefJson"] = json_encode($data["points_ref_lecture"]);
         }
         /**
          * Recalcul du rayon d'affichage du premier point
@@ -322,10 +340,17 @@ class Photolecture extends PpciLibrary
          */
         $finalStripe = new Final_stripe();
         $this->vue->set($finalStripe->getListe(1), "finalStripe");
-        $this->vue->set($_SESSION["moduleListe"],"moduleListe");
+        $this->vue->set($_SESSION["moduleListe"], "moduleListe");
+
+        /**
+         * Get remarkable point types
+         */
+        $remarkableType = new RemarkableType;
+        $this->vue->set($rt = $remarkableType->getList("sort_order"), 'remarkableTypes');
+        $this->vue->set(json_encode($rt), 'remarkableTypesJson');
+        $this->vue->htmlVars[] = "remarkableTypesJson";
         return $this->vue->send();
     }
-
 
     function write()
     {
@@ -452,7 +477,15 @@ class Photolecture extends PpciLibrary
             //$nomfichier = "lecture";
             //$export->exportCSVinit($nomfichier, 'tab');
             $colExclude = array(
-                "photolecture_id", "photo_id", "lecteur_id", "piece_id", "individu_id", "points", "points_ref_lecture", "final_stripe_id", "remarkable_points"
+                "photolecture_id",
+                "photo_id",
+                "lecteur_id",
+                "piece_id",
+                "individu_id",
+                "points",
+                "points_ref_lecture",
+                "final_stripe_id",
+                "remarkable_points"
             );
             $dataExport = array();
 

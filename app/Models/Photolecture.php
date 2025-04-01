@@ -223,8 +223,8 @@ class Photolecture extends PpciModel
                 /**
                  * Traitement des points remarquables
                  */
-                if ($value["remarkablePoint"] == 1) {
-                    $rp[] = $pointNumber;
+                if ($value["remarkablePoint"] > 0) {
+                    $rp[] = [$pointNumber => ["id" => $value["remarkablePoint"]]];
                 }
                 $pointNumber++;
             }
@@ -403,17 +403,31 @@ class Photolecture extends PpciModel
                      */
                     if (!empty($data[$key]["remarkable_points"])) {
                         $remarkable = json_decode($data[$key]["remarkable_points"], true);
+                        $rmk = [];
+                        foreach ($remarkable as $rp) {
+                            if ($data[$key]["version"] == 2013) {
+                                $rmk[$rp] = ["remarkable" => $types[1]];
+                            } elseif ($data[$key]["version"] == 2025) {
+                                foreach ($rp as $k => $v) {
+                                    $rmk[$k] = $v;
+                                    $rmk[$k]["remarkable"] = $types[$rmk[$k]["id"]];
+                                }
+                            }
+                        }
+                        $data[$key]["remarkable_points"] = json_encode($rmk, true);
                         foreach ($data[$key]["points"] as $k => $point) {
                             if ($data[$key]["version"] == 2013) {
-                                if (in_array($k, $remarkable)) {
-                                    $point["remarkable"] = _("remarquable");
-                                    $data[$key]["points"][$k] = $point;
+                                if (array_key_exists($k, $rmk)) {
+                                    $point["remarkable"] = $types[1];
+                                    $point["remarkable_type_id"] = 1;
                                 }
                             } else if ($data[$key]["version"] == 2025) {
-                                if (array_key_exists($k, $remarkable)) {
-                                    $point["remarkable"] = $types[$remarkable[$k]["id"]];
-                                }    
+                                if (array_key_exists($k, $rmk)) {
+                                    $point["remarkable"] = $types[$rmk[$k]["id"]];
+                                    $point["remarkable_type_id"] = $rmk[$k]["id"];
+                                }
                             }
+                            $data[$key]["points"][$k] = $point;
                         }
                     }
                     $data[$key]["pointsJson"] = json_encode($data[$key]["points"]);
@@ -459,7 +473,7 @@ class Photolecture extends PpciModel
      *
      * @return array
      */
-    public function calculPointsAffichage($listepoint, $coef, $remarkable_points = "")
+    public function calculPointsAffichage($listepoint, $coef, $remarkable_points = "", $version = 2025)
     {
         /**
          * Nettoyage des donnees
@@ -468,10 +482,12 @@ class Photolecture extends PpciModel
         $alpt = explode(",", $lpt);
         $i = 0;
         $data = array();
+        $remarkableType = new RemarkableType;
+        $types = $remarkableType->getAsArray();
         /**
          * Decodage du champ json
          */
-        $rp = json_decode($remarkable_points);
+        $rp = json_decode($remarkable_points, true);
         foreach ($alpt as $value1) {
             /**
              * Separation des valeurs x et y
@@ -487,6 +503,20 @@ class Photolecture extends PpciModel
              */
             if (!is_null($rp) && in_array($i, $rp)) {
                 $data[$i]["remarkablePoint"] = 1;
+            }
+            /**
+             * Add remarkable information
+             */
+            if (!empty($rp)) {
+                if ($version == 2013) {
+                    if (in_array($i, $rp)) {
+                        $data[$i]["remarkablePoint"] = ["remarkable_type_id" => 1];
+                    }
+                } else if ($version == 2025) {
+                    if (array_key_exists($i, $rp)) {
+                        $data[$i]["remarkablePoint"] = ["remarkable_type_id" => $rp[$i]["id"]];
+                    }
+                }
             }
             $i++;
         }
