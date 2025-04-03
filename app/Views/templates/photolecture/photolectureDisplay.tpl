@@ -75,7 +75,7 @@
 					if (i > 0) {
 						document.write(", ");
 					}
-					document.write(p + ":" + arp[p].remarkable_type_name);
+					document.write(p + ": " + arp[p].remarkable_type_name);
 					i++;
 				}
 			})

@@ -110,7 +110,7 @@ class Photolecture extends PpciLibrary
          */
         foreach ($data as $k => $row) {
             if (!empty($row["commentaire"])) {
-                $row["commentaire"] = esc($row["commentaire"]);   
+                $row["commentaire"] = esc($row["commentaire"]);
             }
             //$row["remarkable_points"] = json_encode(json_decode($row["remarkable_points"],true));
             $data[$k] = $row;
@@ -184,14 +184,7 @@ class Photolecture extends PpciLibrary
             $this->message->set(_("Vous ne disposez pas des droits nécessaires pour réaliser une lecture"), true);
             return $this->display();
         }
-
-        $data = $this->dataRead($this->id, "photolecture/photolectureChange.tpl", $_SESSION["it_photo"]->getValue($_REQUEST["photo_id"]));
-        /**
-         * Rajout de l'identifiant du lecteur
-         */
-        if (!$data["lecteur_id"] > 0) {
-            $data["lecteur_id"] = $lecteur_id;
-        }
+        $this->vue->set("photolecture/photolectureChange.tpl", "corps");
         /**
          * Lecture des informations concernant la photo
          */
@@ -211,11 +204,22 @@ class Photolecture extends PpciLibrary
         $dataIndiv = $_SESSION["it_individu"]->translateRow($dataIndiv);
         $dataIndiv = $_SESSION["it_peche"]->translateRow($dataIndiv);
         $this->vue->set($dataIndiv, "individu");
-
+        $data = $this->dataclass->read($this->id, true, $_SESSION["it_photo"]->getValue($_REQUEST["photo_id"]));
+        /**
+         * Rajout de l'identifiant du lecteur
+         */
+        if (!$data["lecteur_id"] > 0) {
+            $data["lecteur_id"] = $lecteur_id;
+        }
         /**
          * Recuperation de la taille de l'image
          */
         if ($data["photolecture_id"] == 0) {
+            /**
+             * default parameters
+             */
+            $data["pointsJson"] = json_encode([]);
+            $data["pointsRefJson"] = json_encode([]);
             switch ($_REQUEST["resolution"]) {
                 case 2:
                     $image_width = 1024;
@@ -272,20 +276,22 @@ class Photolecture extends PpciLibrary
         $this->vue->set($image_width, "image_width");
         $this->vue->set($image_height, "image_height");
         $dataDetail = $this->dataclass->getDetailLecture($this->id, $coef);
-        $dataT = $_SESSION["it_photolecture"]->translateRow($dataDetail);
-        $dataT = $_SESSION["it_photo"]->translateRow($dataT);
-        $this->vue->set($dataT, "data");
+        $data = array_merge($data, $dataDetail);
         /**
          * Recuperation des lectures precedentes
          */
         if (isset($mesurePrecId)) {
             $mesurePrec = $this->dataclass->getDetailLecture($mesurePrecId, $coef, $this->id);
             $this->vue->set($mesurePrec, "mesurePrec");
-            $this->vue->set(json_encode($mesurePrec),"mesurePrecJson");
-            $this->vue->htmlVars[] = "mesurePrecJson";
+            $this->vue->set(json_encode($mesurePrec), "mesurePrecJson");
+        } else {
+            $this->vue->set([], "mesurePrec");
+            $this->vue->set(json_encode([]), "mesurePrecJson");
         }
-        $this->vue->set($coef, "coef_correcteur");
 
+        $this->vue->set($coef, "coef_correcteur");
+        $this->vue->htmlVars[] = "mesurePrecJson";
+        $this->vue->htmlVars[] = "mesurePrec";
         /**
          * Calcul des points pour reaffichage en mode saisie
          */
@@ -306,7 +312,6 @@ class Photolecture extends PpciLibrary
                     null,
                     $data["version"]
                 );
-                
             }
             $data["pointsJson"] = json_encode($data["points"]);
             $data["pointsRefJson"] = json_encode($data["points_ref_lecture"]);
@@ -354,7 +359,6 @@ class Photolecture extends PpciLibrary
         $this->vue->set($rt = $remarkableType->getList("sort_order"), 'remarkableTypes');
         $this->vue->set(json_encode($rt), 'remarkableTypesJson');
         $this->vue->htmlVars[] = "remarkableTypesJson";
-        printA($data);
         return $this->vue->send();
     }
 

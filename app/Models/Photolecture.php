@@ -333,6 +333,7 @@ class Photolecture extends PpciModel
      */
     public function getDetailLecture($id, $coef, $id_exclu = 0)
     {
+        $data = [];
         if (is_array($id) || $id > 0) {
             $sql = "select photolecture_id, photo_id, lecteur_id, lecteur_nom, lecteur_prenom, photolecture_date,
                             st_astext(points) as listepoint,
@@ -431,8 +432,8 @@ class Photolecture extends PpciModel
                  */
                 $data[$key]["rayon_point_initial"] = floor($data[$key]["rayon_point_initial"] / $coef);
             }
-            return $data;
         }
+        return $data;
     }
 
     /***

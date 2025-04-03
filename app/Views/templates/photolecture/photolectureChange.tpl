@@ -35,9 +35,7 @@
 		var cy = 0;
 		var couleur = "";
 		var fillOpacity = 0;
-
-		var lien = "photoGetPhoto?photo_id={$photo.photo_id}&sizeX={$image_width}&sizeY={$image_height}";
-
+		var lien = "photoGetPhoto?photo_id={$photo.photo_id}&sizeX="+image_width+"&sizeY="+image_height;
 		var myImage = svg.group();
 		svg.image(myImage, 0, 0, image_width, image_height, lien);
 		//var myImage = svg.image(0, 0, image_width, image_height, "");
@@ -45,14 +43,23 @@
 		var r = 7
 		var fillOpacity = '{$fill}';
 		Object.keys(mesurePrec).forEach(read => {
-			var couleur = mesurePrec.read.couleur;
-			Object.keys(mesurePrec.read).forEach (p,i => {
-				if (i == 0 && mesurePrec.read.p.rayon_point_initial > 0) {
-					r = mesurePrec.read.p.rayon_point_initial;
+			var couleur = mesurePrec[read].couleur;
+			var points = mesurePrec[read].points;
+			Object.keys(points).forEach (p => {
+				var point = points[p];
+				if (point) {
+				if (i == 0 && mesurePrec.rayon_point_initial > 0) {
+					r = mesurePrec.rayon_point_initial;
 				}
-				var cx = mesurePrec.read.p.x;
-				var cy = mesurePrec.read.p.y;
-				svg.circle(myImage, cx, cy, r, { 'stroke': couleur, 'fill': couleur, 'fill-opacity': fillOpacity });
+				var cx = point.x;
+				var cy = point.y;
+				var circle = svg.circle(myImage, cx, cy, r, { 'stroke': couleur, 'fill': couleur, 'fill-opacity': fillOpacity });
+				var title = p;
+				if (point.remarkable_type_id) {
+					title += " " + point.remarkable_type_name;
+				}
+				svg.title(circle,title);
+			}
 			});
 		});
 		/*{section name = "lst" loop = $mesurePrec }
@@ -203,7 +210,6 @@
 		}
 		/* suppression du point depuis le tableau */
 		$("#point" + valeurCompteur).mousedown(function (event) {
-			console.log("suppression du point " + valeurCompteur);
 			$("#pointx" + valeurCompteur).remove();
 			$("#pointy" + valeurCompteur).remove();
 			$("#ligne" + valeurCompteur).remove();
@@ -486,16 +492,15 @@
 	- {t}Résolution{/t} : {$mesurePrec[lst].photolecture_width}x{$mesurePrec[lst].photolecture_height}
 	- {t}Points remarquables :{/t}
 	<script>
-		var rp = "{$mesurePrec[lst].pointsJson}";
-		if (rp) {
-			var arp = JSON.parse(rp);
+		var arp = {$mesurePrec[lst].pointsJson};
+		if (arp) {
 			var i = 0;
 			Object.keys(arp).forEach(p => {
 				if (arp[p].remarkable_type_id != undefined ) {
 					if (i > 0) {
 						document.write(", ");
 					}
-					document.write(p + ":" + arp[p].remarkable_type_name);
+					document.write(p + ": " + arp[p].remarkable_type_name);
 					i++;
 				}
 			})
