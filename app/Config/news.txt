@@ -1,5 +1,10 @@
 Nouveautés
 ============
+Version 25.0.0 du 4/4/2025
+----------------------------
+Nouveautés :
+- il est maintenant possible d'indiquer la nature des points remarquables
+
 Version 24.0.1 du 22/10/2024
 ----------------------------
 Mise à niveau des bibliothèques tierces

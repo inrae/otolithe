@@ -1065,7 +1065,7 @@ not recorded]]>
 	</constraint>
 	<initial-data>
 <![CDATA["dbversion_number";"dbversion_date"
-"24.0";"2024-06-19"
+"25.0";"2025-04-04"
 ]]>
 	</initial-data>
 </table>
