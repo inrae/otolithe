@@ -553,7 +553,7 @@ class Photolecture extends PpciModel
                         photo_nom, photo_date, color, long_reference, photo_height, photo_width,
                         piecetype_libelle, traitementpiece_libelle,
                         rayon_point_initial, commentaire, remarkable_points
-
+                        ,version
                         from photolecture left join lecteur using(lecteur_id)
                         left join photo using (photo_id)
                         left join piece using (piece_id)

@@ -505,7 +505,8 @@ class Photolecture extends PpciLibrary
                 "remarkable_points"
             );
             $dataExport = array();
-
+            $remarkableType = new RemarkableType;
+            $types = $remarkableType->getAsArray();
             /**
              * Traitement des lignes - on rajoute les coordonnees des points
              */
@@ -521,18 +522,24 @@ class Photolecture extends PpciLibrary
                     }
                 }
                 /** Traitement des points remarquables */
-                $rp = json_decode($row["remarkable_points"]);
-                $i = 0;
+
+                $rp = json_decode($row["remarkable_points"], true);
                 $drp = "";
+                $i = 0;
                 foreach ($rp as $vrp) {
                     if ($i > 0) {
                         $drp .= ",";
                     }
-                    $drp .= $vrp + 1;
+                    if ($row["version"] == 2013) {
+                        $drp .= $vrp . ":" . $types[1];
+                    } else if ($row["version"] == 2025) {
+                        foreach ($vrp as $kt => $t) {
+                            $drp .= $kt . ":" . $types[$t["id"]];
+                        }
+                    }
                     $i++;
                 }
                 $ligne["remarkable_points"] = $drp;
-
                 /** Traitement des points - calcul des coordonnees */
                 if (strlen($row["points"]) > 0) {
                     $dataPoints["points"] = $this->dataclass->calculPointsAffichage($row["points"], 1);
