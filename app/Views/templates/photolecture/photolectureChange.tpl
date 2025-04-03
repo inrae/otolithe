@@ -41,7 +41,21 @@
 		var myImage = svg.group();
 		svg.image(myImage, 0, 0, image_width, image_height, lien);
 		//var myImage = svg.image(0, 0, image_width, image_height, "");
-		{section name = "lst" loop = $mesurePrec }
+		var mesurePrec = {$mesurePrecJson};
+		var r = 7
+		var fillOpacity = '{$fill}';
+		Object.keys(mesurePrec).forEach(read => {
+			var couleur = mesurePrec.read.couleur;
+			Object.keys(mesurePrec.read).forEach (p,i => {
+				if (i == 0 && mesurePrec.read.p.rayon_point_initial > 0) {
+					r = mesurePrec.read.p.rayon_point_initial;
+				}
+				var cx = mesurePrec.read.p.x;
+				var cy = mesurePrec.read.p.y;
+				svg.circle(myImage, cx, cy, r, { 'stroke': couleur, 'fill': couleur, 'fill-opacity': fillOpacity });
+			});
+		});
+		/*{section name = "lst" loop = $mesurePrec }
 		{section name = "lst1" loop = $mesurePrec[lst].points }
 		{if $smarty.section.lst1.index == 0 }
 		{if $mesurePrec[lst].rayon_point_initial > 0}
@@ -60,7 +74,7 @@
 		svg.circle(myImage, cx, cy, r, { 'stroke': couleur, 'fill': couleur, 'fill-opacity': fillOpacity });
 		{/section }
 		{/section }
-
+*/
 		$("#resetCompteur").click(function (event) {
 			/* Reinitialisation du compteur */
 			compteur = 0;
@@ -82,7 +96,7 @@
 		 */
 		var photolecture_id = "{$data.photolecture_id}";
 		if (photolecture_id > 0) {
-			var points = JSON.parse({$data.pointsJson});
+			var points = {$data.pointsJson};
 			var i = 0;
 			Object.keys(points).forEach(k => {
 				$("#modeLecture").val(1);
@@ -249,17 +263,21 @@
 </script>
 <h2>{t}Mesure d'un otolithe ou d'une pièce calcifiée{/t}</h2>
 <a href="{$moduleListe}"
-	onclick="return confirm('{t}Les modifications apportées dans cette page vont être perdues. Confirmez-vous cette opération ?{/t}')">{t}Retour
-	à la liste{/t}</a> >
+	onclick="return confirm('{t}Les modifications apportées dans cette page vont être perdues. Confirmez-vous cette opération ?{/t}')">
+	{t}Retour à la liste{/t}
+</a> >
 <a href="individuDisplay?individu_id={$piece.individu_id}"
-	onclick="return confirm('{t}Les modifications apportées dans cette page vont être perdues. Confirmez-vous cette opération ?{/t}')">{t}Retour
-	au détail du poisson{/t}</a> >
+	onclick="return confirm('{t}Les modifications apportées dans cette page vont être perdues. Confirmez-vous cette opération ?{/t}')">
+	{t}Retour au détail du poisson{/t}
+</a> >
 <a href="pieceDisplay?piece_id={$piece.piece_id}"
-	onclick="return confirm('{t}Les modifications apportées dans cette page vont être perdues. Confirmez-vous cette opération ?{/t}')">{t}Retour
-	au détail de la pièce{/t}</a> >
+	onclick="return confirm('{t}Les modifications apportées dans cette page vont être perdues. Confirmez-vous cette opération ?{/t}')">
+	{t}Retour au détail de la pièce{/t}
+</a> >
 <a href="photoDisplay?photo_id={$data.photo_id}"
-	onclick="return confirm('{t}Les modifications apportées dans cette page vont être perdues. Confirmez-vous cette opération ?{/t}')">{t}Retour
-	à la photo{/t}</a>
+	onclick="return confirm('{t}Les modifications apportées dans cette page vont être perdues. Confirmez-vous cette opération ?{/t}')">
+	{t}Retour à la photo{/t}
+</a>
 <div class="row">
 	<div class="col-lg-8 col-sm-12">
 		{include file="gestion/individuCartouche.tpl"}
@@ -473,11 +491,11 @@
 			var arp = JSON.parse(rp);
 			var i = 0;
 			Object.keys(arp).forEach(p => {
-				if (arp[p].remarkable != undefined ) {
+				if (arp[p].remarkable_type_id != undefined ) {
 					if (i > 0) {
 						document.write(", ");
 					}
-					document.write(p + " " + arp[p].remarkable);
+					document.write(p + ":" + arp[p].remarkable_type_name);
 					i++;
 				}
 			})

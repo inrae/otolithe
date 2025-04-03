@@ -281,6 +281,8 @@ class Photolecture extends PpciLibrary
         if (isset($mesurePrecId)) {
             $mesurePrec = $this->dataclass->getDetailLecture($mesurePrecId, $coef, $this->id);
             $this->vue->set($mesurePrec, "mesurePrec");
+            $this->vue->set(json_encode($mesurePrec),"mesurePrecJson");
+            $this->vue->htmlVars[] = "mesurePrecJson";
         }
         $this->vue->set($coef, "coef_correcteur");
 
@@ -306,6 +308,7 @@ class Photolecture extends PpciLibrary
                 );
                 
             }
+            $data["pointsJson"] = json_encode($data["points"]);
             $data["pointsRefJson"] = json_encode($data["points_ref_lecture"]);
         }
         /**
@@ -318,6 +321,8 @@ class Photolecture extends PpciLibrary
          */
         $data = $_SESSION["it_photolecture"]->translateRow($data);
         $data = $_SESSION["it_photo"]->translateRow($data);
+        $data["commentaire"] = esc($data["commentaire"]);
+        $this->vue->htmlVars[] = "data";
         $this->vue->set($data, "data");
 
         /**
@@ -349,6 +354,7 @@ class Photolecture extends PpciLibrary
         $this->vue->set($rt = $remarkableType->getList("sort_order"), 'remarkableTypes');
         $this->vue->set(json_encode($rt), 'remarkableTypesJson');
         $this->vue->htmlVars[] = "remarkableTypesJson";
+        printA($data);
         return $this->vue->send();
     }
 

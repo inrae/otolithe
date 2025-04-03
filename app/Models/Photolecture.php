@@ -396,25 +396,14 @@ class Photolecture extends PpciModel
             $remarkableType = new RemarkableType;
             $types = $remarkableType->getAsArray();
             foreach ($data as $key => $value) {
-                if (strlen($data[$key]["listepoint"]) > 0) {
-                    $data[$key]["points"] = $this->calculPointsAffichage($data[$key]["listepoint"], $coef);
+                if (strlen($value["listepoint"]) > 0) {
+                    $data[$key]["points"] = $this->calculPointsAffichage($data[$key]["listepoint"], $coef, $value["remarkable_points"], $value["version"]);
                     /**
                      * Add remarkable information
                      */
-                    if (!empty($data[$key]["remarkable_points"])) {
-                        $remarkable = json_decode($data[$key]["remarkable_points"], true);
-                        $rmk = [];
-                        foreach ($remarkable as $rp) {
-                            if ($data[$key]["version"] == 2013) {
-                                $rmk[$rp] = ["remarkable" => $types[1]];
-                            } elseif ($data[$key]["version"] == 2025) {
-                                foreach ($rp as $k => $v) {
-                                    $rmk[$k] = $v;
-                                    $rmk[$k]["remarkable"] = $types[$rmk[$k]["id"]];
-                                }
-                            }
-                        }
-                        $data[$key]["remarkable_points"] = json_encode($rmk, true);
+                    /*if (!empty($data[$key]["remarkable_points"])) {
+                        $rmk = $this->normalizeRemarkable($data[$key]["remarkable_points"], $data["version"]);
+                        //$data[$key]["remarkable_points"] = json_encode($rmk, true);
                         foreach ($data[$key]["points"] as $k => $point) {
                             if ($data[$key]["version"] == 2013) {
                                 if (array_key_exists($k, $rmk)) {
@@ -429,7 +418,7 @@ class Photolecture extends PpciModel
                             }
                             $data[$key]["points"][$k] = $point;
                         }
-                    }
+                    }*/
                     $data[$key]["pointsJson"] = json_encode($data[$key]["points"]);
                     /**
                      * Rajout de la couleur
@@ -487,7 +476,7 @@ class Photolecture extends PpciModel
         /**
          * Decodage du champ json
          */
-        $rp = json_decode($remarkable_points, true);
+        $rmk = $this->normalizeRemarkable($remarkable_points, $version);
         foreach ($alpt as $value1) {
             /**
              * Separation des valeurs x et y
@@ -499,23 +488,16 @@ class Photolecture extends PpciModel
             $data[$i]["x"] = floor($xy[0] / $coef);
             $data[$i]["y"] = floor($xy[1] / $coef);
             /**
-             * Ajout du point remarquable
-             */
-            if (!is_null($rp) && in_array($i, $rp)) {
-                $data[$i]["remarkablePoint"] = 1;
-            }
-            /**
              * Add remarkable information
              */
-            if (!empty($rp)) {
+            if (!empty($rmk) && array_key_exists($i, $rmk)) {
                 if ($version == 2013) {
-                    if (in_array($i, $rp)) {
-                        $data[$i]["remarkablePoint"] = ["remarkable_type_id" => 1];
-                    }
+                    $data[$i]["remarkable_type_id"] = 1;
                 } else if ($version == 2025) {
-                    if (array_key_exists($i, $rp)) {
-                        $data[$i]["remarkablePoint"] = ["remarkable_type_id" => $rp[$i]["id"]];
-                    }
+                    $data[$i]["remarkable_type_id"] = $rmk[$i];
+                }
+                if (isset($data[$i]["remarkable_type_id"])) {
+                    $data[$i]["remarkable_type_name"] = $types[$data[$i]["remarkable_type_id"]];
                 }
             }
             $i++;
@@ -615,5 +597,30 @@ class Photolecture extends PpciModel
         $order = " order by codeindividu, tag, piece_id, photo_id, photolecture_date";
         $this->fields["photo_date"] = ["type" => 2];
         return $this->getListeParam($sql . $where . $order, $sqlparam);
+    }
+    /**
+     * Transform the remarkable points in array with key is the number of the point
+     * and the content is remarkable_type_id
+     *
+     * @param string $content
+     * @param integer $version
+     * @return array
+     */
+    function normalizeRemarkable($content, $version = 2025)
+    {
+        $rmk = [];
+        if (!empty($content)) {
+            $remarkable = json_decode($content, true);
+            foreach ($remarkable as $rp) {
+                if ($version == 2013) {
+                    $rmk[$rp] = 1;
+                } elseif ($version == 2025) {
+                    foreach ($rp as $k => $v) {
+                        $rmk[$k] = $v["id"];
+                    }
+                }
+            }
+        }
+        return $rmk;
     }
 }

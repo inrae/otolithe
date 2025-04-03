@@ -36,6 +36,7 @@
 		<image x="0" y="0" width="{$image_width}" height="{$image_height}"
 			xlink:href="photoGetPhoto?photo_id={$photo.photo_id}&sizeX={$image_width}&sizeY={$image_height}" />
 		{section name="lst" loop=$data}
+		<script>console.log({$data[lst].points})</script>
 		{section name="lst1" loop=$data[lst].points}
 		{if $smarty.section.lst1.index == 0 }
 		{assign var = 'r' value = $data[lst].rayon_point_initial}
@@ -44,7 +45,7 @@
 		{/if}
 		<circle cx="{$data[lst].points[lst1].x}" cy="{$data[lst].points[lst1].y}" r="{$r}"
 			style="stroke:{$data[lst].couleur}; fill:{$data[lst].couleur}; fill-opacity:{$fill}">
-			<title>point {$smarty.section.lst1.index} {$data[lst].points[lst1].remarkable}</title>
+			<title>point {$smarty.section.lst1.index} {$data[lst].points[lst1].remarkable_type_name}</title>
 		</circle>
 		{/section}
 		{/section}
@@ -70,11 +71,11 @@
 			var arp = JSON.parse(rp);
 			var i = 0;
 			Object.keys(arp).forEach(p => {
-				if (arp[p].remarkable != undefined ) {
+				if (arp[p].remarkable_type_id != undefined ) {
 					if (i > 0) {
 						document.write(", ");
 					}
-					document.write(p + " " + arp[p].remarkable);
+					document.write(p + ":" + arp[p].remarkable_type_name);
 					i++;
 				}
 			})
