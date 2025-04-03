@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-21 12:20+0200\n"
+"POT-Creation-Date: 2025-04-03 17:12+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10,7 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. (itstool) path: menu/item@label
@@ -71,7 +71,7 @@ msgstr "Settings"
 
 #. (itstool) path: menu/item@tooltip
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:15 ../../Config/menu.xml:31
+#: ../../Config/menu.xml:15 ../../Config/menu.xml:32
 msgid "Paramètres de l'application"
 msgstr "Application Settings"
 
@@ -104,268 +104,269 @@ msgstr "List of types of calcified pieces"
 
 #. (itstool) path: item/item@label
 #: ../../Config/menu.xml:19
+#: ../../../app/Views/templates/gestion/photoDisplay.tpl:187
+msgid "Points remarquables"
+msgstr "Remarkable points:"
+
+#. (itstool) path: item/item@tooltip
+#: ../../Config/menu.xml:19
+msgid "Liste des points remarquables positionnables sur les photos"
+msgstr "List of remarkable points that can be positioned on the pictures"
+
+#. (itstool) path: item/item@label
+#: ../../Config/menu.xml:20
 msgid "Espèces"
 msgstr "Species"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:19
+#: ../../Config/menu.xml:20
 #: ../../../app/Views/templates/gestion/especeList.tpl:1
 msgid "Liste des espèces"
 msgstr "List of species"
 
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:20
+#: ../../Config/menu.xml:21
 msgid "Métadonnées"
 msgstr "Metadata"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:20
+#: ../../Config/menu.xml:21
 #: ../../../app/Views/templates/param/metadatatypeList.tpl:15
 msgid "Modèles de métadonnées"
 msgstr "Metadata templates"
 
 #. (itstool) path: item/item@label
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:22
+#: ../../Config/menu.xml:23
 msgid "Schéma de la base de données"
 msgstr "Database structure"
 
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:23
+#: ../../Config/menu.xml:24
 msgid "Structure de la base de données (HTML)"
 msgstr "Database structure (HTML)"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:23
+#: ../../Config/menu.xml:24
 msgid "Liste des tables et des colonnes"
 msgstr "List of tables and columns"
 
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:24
+#: ../../Config/menu.xml:25
 msgid "Structure de la base de données (Latex)"
 msgstr "Database structure (Latex)"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:24
+#: ../../Config/menu.xml:25
 msgid "Liste des tables et des colonnes sous forme de tableaux Latex"
 msgstr "List of tables and columns in Latex format"
 
 #. (itstool) path: menu/item@label
-#: ../../Config/menu.xml:26
+#: ../../Config/menu.xml:27
 msgid "Administration"
 msgstr "Administration"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../Config/menu.xml:26
+#: ../../Config/menu.xml:27
 msgid "Administration de l'application"
 msgstr "Application administration"
 
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:27
+#: ../../Config/menu.xml:28
 msgid "Liste des comptes locaux"
 msgstr "Local accounts list"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:27
+#: ../../Config/menu.xml:28
 msgid "Liste des logins - identification via la base de données"
 msgstr "List of logins - identification via the database"
 
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:28
+#: ../../Config/menu.xml:29
 msgid "ACL - droits"
 msgstr "ACL - rights"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:28
+#: ../../Config/menu.xml:29
 msgid "applications et droits gérés"
 msgstr "applications and rights managed"
 
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:29
+#: ../../Config/menu.xml:30
 msgid "ACL - logins"
 msgstr "ACL - logins"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:29
+#: ../../Config/menu.xml:30
 msgid "Logins déclarés dans le module de manage des droits"
 msgstr "Logins declared in the rights management module"
 
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:30
+#: ../../Config/menu.xml:31
 msgid "ACL - groupes de logins"
 msgstr "ACL - login groups"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:30
+#: ../../Config/menu.xml:31
 msgid "Groupes de logins et logins rattachés aux groupes"
 msgstr "Groups of logins and logins attached to groups"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:31
+#: ../../Config/menu.xml:32
 msgid "Liste des paramètres pérennes de l'application"
 msgstr "List of long-term parameters of the application"
 
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:33
+#: ../../Config/menu.xml:34
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/phpinfo.tpl:1
 msgid "PHP info"
 msgstr "PHP info"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:33
+#: ../../Config/menu.xml:34
 msgid "configuration générale du serveur PHP"
 msgstr "general configuration of the PHP server"
 
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:34
+#: ../../Config/menu.xml:35
 msgid "Logs"
 msgstr "Logs"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:34
+#: ../../Config/menu.xml:35
 msgid "Consultation des logs enregistrées"
 msgstr "Consultation of recorded logs"
 
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:35
+#: ../../Config/menu.xml:36
 msgid "Variables SERVER"
 msgstr "SERVER variables"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:35
+#: ../../Config/menu.xml:36
 msgid "Affichage des variables fournies par le serveur"
 msgstr "Display of variables supplied by the server"
 
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:36
+#: ../../Config/menu.xml:37
 msgid "Variables SESSION"
 msgstr "SESSION variables"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:36
+#: ../../Config/menu.xml:37
 msgid "Affichage des variables de session"
 msgstr "Display of the session variables"
 
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:38
+#: ../../Config/menu.xml:39
 msgid "Backup"
 msgstr "Backup"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:38
+#: ../../Config/menu.xml:39
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/backup.tpl:1
 msgid "Sauvegarde de la base de données"
 msgstr "Backup of the database"
 
 #. (itstool) path: menu/item@label
-#: ../../Config/menu.xml:40
+#: ../../Config/menu.xml:41
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/header.tpl:21
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/header.tpl:41
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/header.tpl:42
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/header.tpl:43
 msgid "Connexion"
 msgstr "Sign in"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../Config/menu.xml:40
+#: ../../Config/menu.xml:41
 msgid "S'identifier dans l'application"
 msgstr "Sign in to the app"
 
 #. (itstool) path: menu/item@label
-#: ../../Config/menu.xml:41
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/header.tpl:37
+#: ../../Config/menu.xml:42
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/header.tpl:38
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/header.tpl:39
 msgid "Déconnexion"
 msgstr "Sign out"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../Config/menu.xml:41
+#: ../../Config/menu.xml:42
 msgid "Déconnexion de l'application"
 msgstr "Sign out of the app"
 
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:42
+#: ../../Config/menu.xml:43
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/header.tpl:32
 msgid "Activer la double authentification"
 msgstr "Enable dual authentication"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:42
+#: ../../Config/menu.xml:43
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/header.tpl:32
 msgid "Activer la double authentification pour votre compte"
 msgstr "Enabling dual authentication for your account"
 
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:43
+#: ../../Config/menu.xml:44
 msgid "Nouvelle version ?"
 msgstr "New version?"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:43
+#: ../../Config/menu.xml:44
 msgid "Rechercher s'il existe une nouvelle version disponible de l'application"
 msgstr "Find out if there is a new version of the application available"
 
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:44
+#: ../../Config/menu.xml:45
 msgid "Dernières connexions"
 msgstr "Last connections"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:44
+#: ../../Config/menu.xml:45
 msgid "Liste des dernières connexions réalisées"
 msgstr "List of last connections"
 
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:45
+#: ../../Config/menu.xml:46
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/ident/loginChangePassword.tpl:86
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/header.tpl:33
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/header.tpl:34
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/header.tpl:35
 msgid "Modifier le mot de passe"
 msgstr "Change your password"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:45
+#: ../../Config/menu.xml:46
 msgid "Modifiez votre mot de passe (identification locale uniquement)"
 msgstr "Change your password (local identification only)"
 
 #. (itstool) path: menu/item@label
-#: ../../Config/menu.xml:47
+#: ../../Config/menu.xml:48
 msgid "?"
 msgstr "?"
 
 #. (itstool) path: menu/item@tooltip
-#: ../../Config/menu.xml:47
+#: ../../Config/menu.xml:48
 msgid "Aide"
 msgstr "Help"
 
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:48
+#: ../../Config/menu.xml:49
 msgid "A propos"
 msgstr "About"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:48
+#: ../../Config/menu.xml:49
 msgid "A propos de Metabo"
 msgstr "About Otolith"
 
 #. (itstool) path: item/item@label
-#: ../../Config/menu.xml:49
+#: ../../Config/menu.xml:50
 msgid "Nouveautés"
 msgstr "What's new?"
 
 #. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:49
+#: ../../Config/menu.xml:50
 msgid "Quoi de neuf dans l'application ?"
 msgstr "What's new in the app?"
-
-#. (itstool) path: item/item@label
-#: ../../Config/menu.xml:50
-msgid "Lexique"
-msgstr "Glossary"
-
-#. (itstool) path: item/item@tooltip
-#: ../../Config/menu.xml:50
-msgid "Lexique des termes utilisés dans le logiciel"
-msgstr "Glossary of terms used in the software"
 
 #. (itstool) path: item/item@label
 #: ../../Config/menu.xml:51
@@ -407,25 +408,25 @@ msgstr "No pieces have been selected from the database"
 msgid "L'exportation n'a pas été réalisée"
 msgstr "The export was not realized"
 
-#: ../../../app/Libraries/Piecemetadata.php:123
+#: ../../../app/Libraries/Piecemetadata.php:118
 msgid "Importation du jeu de métadonnées effectué"
 msgstr "Metadata set import done"
 
-#: ../../../app/Libraries/Piecemetadata.php:128
+#: ../../../app/Libraries/Piecemetadata.php:123
 #: ../../../app/Libraries/Metadatatype.php:140
 msgid "Impossible de charger le fichier à importer"
 msgstr "Unable to load the file to import"
 
-#: ../../../app/Libraries/Photolecture.php:164
+#: ../../../app/Libraries/Photolecture.php:179
 msgid ""
 "Vous n'êtes pas le lecteur initial : vous ne pouvez modifier cette lecture"
 msgstr "You are not the initial reader: you cannot modify this reading"
 
-#: ../../../app/Libraries/Photolecture.php:169
+#: ../../../app/Libraries/Photolecture.php:184
 msgid "Vous ne disposez pas des droits nécessaires pour réaliser une lecture"
 msgstr "You are not granted to read"
 
-#: ../../../app/Libraries/Photolecture.php:372
+#: ../../../app/Libraries/Photolecture.php:418
 msgid "Vous ne disposez pas des droits suffisants pour supprimer la lecture"
 msgstr "You are not granted to delete this reading"
 
@@ -454,7 +455,7 @@ msgstr ""
 "An error occurred while loading the photo. If the problem persists, contact "
 "your technical support"
 
-#: ../../../app/Models/Piece.php:109 ../../../app/Models/Photo.php:219
+#: ../../../app/Models/Piece.php:109 ../../../app/Models/Photo.php:213
 msgid "La suppression d'une clé nulle ou non numérique n'est pas possible"
 msgstr "Deleting a null or non-numeric key is not possible"
 
@@ -468,53 +469,53 @@ msgstr "Column header %1$s is not recognized (%2$s)"
 msgid "%s non trouvé ou non lisible"
 msgstr "%s not found or not readable"
 
-#: ../../../app/Models/Import.php:341
+#: ../../../app/Models/Import.php:339
 msgid "Aucun code (codeindividu ou tag) n'a été indiqué."
 msgstr "No code (individual code or tag) has been specified."
 
-#: ../../../app/Models/Import.php:355
+#: ../../../app/Models/Import.php:353
 msgid "Le numéro de l'expérimentation est manquant, inconnu ou non autorisé."
 msgstr "Experiment number is missing, unknown or unautorized."
 
-#: ../../../app/Models/Import.php:369
+#: ../../../app/Models/Import.php:367
 msgid "Le numéro d'espèce est manquant ou non connu."
 msgstr "Specie number is missing or unknown"
 
-#: ../../../app/Models/Import.php:385
+#: ../../../app/Models/Import.php:383
 msgid "Le sexe indiqué n'existe pas dans la base de données."
 msgstr "The specified sex don't exist in the database."
 
-#: ../../../app/Models/Import.php:393
+#: ../../../app/Models/Import.php:391
 msgid "L'UUID de l'individu n'est pas correct."
 msgstr "Individual UUID is not correct."
 
-#: ../../../app/Models/Import.php:402
+#: ../../../app/Models/Import.php:400
 msgid "La pièce dispose d'un code, mais son type n'a pas été indiqué."
 msgstr "The piece has a code, but its type has not been specified"
 
-#: ../../../app/Models/Import.php:417
+#: ../../../app/Models/Import.php:415
 msgid "Le type de pièce indiqué n'est pas connu."
 msgstr "The type of piece is unknown"
 
-#: ../../../app/Models/Import.php:424
+#: ../../../app/Models/Import.php:422
 msgid "L'UUID de la pièce n'est pas correct."
 msgstr "Piece UUID is not correct."
 
-#: ../../../app/Models/Import.php:455
+#: ../../../app/Models/Import.php:453
 msgid ""
 "Le type de métadonnées (metadatatype_id) n'est pas renseigné ou inconnu."
 msgstr "The metadata type (metadatatype_id) is unknown or empty."
 
-#: ../../../app/Models/Import.php:467
+#: ../../../app/Models/Import.php:464
 #, php-format
 msgid "Le champ %s n'est pas numérique."
 msgstr "The field %1$s is not numeric."
 
-#: ../../../app/Models/Import.php:477
+#: ../../../app/Models/Import.php:472
 msgid "La date de pêche est mal formatée"
 msgstr "The date of fishing is poorly formatted"
 
-#: ../../../app/Models/Import.php:486
+#: ../../../app/Models/Import.php:479
 msgid "La date associée aux méta-données est mal formatée"
 msgstr "The date related with the metadata is poorly formatted"
 
@@ -526,25 +527,25 @@ msgstr "Photos are attached to the fish, its removable is impossible"
 msgid "Imagick - impossible de charger la photo "
 msgstr "Imagick - impossible to load the photo"
 
-#: ../../../app/Models/Photo.php:146
+#: ../../../app/Models/Photo.php:145
 msgid "Imagick - impossible de redimensionner la photo"
 msgstr "Imagick - impossible to resize the photo"
 
-#: ../../../app/Models/Photo.php:153
+#: ../../../app/Models/Photo.php:152
 msgid "Imagick - impossible de définir le format de la photo"
 msgstr "Imagick - impossible to define the format of the photo"
 
-#: ../../../app/Models/Photo.php:186
+#: ../../../app/Models/Photo.php:184
 msgid ""
 "Problème rencontré lors du parcours des photos existantes ou de leur "
 "suppression"
 msgstr "An error occurred when browsing existing photos or deleting them"
 
-#: ../../../app/Models/Photo.php:294
+#: ../../../app/Models/Photo.php:288
 msgid "La photo demandée n'existe pas"
 msgstr "The requested picture does not exist"
 
-#: ../../../app/Models/Photo.php:334
+#: ../../../app/Models/Photo.php:326
 msgid "Problème d'écriture de la photo dans le dossier temporaire"
 msgstr "Problem of writing the photo in the temporary folder"
 
@@ -555,11 +556,11 @@ msgid ""
 "supprimée"
 msgstr "%s individuals are attached to the experiment, it cannot be deleted"
 
-#: ../../../vendor/equinton/ppci/src/Libraries/Views/PdfView.php:71
+#: ../../../vendor/equinton/ppci/src/Libraries/Views/PdfView.php:77
 msgid "Le fichier ne peut pas être envoyé au navigateur"
 msgstr "The file cannot be sent to the browser"
 
-#: ../../../vendor/equinton/ppci/src/Libraries/Views/PdfView.php:74
+#: ../../../vendor/equinton/ppci/src/Libraries/Views/PdfView.php:80
 msgid "Aucun contenu disponible"
 msgstr "No content available"
 
@@ -567,14 +568,14 @@ msgstr "No content available"
 msgid "Problème rencontré lors de l'ouverture de finfo"
 msgstr "Problem encountered when opening finfo"
 
-#: ../../../vendor/equinton/ppci/src/Libraries/Views/SmartyPpci.php:93
+#: ../../../vendor/equinton/ppci/src/Libraries/Views/SmartyPpci.php:94
 #, php-format
 msgid ""
 "Mode développement - base de données : pgsql:host=%1s;dbname=%2s - schema : "
 "%3s"
 msgstr "Development mode - database: pgsql:host=%1s;dbname=%2s - schema: %3s"
 
-#: ../../../vendor/equinton/ppci/src/Libraries/Views/FileView.php:38
+#: ../../../vendor/equinton/ppci/src/Libraries/Views/FileView.php:41
 msgid ""
 "Le nom du fichier à exporter n'a pas été renseigné et aucune donnée n'est "
 "disponible pour l'exportation"
@@ -582,16 +583,16 @@ msgstr ""
 "The name of the file to be exported has not been entered and no data is "
 "available for export."
 
-#: ../../../vendor/equinton/ppci/src/Libraries/PpciLibrary.php:42
+#: ../../../vendor/equinton/ppci/src/Libraries/PpciLibrary.php:45
 msgid "Erreur de lecture des informations dans la base de données"
 msgstr "Error reading information in the database"
 
-#: ../../../vendor/equinton/ppci/src/Libraries/PpciLibrary.php:59
+#: ../../../vendor/equinton/ppci/src/Libraries/PpciLibrary.php:62
 #: ../../../vendor/equinton/ppci/src/Libraries/Dbparam.php:22
 msgid "Enregistrement effectué"
 msgstr "Saved"
 
-#: ../../../vendor/equinton/ppci/src/Libraries/PpciLibrary.php:65
+#: ../../../vendor/equinton/ppci/src/Libraries/PpciLibrary.php:68
 msgid ""
 "Un problème est survenu lors de l'enregistrement. Si le problème persiste, "
 "contactez votre support"
@@ -599,35 +600,41 @@ msgstr ""
 "A problem is occurred during the registration. If it persist, contact your "
 "support"
 
-#: ../../../vendor/equinton/ppci/src/Libraries/PpciLibrary.php:71
+#: ../../../vendor/equinton/ppci/src/Libraries/PpciLibrary.php:74
 #, php-format
 msgid "La clé n'a pas été retournée lors de l'enregistrement dans %s"
 msgstr "The key was not returned during registration in %s"
 
-#: ../../../vendor/equinton/ppci/src/Libraries/PpciLibrary.php:80
+#: ../../../vendor/equinton/ppci/src/Libraries/PpciLibrary.php:84
 msgid ""
 "Un enregistrement portant déjà ce nom existe déjà dans la base de données."
 msgstr "A record with this name already exists into the database."
 
-#: ../../../vendor/equinton/ppci/src/Libraries/PpciLibrary.php:97
+#: ../../../vendor/equinton/ppci/src/Libraries/PpciLibrary.php:101
 msgid "Suppression effectuée"
 msgstr "Deletion done"
 
-#: ../../../vendor/equinton/ppci/src/Libraries/PpciLibrary.php:108
+#: ../../../vendor/equinton/ppci/src/Libraries/PpciLibrary.php:112
 msgid ""
 "La suppression n'est pas possible : des informations sont référencées par "
 "cet enregistrement"
 msgstr "Delete is not possible: some data as referenced by this item"
 
-#: ../../../vendor/equinton/ppci/src/Libraries/PpciLibrary.php:113
+#: ../../../vendor/equinton/ppci/src/Libraries/PpciLibrary.php:117
 msgid "Problème lors de la suppression"
 msgstr "Problem when deleting"
 
-#: ../../../vendor/equinton/ppci/src/Libraries/LastRelease.php:35
+#: ../../../vendor/equinton/ppci/src/Libraries/LastRelease.php:18
+#: ../../../vendor/equinton/ppci/src/Libraries/LastRelease.php:38
 msgid "Impossible de récupérer la dernière version publiée de l'application"
 msgstr "Unable to retrieve the latest published version of the application"
 
-#: ../../../vendor/equinton/ppci/src/Libraries/Totp.php:52
+#: ../../../vendor/equinton/ppci/src/Libraries/LastRelease.php:58
+#, php-format
+msgid "La nouvelle version %1s du %2s a été publiée !"
+msgstr "The new release %1s of %2s has been published!"
+
+#: ../../../vendor/equinton/ppci/src/Libraries/Totp.php:55
 msgid ""
 "Les informations fournies sont insuffisantes pour valider la création de la "
 "double identification"
@@ -635,28 +642,33 @@ msgstr ""
 "The information provided is insufficient to validate the creation of double "
 "identification"
 
-#: ../../../vendor/equinton/ppci/src/Libraries/Totp.php:62
+#: ../../../vendor/equinton/ppci/src/Libraries/Totp.php:65
 msgid "La double authentification est maintenant activée."
 msgstr "The dual authentication is activate now."
 
-#: ../../../vendor/equinton/ppci/src/Libraries/Totp.php:71
+#: ../../../vendor/equinton/ppci/src/Libraries/Totp.php:74
 msgid "Le code fourni n'a pu être vérifié"
 msgstr "The code provided could not be verified"
 
-#: ../../../vendor/equinton/ppci/src/Libraries/Totp.php:103
+#: ../../../vendor/equinton/ppci/src/Libraries/Totp.php:106
 msgid "Vous êtes maintenant connecté"
 msgstr "You are now logged in"
 
-#: ../../../vendor/equinton/ppci/src/Libraries/Totp.php:129
+#: ../../../vendor/equinton/ppci/src/Libraries/Totp.php:132
+#: ../../../vendor/equinton/ppci/src/Libraries/Totp.php:161
 msgid "Le code TOTP rentré n'a pas été reconnu"
 msgstr "The TOTP code entered was not recognised"
+
+#: ../../../vendor/equinton/ppci/src/Libraries/Totp.php:151
+msgid "L'identification TOTP n'a pas été activée"
+msgstr "TOTP identification has not been activated"
 
 #: ../../../vendor/equinton/ppci/src/Libraries/Markdown.php:16
 #, php-format
 msgid "Le fichier %s n'existe pas"
 msgstr "The file %s don't exist"
 
-#: ../../../vendor/equinton/ppci/src/Libraries/Markdown.php:23
+#: ../../../vendor/equinton/ppci/src/Libraries/Markdown.php:22
 #, php-format
 msgid "Le fichier %s est vide ou ne peut être lu"
 msgstr "File %s not found or not readable"
@@ -681,7 +693,7 @@ msgstr "Data transmitted :"
 msgid "Un problème a été rencontré lors de l'envoi du mail"
 msgstr "A problem was encountered when sending the email"
 
-#: ../../../vendor/equinton/ppci/src/Libraries/Structure.php:75
+#: ../../../vendor/equinton/ppci/src/Libraries/Structure.php:83
 msgid "Le fichier contenant le schéma de la base de données n'a pas été trouvé"
 msgstr "The file containing the database schema was not found"
 
@@ -727,8 +739,8 @@ msgstr "Password reset is not enabled for this application"
 #: ../../../vendor/equinton/ppci/src/Libraries/PasswordLost.php:82
 #: ../../../vendor/equinton/ppci/src/Libraries/PasswordLost.php:107
 #: ../../../vendor/equinton/ppci/src/Libraries/LoginGestionLib.php:84
-#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:441
-#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:494
+#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:450
+#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:503
 msgid ""
 "Le mode d'identification utilisé pour votre compte n'autorise pas la "
 "modification du mot de passe depuis cette application"
@@ -762,7 +774,7 @@ msgstr "%s - change password"
 msgid "La modification du mot de passe a été enregistrée"
 msgstr "The password change has been saved"
 
-#: ../../../vendor/equinton/ppci/src/Filters/DbversioncheckFilter.php:42
+#: ../../../vendor/equinton/ppci/src/Filters/DbversioncheckFilter.php:44
 #, php-format
 msgid ""
 "La base de données n'est pas dans la version attendue (%1$s). Version "
@@ -770,7 +782,7 @@ msgid ""
 msgstr ""
 "The database is not in the expected version (%1$s). Current version: %2$s"
 
-#: ../../../vendor/equinton/ppci/src/Filters/AdminFilter.php:42
+#: ../../../vendor/equinton/ppci/src/Filters/AdminFilter.php:46
 msgid ""
 "Vous devez vous ré-identifier avec votre code TOTP pour accéder aux modules "
 "d'administration"
@@ -778,7 +790,7 @@ msgstr ""
 "You must re-identify with your TOTP code to access the administration "
 "modules."
 
-#: ../../../vendor/equinton/ppci/src/Filters/AdminFilter.php:45
+#: ../../../vendor/equinton/ppci/src/Filters/AdminFilter.php:49
 msgid ""
 "Vous devez activer la double identification TOTP pour accéder aux modules "
 "d'administration"
@@ -786,11 +798,11 @@ msgstr ""
 "You must activate dual TOTP identification to access the administration "
 "modules"
 
-#: ../../../vendor/equinton/ppci/src/Filters/StartcallFilter.php:24
+#: ../../../vendor/equinton/ppci/src/Filters/StartcallFilter.php:27
 msgid "La session a expiré, vous devez vous reconnecter"
 msgstr "The session has expired, you need to reconnect"
 
-#: ../../../vendor/equinton/ppci/src/Filters/RightFilter.php:47
+#: ../../../vendor/equinton/ppci/src/Filters/RightFilter.php:52
 msgid ""
 "Vous ne disposez pas des droits nécessaires pour exécuter cette fonction"
 msgstr "You do not have the necessary rights to perform this function"
@@ -811,7 +823,7 @@ msgstr ""
 msgid "Vous avez été déconnecté"
 msgstr "You have been disconnected"
 
-#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:189
+#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:195
 msgid ""
 "Votre mot de passe a expiré. Veuillez contacter l'administrateur de "
 "l'application pour le renouveler"
@@ -819,24 +831,27 @@ msgstr ""
 "Your password has expired. Please contact the application administrator to "
 "renew it"
 
-#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:192
+#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:198
 msgid "Votre mot de passe va expirer. Veuillez le changer immédiatement"
 msgstr "Your password is about to expire. Please, change it immediately"
 
-#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:263
+#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:269
 msgid "Mot de passe insuffisamment complexe ou trop petit"
 msgstr "Password not enough complex or too small"
 
-#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:277
+#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:283
 msgid ""
-"Une erreur est survenue pendant le chiffrement du jeton d'identification"
-msgstr "An error occurred during the encryption of the token"
+"Une erreur est survenue pendant le chiffrement du jeton d'identification, "
+"qui n'a pas pu être mis à jour"
+msgstr ""
+"An error occurred during the encryption of the identification token, which "
+"could not be updated"
 
-#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:303
+#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:310
 msgid "Activation de votre compte"
 msgstr "Activating your account"
 
-#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:316
+#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:322
 msgid ""
 "Un message vient d'être envoyé à l'utilisateur pour l'informer de "
 "l'activation de son compte"
@@ -844,20 +859,20 @@ msgstr ""
 "A message has just been sent to the user to inform them that their account "
 "has been activated."
 
-#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:332
+#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:338
 msgid ""
 "Une erreur est survenue pendant le déchiffrement du jeton d'identification"
 msgstr "An error occurred during the decryption of the token"
 
-#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:435
+#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:444
 msgid "La modification du mot de passe a échoué"
 msgstr "Password change failed"
 
-#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:438
+#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:447
 msgid "L'ancien mot de passe est incorrect"
 msgstr "The old password is incorrect"
 
-#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:459
+#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:468
 msgid ""
 "Le mot de passe que vous avez indiqué n'est pas assez complexe, ou un "
 "problème est survenu lors de l'enregistrement"
@@ -865,11 +880,11 @@ msgstr ""
 "The password you entered is not complex enough, or a problem has occurred "
 "during registration."
 
-#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:489
+#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:498
 msgid "Le mot de passe a été modifié"
 msgstr "The password has been changed"
 
-#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:491
+#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:500
 msgid ""
 "Echec de la modification du mot de passe pour une raison inconnue. Si le "
 "problème persiste, contactez l'assistance"
@@ -877,21 +892,21 @@ msgstr ""
 "Failed to change the password for an unknown reason. If the problem "
 "persists, contact support"
 
-#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:543
+#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:552
 msgid "Le mot de passe n'est pas assez fort"
 msgstr "Password not strong enough"
 
-#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:546
+#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:555
 msgid "Le mot de passe n'est pas assez complexe"
 msgstr ""
 "The password is not complex enough (mix 3 character sets among lowercase, "
 "uppercase, numbers, and punctuation)"
 
-#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:549
+#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:558
 msgid "Le mot de passe est trop court"
 msgstr "The password is too short (minimum: 10 characters)"
 
-#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:552
+#: ../../../vendor/equinton/ppci/src/Models/LoginGestion.php:561
 msgid "Le mot de passe n'est pas identique dans les deux zones"
 msgstr "Passwords don't match in both fields"
 
@@ -919,17 +934,22 @@ msgstr "The email has not been filled in"
 msgid "L'identification par jeton n'a pas abouti"
 msgstr "Token identification was unsuccessful"
 
-#: ../../../vendor/equinton/ppci/src/Models/Login.php:120
+#: ../../../vendor/equinton/ppci/src/Models/Login.php:110
+#, php-format
+msgid "La connexion auprès de l'annuaire LDAP pour l'utilisateur %s a échoué"
+msgstr "Connection to the LDAP directory for user %s has failed"
+
+#: ../../../vendor/equinton/ppci/src/Models/Login.php:124
 msgid ""
 "L'identification n'a pas abouti. Vérifiez votre login et votre mot de passe"
 msgstr "The identification was not successful. Check your login and password"
 
-#: ../../../vendor/equinton/ppci/src/Models/Login.php:207
+#: ../../../vendor/equinton/ppci/src/Models/Login.php:203
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/mail/newUser.tpl:1
 msgid "Nouvel utilisateur"
 msgstr "New user:"
 
-#: ../../../vendor/equinton/ppci/src/Models/Login.php:217
+#: ../../../vendor/equinton/ppci/src/Models/Login.php:213
 msgid ""
 "Votre compte a été créé, mais est inactif. Un mail a été adressé aux "
 "administrateurs pour son activation"
@@ -937,60 +957,55 @@ msgstr ""
 "Your account was create, but it's inactive. An email was send to the "
 "administrators for its activation"
 
-#: ../../../vendor/equinton/ppci/src/Models/Login.php:227
+#: ../../../vendor/equinton/ppci/src/Models/Login.php:223
 msgid "Aucun login n'a été fourni, identification refusée"
 msgstr "No login provided, identification refused"
 
-#: ../../../vendor/equinton/ppci/src/Models/Login.php:384
-#: ../../../vendor/equinton/ppci/src/Models/Ldap.php:74
+#: ../../../vendor/equinton/ppci/src/Models/Login.php:385
+#: ../../../vendor/equinton/ppci/src/Models/Ldap.php:75
 msgid "Impossible de se connecter au serveur LDAP"
 msgstr "Unable to connect to LDAP server"
 
-#: ../../../vendor/equinton/ppci/src/Models/Login.php:410
-#, php-format
-msgid "La connexion auprès de l'annuaire LDAP pour l'utilisateur %s a échoué"
-msgstr "Connection to the LDAP directory for user %s has failed"
-
-#: ../../../vendor/equinton/ppci/src/Models/Aclgroup.php:99
+#: ../../../vendor/equinton/ppci/src/Models/Aclgroup.php:102
 msgid ""
 "L'identification dans l'annuaire LDAP a échoué pour la récupération des "
 "groupes de l'utilisateur"
 msgstr ""
 "Identification in the LDAP directory failed to retrieve the user's groups"
 
-#: ../../../vendor/equinton/ppci/src/Models/Aclgroup.php:136
+#: ../../../vendor/equinton/ppci/src/Models/Aclgroup.php:139
 msgid "Connexion à l'annuaire LDAP impossible"
 msgstr "Cannot connect to the LDAP directory"
 
-#: ../../../vendor/equinton/ppci/src/Models/Aclgroup.php:321
+#: ../../../vendor/equinton/ppci/src/Models/Aclgroup.php:319
 msgid "Un groupe ne peut être son propre parent"
 msgstr "A group can't be its own parent"
 
-#: ../../../vendor/equinton/ppci/src/Models/Aclgroup.php:365
+#: ../../../vendor/equinton/ppci/src/Models/Aclgroup.php:363
 msgid "Suppression du groupe impossible : d'autres groupes lui sont rattachés"
 msgstr "Can not delete group: other groups are attached to it"
 
-#: ../../../vendor/equinton/ppci/src/Models/Aclgroup.php:381
+#: ../../../vendor/equinton/ppci/src/Models/Aclgroup.php:378
 msgid ""
 "La suppression du groupe a échoué. Consultez les logs pour en connaître la "
 "raison"
 msgstr "Deleting the group failed. Check the logs to find out the reason"
 
-#: ../../../vendor/equinton/ppci/src/Models/Gacltotp.php:89
+#: ../../../vendor/equinton/ppci/src/Models/Gacltotp.php:92
 msgid "Une erreur est survenue pendant le chiffrement de la clé secrète"
 msgstr "An error occurred during the encryption of the secret key"
 
-#: ../../../vendor/equinton/ppci/src/Models/Gacltotp.php:104
+#: ../../../vendor/equinton/ppci/src/Models/Gacltotp.php:107
 msgid "Une erreur est survenue pendant le déchiffrement de la clé secrète"
 msgstr "An error occurred during the decryption of the secret key"
 
-#: ../../../vendor/equinton/ppci/src/Models/Gacltotp.php:150
-#: ../../../vendor/equinton/ppci/src/Models/Gacltotp.php:155
+#: ../../../vendor/equinton/ppci/src/Models/Gacltotp.php:153
+#: ../../../vendor/equinton/ppci/src/Models/Gacltotp.php:158
 msgid "Une erreur est survenue pendant le chiffrement"
 msgstr "An error occurred during the encryption"
 
-#: ../../../vendor/equinton/ppci/src/Models/Gacltotp.php:173
-#: ../../../vendor/equinton/ppci/src/Models/Gacltotp.php:178
+#: ../../../vendor/equinton/ppci/src/Models/Gacltotp.php:176
+#: ../../../vendor/equinton/ppci/src/Models/Gacltotp.php:181
 msgid "Une erreur est survenue pendant le déchiffrement"
 msgstr "An error occurred during the decryption"
 
@@ -1012,17 +1027,17 @@ msgstr ""
 "The request must not contain any database modification commands or relate to "
 "tables containing confidential information"
 
-#: ../../../vendor/equinton/ppci/src/Models/PpciModel.php:145
+#: ../../../vendor/equinton/ppci/src/Models/PpciModel.php:144
 #, php-format
 msgid "Le champ %s est obligatoire mais n'a pas été renseigné"
 msgstr "The field %s is required, but has not been filled out"
 
-#: ../../../vendor/equinton/ppci/src/Models/PpciModel.php:263
+#: ../../../vendor/equinton/ppci/src/Models/PpciModel.php:279
 #, php-format
 msgid "La clé principale %s n'est pas renseignée ou vaut zéro"
 msgstr "The primary key %s is not filled in or is zero"
 
-#: ../../../vendor/equinton/ppci/src/Models/PpciModel.php:267
+#: ../../../vendor/equinton/ppci/src/Models/PpciModel.php:283
 #, php-format
 msgid "Une valeur fournie n'est pas numérique (%s)"
 msgstr "A value supplied is not numeric (%s)"
@@ -1056,7 +1071,7 @@ msgstr ""
 msgid "%s - Trop d'accès à un module"
 msgstr "%s - Too many accesses to a module"
 
-#: ../../../vendor/equinton/ppci/src/Models/Acllogin.php:120
+#: ../../../vendor/equinton/ppci/src/Models/Acllogin.php:122
 msgid ""
 "L'ajout d'un login à la table des comptes (gestion des droits) n'est pas "
 "possible : le login n'est pas fourni"
@@ -1073,8 +1088,8 @@ msgid "Création - Modification d'un modèle de métadonnées"
 msgstr "Create / Edit a metadata template"
 
 #: ../../../app/Views/templates/param/metadatatypeChange.tpl:34
-#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:8
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:231
+#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:17
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:254
 #: ../../../app/Views/templates/gestion/individuDisplay.tpl:4
 #: ../../../app/Views/templates/gestion/pieceChange.tpl:4
 #: ../../../app/Views/templates/gestion/especeChange.tpl:4
@@ -1082,6 +1097,7 @@ msgstr "Create / Edit a metadata template"
 #: ../../../app/Views/templates/gestion/piecemetadataDisplay.tpl:80
 #: ../../../app/Views/templates/gestion/piecetypeChange.tpl:3
 #: ../../../app/Views/templates/gestion/photoDisplay.tpl:29
+#: ../../../app/Views/templates/gestion/remarkabletypeChange.tpl:3
 #: ../../../app/Views/templates/gestion/pieceDisplay.tpl:4
 #: ../../../app/Views/templates/gestion/photoChange.tpl:7
 #: ../../../app/Views/templates/gestion/individuChange.tpl:30
@@ -1097,7 +1113,7 @@ msgstr "Model name:"
 #: ../../../app/Views/templates/gestion/photoDisplay.tpl:61
 #: ../../../app/Views/templates/gestion/experimentationChange.tpl:18
 #: ../../../app/Views/templates/gestion/photoChange.tpl:46
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliChange.tpl:19
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliChange.tpl:18
 msgid "Description :"
 msgstr "Description:"
 
@@ -1108,8 +1124,8 @@ msgstr "Is the data tabulated (multi-values) ?"
 #: ../../../app/Views/templates/param/metadatatypeChange.tpl:68
 #: ../../../app/Views/templates/param/metadatatypeList.tpl:59
 #: ../../../app/Views/templates/photolecture/lectureSearch.tpl:153
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:323
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:360
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:363
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:402
 #: ../../../app/Views/templates/gestion/individuSearch.tpl:139
 #: ../../../app/Views/templates/gestion/photoDisplay.tpl:274
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/ident/loginsaisie.tpl:124
@@ -1124,8 +1140,8 @@ msgstr "yes"
 #: ../../../app/Views/templates/param/metadatatypeChange.tpl:72
 #: ../../../app/Views/templates/param/metadatatypeList.tpl:59
 #: ../../../app/Views/templates/photolecture/lectureSearch.tpl:152
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:326
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:363
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:366
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:406
 #: ../../../app/Views/templates/gestion/individuSearch.tpl:138
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/ident/loginsaisie.tpl:128
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/ident/loginsaisie.tpl:202
@@ -1134,13 +1150,14 @@ msgstr "no"
 
 #: ../../../app/Views/templates/param/metadatatypeChange.tpl:77
 #: ../../../app/Views/templates/param/metadatatypeChange.tpl:90
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:255
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:387
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:288
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:431
 #: ../../../app/Views/templates/gestion/pieceChange.tpl:69
 #: ../../../app/Views/templates/gestion/especeChange.tpl:33
 #: ../../../app/Views/templates/gestion/piecemetadataChange.tpl:114
 #: ../../../app/Views/templates/gestion/piecemetadataChange.tpl:162
 #: ../../../app/Views/templates/gestion/piecetypeChange.tpl:21
+#: ../../../app/Views/templates/gestion/remarkabletypeChange.tpl:30
 #: ../../../app/Views/templates/gestion/experimentationChange.tpl:52
 #: ../../../app/Views/templates/gestion/photoChange.tpl:157
 #: ../../../app/Views/templates/gestion/individuChange.tpl:45
@@ -1149,10 +1166,11 @@ msgstr "no"
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/ident/loginChangePassword.tpl:133
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/ident/totp.tpl:36
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/ident/loginsaisie.tpl:220
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/ident/totpShowCode.tpl:20
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/dbparamListChange.tpl:34
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/acoChange.tpl:16
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/groupChange.tpl:13
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/otpCreate.tpl:28
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/groupChange.tpl:12
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/otpCreate.tpl:62
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliChange.tpl:25
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/loginChange.tpl:45
 msgid "Valider"
@@ -1166,13 +1184,14 @@ msgstr "Save and return"
 #: ../../../app/Views/templates/gestion/piecemetadataChange.tpl:164
 #: ../../../app/Views/templates/gestion/piecetypeChange.tpl:23
 #: ../../../app/Views/templates/gestion/photoDisplay.tpl:195
+#: ../../../app/Views/templates/gestion/remarkabletypeChange.tpl:32
 #: ../../../app/Views/templates/gestion/experimentationChange.tpl:54
 #: ../../../app/Views/templates/gestion/photoChange.tpl:159
 #: ../../../app/Views/templates/gestion/individuChange.tpl:214
 #: ../../../app/Views/templates/gestion/lecteurChange.tpl:50
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/ident/loginsaisie.tpl:222
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/acoChange.tpl:18
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/groupChange.tpl:15
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/groupChange.tpl:14
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliChange.tpl:27
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/loginChange.tpl:47
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/request/requestChange.tpl:94
@@ -1186,8 +1205,8 @@ msgstr "Metadata set"
 #: ../../../app/Views/templates/param/metadatatypeChange.tpl:101
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/ident/loginsaisie.tpl:234
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/acoChange.tpl:51
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/groupChange.tpl:61
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliChange.tpl:36
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/groupChange.tpl:60
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliChange.tpl:35
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/loginChange.tpl:54
 msgid "Donnée obligatoire"
 msgstr "Mandatory data"
@@ -1232,7 +1251,7 @@ msgid "Données en tableau ?"
 msgstr "Data in table?"
 
 #: ../../../app/Views/templates/param/metadatatypeList.tpl:44
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliList.tpl:11
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliList.tpl:10
 msgid "Modifier"
 msgstr "Edit"
 
@@ -1443,12 +1462,12 @@ msgstr "Total actual length of measurement"
 msgid "Age"
 msgstr "Age"
 
-#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:7
+#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:16
 msgid "Affichage des mesures d'une pièce"
 msgstr "Display of the measurements of a piece"
 
-#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:9
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:232
+#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:18
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:258
 #: ../../../app/Views/templates/gestion/pieceChange.tpl:8
 #: ../../../app/Views/templates/gestion/piecemetadataChange.tpl:92
 #: ../../../app/Views/templates/gestion/piecemetadataDisplay.tpl:83
@@ -1456,8 +1475,8 @@ msgstr "Display of the measurements of a piece"
 msgid "Retour au détail du poisson"
 msgstr "Back to the detail of the fish"
 
-#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:10
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:233
+#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:19
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:262
 #: ../../../app/Views/templates/gestion/pieceChange.tpl:13
 #: ../../../app/Views/templates/gestion/piecemetadataChange.tpl:93
 #: ../../../app/Views/templates/gestion/piecemetadataDisplay.tpl:86
@@ -1466,53 +1485,53 @@ msgstr "Back to the detail of the fish"
 msgid "Retour au détail de la pièce"
 msgstr "Back to the detail of the piece"
 
-#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:11
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:234
+#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:20
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:266
 msgid "Retour à la photo"
 msgstr "Back to the photo"
 
-#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:21
+#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:30
 msgid "Résolution d'affichage :"
 msgstr "Display resolution:"
 
-#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:43
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:419
+#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:55
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:463
 msgid "Légende"
 msgstr "Legend"
 
-#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:49
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:425
+#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:61
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:469
 msgid "lecture du"
 msgstr "Reading of"
 
-#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:50
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:426
+#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:62
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:471
 #: ../../../app/Views/templates/gestion/photoDisplay.tpl:181
 msgid "Résolution"
 msgstr "Resolution"
 
-#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:51
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:331
+#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:63
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:371
 msgid "Nature de la strie finale :"
 msgstr "Nature of final streak:"
 
-#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:52
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:345
+#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:64
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:386
 msgid "Fiabilité de la lecture :"
 msgstr "Reading fiability:"
 
-#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:53
+#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:65
 #: ../../../app/Views/templates/gestion/photoDisplay.tpl:192
 msgid "Lecture consensuelle"
 msgstr "Consensual reading"
 
-#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:54
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:366
+#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:66
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:409
 msgid "Année de naissance estimée :"
 msgstr "Estimated birth year:"
 
-#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:55
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:427
+#: ../../../app/Views/templates/photolecture/photolectureDisplay.tpl:67
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:472
 msgid "Points remarquables :"
 msgstr "Remarkable points:"
 
@@ -1579,130 +1598,130 @@ msgstr "Search..."
 msgid "Exporter la liste"
 msgstr "Export the list at CSV format"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:147
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:171
 msgid "Supprimer le point courant"
 msgstr "Delete the current point"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:230
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:251
 msgid "Mesure d'un otolithe ou d'une pièce calcifiée"
 msgstr "Measurement of an otolith or calcified piece"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:231
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:232
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:233
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:234
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:253
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:257
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:261
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:265
 msgid ""
 "Les modifications apportées dans cette page vont être perdues. Confirmez-"
 "vous cette opération ?"
 msgstr "Changes made on this page will be lost. Do you confirm this operation?"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:252
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:385
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:285
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:429
 msgid "Enregistrez les points positionnés :"
 msgstr "Record positionned points:"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:260
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:293
 msgid "Si tous les points ont été supprimés, vous pouvez :"
 msgstr "If all points have been deleted, you can:"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:262
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:296
 msgid "Uniquement si tous les points ont été supprimés"
 msgstr "Only if all points have been deleted"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:263
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:297
 msgid "Réinitialiser le compteur"
 msgstr "Reset counter"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:280
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:314
 msgid "Type de lecture pour le prochain point :"
 msgstr "type of reading for the next point:"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:283
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:317
 msgid "Point initial avec cercle élargi"
 msgstr "Initial point with enlarged circle"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:284
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:318
 msgid "Lecture des points"
 msgstr "Reading of points"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:285
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:319
 msgid "Mesure de la longueur de référence"
 msgstr "Reference length measurement"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:286
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:320
 msgid "Tracé d'une ligne sur la photo (aide à la mesure)"
 msgstr "Plot of a line on the picture (help at the measure)"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:290
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:324
 msgid "Taille originale de la photo :"
 msgstr "Original size of the photo:"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:298
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:334
 msgid "Taille de lecture de la photo :"
 msgstr "Reading size of the photo:"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:306
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:344
 msgid "Coefficient de correction de la taille :"
 msgstr "Coefficient of correction of the size:"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:312
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:351
 msgid "Rayon (en pixels) du cercle élargi :"
 msgstr "Radius (in pixels) of the enlarged circle:"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:319
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:359
 msgid "Recalcul automatique de l'ordre des points ?"
 msgstr "Automatic recalculation of the order of points?"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:356
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:397
 msgid "Lecture consensuelle :"
 msgstr "Consensual reading:"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:371
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:414
 #: ../../../app/Views/templates/gestion/photoDisplay.tpl:193
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/logList.tpl:52
 msgid "Commentaires"
 msgstr "Comment"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:380
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:424
 msgid "Points sélectionnés"
 msgstr "Selected points"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:391
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:435
 msgid "N°"
 msgstr "#"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:394
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:438
 msgid "Ordre de lecture"
 msgstr "Reading order"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:395
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:439
 msgid "Point remarquable"
 msgstr "Remarkable point"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:396
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:440
 msgid "Point de mesure de la longueur de référence"
 msgstr "Point of measure of reference length"
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:405
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:449
 msgid "Pour supprimer un point, réalisez un double-clic sur celui-ci."
 msgstr "To delete a point, double-click on it."
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:408
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:452
 msgid ""
 "Vous pouvez modifier manuellement l'ordre de lecture d'un point, si "
 "nécessaire."
 msgstr "You can manualy change the reading order of a point, if necessary."
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:411
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:455
 msgid ""
 "Pour tracer une ligne, positionnez le premier point, puis le second. Pour "
-"supprimer la ligne, supprimez d'abord le second point, avant de toucher au "
+"supprimer la ligne,  supprimez d'abord le second point, avant de toucher au "
 "premier point."
 msgstr ""
 "To draw a line, position the first point, then the second point. To delete "
 "the line, first delete the second point before the first point."
 
-#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:414
+#: ../../../app/Views/templates/photolecture/photolectureChange.tpl:458
 msgid ""
 "Le recalcul automatique de l'ordre des points ne fonctionne que si le "
 "premier point (origine) est saisi en premier (valeur \"ordre de lecture\" la "
@@ -1715,6 +1734,7 @@ msgstr ""
 #: ../../../app/Views/templates/gestion/lecteurListe.tpl:12
 #: ../../../app/Views/templates/gestion/experimentationList.tpl:13
 #: ../../../app/Views/templates/gestion/piecetypeList.tpl:13
+#: ../../../app/Views/templates/gestion/remarkabletypeList.tpl:13
 #: ../../../app/Views/templates/gestion/pieceDisplay.tpl:63
 msgid "Nom"
 msgstr "Name"
@@ -1749,6 +1769,7 @@ msgstr "New experimentation..."
 
 #: ../../../app/Views/templates/gestion/experimentationList.tpl:12
 #: ../../../app/Views/templates/gestion/piecetypeList.tpl:12
+#: ../../../app/Views/templates/gestion/remarkabletypeList.tpl:12
 #: ../../../app/Views/templates/gestion/especeList.tpl:14
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/request/requestList.tpl:9
 msgid "Id"
@@ -1757,7 +1778,7 @@ msgstr "Id"
 #: ../../../app/Views/templates/gestion/experimentationList.tpl:14
 #: ../../../app/Views/templates/gestion/pieceDisplay.tpl:64
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/dbparamListChange.tpl:11
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliList.tpl:13
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliList.tpl:12
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/request/requestList.tpl:10
 msgid "Description"
 msgstr "Description"
@@ -1958,6 +1979,7 @@ msgstr "French name:"
 #: ../../../app/Views/templates/gestion/especeChange.tpl:45
 #: ../../../app/Views/templates/gestion/piecetypeChange.tpl:30
 #: ../../../app/Views/templates/gestion/import.tpl:114
+#: ../../../app/Views/templates/gestion/remarkabletypeChange.tpl:39
 #: ../../../app/Views/templates/gestion/experimentationChange.tpl:62
 #: ../../../app/Views/templates/gestion/photoChange.tpl:167
 #: ../../../app/Views/templates/gestion/individuChange.tpl:243
@@ -2405,10 +2427,6 @@ msgstr "Birthdate estimated"
 msgid "Fiabilité de la lecture"
 msgstr "Reading fiability"
 
-#: ../../../app/Views/templates/gestion/photoDisplay.tpl:187
-msgid "Points remarquables"
-msgstr "Remarkable points:"
-
 #: ../../../app/Views/templates/gestion/photoDisplay.tpl:190
 msgid "Longueur totale lue"
 msgstr "Total length read"
@@ -2468,6 +2486,30 @@ msgid ""
 msgstr ""
 "Trigger the display of selected readings, with or without creation/edit of a "
 "reading"
+
+#: ../../../app/Views/templates/gestion/remarkabletypeList.tpl:1
+msgid "Liste des types de points remarquables"
+msgstr "List of remarkable point types"
+
+#: ../../../app/Views/templates/gestion/remarkabletypeList.tpl:4
+msgid "Nouveau type de point remarquable..."
+msgstr "New type of remarkable point..."
+
+#: ../../../app/Views/templates/gestion/remarkabletypeList.tpl:14
+msgid "Ordre d'affichage"
+msgstr "Display order"
+
+#: ../../../app/Views/templates/gestion/remarkabletypeChange.tpl:1
+msgid "Modification d'un type de point remarquable"
+msgstr "Edit a type of remarkable point"
+
+#: ../../../app/Views/templates/gestion/remarkabletypeChange.tpl:14
+msgid "Nom du type de point remarquable :"
+msgstr "Name of the type of remarkable point:"
+
+#: ../../../app/Views/templates/gestion/remarkabletypeChange.tpl:23
+msgid "Ordre d'affichage :"
+msgstr "Sort order:"
 
 #: ../../../app/Views/templates/gestion/experimentationChange.tpl:1
 msgid "Modification d'une expérimentation"
@@ -2791,16 +2833,16 @@ msgstr "Show %d entries"
 msgid "Tout afficher"
 msgstr "Display All"
 
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/main_js.tpl:225
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/main_js.tpl:250
 msgid "Valeur numérique..."
 msgstr "Numerical value..."
 
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/main_js.tpl:275
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/main_js.tpl:296
 msgid "Confirmez-vous la suppression ?"
 msgstr "Do you confirm the deletion?"
 
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/main_js.tpl:294
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/main_js.tpl:377
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/main_js.tpl:315
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/main_js.tpl:344
 msgid "Confirmez-vous cette opération ?"
 msgstr "Do you confirm this operation?"
 
@@ -2949,7 +2991,8 @@ msgstr ""
 "up in your smartphone"
 
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/ident/totp.tpl:15
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/otpCreate.tpl:22
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/ident/totpShowCode.tpl:14
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/otpCreate.tpl:56
 msgid "Code généré par le logiciel TOTP :"
 msgstr "TOTP software generated code:"
 
@@ -3106,6 +3149,33 @@ msgstr "Account blocked"
 msgid "Adresses mails :"
 msgstr "Email addresses:"
 
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/ident/totpShowCode.tpl:1
+msgid "Affichage de la clé TOTP"
+msgstr "Display the TOTP key"
+
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/ident/totpShowCode.tpl:6
+msgid ""
+"Ce module vous permet de visualiser les paramètres de votre clé TOTP, pour "
+"pouvoir configurer un autre appareil le cas échéant"
+msgstr ""
+"This module allows you to view the parameters of your TOTP key, so that you "
+"can configure another device if necessary."
+
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/ident/totpShowCode.tpl:31
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/otpCreate.tpl:40
+msgid "Fournisseur"
+msgstr "Provider"
+
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/ident/totpShowCode.tpl:35
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/otpCreate.tpl:44
+msgid "Compte"
+msgstr "Account"
+
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/ident/totpShowCode.tpl:39
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/otpCreate.tpl:48
+msgid "Jeton"
+msgstr "Token"
+
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/ident/identMailInput.tpl:2
 msgid "lancement de la procédure de récupération"
 msgstr "start the recovery procedure"
@@ -3241,7 +3311,15 @@ msgid ""
 msgstr ""
 "You are receiving this message because you are the application administrator."
 
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/header.tpl:35
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/header.tpl:33
+msgid "Afficher le code TOTP pour configurer un autre appareil"
+msgstr "Display the TOTP code to configure another device"
+
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/header.tpl:33
+msgid "Afficher le code TOTP"
+msgstr "Display the TOTP code"
+
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/header.tpl:36
 msgid "Mot de passe"
 msgstr "Password"
 
@@ -3294,7 +3372,7 @@ msgid "Modification du droit d'une application (module de gestion des droits)"
 msgstr "Modify the right of an application (rights management module)"
 
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/acoChange.tpl:5
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliChange.tpl:5
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliChange.tpl:4
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliDisplay.tpl:3
 msgid "Retour à la liste des applications"
 msgstr "Back to the list of applications"
@@ -3311,47 +3389,61 @@ msgstr "Name of the right used in the application:"
 msgid "Groupes disposant du droit :"
 msgstr "Groups with the right:"
 
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/groupChange.tpl:2
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/groupChange.tpl:1
 msgid "Modification d'un groupe et rattachement des logins"
 msgstr "Edit the group and its attachments to the logins"
 
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/groupChange.tpl:5
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/groupChange.tpl:4
 msgid "Retour à la liste des groupes"
 msgstr "Back to the list of groups"
 
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/groupChange.tpl:20
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/groupChange.tpl:19
 msgid "Nom du groupe :"
 msgstr "Name of the group:"
 
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/groupChange.tpl:26
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/groupChange.tpl:25
 msgid "Groupe de rattachement"
 msgstr "Group of attachment"
 
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/groupChange.tpl:42
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/groupChange.tpl:41
 msgid "Logins rattachés"
 msgstr "Logins attached"
 
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/otpCreate.tpl:1
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/otpCreate.tpl:8
 msgid "Activation de la double authentification"
 msgstr "Enabling dual authentication"
 
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/otpCreate.tpl:5
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/otpCreate.tpl:12
 msgid ""
 "La double identification limite les risques d'usurpation de votre compte."
 msgstr ""
 "The double identification limits the risks of usurpation of your account."
 
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/otpCreate.tpl:7
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/otpCreate.tpl:14
 msgid ""
 "Pour l'activer, vous devrez installer dans votre smartphone une application "
-"compatible avec l'identificationTOTP, par exemple FreeOTP, Google "
+"compatible avec l'identificationTOTP, par exemple FreeOTP+, Google "
 "Authenticator, etc."
 msgstr ""
 "To activate it, you will need to install in your smartphone an application "
-"that is compatible with the identification TOTP, e.g. FreeOTP, Google "
+"that is compatible with the identification TOTP, e.g. FreeOTP+, Google "
 "Authenticator, etc."
 
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/otpCreate.tpl:9
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/otpCreate.tpl:16
+msgid ""
+"Si vous devez travailler dans une pièce à accès restreint (laboratoire "
+"protégé), vous pouvez également utiliser un logiciel qui s'installe dans "
+"votre ordinateur, comme Ente Auth pour Windows ou Authenticator pour Linux. "
+"Ces logiciels vous permettent d'échanger les clés d'un ordinateur à un "
+"autre, pensez simplement à chiffrer les informations quand vous les exportez."
+msgstr ""
+"If you need to work in a room with restricted access (protected laboratory), "
+"you can also use software that installs on your computer, such as Ente Auth "
+"for Windows or Authenticator for Linux. This software allows you to exchange "
+"keys from one computer to another, just remember to encrypt the information "
+"when you export it."
+
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/otpCreate.tpl:18
 msgid ""
 "Une fois l'application installée, scannez le QRCODE, puis tapez le code "
 "généré par l'application pour valider votre double identification."
@@ -3359,11 +3451,15 @@ msgstr ""
 "Once the application has been installed, scan the QRCODE, then enter the "
 "code generated by the application to validate your dual identification."
 
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliChange.tpl:2
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/otpCreate.tpl:33
+msgid "Afficher le contenu du QRCODE pour une saisie manuelle"
+msgstr "Display the content of the QRCODE for manual entry"
+
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliChange.tpl:1
 msgid "Modification d'une application (module de gestion des droits)"
 msgstr "Modify the application (rights management module)"
 
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliChange.tpl:12
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliChange.tpl:10
 msgid "Nom de l'application :"
 msgstr "Name of the application:"
 
@@ -3423,15 +3519,15 @@ msgstr "Number of logins declared"
 msgid "Rajouter un groupe fils"
 msgstr "Add a child group"
 
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliList.tpl:2
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliList.tpl:1
 msgid "Liste des applications disponibles dans le module de gestion des droits"
 msgstr "List of applications available in the rights management module"
 
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliList.tpl:6
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliList.tpl:5
 msgid "Nouvelle application..."
 msgstr "New application"
 
-#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliList.tpl:12
+#: ../../../vendor/equinton/ppci/src/Views/templates/ppci/droits/appliList.tpl:11
 msgid "Nom de l'application"
 msgstr "Name of the application"
 
@@ -3569,6 +3665,12 @@ msgstr "Variable name"
 #: ../../../vendor/equinton/ppci/src/Views/templates/ppci/utils/system.tpl:9
 msgid "Contenu"
 msgstr "Content"
+
+#~ msgid "Lexique"
+#~ msgstr "Glossary"
+
+#~ msgid "Lexique des termes utilisés dans le logiciel"
+#~ msgstr "Glossary of terms used in the software"
 
 #, fuzzy
 #~ msgid ""
@@ -3735,8 +3837,8 @@ msgstr "Content"
 #~ "mot de passe pour l'application :appli. Si ce n'était pas le cas, "
 #~ "contactez l'administrateur de l'application.\n"
 #~ "                            <br>Pour réinitaliser votre mot de passe, "
-#~ "recopiez le lien suivant dans votre navigateur :<br><a href=':"
-#~ "adresse'>Réinitialisez votre mot de passe</a>\n"
+#~ "recopiez le lien suivant dans votre navigateur :<br><a "
+#~ "href=':adresse'>Réinitialisez votre mot de passe</a>\n"
 #~ "                            <br>Ne répondez pas à ce mail, qui est généré "
 #~ "automatiquement"
 #~ msgstr ""

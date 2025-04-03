@@ -452,12 +452,10 @@
 			{t}Vous pouvez modifier manuellement l'ordre de lecture d'un point, si nécessaire.{/t}
 		</li>
 		<li>
-			{t}Pour tracer une ligne, positionnez le premier point, puis le second. Pour supprimer la ligne, supprimez
-			d'abord le second point, avant de toucher au premier point.{/t}
+			{t}Pour tracer une ligne, positionnez le premier point, puis le second. Pour supprimer la ligne,  supprimez d'abord le second point, avant de toucher au premier point.{/t}
 		</li>
 		<li>
-			{t}Le recalcul automatique de l'ordre des points ne fonctionne que si le premier point (origine) est saisi
-			en premier (valeur "ordre de lecture" la plus faible de la série).{/t}
+			{t}Le recalcul automatique de l'ordre des points ne fonctionne que si le premier point (origine) est saisi en premier (valeur "ordre de lecture" la plus faible de la série).{/t}
 		</li>
 	</ul>
 </div>
