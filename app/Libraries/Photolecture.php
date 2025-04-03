@@ -9,6 +9,7 @@ use App\Models\Peche;
 use App\Models\Photo;
 use App\Models\Photolecture as ModelsPhotolecture;
 use App\Models\Piece;
+use App\Models\RemarkableType;
 use Ppci\Libraries\PpciLibrary;
 
 class Photolecture extends PpciLibrary
@@ -17,6 +18,9 @@ class Photolecture extends PpciLibrary
     function __construct()
     {
         parent::__construct();
+        /**
+         * @var ModelsPhotolecture
+         */
         $this->dataclass = new ModelsPhotolecture();
         if (is_array($_REQUEST["photolecture_id"])) {
             foreach ($_REQUEST["photolecture_id"] as $value) {
@@ -101,6 +105,17 @@ class Photolecture extends PpciLibrary
         }
         $data = $_SESSION["it_photolecture"]->translateList($data);
         $data = $_SESSION["it_photo"]->translateList($data);
+        /**
+         * manual html encoding
+         */
+        foreach ($data as $k => $row) {
+            if (!empty($row["commentaire"])) {
+                $row["commentaire"] = esc($row["commentaire"]);
+            }
+            //$row["remarkable_points"] = json_encode(json_decode($row["remarkable_points"],true));
+            $data[$k] = $row;
+        }
+        $this->vue->htmlVars[] = "data";
         $this->vue->set($data, "data");
         /**
          * Lecture des informations concernant la piece et le poisson
@@ -130,7 +145,7 @@ class Photolecture extends PpciLibrary
         $dataPhoto = $_SESSION["it_photo"]->translateRow($dataPhoto);
         $dataPhoto = $_SESSION["it_piece"]->translateRow($dataPhoto);
         $this->vue->set($dataPhoto, "photo");
-        $this->vue->set($_SESSION["moduleListe"],"moduleListe");
+        $this->vue->set($_SESSION["moduleListe"], "moduleListe");
         $this->vue->set("photolecture/photolectureDisplay.tpl", "corps");
         return $this->vue->send();
     }
@@ -169,14 +184,7 @@ class Photolecture extends PpciLibrary
             $this->message->set(_("Vous ne disposez pas des droits nécessaires pour réaliser une lecture"), true);
             return $this->display();
         }
-
-        $data = $this->dataRead($this->id, "photolecture/photolectureChange.tpl", $_SESSION["it_photo"]->getValue($_REQUEST["photo_id"]));
-        /**
-         * Rajout de l'identifiant du lecteur
-         */
-        if (!$data["lecteur_id"] > 0) {
-            $data["lecteur_id"] = $lecteur_id;
-        }
+        $this->vue->set("photolecture/photolectureChange.tpl", "corps");
         /**
          * Lecture des informations concernant la photo
          */
@@ -196,11 +204,22 @@ class Photolecture extends PpciLibrary
         $dataIndiv = $_SESSION["it_individu"]->translateRow($dataIndiv);
         $dataIndiv = $_SESSION["it_peche"]->translateRow($dataIndiv);
         $this->vue->set($dataIndiv, "individu");
-
+        $data = $this->dataclass->read($this->id, true, $_SESSION["it_photo"]->getValue($_REQUEST["photo_id"]));
+        /**
+         * Rajout de l'identifiant du lecteur
+         */
+        if (!$data["lecteur_id"] > 0) {
+            $data["lecteur_id"] = $lecteur_id;
+        }
         /**
          * Recuperation de la taille de l'image
          */
         if ($data["photolecture_id"] == 0) {
+            /**
+             * default parameters
+             */
+            $data["pointsJson"] = json_encode([]);
+            $data["pointsRefJson"] = json_encode([]);
             switch ($_REQUEST["resolution"]) {
                 case 2:
                     $image_width = 1024;
@@ -257,19 +276,22 @@ class Photolecture extends PpciLibrary
         $this->vue->set($image_width, "image_width");
         $this->vue->set($image_height, "image_height");
         $dataDetail = $this->dataclass->getDetailLecture($this->id, $coef);
-        $dataT = $_SESSION["it_photolecture"]->translateRow($dataDetail);
-        $dataT = $_SESSION["it_photo"]->translateRow($dataT);
-        $this->vue->set($dataT, "data");
-
+        $data = array_merge($data, $dataDetail);
         /**
          * Recuperation des lectures precedentes
          */
         if (isset($mesurePrecId)) {
             $mesurePrec = $this->dataclass->getDetailLecture($mesurePrecId, $coef, $this->id);
             $this->vue->set($mesurePrec, "mesurePrec");
+            $this->vue->set(json_encode($mesurePrec), "mesurePrecJson");
+        } else {
+            $this->vue->set([], "mesurePrec");
+            $this->vue->set(json_encode([]), "mesurePrecJson");
         }
-        $this->vue->set($coef, "coef_correcteur");
 
+        $this->vue->set($coef, "coef_correcteur");
+        $this->vue->htmlVars[] = "mesurePrecJson";
+        $this->vue->htmlVars[] = "mesurePrec";
         /**
          * Calcul des points pour reaffichage en mode saisie
          */
@@ -279,12 +301,20 @@ class Photolecture extends PpciLibrary
                 $data["points"] = $this->dataclass->calculPointsAffichage(
                     $dataPoint["points"],
                     $coef,
-                    $data["remarkable_points"]
+                    $data["remarkable_points"],
+                    $data["version"]
                 );
             }
             if (strlen($dataPoint["points_ref_lecture"]) > 0) {
-                $data["points_ref_lecture"] = $this->dataclass->calculPointsAffichage($dataPoint["points_ref_lecture"], $coef);
+                $data["points_ref_lecture"] = $this->dataclass->calculPointsAffichage(
+                    $dataPoint["points_ref_lecture"],
+                    $coef,
+                    null,
+                    $data["version"]
+                );
             }
+            $data["pointsJson"] = json_encode($data["points"]);
+            $data["pointsRefJson"] = json_encode($data["points_ref_lecture"]);
         }
         /**
          * Recalcul du rayon d'affichage du premier point
@@ -292,10 +322,19 @@ class Photolecture extends PpciLibrary
         $data["rayon_point_initial"] = floor($data["rayon_point_initial"] / $coef);
 
         /**
+         * Traitement des points de référence
+         */
+        if (empty($data["points_ref_lecture"])) {
+            $data["points_ref_lecture"] = [];
+        }
+        $data["pointsRefJson"] = json_encode($data["points_ref_lecture"]);
+        /**
          * Reecriture de data dans smarty
          */
         $data = $_SESSION["it_photolecture"]->translateRow($data);
         $data = $_SESSION["it_photo"]->translateRow($data);
+        $data["commentaire"] = esc($data["commentaire"]);
+        $this->vue->htmlVars[] = "data";
         $this->vue->set($data, "data");
 
         /**
@@ -318,10 +357,17 @@ class Photolecture extends PpciLibrary
          */
         $finalStripe = new Final_stripe();
         $this->vue->set($finalStripe->getListe(1), "finalStripe");
-        $this->vue->set($_SESSION["moduleListe"],"moduleListe");
+        $this->vue->set($_SESSION["moduleListe"], "moduleListe");
+
+        /**
+         * Get remarkable point types
+         */
+        $remarkableType = new RemarkableType;
+        $this->vue->set($rt = $remarkableType->getList("sort_order"), 'remarkableTypes');
+        $this->vue->set(json_encode($rt), 'remarkableTypesJson');
+        $this->vue->htmlVars[] = "remarkableTypesJson";
         return $this->vue->send();
     }
-
 
     function write()
     {
@@ -448,10 +494,19 @@ class Photolecture extends PpciLibrary
             //$nomfichier = "lecture";
             //$export->exportCSVinit($nomfichier, 'tab');
             $colExclude = array(
-                "photolecture_id", "photo_id", "lecteur_id", "piece_id", "individu_id", "points", "points_ref_lecture", "final_stripe_id", "remarkable_points"
+                "photolecture_id",
+                "photo_id",
+                "lecteur_id",
+                "piece_id",
+                "individu_id",
+                "points",
+                "points_ref_lecture",
+                "final_stripe_id",
+                "remarkable_points"
             );
             $dataExport = array();
-
+            $remarkableType = new RemarkableType;
+            $types = $remarkableType->getAsArray();
             /**
              * Traitement des lignes - on rajoute les coordonnees des points
              */
@@ -467,18 +522,24 @@ class Photolecture extends PpciLibrary
                     }
                 }
                 /** Traitement des points remarquables */
-                $rp = json_decode($row["remarkable_points"]);
-                $i = 0;
+
+                $rp = json_decode($row["remarkable_points"], true);
                 $drp = "";
+                $i = 0;
                 foreach ($rp as $vrp) {
                     if ($i > 0) {
                         $drp .= ",";
                     }
-                    $drp .= $vrp + 1;
+                    if ($row["version"] == 2013) {
+                        $drp .= $vrp . ":" . $types[1];
+                    } else if ($row["version"] == 2025) {
+                        foreach ($vrp as $kt => $t) {
+                            $drp .= $kt . ":" . $types[$t["id"]];
+                        }
+                    }
                     $i++;
                 }
                 $ligne["remarkable_points"] = $drp;
-
                 /** Traitement des points - calcul des coordonnees */
                 if (strlen($row["points"]) > 0) {
                     $dataPoints["points"] = $this->dataclass->calculPointsAffichage($row["points"], 1);

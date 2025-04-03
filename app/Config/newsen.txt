@@ -1,5 +1,12 @@
 News
 ====================
+Translated with www.DeepL.com/Translator (free version)
+
+Version 25.0.0 of 4/4/2025
+----------------------------
+New features :
+- it is now possible to indicate the nature of remarkable points
+
 Version 24.0.1 of 22/10/2024
 ----------------------------
 Upgrade of third-party libraries
@@ -161,5 +168,3 @@ This version has been developed quickly, and does not allow:
 - to manage different display languages;
 - to add fishes, fishing grounds, etc.
 - as it is, it cannot be used in extranet mode (access from internet).
-
-Translated with www.DeepL.com/Translator (free version)

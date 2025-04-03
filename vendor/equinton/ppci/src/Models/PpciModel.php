@@ -2,7 +2,6 @@
 
 namespace Ppci\Models;
 
-use CodeIgniter\Database\Query;
 use CodeIgniter\Model;
 use Ppci\Libraries\PpciException;
 
@@ -414,6 +413,11 @@ class PpciModel extends Model
                     $data = $this->getDefaultValues($parentKey);
                 }
             }
+        } else {
+            $data = $this->find($id);
+            if (!$data) {
+                $data = [];
+            }
         }
         if ($this->autoFormatDate) {
             $data = $this->formatDatesToLocale($data);
@@ -581,7 +585,11 @@ class PpciModel extends Model
     {
         foreach ($this->dateFields as $field) {
             if (!empty($row[$field])) {
-                $date = date_create_from_format("Y-m-d H:i:s", $row[$field]);
+                if (strlen($row[$field])>10) {
+                    $date = date_create_from_format("Y-m-d H:i:s", $row[$field]);  
+                } else {
+                    $date = date_create_from_format("Y-m-d", $row[$field]);
+                }
                 if ($date) {
                     $row[$field] = date_format($date, $this->dateFormatMask);
                 }
@@ -601,6 +609,15 @@ class PpciModel extends Model
     {
         $newdate = "";
         $date = date_create_from_format($this->dateFormatMask, $value);
+        if ($date) {
+            $newdate = date_format($date, 'Y-m-d H:i:s');
+        }
+        return $newdate;
+    }
+    function formatDateTimeLocaleToDB(string $value)
+    {
+        $newdate = "";
+        $date = date_create_from_format($this->datetimeFormat, $value);
         if ($date) {
             $newdate = date_format($date, 'Y-m-d H:i:s');
         }
@@ -677,7 +694,7 @@ class PpciModel extends Model
             if (!empty($row[$field])) {
                 $date = date_create_from_format($this->datetimeFormat, $row[$field]);
                 if ($date) {
-                    $row[$field] = date_format($date, "Y-m-d h:i:s");
+                    $row[$field] = date_format($date, "Y-m-d H:i:s");
                 }
             }
         }

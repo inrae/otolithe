@@ -16,6 +16,7 @@
 		<item module="experimentationList" label="Expérimentations" tooltip="Liste des expérimentations" droits="manage"/>
 		<item module="lecteurList" droits="param" label="Lecteurs" tooltip="Liste des lecteurs"/>
 		<item module="piecetypeList" label="Pièces" tooltip="Liste des types de pièces calcifiées" droits="manage"/>
+		<item module="remarkabletypeList" label="Points remarquables" tooltip="Liste des points remarquables positionnables sur les photos" droits="manage"/>
 		<item module="especeList" label="Espèces" tooltip="Liste des espèces" droits="manage"/>
 		<item module="metadatatypeList" droits="manage" label="Métadonnées" tooltip="Modèles de métadonnées" />
 		<item divider='1' droits="param"/>

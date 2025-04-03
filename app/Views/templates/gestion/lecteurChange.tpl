@@ -43,7 +43,7 @@
 </div>
 {/foreach}
 </fieldset>
-{if $rights.admin == 1}
+{if $rights.param == 1}
 <div class="form-group center">
       <button type="submit" class="btn btn-primary button-valid">{t}Valider{/t}</button>
       {if $data.lecteur_id > 0 }
