@@ -62,26 +62,7 @@
 			}
 			});
 		});
-		/*{section name = "lst" loop = $mesurePrec }
-		{section name = "lst1" loop = $mesurePrec[lst].points }
-		{if $smarty.section.lst1.index == 0 }
-		{if $mesurePrec[lst].rayon_point_initial > 0}
-		{assign var = 'r' value = $mesurePrec[lst].rayon_point_initial }
-		{else }
-		{assign var = 'r' value = '7' }
-		{/if }
-		{else }
-		{assign var = 'r' value = '7' }
-		{/if }
-		cx = '{$mesurePrec[lst].points[lst1].x}';
-		cy = '{$mesurePrec[lst].points[lst1].y}';
-		r = '{$r}';
-		couleur = '{$mesurePrec[lst].couleur}';
-		fillOpacity = '{$fill}';
-		svg.circle(myImage, cx, cy, r, { 'stroke': couleur, 'fill': couleur, 'fill-opacity': fillOpacity });
-		{/section }
-		{/section }
-*/
+
 		$("#resetCompteur").click(function (event) {
 			/* Reinitialisation du compteur */
 			compteur = 0;
@@ -118,9 +99,9 @@
 		$("#modeLecture").val(2);
 		var pointsRef = {$data.pointsRefJson};
 		if (pointsRef) {
-			var pr = JSON.parse(pointsRef);
-			Object.keys(pr).forEach(k => { 
-				setCircle(svg, pr[k].x, pr[k].y, rayon_initial, 0);
+			//var pr = JSON.parse(pointsRef);
+			Object.keys(pointsRef).forEach(k => { 
+				setCircle(svg, pointsRef[k].x, pointsRef[k].y, 0, 0);
 			});
 		}
 		$("#modeLecture").val(1);

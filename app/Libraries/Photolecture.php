@@ -322,6 +322,13 @@ class Photolecture extends PpciLibrary
         $data["rayon_point_initial"] = floor($data["rayon_point_initial"] / $coef);
 
         /**
+         * Traitement des points de référence
+         */
+        if (empty($data["points_ref_lecture"])) {
+            $data["points_ref_lecture"] = [];
+        }
+        $data["pointsRefJson"] = json_encode($data["points_ref_lecture"]);
+        /**
          * Reecriture de data dans smarty
          */
         $data = $_SESSION["it_photolecture"]->translateRow($data);
