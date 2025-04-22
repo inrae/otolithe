@@ -81,7 +81,7 @@ class Individu extends PpciModel
          */
         $where = "";
         $and = " and ";
-        if (strlen($data["exp_id"]) == 0) {
+        if (!is_array($data["exp_id"]) && strlen($data["exp_id"]) == 0) {
             $data["exp_id"] = 0;
         }
         $param["exp_id"] = $data["exp_id"];
@@ -196,7 +196,7 @@ class Individu extends PpciModel
                     where individu_id = :id:";
             return $this->lireParamAsPrepared($sql, array("id" => $id));
         } else {
-            return $this->getDefaultValue();
+            return $this->getDefaultValues();
         }
     }
 
@@ -249,7 +249,7 @@ class Individu extends PpciModel
          * Suppression dans la table des experimentations
          */
         $sql = "delete from individu_experimentation where individu_id = :individu_id:";
-        $this->executeAsPrepared($sql, $aid, true);
+        $this->executeSQL($sql, $aid, true);
         return parent::supprimer($id);
     }
 }
