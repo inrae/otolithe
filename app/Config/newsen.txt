@@ -2,6 +2,11 @@ News
 ====================
 Translated with www.DeepL.com/Translator (free version)
 
+Version 25.0.1 of 22/4/2025
+---------------------------
+Bug fixes:
+- the creation or the deletion of a fish (individu) no longer works
+
 Version 25.0.0 of 4/4/2025
 ----------------------------
 New features :

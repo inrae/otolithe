@@ -44,7 +44,7 @@ class Individu extends PpciLibrary
         /*
          * Gestion des criteres de recherche
          */
-        if (isset($_REQUEST["exp_id"])) {
+        if (isset($_REQUEST["exp_id"])&& !is_array($_REQUEST["exp_id"])) {
             $_REQUEST["exp_id"] = $_SESSION["it_experimentation"]->getValue($_REQUEST["exp_id"]);
         }
         $_SESSION["searchIndividu"]->setParam($_REQUEST);
@@ -69,6 +69,9 @@ class Individu extends PpciLibrary
         $peche = new Peche();
         $this->vue->set($peche->getListeSite(), "site");
         $this->vue->set($peche->getListeZone(), "zone");
+        if (is_array($dataRecherche["exp_id"])) {
+            $dataRecherche["exp_id"] = $dataRecherche["exp_id"][0];
+        }
         $dataRecherche["exp_id"] = $_SESSION["it_experimentation"]->setValue($dataRecherche["exp_id"]);
         $this->vue->set($dataRecherche, "individuSearch");
 
